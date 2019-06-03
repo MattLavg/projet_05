@@ -1,0 +1,12 @@
+{
+    "name": "mathias/projet_05",
+    "require": {
+        "twig/twig": "^2.10"
+    },
+    "authors": [
+        {
+            "name": "Mathias",
+            "email": "mathias.lavergne.graph@gmail.com"
+        }
+    ]
+}
