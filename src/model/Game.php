@@ -1,6 +1,6 @@
 <?php
 
-namespace Listagame\Model;
+namespace App\Model;
 
 /**
  * Game

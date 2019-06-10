@@ -1,8 +1,8 @@
 <?php
 
-namespace Listagame\Core;
+namespace App\Core;
 
-use Blog\Core\Registry;
+use App\Core\Registry;
 
 /**
  *  Manager
@@ -10,7 +10,7 @@ use Blog\Core\Registry;
  *  Get the database connection
  */
 
-class Manager
+abstract class Manager
 {
     /**
      * Set the database connection in variable $db
@@ -22,4 +22,5 @@ class Manager
         $db = Registry::getDb();
         return $db;
     }
+
 }
