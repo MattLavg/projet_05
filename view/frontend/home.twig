@@ -1,0 +1,44 @@
+
+{% extends "front.twig" %}
+
+{% block ASSETS %}
+    {{ ASSETS }}
+{% endblock %}
+
+{% block HOST %}
+    {{ HOST }}
+{% endblock %}
+
+{% block title %}
+    <title>Accueil | LISTaGAME</title>
+{% endblock %}
+
+{% block content %}
+
+    {% set elementsOnPage = false %}
+
+    {% for game in games %} 
+
+        {% set elementsOnPage = true %}
+
+        <div class="listPosts">
+
+            <h3>
+                <a href="{{ HOST }}post/id/{{ game.getId }}">{{ game.getName }}</a>
+            </h3>
+            <p>
+                {{ game.getContent }}<br>
+                <a href="{{ HOST }}post/id/{{ game.getId }}">Voir la suite</a>
+            </p>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+    {% if not elementsOnPage %}
+        <p>Il n'y a actuellement aucun article</p>
+    {% endif %}
+
+{% endblock %}
