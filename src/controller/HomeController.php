@@ -25,7 +25,7 @@ class HomeController
         
         $gameManager = new GameManager();
         
-        $games = $gameManager->listGames();
+        $games = $gameManager->getAll();
 
         $view = new View('home');
         $view->render('front', array(

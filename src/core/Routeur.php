@@ -25,7 +25,7 @@ class Routeur
      */
     protected $_routes = [ 
         'home'               => ['controller' => 'App\Controller\HomeController',       'method' => 'showHome'],
-        'post'               => ['controller' => 'App\Controller\GameController',       'method' => 'showGame'],
+        'game'               => ['controller' => 'App\Controller\GameController',       'method' => 'showGame'],
         'connection'         => ['controller' => 'App\Controller\ConnectionController', 'method' => 'showConnection'],
         'login'              => ['controller' => 'App\Controller\ConnectionController', 'method' => 'loginCheck'],
         'logout'             => ['controller' => 'App\Controller\ConnectionController', 'method' => 'logOut'],

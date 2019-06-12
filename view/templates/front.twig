@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
 
         <!-- CSS -->
-        <link href="{% block ASSETS %}{% endblock %}/css/style.css" rel="stylesheet">
+        <link href="{{ ASSETS }}css/style.css" rel="stylesheet">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Kanit:700&display=swap" rel="stylesheet">
@@ -43,10 +43,19 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ block('HOST') }}">Accueil<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ block('HOST') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ block('HOST') }}connection">Connexion</a>
                     </li>
                 </ul>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher un jeu..." aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Chercher</button>
+                </form>
             </div>
+
+            
         </nav>
     
 
@@ -92,7 +101,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
 
     <!-- SCRIPTS JS -->
-    <script src="{{ block('ASSETS') }}/js/script.js"></script>
+    <script src="{{ ASSETS }}js/script.js"></script>
 
 </html>
 

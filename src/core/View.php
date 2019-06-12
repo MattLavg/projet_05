@@ -43,7 +43,7 @@ class View
         // foreach ($params as $name => $value) {
         //     ${name} = $value;
 
-        extract($params); 
+        // extract($params); 
         // Allows to extract variables from array's keys
         // Ex : from HomeController, allows to extract variables $games, $pagination, $isSessionValid, $actionDone
 
@@ -64,30 +64,10 @@ class View
                 'auto-reload' => true
         ]);
 
-        // ob_start();
-
-        // if ($template == 'front') {
-        //     // echo $twig->render($view . '.html', $params);
-        //     require(VIEWFRONT . $view . '.html'); // search the view in frontend
-        // } else {
-        //     require(VIEWBACK . $view . '.php'); // search the view in backend
-        // }
-        
-        // $content = ob_get_clean();
-
-        // $templateParams = ['HOST' => HOST, 'ASSETS' => ASSETS, 'content' => $content];
-
-        // echo $twig->render($view . '.html', $params);
-
-        // $view = require(VIEWFRONT . $view . '.html');
-  
-        $templateParams = [
-            'HOST' => HOST, 
-            'ASSETS' => ASSETS, 
-            'games' => $params['games']
-        ];
-  
-        echo $twig->render($view . '.twig', $templateParams);
+        $params['HOST'] = HOST;
+        $params['ASSETS'] = ASSETS;
+ 
+        echo $twig->render($view . '.twig', $params);
   
     }
 
