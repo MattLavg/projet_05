@@ -6,10 +6,17 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controller\\ConnectionController' => $baseDir . '/src/controller/ConnectionController.php',
+    'App\\Controller\\GameController' => $baseDir . '/src/controller/GameController.php',
+    'App\\Controller\\HomeController' => $baseDir . '/src/controller/HomeController.php',
     'App\\Core\\Manager' => $baseDir . '/src/core/Manager.php',
     'App\\Core\\MyException' => $baseDir . '/src/core/MyException.php',
     'App\\Core\\Routeur' => $baseDir . '/src/core/Routeur.php',
     'App\\Core\\View' => $baseDir . '/src/core/View.php',
+    'App\\Model\\Game' => $baseDir . '/src/model/Game.php',
+    'App\\Model\\GameManager' => $baseDir . '/src/model/GameManager.php',
+    'App\\Model\\Pagination' => $baseDir . '/src/model/Pagination.php',
+    'App\\controller\\ErrorController' => $baseDir . '/src/controller/ErrorController.php',
     'App\\core\\Registry' => $baseDir . '/src/core/Registry.php',
     'Symfony\\Polyfill\\Ctype\\Ctype' => $vendorDir . '/symfony/polyfill-ctype/Ctype.php',
     'Symfony\\Polyfill\\Mbstring\\Mbstring' => $vendorDir . '/symfony/polyfill-mbstring/Mbstring.php',

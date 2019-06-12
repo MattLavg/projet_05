@@ -57,10 +57,17 @@ class ComposerStaticInit6a2662c817d9b918d149fb1943635164
     );
 
     public static $classMap = array (
+        'App\\Controller\\ConnectionController' => __DIR__ . '/../..' . '/src/controller/ConnectionController.php',
+        'App\\Controller\\GameController' => __DIR__ . '/../..' . '/src/controller/GameController.php',
+        'App\\Controller\\HomeController' => __DIR__ . '/../..' . '/src/controller/HomeController.php',
         'App\\Core\\Manager' => __DIR__ . '/../..' . '/src/core/Manager.php',
         'App\\Core\\MyException' => __DIR__ . '/../..' . '/src/core/MyException.php',
         'App\\Core\\Routeur' => __DIR__ . '/../..' . '/src/core/Routeur.php',
         'App\\Core\\View' => __DIR__ . '/../..' . '/src/core/View.php',
+        'App\\Model\\Game' => __DIR__ . '/../..' . '/src/model/Game.php',
+        'App\\Model\\GameManager' => __DIR__ . '/../..' . '/src/model/GameManager.php',
+        'App\\Model\\Pagination' => __DIR__ . '/../..' . '/src/model/Pagination.php',
+        'App\\controller\\ErrorController' => __DIR__ . '/../..' . '/src/controller/ErrorController.php',
         'App\\core\\Registry' => __DIR__ . '/../..' . '/src/core/Registry.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
