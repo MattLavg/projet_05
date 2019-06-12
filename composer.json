@@ -1,5 +1,6 @@
 {
     "name": "mathias/projet_05",
+    "description":"Project 05 requirements",
     "require": {
         "twig/twig": "^2.10"
     },
