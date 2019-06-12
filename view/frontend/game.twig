@@ -1,0 +1,19 @@
+{% extends "front.twig" %}
+
+{% block ASSETS %}
+    {{ ASSETS }}
+{% endblock %}
+
+{% block HOST %}
+    {{ HOST }}
+{% endblock %}
+
+{% block title %}
+    <title>{{ game.getName }} | LISTaGAME</title>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ game.getName }}</h1>
+    <p>{{ game.getContent }}</p>
+    <hr>
+{% endblock %}
