@@ -1,0 +1,213 @@
+/* GENERAL */
+
+.mainContainer {
+    padding-top : 100px;
+    padding-bottom : 100px;
+}
+
+.mainContainerHome {
+    padding-top : 50px;
+    padding-bottom : 100px;
+}
+
+.italic {
+    font-style: italic;
+}
+
+h1 {
+    font-size: 1.6em;
+}
+
+/* LOGO */
+
+.logo {
+    font-family: 'Kanit', Arial, Helvetica, sans-serif
+}
+
+/* NAVBAR and FOOTER*/
+
+.navbar-bg,
+.footer-bg {
+    background-color: rgb(226, 0, 0);
+}
+
+/* BACK OFFICE LEFT MENU */
+
+.leftMenu {
+    display: none;
+}
+
+/* ANCHORS */
+
+.anchor::before {
+    display: block; 
+    content: " "; 
+    margin-top: -90px; 
+    height: 90px; 
+    visibility: hidden; 
+    pointer-events: none;
+}
+
+/* ACTIONS */
+
+.actionErrorMessage {
+    bottom: 24px;  
+}
+
+
+/* POSTS */
+
+.listPosts {
+    -webkit-transition : background-color 0.5s ease;
+    transition : background-color 0.5s ease;
+}
+
+.listPosts:hover {
+    background-color: #F0F0F0;
+}
+
+.modificationColor {
+    color: rgb(141, 141, 141);
+}
+
+/* COMMENTS */
+
+.comment.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.comment.container p {
+    margin-bottom: 0px;
+}
+
+.authorCommentBloc {
+    margin-bottom: 0;
+}
+
+.authorComment {
+    font-weight: bold;
+}
+
+.textComment {
+    background-color: rgb(221, 221, 221);
+}
+
+.authorCommentBloc, .textComment {
+    padding: 1em;
+}
+
+.commentButtonBloc {
+    background-color: rgb(221, 221, 221);
+    padding: 0.5em;
+}
+
+/* POST MANAGEMENT */
+
+.tableMargin {
+    margin-top: 20px;
+}
+
+/* FOOTER */
+
+footer p {
+    margin-top: inherit;
+    margin-bottom: inherit;
+}
+
+footer a:hover {
+    color: #FFFFFF;
+}
+
+
+/* MEDIA QUERIES */
+
+@media all and (min-width: 420px) {
+
+    .homeTitleImage {
+        font-size: 1.7em;
+    }
+
+    .subtitle {
+        font-size: 1.1em;
+    }
+
+}
+
+@media all and (min-width: 600px) {
+
+    .homeTitleImage {
+        font-size: 2em;
+    }
+
+    .subtitle {
+        font-size: 1.3em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+}
+
+@media all and (min-width: 768px) {
+
+    .homeTitleImage {
+        font-size: 2.3em;
+    }
+
+    .subtitle {
+        font-size: 1.5em;
+    }
+
+    h1 {
+        font-size: 2.4em;
+    }
+
+}
+
+@media all and (min-width: 992px) {
+
+    .homeTitleImage {
+        font-size: 2.6em;
+    }
+
+    .subtitle {
+        font-size: 1.7em;
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Bootstrap default size */
+    }
+
+    .leftMenu {
+        margin-bottom: 20px;
+        display: block;
+    }
+
+}
+
+@media all and (min-width: 1280px) {
+
+    .homeTitleImage {
+        font-size: 2.9em;
+    }
+
+    .subtitle {
+        font-size: 1.9em;
+    }
+
+}
+
+
+@media all and (min-width: 1400px) {
+
+    .homeTitleImage {
+        font-size: 3.5em;
+    }
+
+    .subtitle {
+        font-size: 2em;
+    }
+
+}
