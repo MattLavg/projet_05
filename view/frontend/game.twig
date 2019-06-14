@@ -1,19 +1,37 @@
 {% extends "front.twig" %}
 
-{% block ASSETS %}
-    {{ ASSETS }}
-{% endblock %}
-
-{% block HOST %}
-    {{ HOST }}
-{% endblock %}
-
 {% block title %}
     <title>{{ game.getName }} | LISTaGAME</title>
 {% endblock %}
 
 {% block content %}
+
     <h1>{{ game.getName }}</h1>
+
+    <p>Développeur(s) :<br>
+        {% for i in developers %} 
+            <p>- {{ i }}</p>
+        {% endfor %}
+    </p>
+
+    <p>Genre(s) :<br>
+        {% for i in genres %} 
+            <p>- {{ i }}</p>
+        {% endfor %}
+    </p>
+
+    <p>Mode(s) de jeu :<br>
+        {% for i in modes %} 
+            <p>- {{ i }}</p>
+        {% endfor %}
+    </p>
+
+    <p>Sorties :<br>
+        {% for release in releases %} 
+            <p>- Sur {{ release.platform }}, édité par {{ release.publisher }} - {{ release.region }} - {{  release. releaseDate }}</p>
+        {% endfor %}
+    </p>
+
     <p>{{ game.getContent }}</p>
     <hr>
 {% endblock %}

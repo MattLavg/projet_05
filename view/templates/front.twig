@@ -35,7 +35,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top navbar-bg">
-            <a class="navbar-brand logo" href="{% block HOST %}{% endblock %}">LISTaGAME</a>
+            <a class="navbar-brand logo" href="{{ HOST }}">LISTaGAME</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,10 +43,10 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ block('HOST') }}">Accueil</a>
+                        <a class="nav-link" href="{{ HOST }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ block('HOST') }}connection">Connexion</a>
+                        <a class="nav-link" href="{{ HOST }}connection">Connexion</a>
                     </li>
                 </ul>
                 <form class="form-inline">
@@ -86,7 +86,7 @@
             </div>
 
             <footer class="container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg">
-                <p><span class="text-light">ListaGame - </span><a href="{{ block('HOST') }}connection">Connexion</a></p>
+                <p><span class="text-light">ListaGame - </span><a href="{{ HOST }}connection">Connexion</a></p>
             </footer>
 
         </main><!-- /.container -->

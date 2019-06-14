@@ -66,7 +66,9 @@ class View
 
         $params['HOST'] = HOST;
         $params['ASSETS'] = ASSETS;
- 
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
         echo $twig->render($view . '.twig', $params);
   
     }
