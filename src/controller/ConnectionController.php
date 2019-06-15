@@ -53,26 +53,29 @@ class ConnectionController
         // Default SESSION['valid'] to false
         $_SESSION['valid'] = false;
 
-        if ($params['name'] == $authentication['name'] && password_verify($params['password'], $authentication['password'])) {
+        if (isset($params['mail']) && isset($params['password'])) {
+
+            if ($params['mail'] == $authentication['mail'] && password_verify($params['password'], $authentication['password'])) {
             
-            $_SESSION['valid'] = true;
-
-            $view = new View();
-            $view->redirect('post-management');
-
-        } elseif (empty($params['name']) || empty($params['password'])) {
-
-            $_SESSION['errorMessage'] = 'Veuillez renseigner les identifiants.';
-
-            $view = new View();
-            $view->redirect('connection');
-            
-        } else {
-
-            $_SESSION['errorMessage'] = 'Les identifiants ne sont pas valides.';
-
-            $view = new View();
-            $view->redirect('connection');
+                $_SESSION['valid'] = true;
+     
+                $view = new View();
+                $view->redirect('home');
+    
+            } elseif (empty($params['name']) || empty($params['password'])) {
+    
+                $_SESSION['errorMessage'] = 'Veuillez renseigner les identifiants.';
+    
+                $view = new View();
+                $view->redirect('connection');
+                
+            } else {
+    
+                $_SESSION['errorMessage'] = 'Les identifiants ne sont pas valides.';
+    
+                $view = new View();
+                $view->redirect('connection');
+            }
         }
     }
 

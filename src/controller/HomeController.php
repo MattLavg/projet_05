@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Model\GameManager;
 use App\Model\Pagination;
 use App\Core\View;
-// use App\Controller\ConnectionController;
+use App\Controller\ConnectionController;
 
 /**
  * HomeController
@@ -29,7 +29,8 @@ class HomeController
 
         $view = new View('home');
         $view->render('front', array(
-            'games' => $games));
+            'games' => $games,
+            'connected' => ConnectionController::isSessionValid()));
 
     }
 }

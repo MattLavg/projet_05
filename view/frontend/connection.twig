@@ -13,12 +13,12 @@
 
             <form method="post" action="{{ HOST }}login">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="identificationEmail" aria-describedby="emailHelp" placeholder="Email">
+                    <input type="email" class="form-control" id="identificationEmail" name="mail" aria-describedby="emailHelp" placeholder="Email">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="identificationPassword1" placeholder="Mot de passe">
+                    <input type="password" class="form-control" id="identificationPassword" name="password" placeholder="Mot de passe">
                 </div>
-                <button type="submit" class="btn btn-primary">S'identifier</button>
+                <button type="submit" class="btn btn-primary">S'identifier</button>   
             </form>
 
         </div>

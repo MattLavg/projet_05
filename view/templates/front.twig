@@ -45,9 +45,25 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ HOST }}">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ HOST }}connection">Connexion</a>
-                    </li>
+        
+                    {% if connected %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ HOST }}post-management" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a href="{{ HOST }}edit" class="dropdown-item">Ajouter un jeu</a>
+                                <a href="{{ HOST }}post-management" class="dropdown-item">Gérer les jeux</a>
+                                <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ HOST }}logout">Déconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ HOST }}connection">Connexion</a>
+                        </li>
+                    {% endif %}
+                    
                 </ul>
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Chercher un jeu..." aria-label="Search">
@@ -63,6 +79,7 @@
 
             {% block content %}{% endblock %}
 
+            <!-- DELETE MODAL -->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">

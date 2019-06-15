@@ -1,8 +1,8 @@
 <?php
 
-namespace Blog\Model;
+namespace App\Model;
 
-use Blog\Core\Manager;
+use App\Core\Manager;
 
 /**
  * Authentication
@@ -20,10 +20,10 @@ class Authentication extends Manager
     public function checkLogin()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT mail, password FROM login');
+        $req = $db->query('SELECT mail, password FROM members');
 
         $data = $req->fetch(\PDO::FETCH_ASSOC);
-
+   
         return $data;
     }
 }
