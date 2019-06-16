@@ -8,11 +8,11 @@ namespace App\Model;
  * Set or get informations for a game
  */
 
- class Game
- {
+class Game
+{
     /**
      * @var int $_id, the id of a game
-    */
+     */
     protected $_id;
 
     /**
@@ -131,4 +131,4 @@ namespace App\Model;
         $this->_image = $image;
     }
 
- }
+}

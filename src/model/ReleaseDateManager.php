@@ -52,12 +52,6 @@ use App\model\ReleaseDate;
         }
 
         return $releaseDates;
-        // $array = ['blop','blap'];
-        // $releases = array_merge_recursive($releases, $array);
-        // print_r($releases);die;
-        // echo "<pre>";
-        // print_r($releases);
-        // echo "</pre>";die;
 
     }
  }

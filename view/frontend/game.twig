@@ -9,26 +9,26 @@
     <h1>{{ game.getName }}</h1>
 
     <p>Développeur(s) :<br>
-        {% for i in developers %} 
-            <p>- {{ i }}</p>
+        {% for developer in developers %} 
+            <p>- {{ developer.getName }}</p>
         {% endfor %}
     </p>
 
     <p>Genre(s) :<br>
-        {% for i in genres %} 
-            <p>- {{ i }}</p>
+        {% for genre in genres %} 
+            <p>- {{ genre.getName }}</p>
         {% endfor %}
     </p>
 
     <p>Mode(s) de jeu :<br>
-        {% for i in modes %} 
-            <p>- {{ i }}</p>
+        {% for mode in modes %} 
+            <p>- {{ mode.getName }}</p>
         {% endfor %}
     </p>
 
     <p>Sorties :<br>
         {% for release in releases %} 
-            <p>- Sur {{ release.platform }}, édité par {{ release.publisher }} - {{ release.region }} - {{  release. releaseDate }}</p>
+            <p>- Sur {{ release.getPlatform }}, édité par {{ release.getPublisher }} - {{ release.getRegion }} - {{  release. getReleaseDate }}</p>
         {% endfor %}
     </p>
 

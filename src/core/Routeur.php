@@ -24,22 +24,23 @@ class Routeur
      * Use of full namespace because php does not find the file with dynamic writing
      */
     protected $_routes = [ 
-        'home'               => ['controller' => 'App\Controller\HomeController',       'method' => 'showHome'],
-        'game'               => ['controller' => 'App\Controller\GameController',       'method' => 'showGame'],
-        'connection'         => ['controller' => 'App\Controller\ConnectionController', 'method' => 'showConnection'],
-        'login'              => ['controller' => 'App\Controller\ConnectionController', 'method' => 'loginCheck'],
-        'logout'             => ['controller' => 'App\Controller\ConnectionController', 'method' => 'logOut'],
-        'edit'               => ['controller' => 'App\Controller\BackController',       'method' => 'showEdit'],
-        'add-game'           => ['controller' => 'App\Controller\GameController',       'method' => 'addGame'],
-        'update-game'        => ['controller' => 'App\Controller\GameController',       'method' => 'updateGame'],
-        'delete-game'        => ['controller' => 'App\Controller\GameController',       'method' => 'deleteGameAndComments'],
-        'game-management'    => ['controller' => 'App\Controller\BackController',       'method' => 'showPostsManagement'],
-        'reported-comments'  => ['controller' => 'App\Controller\BackController',       'method' => 'showReportedComments'],
-        'add-comment'        => ['controller' => 'App\Controller\CommentController',    'method' => 'addComment'],
-        'delete-comment'     => ['controller' => 'App\Controller\CommentController',    'method' => 'deleteComment'],
-        'report-comment'     => ['controller' => 'App\Controller\CommentController',    'method' => 'reportComment'],
-        'valid-comment'      => ['controller' => 'App\Controller\CommentController',    'method' => 'validComment'],
-        'error'              => ['controller' => 'App\Controller\ErrorController',      'method' => 'showError']
+        'home'                 => ['controller' => 'App\Controller\HomeController',       'method' => 'showHome'],
+        'game'                 => ['controller' => 'App\Controller\GameController',       'method' => 'showGame'],
+        'connection'           => ['controller' => 'App\Controller\ConnectionController', 'method' => 'showConnection'],
+        'login'                => ['controller' => 'App\Controller\ConnectionController', 'method' => 'loginCheck'],
+        'logout'               => ['controller' => 'App\Controller\ConnectionController', 'method' => 'logOut'],
+        'edit'                 => ['controller' => 'App\Controller\BackController',       'method' => 'showEdit'],
+        'add-game'             => ['controller' => 'App\Controller\GameController',       'method' => 'addGame'],
+        'update-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'updateGame'],
+        'delete-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'deleteGameAndComments'],
+        'game-management'      => ['controller' => 'App\Controller\BackController',       'method' => 'showPostsManagement'],
+        'developer-management' => ['controller' => 'App\Controller\BackController',       'method' => 'showDeveloperManagement'],
+        'reported-comments'    => ['controller' => 'App\Controller\BackController',       'method' => 'showReportedComments'],
+        'add-comment'          => ['controller' => 'App\Controller\CommentController',    'method' => 'addComment'],
+        'delete-comment'       => ['controller' => 'App\Controller\CommentController',    'method' => 'deleteComment'],
+        'report-comment'       => ['controller' => 'App\Controller\CommentController',    'method' => 'reportComment'],
+        'valid-comment'        => ['controller' => 'App\Controller\CommentController',    'method' => 'validComment'],
+        'error'                => ['controller' => 'App\Controller\ErrorController',      'method' => 'showError']
     ];
 
     /**

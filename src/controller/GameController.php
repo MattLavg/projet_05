@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Model\GameManager;
 use App\Model\DeveloperManager;
+use App\Model\GenreManager;
+use App\Model\ModeManager;
 use App\Model\ReleaseDateManager;
 // use App\Model\CommentManager;
 // use App\Model\Pagination;
@@ -32,10 +34,14 @@ use App\Core\View;
         $gameManager = new GameManager();
         $game = $gameManager->getgame($game_id);
 
-        // Get developers, genres and modes of a game
-        $developers = $gameManager->getDevelopers($game_id);
-        $genres = $gameManager->getGenres($game_id);
-        $modes = $gameManager->getModes($game_id);
+        $developerManager = new DeveloperManager();
+        $developers = $developerManager->getDevelopers($game_id);
+
+        $genreManager = new GenreManager();
+        $genres = $genreManager->getGenres($game_id);
+
+        $modeManager = new ModeManager();
+        $modes = $modeManager->getModes($game_id);
 
         // Get releases for a game with platforms, regions and publishers
         $releaseDateManager = new ReleaseDateManager();
@@ -47,7 +53,8 @@ use App\Core\View;
             'developers' => $developers,
             'genres' => $genres,
             'modes' => $modes,
-            'releases' => $releaseDates));
+            'releases' => $releaseDates,
+            'connected' => ConnectionController::isSessionValid()));
 
     }
  }
