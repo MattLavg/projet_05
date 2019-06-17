@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block title %}{% endblock %}
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+
+        <!-- CSS -->
+        <link href="{{ ASSETS }}css/style.css" rel="stylesheet">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Kanit:700&display=swap" rel="stylesheet">
+
+        <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        </style>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top navbar-bg">
+            <a class="navbar-brand logo" href="{{ HOST }}">LISTaGAME</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ HOST }}">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{{ HOST }}post-management" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a href="{{ HOST }}edit" class="dropdown-item">Ajouter un jeu</a>
+                            <a href="{{ HOST }}post-management" class="dropdown-item">Gérer les jeux</a>
+                            <a href="{{ HOST }}developer-management" class="dropdown-item">Gérer les développeurs</a>
+                            <a href="{{ HOST }}publisher-management" class="dropdown-item">Gérer les éditeurs</a>
+                            <a href="{{ HOST }}platforms-management" class="dropdown-item">Gérer les supports</a>
+                            <a href="{{ HOST }}genre-management" class="dropdown-item">Gérer les genres</a>
+                            <a href="{{ HOST }}mode-management" class="dropdown-item">Gérer les modes</a>
+                            <a href="{{ HOST }}region-management" class="dropdown-item">Gérer les régions</a>
+                            <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ HOST }}logout">Déconnexion</a>
+                    </li>   
+                </ul>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher un jeu..." aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Chercher</button>
+                </form>
+            </div>
+
+            
+        </nav>
+    
+
+        <main role="main" class="mainContainer container-fluid">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-lg-4 leftMenu">
+                        <ul class="list-group">
+                            <a href="{{ HOST }}edit"><li class="list-group-item">Ajouter un article</li></a>
+                            <a href="{{ HOST }}post-management"><li class="list-group-item">Gérer les articles</li></a>
+                            <a href="{{ HOST }}reported-comments"><li class="list-group-item">Modérer les commentaires</li></a>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-8">
+
+                        {% block content %}{% endblock %}
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELETE MODAL -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Suppression</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Souhaitez-vous vraiment effacer <span class="modal-text"></span> ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <a id="modalConfirmBtn" href="">
+                                <button type="button" class="btn btn-primary">Effacer</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg">
+                <p><span class="text-light">ListaGame - </span><a href="{{ HOST }}connection">Connexion</a></p>
+            </footer>
+
+        </main><!-- /.container -->
+
+    </body>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- BOOSTRAP JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+
+    <!-- SCRIPTS JS -->
+    <script src="{{ ASSETS }}js/script.js"></script>
+
+</html>
+
+
