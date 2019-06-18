@@ -127,9 +127,9 @@ use App\Core\View;
                     break;
             }
 
-            $lastInsertedId = $manager->insertName($params);
+            $lastInsertedId = $manager->insertEntity($params);
 
-            $_SESSION['actionDone'] = 'Un nouvel article a été ajouté.';
+            $_SESSION['actionDone'] = 'Un nouvel élément a été ajouté.';
 
             $urlUpdateEntity = HOST . 'update-entity/entity/' . $entity . '/id/' . $lastInsertedId;
             $urlDeleteEntity = HOST . 'delete-entity/entity/' . $entity . '/id/' . $lastInsertedId;
@@ -138,10 +138,117 @@ use App\Core\View;
 
         } else {
 
-            $_SESSION['errorMessage'] = 'Tous les champs doivent être renseignés.';
+            $_SESSION['errorMessage'] = 'Le champs doit être renseigné.';
 
             echo json_encode(['success' => 0]);
 
         }
     }
+
+    /**
+     *  Allows to update an entity
+     * 
+     *  @param array $params 
+     */
+    public function updateEntity($params)
+    {
+        $params['name'] = trim(strip_tags($params['name']));
+
+        if (!empty($params['name'])) {
+
+            switch ($params['entity']) {
+                case 'developer':
+                    $manager = new DeveloperManager();
+                    $entity = 'developer';
+                    break;
+                case 'publisher':
+                    $manager = new PublisherManager();
+                    $entity = 'publisher';
+                    break;
+                case 'genre':
+                    $manager = new GenreManager();
+                    $entity = 'genre';
+                    break;
+                case 'mode':
+                    $manager = new ModeManager();
+                    $entity = 'mode';
+                    break;
+                case 'platform':
+                    $manager = new PlatformManager();
+                    $entity = 'platform';
+                    break;
+                case 'region':
+                    $manager = new RegionManager();
+                    $entity = 'region';
+                    break;
+            }
+
+            $manager->updateEntity($params);
+
+            $_SESSION['actionDone'] = 'L\'élément a été mis à jour.';
+
+            echo json_encode(['success' => 1, 'name' => $params['name']]);
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez enregistrer un champ vide.';
+
+            echo json_encode(['success' => 0]);
+
+        }
+    }
+
+    /**
+     *  Allows to delete an entity
+     * 
+     *  @param array $params 
+     */
+    public function deleteEntity($params)
+    {
+        // var_dump($params);die;
+        switch ($params['entity']) {
+            case 'developer':
+                $manager = new DeveloperManager();
+                $entity = 'developer';
+                break;
+            case 'publisher':
+                $manager = new PublisherManager();
+                $entity = 'publisher';
+                break;
+            case 'genre':
+                $manager = new GenreManager();
+                $entity = 'genre';
+                break;
+            case 'mode':
+                $manager = new ModeManager();
+                $entity = 'mode';
+                break;
+            case 'platform':
+                $manager = new PlatformManager();
+                $entity = 'platform';
+                break;
+            case 'region':
+                $manager = new RegionManager();
+                $entity = 'region';
+                break;
+        }
+
+        $count = $manager->deleteEntity($params);
+
+        if(!empty($count)) {
+
+            $_SESSION['actionDone'] = 'Un élément a été effacé.';
+
+             echo json_encode(['success' => 1]);
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'L\'élément n\'a pu être effacé.';
+
+             echo json_encode(['success' => 0]);
+
+        }  
+
+    }
+
  }

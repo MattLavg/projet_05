@@ -77,9 +77,9 @@ abstract class Manager
     /**
      * insert name in tables developers, genres, modes, platforms, publishers and regions
      * 
-     * @param array $name
+     * @param array $values
      */
-    public function insertName($values)
+    public function insertEntity($values)
     {
         $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name) VALUES(?)');
 
@@ -91,10 +91,37 @@ abstract class Manager
             $id = $this->_db->lastInsertId();
             return $id;
         }
-        
-        // if (!$count) {
-        //     throw new MyException('Impossible d\'ajouter l\'article');
-        // }
+    }
+
+    /**
+     * update name in tables developers, genres, modes, platforms, publishers and regions
+     * 
+     * @param array $values
+     */
+    public function updateEntity($values)
+    {
+        $req = $this->_db->prepare('UPDATE ' . $this->_table . ' SET name = ? WHERE id = ?');
+
+        $req->execute(array($values['name'], $values['id']));
+
+        // $count = $req->rowCount();
+
+    }
+
+    /**
+     * delete name in tables developers, genres, modes, platforms, publishers and regions
+     * 
+     * @param array $values
+     */
+    public function deleteEntity($values)
+    {
+        $req = $this->_db->prepare('DELETE FROM ' . $this->_table . ' WHERE id = ?');
+
+        $req->execute(array($values['id']));
+
+        $count = $req->rowCount();
+        return $count;
+
     }
 
 }
