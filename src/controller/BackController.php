@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\ConnectionController;
 use App\Model\GameManager;
+use App\Model\DeveloperManager;
 // use App\Model\CommentManager;
 // use App\Model\Pagination;
 use App\Core\View;
@@ -113,33 +114,6 @@ class BackController
         }
     }
 
-    /**
-     * Allows to show the posts management page
-     * 
-     * @param array $params optionnal
-     */
-    public function showDeveloppersManagement($params = [])
-    {
-        if (ConnectionController::isSessionValid()) {
-
-            $developerManager = new DeveloperManager();
-            $developers = $developerManager->getAll();
-
-            $view = new View('developerManagement');
-            $view->render('back', array(
-                'developers' => $developers, 
-                'isSessionValid' => ConnectionController::isSessionValid()));
-
-            unset($_SESSION['actionDone']);
-
-        } else {
-            
-            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
-
-            $view = new View();
-            $view->redirect('connection');
-        }
-    }
     
     /**
      * Allows to show the reported comments page

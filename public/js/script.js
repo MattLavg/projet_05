@@ -18,32 +18,38 @@ $(document).ready(function () {
         modal.find('#modalConfirmBtn').attr('href', url);
     })
 
-    // LOGIN AJAX
-    $('#login').click(function(e) {
+    // ADD DEVELOPER AJAX
+    $('#addDeveloper').click(function(e) {
         e.preventDefault();
-        url = $(this).attr('data-url');
-        console.log(url);
+        url = $(this).attr('data-url');        
+
         $.post(
             url,
             {
-                mail : $('#identificationEmail').val(),
-                password : $('#identificationPassword').val()
+                name : $('#developer').val()
             },
             function(data){
-                console.log(data);
-                if(data == 'Success'){
+                console.log(data.success, data.content, data);
+                if(data.success){
                     // Le membre est connecté. Ajoutons lui un message dans la page HTML.
-
                     $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
+
+                    var ligne = '<tr>' +
+                                '<td>' + data.name + '</td>'+
+                                '<td><a href="' + data.urlUpdate + '">Modifier</a></td>'+
+                                '<td><a href="' + data.urlDelete + '">Supprimer</a></td>' + 
+                                '</tr>';
+
+                    $('#table-dev table tbody').prepend(ligne);
                }
                else{
                     // Le membre n'a pas été connecté. (data vaut ici "failed")
-
                     $("#resultat").html("<p>Erreur lors de la connexion...</p>");
                }
             },
-            'text'
+            'json'
         );
+
     });
 
 });

@@ -74,4 +74,27 @@ abstract class Manager
         return $array;
     }
 
+    /**
+     * insert name in tables developers, genres, modes, platforms, publishers and regions
+     * 
+     * @param array $name
+     */
+    public function insertName($values)
+    {
+        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name) VALUES(?)');
+
+        $req->execute(array($values['name']));
+
+        $count = $req->rowCount();
+
+        if (!empty($count)) {
+            $id = $this->_db->lastInsertId();
+            return $id;
+        }
+        
+        // if (!$count) {
+        //     throw new MyException('Impossible d\'ajouter l\'article');
+        // }
+    }
+
 }
