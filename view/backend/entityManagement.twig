@@ -1,0 +1,58 @@
+{% extends "back.twig" %}
+
+{% block title %}
+    <title>Gestion des {{ entityFr }}s | LISTaGAME</title>
+{% endblock %}
+
+{% set elementsOnPage = false %}
+
+{% block content %}
+
+    <h1>Gestion - {{ entityFr }}</h1>
+
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="entity">Ajouter à la liste :&nbsp;</label>
+          <input type="text" class="form-control" id="entity" placeholder="{{ entityFr }}">
+        </div>
+        <button type="submit" id="addEntity" class="btn btn-primary mb-2" data-url="{{ urlAddEntity }}">Ajouter</button>
+    </form>
+
+    <div id="resultat">
+        <!-- Nous allons afficher un retour en jQuery au visiteur -->
+    </div>
+
+    <h3>Liste des {{ entityFr }}s disponibles</h3>
+
+    <div class="table-responsive tableMargin" id="table-dev">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Modification</th>
+                    <th scope="col">Suppression</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for entity in entities %}
+
+                    {% set elementsOnPage = true %}
+
+                    <tr id="{{ entity.getId }}">
+                        <td id="entityName">{{ entity.getName }}</td>
+                        <td><a href="{{ urlUpdateEntity }}/id/{{ entity.getId }}" id="updateEntity">Modifier</a></td>
+                        <td><a href="#" data-url="{{ urlDeleteEntity }}/id/{{ entity.getId }}" id="entityDeleteBtn" data-entity="{{ entityFr }}" data-entity-name="{{ entity.getName }}" data-entity-id="{{ entity.getId }}"  data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
+                    </tr> 
+
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+
+    {% if not elementsOnPage %}
+        <p>Il n'y a actuellement aucun article</p>
+    {% endif %}
+
+{% endblock %}
