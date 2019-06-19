@@ -132,15 +132,25 @@ use App\Core\View;
                 $gameManager = new GameManager();
                 $post = $postManager->getgame($id);
 
-                $view = new View('edit');
+                $view = new View('gameEdit');
                 $view->render('back', array('post' => $post, 'errorMessage' => $errorMessage));
 
                 unset($_SESSION['errorMessage']);
 
             } else {
 
-                $view = new View('edit');
-                $view->render('back', array('errorMessage' => $errorMessage));
+                $developerManager = new DeveloperManager();
+                // $platformManager = new GenreManager();
+                // $platformManager = new ModeManager();
+                // $platformManager = new PublisherManager();
+                // $platformManager = new PlatformManager();
+                // $platformManager = new PlatformManager();
+                $developers = $developerManager->getAll();
+
+                $view = new View('gameEdit');
+                $view->render('back', array(
+                    'developers' => $developers,
+                    'errorMessage' => $errorMessage));
 
                 unset($_SESSION['errorMessage']);
 

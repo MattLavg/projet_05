@@ -13,7 +13,7 @@
     <form class="form-inline">
         <div class="form-group mx-sm-3 mb-2">
           <label for="entity">Ajouter à la liste :&nbsp;</label>
-          <input type="text" class="form-control" id="entity" placeholder="{{ entityFr }}">
+          <input type="text" class="form-control" id="addEntityInput" placeholder="{{ entityFr }}">
         </div>
         <button type="submit" id="addEntity" class="btn btn-primary mb-2" data-url="{{ urlAddEntity }}">Ajouter</button>
     </form>
@@ -39,10 +39,10 @@
 
                     {% set elementsOnPage = true %}
 
-                    <tr id="{{ entity.getId }}">
-                        <td id="entityName">{{ entity.getName }}</td>
-                        <td><a href="{{ urlUpdateEntity }}/id/{{ entity.getId }}" id="updateEntity">Modifier</a></td>
-                        <td><a href="#" data-url="{{ urlDeleteEntity }}/id/{{ entity.getId }}" id="entityDeleteBtn" data-entity="{{ entityFr }}" data-entity-name="{{ entity.getName }}" data-entity-id="{{ entity.getId }}"  data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
+                    <tr>
+                        <td class="entityName">{{ entity.getName }}</td>
+                        <td><a href="{{ urlUpdateEntity }}/id/{{ entity.getId }}" class="updateEntity">Modifier</a></td>
+                        <td><a href="#" data-url="{{ urlDeleteEntity }}/id/{{ entity.getId }}" class="entityDeleteBtn" data-entity="{{ entityFr }}" data-entity-name="{{ entity.getName }}" data-entity-id="{{ entity.getId }}"  data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
                     </tr> 
 
                 {% endfor %}
