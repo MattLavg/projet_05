@@ -29,7 +29,7 @@ class Routeur
         'connection'           => ['controller' => 'App\Controller\ConnectionController', 'method' => 'showConnection'],
         'login'                => ['controller' => 'App\Controller\ConnectionController', 'method' => 'loginCheck'],
         'logout'               => ['controller' => 'App\Controller\ConnectionController', 'method' => 'logOut'],
-        'edit'                 => ['controller' => 'App\Controller\BackController',       'method' => 'showEdit'],
+        'edit-game'            => ['controller' => 'App\Controller\GameController',       'method' => 'showEditGame'],
         'add-game'             => ['controller' => 'App\Controller\GameController',       'method' => 'addGame'],
         'update-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'updateGame'],
         'delete-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'deleteGameAndComments'],

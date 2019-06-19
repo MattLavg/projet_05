@@ -108,5 +108,51 @@ use App\Core\View;
         }
     }
 
+    /**
+     * Allows to show the game edit page
+     * 
+     * @param array $params
+     */
+    public function showEditGame($params = [])
+    {
+        if (ConnectionController::isSessionValid()) {
+
+            // Default error message to null
+            $errorMessage = null;
+
+            // if user try to post empty fields
+            if (isset($_SESSION['errorMessage'])) {
+                $errorMessage = $_SESSION['errorMessage'];
+            }
+
+            if (isset($params['id'])) {
+
+                extract($params); // Allows to extract the $id variable
+
+                $gameManager = new GameManager();
+                $post = $postManager->getgame($id);
+
+                $view = new View('edit');
+                $view->render('back', array('post' => $post, 'errorMessage' => $errorMessage));
+
+                unset($_SESSION['errorMessage']);
+
+            } else {
+
+                $view = new View('edit');
+                $view->render('back', array('errorMessage' => $errorMessage));
+
+                unset($_SESSION['errorMessage']);
+
+            }
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
 
  }
