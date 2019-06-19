@@ -46,10 +46,10 @@
                         <a class="nav-link" href="{{ HOST }}">Accueil</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{{ HOST }}post-management" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a href="{{ HOST }}edit" class="dropdown-item">Ajouter un jeu</a>
-                            <a href="{{ HOST }}post-management" class="dropdown-item">Gérer les jeux</a>
+                            <a href="{{ HOST }}edit-game" class="dropdown-item">Ajouter un jeu</a>
+                            <a href="{{ HOST }}game-management" class="dropdown-item">Gérer les jeux</a>
                             <a href="{{ HOST }}entity-management/entity/developer" class="dropdown-item">Gérer les développeurs</a>
                             <a href="{{ HOST }}entity-management/entity/publisher" class="dropdown-item">Gérer les éditeurs</a>
                             <a href="{{ HOST }}entity-management/entity/platform" class="dropdown-item">Gérer les supports</a>
@@ -81,8 +81,14 @@
 
                     <div class="col-lg-4 leftMenu">
                         <ul class="list-group">
-                            <a href="{{ HOST }}edit"><li class="list-group-item">Ajouter un article</li></a>
-                            <a href="{{ HOST }}post-management"><li class="list-group-item">Gérer les articles</li></a>
+                            <a href="{{ HOST }}edit-game"><li class="list-group-item">Ajouter un jeu</li></a>
+                            <a href="{{ HOST }}game-management"><li class="list-group-item">Gérer les jeux</li></a>
+                            <a href="{{ HOST }}entity-management/entity/developer"><li class="list-group-item">Gérer les développeurs</li></a>
+                            <a href="{{ HOST }}entity-management/entity/publisher"><li class="list-group-item">Gérer les éditeurs</li></a>
+                            <a href="{{ HOST }}entity-management/entity/platform"><li class="list-group-item">Gérer les supports</li></a>
+                            <a href="{{ HOST }}entity-management/entity/genre"><li class="list-group-item">Gérer les genres</li></a>
+                            <a href="{{ HOST }}entity-management/entity/mode"><li class="list-group-item">Gérer les modes</li></a>
+                            <a href="{{ HOST }}entity-management/entity/region"><li class="list-group-item">Gérer les régions</li></a>
                             <a href="{{ HOST }}reported-comments"><li class="list-group-item">Modérer les commentaires</li></a>
                         </ul>
                     </div>

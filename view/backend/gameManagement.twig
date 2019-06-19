@@ -1,0 +1,46 @@
+{% extends "back.twig" %}
+
+{% block title %}
+    <title>Gestion des jeux | LISTaGAME</title>
+{% endblock %}
+
+{% set elementsOnPage = false %}
+
+{% block content %}
+
+    <h1>Gestion - jeux</h1>
+
+    <h3>Liste des jeux disponibles</h3>
+
+    <div class="table-responsive tableMargin" id="table-dev">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Modification</th>
+                    <th scope="col">Suppression</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for game in games %}
+
+                    {% set elementsOnPage = true %}
+
+                    <tr id="{{ game.getId }}">
+                        <td id="gameName">{{ game.getName }}</td>
+                        <td><a href="{{ HOST }}update-game/id/{{ game.getId }}" id="updateGame">Modifier</a></td>
+                        <td><a href="#" data-url="{{ HOST }}delete-game/id/{{ game.getId }}" id="entityDeleteBtn" data-entity="{{ jeu }}" data-entity-name="{{ game.getName }}" data-entity-id="{{ game.getId }}"  data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
+                    </tr> 
+
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+
+    {% if not elementsOnPage %}
+        <p>Il n'y a actuellement aucun article</p>
+    {% endif %}
+
+{% endblock %}

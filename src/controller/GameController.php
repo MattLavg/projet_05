@@ -57,4 +57,56 @@ use App\Core\View;
             'connected' => ConnectionController::isSessionValid()));
 
     }
+
+    /**
+     * Allows to show the games management page
+     * 
+     * @param array $params optionnal
+     */
+    public function showGamesManagement($params = [])
+    {
+        if (ConnectionController::isSessionValid()) {
+
+            $pageNb = 1;
+
+            if (isset($params['pageNb'])) {
+                $pageNb = $params['pageNb'];
+            } 
+
+            // Default action message to null
+            $actionDone = null;
+
+            // if user delete a post
+            if (isset($_SESSION['actionDone'])) {
+                $actionDone = $_SESSION['actionDone'];
+            }
+
+            $gameManager = new GameManager();
+
+            // $totalNbRows = $postManager->count();
+            // $url = HOST . 'post-management';
+
+            // $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
+            
+            // $posts = $postManager->listPosts($pagination->getFirstEntry(), $pagination->getElementNbByPage());
+
+            $games = $gameManager->getAll();
+
+            $view = new View('gameManagement');
+            $view->render('back', array(
+                'games' => $games,
+                'isSessionValid' => ConnectionController::isSessionValid()));
+
+            unset($_SESSION['actionDone']);
+
+        } else {
+            
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
+
+
  }

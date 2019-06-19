@@ -33,7 +33,7 @@ class Routeur
         'add-game'             => ['controller' => 'App\Controller\GameController',       'method' => 'addGame'],
         'update-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'updateGame'],
         'delete-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'deleteGameAndComments'],
-        'game-management'      => ['controller' => 'App\Controller\BackController',       'method' => 'showGamesManagement'],
+        'game-management'      => ['controller' => 'App\Controller\GameController',       'method' => 'showGamesManagement'],
         'entity-management'    => ['controller' => 'App\Controller\EntityController',     'method' => 'showEntitiesManagement'],
         'add-entity'           => ['controller' => 'App\Controller\EntityController',     'method' => 'addEntity'],
         'update-entity'        => ['controller' => 'App\Controller\EntityController',     'method' => 'updateEntity'],
