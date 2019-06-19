@@ -66,6 +66,7 @@ class View
 
         $params['HOST'] = HOST;
         $params['ASSETS'] = ASSETS;
+        $params['VENDOR'] = VENDOR;
         // echo "<pre>";
         // print_r($params);
         // echo "</pre>";die;

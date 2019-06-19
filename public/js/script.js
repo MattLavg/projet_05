@@ -126,9 +126,10 @@ $(document).ready(function () {
 
         // get the delete entity url
         url = $(this).data('url'); 
-        console.log(url); 
-        // entityId = $(this).data('entity-id'); 
-        // console.log(entityId);
+        
+        // get the id of the entity
+        entityId = $(this).data('entity-id'); 
+        
         $.post(
             url,
             function(data){
@@ -137,7 +138,7 @@ $(document).ready(function () {
                     // Le membre est connecté. Ajoutons lui un message dans la page HTML.
                     // $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
 
-                    $('tr#' + entityId).remove();
+                    $('tr#id' + entityId).remove();
                     $('#deleteModal').modal('toggle');
 
                }
