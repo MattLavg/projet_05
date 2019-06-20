@@ -1,0 +1,76 @@
+{% extends "back.twig" %}
+
+{% block title %}
+    <title>Ajout et modification d'un jeu | LISTaGAME</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Ajouter un jeu</h1>
+<hr>
+    <form method="post" action="{{ HOST }}add-game">
+        <div class="form-group">
+            <label for="name">Le titre du jeu :</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Titre">
+        </div>
+
+        <div class="form-group">
+            <label>Description du jeu :</label>
+            <textarea id="tinymcetextarea" name="content"></textarea>
+        </div>
+
+        <hr>
+        
+        <h4>Le ou les développeur(s) du jeu</h4>
+
+        <div class="form-group" id="developer-group-game-edit">
+            <label for="developer">Choisissez un développeur :</label>
+            <select name="developer1" class="form-control developerList mb-2">
+                {% for developer in developers %}
+                    <option value="{{ developer.getId }}">{{ developer.getName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="addDeveloperForm">Ajouter un développeur</button>
+        <button type="button" class="btn btn-primary" id="deleteDeveloperForm">Supprimer un développeur</button>
+
+        <hr>
+        
+        <h4>Le ou les genre(s) du jeu</h4>
+
+        <div class="form-group" id="genre-group-game-edit">
+            <label for="genre">Choisissez un genre :</label>
+            <select name="genre1" class="form-control genreList mb-2">
+                {% for genre in genres %}
+                    <option value="{{ genre.getId }}">{{ genre.getName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="addGenreForm">Ajouter un genre</button>
+        <button type="button" class="btn btn-primary" id="deleteGenreForm">Supprimer un genre</button>
+
+        <hr>
+        
+        <h4>Le ou les mode(s) du jeu</h4>
+
+        <div class="form-group" id="mode-group-game-edit">
+            <label for="mode">Choisissez un mode :</label>
+            <select name="mode1" class="form-control modeList mb-2">
+                {% for mode in modes %}
+                    <option value="{{ mode.getId }}">{{ mode.getName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="addModeForm">Ajouter un mode</button>
+        <button type="button" class="btn btn-primary" id="deleteModeForm">Supprimer un mode</button>
+
+        <hr>
+
+        <button type="submit" class="btn btn-primary">Valider</button>
+
+    </form>
+
+{% endblock %}
