@@ -31,30 +31,32 @@ $(document).ready(function () {
                 name : $('#addEntityInput').val() // get value of input
             },
             function(data){
-                console.log(data.success, data.content, data);
                 if(data.success){
-                    // Le membre est connecté. Ajoutons lui un message dans la page HTML.
-                    // $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
+                    // Success
+                    // $("#resultat").html("<p>Un élément a été ajouté.</p>");
 
                     // create a row
                     var ligne = '<tr>' +
                                 '<td class="entityName">' + data.name + '</td>'+
                                 '<td><a href="' + data.urlUpdateEntity + '" class="updateEntity">Modifier</a></td>'+
-                                '<td><a href="' + data.urlDeleteEntity + '">Supprimer</a></td>' + 
+                                '<td><a href="' + data.urlDeleteEntity + '" class="deleteEntity">Supprimer</a></td>' + 
                                 '</tr>';
 
                     // add the row in the body's table
                     $('#table-dev table tbody').prepend(ligne);
 
-                    // allows to give the action for the new link "modifier"
+                    // allows to give the action for the new create link "modifier"
                     $('#table-dev tbody tr:first .updateEntity').click(updateAction);
+
+                    // allows to give the action for the new created link "supprimer"
+                    $('#table-dev tbody tr:first .deleteEntity').click(deleteAction);
 
                     // remove the value in the input
                     $('#addEntityInput').val('');
                }
                else{
-                    // Le membre n'a pas été connecté. (data vaut ici "failed")
-                    $("#resultat").html("<p>Erreur lors de la connexion...</p>");
+                    // Failed
+                    $("#resultat").html("<p>Impossible d'ajouter un élément.</p>");
                }
             },
             'json'
@@ -70,21 +72,25 @@ $(document).ready(function () {
         // get the update entity url
         var dataUrl = $(this).attr('href');
  
-        var inlineForm = '<form class="form-inline updateEntityForm">' +
+        var inlineForm = '<form class="form-inline">' +
                          '<div class="form-group mx-sm-3 mb-2">' +
-                         '<input type="text" class="form-control" class="updateEntityInput" placeholder="' + value + '">' +
+                         '<input type="text" class="form-control" class="updateEntityInput" value="' + value + '">' +
                          '</div>' +
-                         '<button type="submit" class="validUpdateEntity" class="btn btn-primary mb-2" ' + 
-                         'data-url="' + dataUrl + '">Ajouter</button>' +
+                         '<button type="submit" class="btn btn-primary mb-2 validUpdateEntity" ' + 
+                         'data-url="' + dataUrl + '">Modifier</button>' +
+                         '<button type="button" class="btn btn-secondary ml-1 mb-2 cancelUpdateEntity" data-default-value="' + value + '">Annuler</button>'+
                          '</form>';
 
         // add the inline form 
         $(this).parent().parent().find('.entityName').html(inlineForm);
 
-        // get the form button "add" of the row
-        var addBtn = $(this).parent().parent().find('.validUpdateEntity');
+        // get the form button "modifier" of the row
+        var updateBtn = $(this).parent().parent().find('.validUpdateEntity');
 
-        $(addBtn).click(function(e) {
+        // get the form button "annuler" of the row
+        var cancelBtn = $(updateBtn).parent().find('.cancelUpdateEntity');
+
+        $(updateBtn).click(function(e) {
             e.preventDefault();
 
             // get the update entity url
@@ -96,25 +102,35 @@ $(document).ready(function () {
                     name : $(this).parent().find('input').val() // get value of input
                 },
                 function(data){
-                    console.log(data.success, data.content, data);
                     if(data.success){
-                        // Le membre est connecté. Ajoutons lui un message dans la page HTML.
-                        // $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
+                        // Success
+                        // $("#resultat").html("<p>Vous avez modifié l'élément.</p>");
     
                         // add the modified name in the td
-                        $(addBtn).parent().parent().prepend(data.name);
+                        $(updateBtn).parent().parent().prepend(data.name);
         
                         // remove the add form
-                        $(addBtn).parent().remove();
-                        // $(this).parent().parent().find('.entityDeleteBtn').data('entity-name', data.name);
+                        $(updateBtn).parent().remove();
                    }
                    else{
-                        // Le membre n'a pas été connecté. (data vaut ici "failed")
-                        $("#resultat").html("<p>Erreur lors de la connexion...</p>");
+                        // Failed
+                        $("#resultat").html("<p>Impossible de modifier l'élément.</p>");
                    }
                 },
                 'json'
             );
+        });
+
+        $(cancelBtn).click(function(e) {
+
+            // get the value of row'input
+            var defaultValue = $(this).data('default-value');
+
+            // put the original value in tr
+            $(this).parent().parent().html(defaultValue);
+
+            // remove the add form
+            $(this).parent().remove();
         });
     };
 
@@ -123,43 +139,38 @@ $(document).ready(function () {
 
     // put the delete action in variable
     var deleteAction = function(e) {
-
+        e.preventDefault();
         // get the delete entity url
-        url = $(this).data('url'); 
-        
-        // get the id of the entity
-        entityId = $(this).data('entity-id'); 
+        url = $(this).attr('href'); 
+
+        var deleteBtn = $(this);
         
         $.post(
             url,
             function(data){
-                console.log(data.success, data.content, data);
                 if(data.success){
-                    // Le membre est connecté. Ajoutons lui un message dans la page HTML.
-                    // $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
+                    // Success
+                    // $("#resultat").html("<p>Vous avez supprimé l'élément.</p>");
 
-                    $('tr#id' + entityId).remove();
-                    $('#deleteModal').modal('toggle');
-
+                    $(deleteBtn).parent().parent().remove();
                }
                else{
-                    // Le membre n'a pas été connecté. (data vaut ici "failed")
-                    $("#resultat").html("<p>Erreur lors de la connexion...</p>");
+                    // Failed
+                    $("#resultat").html("<p>Impossible de supprimer l'élément.</p>");
                }
             },
             'json'
-        );
+            );
     };
 
     // DELETE ENTITY AJAX
-    $('#modalConfirmBtn').click(deleteAction);
+    $('.deleteEntity').click(deleteAction);
 
     // ADD DEVELOPER INPUT IN FORM
     $('#addDeveloperForm').click(function(e) {
-        var select = $('<select>');
-        select.addClass('form-control developerList mt-2');
         
-        var developerList = select + '% for developer in developers %}'+
+        var developerList = '<select class="form-control developerList mt-2">' + 
+                            '{% for developer in developers %}'+
                             '<option id="developer{{ developer.getId }}">'+
                             '{{ developer.getName }}</option>{% endfor %}'+
                             '</select>';

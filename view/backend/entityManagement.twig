@@ -39,10 +39,10 @@
 
                     {% set elementsOnPage = true %}
 
-                    <tr class="id{{ entity.getId }}">
+                    <tr>
                         <td class="entityName">{{ entity.getName }}</td>
                         <td><a href="{{ urlUpdateEntity }}/id/{{ entity.getId }}" class="updateEntity">Modifier</a></td>
-                        <td><a href="#" data-url="{{ urlDeleteEntity }}/id/{{ entity.getId }}" class="entityDeleteBtn" data-entity="{{ entityFr }}" data-entity-name="{{ entity.getName }}" data-entity-id="{{ entity.getId }}"  data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
+                        <td><a href="{{ urlDeleteEntity }}/id/{{ entity.getId }}" class="deleteEntity">Retirer</a></td>
                     </tr> 
 
                 {% endfor %}
