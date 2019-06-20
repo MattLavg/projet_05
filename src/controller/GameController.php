@@ -140,21 +140,47 @@ use App\Core\View;
             } else {
 
                 $developerManager = new DeveloperManager();
-                // $platformManager = new GenreManager();
-                // $platformManager = new ModeManager();
+                $genreManager = new GenreManager();
+                $modeManager = new ModeManager();
                 // $platformManager = new PublisherManager();
                 // $platformManager = new PlatformManager();
                 // $platformManager = new PlatformManager();
                 $developers = $developerManager->getAll();
+                $genres = $genreManager->getAll();
+                $modes = $modeManager->getAll();
 
                 $view = new View('gameEdit');
                 $view->render('back', array(
                     'developers' => $developers,
+                    'genres' => $genres,
+                    'modes' => $modes,
                     'errorMessage' => $errorMessage));
 
                 unset($_SESSION['errorMessage']);
 
             }
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
+
+    /**
+     * Allows to add a game
+     * 
+     * @param array $params
+     */
+    public function addGame($params = [])
+    {
+        var_dump($params);die;
+        $params['name'] = trim(strip_tags($params['name']));
+
+        if (ConnectionController::isSessionValid()) {
+
 
         } else {
 

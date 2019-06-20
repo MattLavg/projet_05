@@ -166,17 +166,78 @@ $(document).ready(function () {
     // DELETE ENTITY AJAX
     $('.deleteEntity').click(deleteAction);
 
-    // ADD DEVELOPER INPUT IN FORM
-    $('#addDeveloperForm').click(function(e) {
-        
-        var developerList = '<select class="form-control developerList mt-2">' + 
-                            '{% for developer in developers %}'+
-                            '<option id="developer{{ developer.getId }}">'+
-                            '{{ developer.getName }}</option>{% endfor %}'+
-                            '</select>';
 
-        // select.appendTo('#developer-group');
-        $(select).appendTo('#developer-group');
+
+    // ADD and DELETE DEVELOPER INPUT IN FORM GAME EDIT
+    var nbDeveloper = 1;
+    // ADD DEVELOPER INPUT 
+    $('#addDeveloperForm').click(function(e) {
+        nbDeveloper++;
+        $('.developerList:first').clone().appendTo('#developer-group-game-edit');
+        $('.developerList:last').attr('name', 'developer' + nbDeveloper);
+    });
+
+    // DELETE DEVELOPER INPUT 
+    $('#deleteDeveloperForm').click(function(e) {
+
+        if (nbDeveloper > 1) {
+            nbDeveloper--;
+        }
+        
+        if ($('.developerList').length > 1) {
+            $('.developerList:last').remove();
+        }
+
+    });
+
+
+
+    // ADD and DELETE GENRE INPUT IN FORM GAME EDIT
+    var nbGenre = 1;
+    // ADD GENRE INPUT 
+    $('#addGenreForm').click(function(e) {
+        nbGenre++;
+        $('.genreList:first').clone().appendTo('#genre-group-game-edit');
+        $('.genreList:last').attr('name', 'genre' + nbGenre);
+
+    });
+
+    // DELETE GENRE INPUT 
+    $('#deleteGenreForm').click(function(e) {
+
+        if (nbGenre > 1) {
+            nbGenre--;
+        }
+
+        if ($('.genreList').length > 1) {
+            $('.genreList:last').remove();
+        }
+
+    });
+
+    
+
+    // ADD and DELETE GENRE INPUT IN FORM GAME EDIT
+    var nbMode = 1;
+    // ADD MODE INPUT IN FORM GAME EDIT
+    $('#addModeForm').click(function(e) {
+        nbMode++;
+        $('.modeList:first').clone().appendTo('#mode-group-game-edit');
+        $('.modeList:last').attr('name', 'mode' + nbMode);
+        
+
+    });
+
+    // DELETE MODE INPUT IN FORM GAME EDIT
+    $('#deleteModeForm').click(function(e) {
+
+        if (nbMode > 1) {
+            nbMode--;
+        }
+
+        if ($('.modeList').length > 1) {
+            $('.modeList:last').remove();
+        }
 
     });
 
