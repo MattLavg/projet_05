@@ -76,6 +76,29 @@ h1 {
     color: rgb(141, 141, 141);
 }
 
+/* GAME EDIT */
+
+.bloc-entity-game-edit {
+    position: relative;
+}
+
+.cross-cancel {
+    display: none;
+}
+
+.cross-game-edit {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    color: rgb(255, 0, 0);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.circle-game-edit:hover {
+    color: rgb(190, 2, 2);
+}
+
 /* COMMENTS */
 
 .comment.container {

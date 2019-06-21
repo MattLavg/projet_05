@@ -168,27 +168,38 @@ $(document).ready(function () {
 
 
 
+
+
+
+
+    var deleteEntityList = function(e) {
+        e.preventDefault();
+        $(this).parent().remove();
+        // if (nbDeveloper > 1) {
+        //     nbDeveloper--;
+        // }
+    };
+
     // ADD and DELETE DEVELOPER INPUT IN FORM GAME EDIT
     var nbDeveloper = 1;
     // ADD DEVELOPER INPUT 
-    $('#addDeveloperForm').click(function(e) {
+    $('.addEntityForm').click(function(e) {
         nbDeveloper++;
-        $('.developerList:first').clone().appendTo('#developer-group-game-edit');
-        $('.developerList:last').attr('name', 'developer' + nbDeveloper);
+        // clone the entity list
+        $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo('#developer-group-game-edit');
+        // display cross
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
+        // apply the delete function to the cross
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').click(deleteEntityList);
+        // add the padding class
+        $(this).parent().find('.bloc-entity-game-edit:last').addClass('pl-5');
+        $('.developerList:last').attr('name', 'developer[' + nbDeveloper + ']');
     });
-
+    
+    
     // DELETE DEVELOPER INPUT 
-    $('#deleteDeveloperForm').click(function(e) {
+    $('.cross-cancel').click();
 
-        if (nbDeveloper > 1) {
-            nbDeveloper--;
-        }
-        
-        if ($('.developerList').length > 1) {
-            $('.developerList:last').remove();
-        }
-
-    });
 
 
 
