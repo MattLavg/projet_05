@@ -176,7 +176,9 @@ use App\Core\View;
      */
     public function addGame($params = [])
     {
-        var_dump($params);die;
+        echo "<pre>";
+        print_r($params);
+        echo "</pre>";die;
         $params['name'] = trim(strip_tags($params['name']));
 
         if (ConnectionController::isSessionValid()) {
