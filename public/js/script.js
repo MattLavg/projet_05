@@ -183,7 +183,7 @@ $(document).ready(function () {
     $('.addEntityForm').click(function(e) {
         nbList++;
 
-        // get the bloc where select are duplicated
+        // get the bloc where list of entities are duplicated
         var blocEntityList = $(this).parent().find('.entity-group-game-edit');
         // clone the entity list
         $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
@@ -214,57 +214,6 @@ $(document).ready(function () {
     // DELETE DEVELOPER INPUT 
     // $('.cross-cancel').click();
 
-
-
-
-    // // ADD and DELETE GENRE INPUT IN FORM GAME EDIT
-    // var nbGenre = 1;
-    // // ADD GENRE INPUT 
-    // $('#addGenreForm').click(function(e) {
-    //     nbGenre++;
-    //     $('.genreList:first').clone().appendTo('#genre-group-game-edit');
-    //     $('.genreList:last').attr('name', 'genre' + nbGenre);
-
-    // });
-
-    // // DELETE GENRE INPUT 
-    // $('#deleteGenreForm').click(function(e) {
-
-    //     if (nbGenre > 1) {
-    //         nbGenre--;
-    //     }
-
-    //     if ($('.genreList').length > 1) {
-    //         $('.genreList:last').remove();
-    //     }
-
-    // });
-
-    
-
-    // // ADD and DELETE GENRE INPUT IN FORM GAME EDIT
-    // var nbMode = 1;
-    // // ADD MODE INPUT IN FORM GAME EDIT
-    // $('#addModeForm').click(function(e) {
-    //     nbMode++;
-    //     $('.modeList:first').clone().appendTo('#mode-group-game-edit');
-    //     $('.modeList:last').attr('name', 'mode' + nbMode);
-        
-
-    // });
-
-    // // DELETE MODE INPUT IN FORM GAME EDIT
-    // $('#deleteModeForm').click(function(e) {
-
-    //     if (nbMode > 1) {
-    //         nbMode--;
-    //     }
-
-    //     if ($('.modeList').length > 1) {
-    //         $('.modeList:last').remove();
-    //     }
-
-    // });
 
 
 });
