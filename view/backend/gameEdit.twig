@@ -21,7 +21,7 @@
 
         <hr>
         
-        <h4>Le ou les développeur(s) du jeu</h4>
+        <h4>Le ou les développeur(s) du jeu :</h4>
         <div>
             <div class="entity-group-game-edit">
                 <div class="form-group bloc-entity-game-edit" >
@@ -39,7 +39,7 @@
         </div>
         <hr>
         
-        <h4>Le ou les genre(s) du jeu</h4>
+        <h4>Le ou les genre(s) du jeu :</h4>
         <div>
             <div class="entity-group-game-edit">
                 <div class="form-group bloc-entity-game-edit" >
@@ -58,7 +58,7 @@
         <hr>
 
         
-        <h4>Le ou les mode(s) du jeu</h4>
+        <h4>Le ou les mode(s) du jeu :</h4>
         <div>
             <div class="entity-group-game-edit">
                 <div class="form-group bloc-entity-game-edit" >
@@ -72,26 +72,39 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary addEntityForm">Ajouter un genre</button>
+            <button type="button" class="btn btn-primary addEntityForm">Ajouter un mode</button>
         </div>
         <hr>
 
-        <h4>La ou les dates de sorties</h4>
-        <p>Vous devez sélectionner un support, un éditeur, une région et remplir le champ avec une date.</p>
+        <h4>La ou les dates de sorties :</h4>
+        <p>Pour valider une date vous devez sélectionner un support, un éditeur, une région et une date.</p>
         <div>
             <div class="entity-group-game-edit">
                 <div class="form-group bloc-entity-game-edit" >
-                    <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                    <select name="mode[1]" class="form-control modeList mb-2">
-                            <option selected>Choisissez un mode</option>
-                        {% for mode in modes %}
-                            <option value="{{ mode.getId }}">{{ mode.getName }}</option>
+                    <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                    <select name="releaseDate[1]" class="form-control releaseDateList mb-2">
+                            <option selected>Choisissez un support</option>
+                        {% for platform in platforms %}
+                            <option value="{{ platform.getId }}">{{ platform.getName }}</option>
                         {% endfor %}
                     </select>
+                    <select name="releaseDate[1]" class="form-control releaseDateList mb-2">
+                            <option selected>Choisissez un éditeur</option>
+                        {% for publisher in publishers %}
+                            <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
+                        {% endfor %}
+                    </select>
+                        <select name="releaseDate[1]" class="form-control releaseDateList mb-2">
+                            <option selected>Choisissez une région</option>
+                        {% for region in regions %}
+                            <option value="{{ region.getId }}">{{ region.getName }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="form-control date" name="releaseDate" id="datepicker1" placeholder="Choisissez une date" readonly>
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary addEntityForm">Ajouter un genre</button>
+            <button type="button" class="btn btn-primary" id="addReleaseDateForm">Ajouter une date</button>
         </div>
         <hr>
 

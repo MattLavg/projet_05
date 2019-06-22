@@ -179,6 +179,7 @@ $(document).ready(function () {
 
     // ADD and DELETE DEVELOPER INPUT IN FORM GAME EDIT
     var nbList = 1;
+    var nbDatepicker = 1;
 
     $('.addEntityForm').click(function(e) {
         nbList++;
@@ -207,7 +208,44 @@ $(document).ready(function () {
             $(this).parent().find('select:last').attr('name', 'mode[' + nbList + ']');
 
         }
+    });
+
+    // $( ".date" ).datepicker( $.datepicker.regional[ "fr" ] );
+    $( ".date" ).datepicker($.datepicker.regional[ "fr" ]);
+
+    $('#addReleaseDateForm').click(function(e) {
+        nbList++;
+        nbDatepicker++;
+        // get the bloc where list of entities are duplicated
+        var blocEntityList = $(this).parent().find('.entity-group-game-edit');
+        // clone the entity list
+        $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
+        // display the first cross
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release').css('display', 'block');
+        // apply the delete function to the new cross icon
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release').click(deleteEntityList);
+        // add a background color, border-radius and padding
+        $(this).parent().find('.bloc-entity-game-edit:last').css({'background-color': '#F2F2F2', 'border-radius': '10px', 'padding': '10px'});
+        // add the padding class
+        $(this).parent().find('.bloc-entity-game-edit:last').addClass('pl-5');
+
+        $(this).parent().find('.bloc-entity-game-edit:last').find('select').attr('name', 'releadeDate[' + nbList + ']');
+
+        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeAttr('id');
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeData('datepicker');
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeClass('hasDatepicker');
         
+
+        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker("destroy");
+        console.log('plop');
+        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeClass('hasDatepicker');
+        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeData('datepicker');
+
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('id', 'datepicker' + nbDatepicker);
+
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker();
+// console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date'));
+        // $('#table-dev tbody tr:first .updateEntity').click(updateAction);
     });
     
     
@@ -215,5 +253,44 @@ $(document).ready(function () {
     // $('.cross-cancel').click();
 
 
+    // /* French initialisation for the jQuery UI date picker plugin. */
+    // /* Written by Keith Wood (kbwood{at}iinet.com.au),
+    //             Stéphane Nahmani (sholby@sholby.net),
+    //             Stéphane Raimbault <stephane.raimbault@gmail.com> */
+    // ( function( factory ) {
+    //     if ( typeof define === "function" && define.amd ) {
+
+    //         // AMD. Register as an anonymous module.
+    //         define( [ "../widgets/datepicker" ], factory );
+    //     } else {
+
+    //         // Browser globals
+    //         factory( jQuery.datepicker );
+    //     }
+    // }( function( datepicker ) {
+
+    // datepicker.regional.fr = {
+    //     closeText: "Fermer",
+    //     prevText: "Précédent",
+    //     nextText: "Suivant",
+    //     currentText: "Aujourd'hui",
+    //     monthNames: [ "janvier", "février", "mars", "avril", "mai", "juin",
+    //         "juillet", "août", "septembre", "octobre", "novembre", "décembre" ],
+    //     monthNamesShort: [ "janv.", "févr.", "mars", "avr.", "mai", "juin",
+    //         "juil.", "août", "sept.", "oct.", "nov.", "déc." ],
+    //     dayNames: [ "dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi" ],
+    //     dayNamesShort: [ "dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam." ],
+    //     dayNamesMin: [ "D","L","M","M","J","V","S" ],
+    //     weekHeader: "Sem.",
+    //     dateFormat: "dd/mm/yy",
+    //     firstDay: 1,
+    //     isRTL: false,
+    //     showMonthAfterYear: false,
+    //     yearSuffix: "" };
+    // datepicker.setDefaults( datepicker.regional.fr );
+
+    // return datepicker.regional.fr;
+
+    // } ) );
 
 });

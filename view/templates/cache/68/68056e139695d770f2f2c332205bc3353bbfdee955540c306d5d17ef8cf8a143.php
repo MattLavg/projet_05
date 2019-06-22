@@ -72,7 +72,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
         <hr>
         
-        <h4>Le ou les développeur(s) du jeu</h4>
+        <h4>Le ou les développeur(s) du jeu :</h4>
         <div>
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
@@ -104,7 +104,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         </div>
         <hr>
         
-        <h4>Le ou les genre(s) du jeu</h4>
+        <h4>Le ou les genre(s) du jeu :</h4>
         <div>
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
@@ -137,7 +137,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         <hr>
 
         
-        <h4>Le ou les mode(s) du jeu</h4>
+        <h4>Le ou les mode(s) du jeu :</h4>
         <div>
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
@@ -165,7 +165,81 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 </div>
             </div>
 
-            <button type=\"button\" class=\"btn btn-primary addEntityForm\">Ajouter un genre</button>
+            <button type=\"button\" class=\"btn btn-primary addEntityForm\">Ajouter un mode</button>
+        </div>
+        <hr>
+
+        <h4>La ou les dates de sorties :</h4>
+        <p>Pour valider une date vous devez sélectionner un support, un éditeur, une région et une date.</p>
+        <div>
+            <div class=\"entity-group-game-edit\">
+                <div class=\"form-group bloc-entity-game-edit\" >
+                    <a href=\"#\" class=\"cross-cancel-release\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
+                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                            <option selected>Choisissez un support</option>
+                        ";
+        // line 87
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["platforms"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["platform"]) {
+            // line 88
+            echo "                            <option value=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["platform"], "getId", [], "any", false, false, false, 88), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["platform"], "getName", [], "any", false, false, false, 88), "html", null, true);
+            echo "</option>
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['platform'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 90
+        echo "                    </select>
+                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                            <option selected>Choisissez un éditeur</option>
+                        ";
+        // line 93
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["publishers"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["publisher"]) {
+            // line 94
+            echo "                            <option value=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["publisher"], "getId", [], "any", false, false, false, 94), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["publisher"], "getName", [], "any", false, false, false, 94), "html", null, true);
+            echo "</option>
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['publisher'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 96
+        echo "                    </select>
+                        <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                            <option selected>Choisissez une région</option>
+                        ";
+        // line 99
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["regions"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["region"]) {
+            // line 100
+            echo "                            <option value=\"";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["region"], "getId", [], "any", false, false, false, 100), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["region"], "getName", [], "any", false, false, false, 100), "html", null, true);
+            echo "</option>
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['region'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 102
+        echo "                    </select>
+                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate\" id=\"datepicker1\" placeholder=\"Choisissez une date\" readonly>
+                </div>
+            </div>
+
+            <button type=\"button\" class=\"btn btn-primary\" id=\"addReleaseDateForm\">Ajouter une date</button>
         </div>
         <hr>
 
@@ -188,7 +262,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
     public function getDebugInfo()
     {
-        return array (  164 => 71,  153 => 69,  149 => 68,  131 => 52,  120 => 50,  116 => 49,  99 => 34,  88 => 32,  84 => 31,  61 => 11,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
+        return array (  237 => 102,  226 => 100,  222 => 99,  217 => 96,  206 => 94,  202 => 93,  197 => 90,  186 => 88,  182 => 87,  164 => 71,  153 => 69,  149 => 68,  131 => 52,  120 => 50,  116 => 49,  99 => 34,  88 => 32,  84 => 31,  61 => 11,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -216,7 +290,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
         <hr>
         
-        <h4>Le ou les développeur(s) du jeu</h4>
+        <h4>Le ou les développeur(s) du jeu :</h4>
         <div>
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
@@ -234,7 +308,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         </div>
         <hr>
         
-        <h4>Le ou les genre(s) du jeu</h4>
+        <h4>Le ou les genre(s) du jeu :</h4>
         <div>
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
@@ -253,7 +327,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         <hr>
 
         
-        <h4>Le ou les mode(s) du jeu</h4>
+        <h4>Le ou les mode(s) du jeu :</h4>
         <div>
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
@@ -267,7 +341,39 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 </div>
             </div>
 
-            <button type=\"button\" class=\"btn btn-primary addEntityForm\">Ajouter un genre</button>
+            <button type=\"button\" class=\"btn btn-primary addEntityForm\">Ajouter un mode</button>
+        </div>
+        <hr>
+
+        <h4>La ou les dates de sorties :</h4>
+        <p>Pour valider une date vous devez sélectionner un support, un éditeur, une région et une date.</p>
+        <div>
+            <div class=\"entity-group-game-edit\">
+                <div class=\"form-group bloc-entity-game-edit\" >
+                    <a href=\"#\" class=\"cross-cancel-release\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
+                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                            <option selected>Choisissez un support</option>
+                        {% for platform in platforms %}
+                            <option value=\"{{ platform.getId }}\">{{ platform.getName }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                            <option selected>Choisissez un éditeur</option>
+                        {% for publisher in publishers %}
+                            <option value=\"{{ publisher.getId }}\">{{ publisher.getName }}</option>
+                        {% endfor %}
+                    </select>
+                        <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                            <option selected>Choisissez une région</option>
+                        {% for region in regions %}
+                            <option value=\"{{ region.getId }}\">{{ region.getName }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate\" id=\"datepicker1\" placeholder=\"Choisissez une date\" readonly>
+                </div>
+            </div>
+
+            <button type=\"button\" class=\"btn btn-primary\" id=\"addReleaseDateForm\">Ajouter une date</button>
         </div>
         <hr>
 

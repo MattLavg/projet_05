@@ -48,15 +48,25 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
         <!-- Bootstrap core CSS -->
         <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css\" integrity=\"sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA\" crossorigin=\"anonymous\">
 
-        <!-- CSS -->
+        <!-- JQUERY UI CSS -->
         <link href=\"";
         // line 13
+        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
+        echo "css/jquery-ui.min.css\" rel=\"stylesheet\">
+        <link href=\"";
+        // line 14
+        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
+        echo "css/jquery-ui.theme.min.css\" rel=\"stylesheet\">
+
+        <!-- CSS -->
+        <link href=\"";
+        // line 17
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "css/style.css\" rel=\"stylesheet\">
 
         <!-- FONT AWESOME -->
         <link href=\"";
-        // line 16
+        // line 20
         echo twig_escape_filter($this->env, ($context["VENDOR"] ?? null), "html", null, true);
         echo "fontawesome/webfonts/all.css\" rel=\"stylesheet\">
 
@@ -84,7 +94,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
     <body>
         <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg\">
             <a class=\"navbar-brand logo\" href=\"";
-        // line 41
+        // line 45
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "\">LISTaGAME</a>
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExampleDefault\" aria-controls=\"navbarsExampleDefault\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -95,7 +105,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                 <ul class=\"navbar-nav mr-auto\">
                     <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
-        // line 49
+        // line 53
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "\">Accueil</a>
                     </li>
@@ -103,46 +113,46 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                         <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Administration</a>
                         <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
                             <a href=\"";
-        // line 54
+        // line 58
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "edit-game\" class=\"dropdown-item\">Ajouter un jeu</a>
                             <a href=\"";
-        // line 55
+        // line 59
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "game-management\" class=\"dropdown-item\">Gérer les jeux</a>
                             <a href=\"";
-        // line 56
+        // line 60
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/developer\" class=\"dropdown-item\">Gérer les développeurs</a>
                             <a href=\"";
-        // line 57
+        // line 61
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/publisher\" class=\"dropdown-item\">Gérer les éditeurs</a>
                             <a href=\"";
-        // line 58
+        // line 62
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/platform\" class=\"dropdown-item\">Gérer les supports</a>
                             <a href=\"";
-        // line 59
+        // line 63
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/genre\" class=\"dropdown-item\">Gérer les genres</a>
                             <a href=\"";
-        // line 60
+        // line 64
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/mode\" class=\"dropdown-item\">Gérer les modes</a>
                             <a href=\"";
-        // line 61
+        // line 65
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/region\" class=\"dropdown-item\">Gérer les régions</a>
                             <a href=\"";
-        // line 62
+        // line 66
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                         </div>
                     </li>
                     <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
-        // line 66
+        // line 70
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "logout\">Déconnexion</a>
                     </li>   
@@ -166,39 +176,39 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                     <div class=\"col-lg-4 leftMenu\">
                         <ul class=\"list-group\">
                             <a href=\"";
-        // line 87
+        // line 91
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "edit-game\"><li class=\"list-group-item\">Ajouter un jeu</li></a>
                             <a href=\"";
-        // line 88
+        // line 92
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "game-management\"><li class=\"list-group-item\">Gérer les jeux</li></a>
                             <a href=\"";
-        // line 89
+        // line 93
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/developer\"><li class=\"list-group-item\">Gérer les développeurs</li></a>
                             <a href=\"";
-        // line 90
+        // line 94
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/publisher\"><li class=\"list-group-item\">Gérer les éditeurs</li></a>
                             <a href=\"";
-        // line 91
+        // line 95
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/platform\"><li class=\"list-group-item\">Gérer les supports</li></a>
                             <a href=\"";
-        // line 92
+        // line 96
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/genre\"><li class=\"list-group-item\">Gérer les genres</li></a>
                             <a href=\"";
-        // line 93
+        // line 97
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/mode\"><li class=\"list-group-item\">Gérer les modes</li></a>
                             <a href=\"";
-        // line 94
+        // line 98
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/region\"><li class=\"list-group-item\">Gérer les régions</li></a>
                             <a href=\"";
-        // line 95
+        // line 99
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "reported-comments\"><li class=\"list-group-item\">Modérer les commentaires</li></a>
                         </ul>
@@ -207,9 +217,9 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                     <div class=\"col-lg-8\">
 
                         ";
-        // line 101
+        // line 105
         $this->displayBlock('content', $context, $blocks);
-        // line 102
+        // line 106
         echo "
                     </div>
                 </div>
@@ -238,7 +248,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
                 <p><span class=\"text-light\">ListaGame - </span><a href=\"";
-        // line 129
+        // line 133
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "connection\">Connexion</a></p>
             </footer>
@@ -250,25 +260,34 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
     <!-- JQUERY -->
     <script src=\"https://code.jquery.com/jquery-3.3.1.min.js\" integrity=\"sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=\" crossorigin=\"anonymous\"></script>
 
+    <!-- JQUERY UI -->
+    <script src=\"";
+        // line 144
+        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
+        echo "js/jquery-ui.min.js\"></script>
+    <script src=\"";
+        // line 145
+        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
+        echo "js/datepickerFrench.js\"></script>
+
     <!-- BOOSTRAP JS -->
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js\" integrity=\"sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp\" crossorigin=\"anonymous\"></script>
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 144
+        // line 152
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
     <!-- TINYMCE -->
     <script src=\"";
-        // line 147
+        // line 155
         echo twig_escape_filter($this->env, ($context["VENDOR"] ?? null), "html", null, true);
         echo "tinymce/js/tinymce/tinymce.min.js\"></script>
     <script type=\"text/javascript\">
         tinymce.init({
             selector: '#tinymcetextarea',  // change this value according to your HTML
-            min_height: 200,
             plugins: [
                 'advlist autolink autoresize link image lists charmap print preview hr anchor pagebreak spellchecker',
                 'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
@@ -292,7 +311,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
     {
     }
 
-    // line 101
+    // line 105
     public function block_content($context, array $blocks = [])
     {
     }
@@ -309,7 +328,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
     public function getDebugInfo()
     {
-        return array (  296 => 101,  291 => 7,  266 => 147,  260 => 144,  242 => 129,  213 => 102,  211 => 101,  202 => 95,  198 => 94,  194 => 93,  190 => 92,  186 => 91,  182 => 90,  178 => 89,  174 => 88,  170 => 87,  146 => 66,  139 => 62,  135 => 61,  131 => 60,  127 => 59,  123 => 58,  119 => 57,  115 => 56,  111 => 55,  107 => 54,  99 => 49,  88 => 41,  60 => 16,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
+        return array (  315 => 105,  310 => 7,  286 => 155,  280 => 152,  270 => 145,  266 => 144,  252 => 133,  223 => 106,  221 => 105,  212 => 99,  208 => 98,  204 => 97,  200 => 96,  196 => 95,  192 => 94,  188 => 93,  184 => 92,  180 => 91,  156 => 70,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  133 => 62,  129 => 61,  125 => 60,  121 => 59,  117 => 58,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -324,6 +343,10 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
         <!-- Bootstrap core CSS -->
         <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css\" integrity=\"sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA\" crossorigin=\"anonymous\">
+
+        <!-- JQUERY UI CSS -->
+        <link href=\"{{ ASSETS }}css/jquery-ui.min.css\" rel=\"stylesheet\">
+        <link href=\"{{ ASSETS }}css/jquery-ui.theme.min.css\" rel=\"stylesheet\">
 
         <!-- CSS -->
         <link href=\"{{ ASSETS }}css/style.css\" rel=\"stylesheet\">
@@ -452,6 +475,10 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
     <!-- JQUERY -->
     <script src=\"https://code.jquery.com/jquery-3.3.1.min.js\" integrity=\"sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=\" crossorigin=\"anonymous\"></script>
 
+    <!-- JQUERY UI -->
+    <script src=\"{{ ASSETS }}js/jquery-ui.min.js\"></script>
+    <script src=\"{{ ASSETS }}js/datepickerFrench.js\"></script>
+
     <!-- BOOSTRAP JS -->
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js\" integrity=\"sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp\" crossorigin=\"anonymous\"></script>
@@ -464,7 +491,6 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
     <script type=\"text/javascript\">
         tinymce.init({
             selector: '#tinymcetextarea',  // change this value according to your HTML
-            min_height: 200,
             plugins: [
                 'advlist autolink autoresize link image lists charmap print preview hr anchor pagebreak spellchecker',
                 'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',

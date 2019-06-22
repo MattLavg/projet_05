@@ -83,13 +83,20 @@ h1 {
 }
 
 .cross-cancel {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    display: none;
+}
+
+.cross-cancel-release {
+    position: absolute;
+    top: 72px;
+    left: 8px;
     display: none;
 }
 
 .cross-game-edit {
-    position: absolute;
-    top: 4px;
-    left: 0;
     color: rgb(255, 0, 0);
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;

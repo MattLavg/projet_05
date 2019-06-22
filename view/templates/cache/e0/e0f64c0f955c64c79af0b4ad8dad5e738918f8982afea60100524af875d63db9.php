@@ -48,15 +48,25 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         <!-- Bootstrap core CSS -->
         <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css\" integrity=\"sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA\" crossorigin=\"anonymous\">
 
-        <!-- CSS -->
+        <!-- JQUERY UI CSS -->
         <link href=\"";
         // line 13
+        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
+        echo "css/jquery-ui.min.css\" rel=\"stylesheet\">
+        <link href=\"";
+        // line 14
+        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
+        echo "css/jquery-ui.theme.min.css\" rel=\"stylesheet\">
+
+        <!-- CSS -->
+        <link href=\"";
+        // line 17
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "css/style.css\" rel=\"stylesheet\">
 
         <!-- FONT AWESOME -->
         <link href=\"";
-        // line 16
+        // line 20
         echo twig_escape_filter($this->env, ($context["VENDOR"] ?? null), "html", null, true);
         echo "fontawesome/webfonts/all.css\" rel=\"stylesheet\">
 
@@ -84,7 +94,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     <body>
         <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg\">
             <a class=\"navbar-brand logo\" href=\"";
-        // line 41
+        // line 45
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "\">LISTaGAME</a>
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExampleDefault\" aria-controls=\"navbarsExampleDefault\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
@@ -95,74 +105,74 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                 <ul class=\"navbar-nav mr-auto\">
                     <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
-        // line 49
+        // line 53
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "\">Accueil</a>
                     </li>
         
                     ";
-        // line 52
+        // line 56
         if (($context["connected"] ?? null)) {
-            // line 53
+            // line 57
             echo "                        <li class=\"nav-item dropdown\">
                             <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Administration</a>
                             <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
                                 <a href=\"";
-            // line 56
+            // line 60
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "edit-game\" class=\"dropdown-item\">Ajouter un jeu</a>
                                 <a href=\"";
-            // line 57
+            // line 61
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "game-management\" class=\"dropdown-item\">Gérer les jeux</a>
                                 <a href=\"";
-            // line 58
+            // line 62
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "entity-management/entity/developer\" class=\"dropdown-item\">Gérer les développeurs</a>
                                 <a href=\"";
-            // line 59
+            // line 63
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "entity-management/entity/publisher\" class=\"dropdown-item\">Gérer les éditeurs</a>
                                 <a href=\"";
-            // line 60
+            // line 64
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "entity-management/entity/platform\" class=\"dropdown-item\">Gérer les supports</a>
                                 <a href=\"";
-            // line 61
+            // line 65
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "entity-management/entity/genre\" class=\"dropdown-item\">Gérer les genres</a>
                                 <a href=\"";
-            // line 62
+            // line 66
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "entity-management/entity/mode\" class=\"dropdown-item\">Gérer les modes</a>
                                 <a href=\"";
-            // line 63
+            // line 67
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "entity-management/entity/region\" class=\"dropdown-item\">Gérer les régions</a>
                                 <a href=\"";
-            // line 64
+            // line 68
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                             </div>
                         </li>
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"";
-            // line 68
+            // line 72
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "logout\">Déconnexion</a>
                         </li>
                     ";
         } else {
-            // line 71
+            // line 75
             echo "                        <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"";
-            // line 72
+            // line 76
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "connection\">Connexion</a>
                         </li>
                     ";
         }
-        // line 75
+        // line 79
         echo "                    
                 </ul>
                 <form class=\"form-inline\">
@@ -178,9 +188,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         <main role=\"main\" class=\"mainContainer container\">
 
             ";
-        // line 89
+        // line 93
         $this->displayBlock('content', $context, $blocks);
-        // line 90
+        // line 94
         echo "
             <!-- DELETE MODAL -->
             <div class=\"modal fade\" id=\"deleteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteModalLabel\" aria-hidden=\"true\">
@@ -207,7 +217,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
                 <p><span class=\"text-light\">ListaGame - </span><a href=\"";
-        // line 115
+        // line 119
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "connection\">Connexion</a></p>
             </footer>
@@ -219,13 +229,19 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     <!-- JQUERY -->
     <script src=\"https://code.jquery.com/jquery-3.3.1.min.js\" integrity=\"sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=\" crossorigin=\"anonymous\"></script>
 
+    <!-- JQUERY UI -->
+    <script src=\"";
+        // line 130
+        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
+        echo "js/jquery-ui.min.js\"></script>
+
     <!-- BOOSTRAP JS -->
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js\" integrity=\"sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp\" crossorigin=\"anonymous\"></script>
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 130
+        // line 137
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
@@ -240,7 +256,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     {
     }
 
-    // line 89
+    // line 93
     public function block_content($context, array $blocks = [])
     {
     }
@@ -257,7 +273,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  244 => 89,  239 => 7,  229 => 130,  211 => 115,  184 => 90,  182 => 89,  166 => 75,  160 => 72,  157 => 71,  151 => 68,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  124 => 59,  120 => 58,  116 => 57,  112 => 56,  107 => 53,  105 => 52,  99 => 49,  88 => 41,  60 => 16,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
+        return array (  260 => 93,  255 => 7,  245 => 137,  235 => 130,  221 => 119,  194 => 94,  192 => 93,  176 => 79,  170 => 76,  167 => 75,  161 => 72,  154 => 68,  150 => 67,  146 => 66,  142 => 65,  138 => 64,  134 => 63,  130 => 62,  126 => 61,  122 => 60,  117 => 57,  115 => 56,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -272,6 +288,10 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
         <!-- Bootstrap core CSS -->
         <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css\" integrity=\"sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA\" crossorigin=\"anonymous\">
+
+        <!-- JQUERY UI CSS -->
+        <link href=\"{{ ASSETS }}css/jquery-ui.min.css\" rel=\"stylesheet\">
+        <link href=\"{{ ASSETS }}css/jquery-ui.theme.min.css\" rel=\"stylesheet\">
 
         <!-- CSS -->
         <link href=\"{{ ASSETS }}css/style.css\" rel=\"stylesheet\">
@@ -385,6 +405,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- JQUERY -->
     <script src=\"https://code.jquery.com/jquery-3.3.1.min.js\" integrity=\"sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=\" crossorigin=\"anonymous\"></script>
+
+    <!-- JQUERY UI -->
+    <script src=\"{{ ASSETS }}js/jquery-ui.min.js\"></script>
 
     <!-- BOOSTRAP JS -->
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>

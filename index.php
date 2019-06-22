@@ -61,12 +61,12 @@ try
 catch (MyException $e)
 {
     echo $e;
-    // $_SESSION['errorMessage'] = '<strong>Erreur !</strong><br>' . '<strong>Message :</strong> ' . $e->getMessage() . '<br>';
+    $_SESSION['errorMessage'] = '<strong>Erreur !</strong><br>' . '<strong>Message :</strong> ' . $e->getMessage() . '<br>';
 
-    // $myException = new MyException($e->getMessage(), $e->getCode(), $e->getSeverity(), $e->getFile(), $e->getLine());
-    // $myException->writeLogs();
+    $myException = new MyException($e->getMessage(), $e->getCode(), $e->getSeverity(), $e->getFile(), $e->getLine());
+    $myException->writeLogs();
 
-    // $routeur = new Routeur('error');
-    // $routeur->renderController();
+    $routeur = new Routeur('error');
+    $routeur->renderController();
 
 }

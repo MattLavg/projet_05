@@ -6,6 +6,9 @@ use App\Model\GameManager;
 use App\Model\DeveloperManager;
 use App\Model\GenreManager;
 use App\Model\ModeManager;
+use App\Model\PlatformManager;
+use App\Model\PublisherManager;
+use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
 // use App\Model\CommentManager;
 // use App\Model\Pagination;
@@ -142,18 +145,25 @@ use App\Core\View;
                 $developerManager = new DeveloperManager();
                 $genreManager = new GenreManager();
                 $modeManager = new ModeManager();
-                // $platformManager = new PublisherManager();
-                // $platformManager = new PlatformManager();
-                // $platformManager = new PlatformManager();
+                $platformManager = new PlatformManager();
+                $publisherManager = new PublisherManager();
+                $regionManager = new RegionManager();
+
                 $developers = $developerManager->getAll();
                 $genres = $genreManager->getAll();
                 $modes = $modeManager->getAll();
+                $platforms = $platformManager->getAll();
+                $publishers = $publisherManager->getAll();
+                $regions = $regionManager->getAll();
 
                 $view = new View('gameEdit');
                 $view->render('back', array(
                     'developers' => $developers,
                     'genres' => $genres,
                     'modes' => $modes,
+                    'platforms' => $platforms,
+                    'publishers' => $publishers,
+                    'regions' => $regions,
                     'errorMessage' => $errorMessage));
 
                 unset($_SESSION['errorMessage']);
