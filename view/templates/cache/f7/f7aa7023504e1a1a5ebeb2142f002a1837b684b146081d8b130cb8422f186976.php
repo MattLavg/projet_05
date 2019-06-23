@@ -145,7 +145,7 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 
     <p>";
         // line 35
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getContent", [], "any", false, false, false, 35), "html", null, true);
+        echo twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getContent", [], "any", false, false, false, 35);
         echo "</p>
     <hr>
 ";
@@ -202,7 +202,7 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
         {% endfor %}
     </p>
 
-    <p>{{ game.getContent }}</p>
+    <p>{{ game.getContent|raw }}</p>
     <hr>
 {% endblock %}", "game.twig", "/Users/mathias/Sites/projet_05/view/frontend/game.twig");
     }

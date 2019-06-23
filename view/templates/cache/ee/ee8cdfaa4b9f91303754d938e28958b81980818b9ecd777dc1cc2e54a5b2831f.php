@@ -293,8 +293,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                 'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
                 'save table directionality emoticons template paste'
             ],
-            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
-            entity_encoding : \"raw\"
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
             });
     </script>
 
@@ -328,7 +327,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
     public function getDebugInfo()
     {
-        return array (  315 => 105,  310 => 7,  286 => 155,  280 => 152,  270 => 145,  266 => 144,  252 => 133,  223 => 106,  221 => 105,  212 => 99,  208 => 98,  204 => 97,  200 => 96,  196 => 95,  192 => 94,  188 => 93,  184 => 92,  180 => 91,  156 => 70,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  133 => 62,  129 => 61,  125 => 60,  121 => 59,  117 => 58,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
+        return array (  314 => 105,  309 => 7,  286 => 155,  280 => 152,  270 => 145,  266 => 144,  252 => 133,  223 => 106,  221 => 105,  212 => 99,  208 => 98,  204 => 97,  200 => 96,  196 => 95,  192 => 94,  188 => 93,  184 => 92,  180 => 91,  156 => 70,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  133 => 62,  129 => 61,  125 => 60,  121 => 59,  117 => 58,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -496,8 +495,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                 'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
                 'save table directionality emoticons template paste'
             ],
-            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
-            entity_encoding : \"raw\"
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
             });
     </script>
 

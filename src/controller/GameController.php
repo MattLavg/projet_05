@@ -35,7 +35,7 @@ use App\Core\View;
         $game_id = $id; // rename the variable for better identification
 
         $gameManager = new GameManager();
-        $game = $gameManager->getgame($game_id);
+        $game = $gameManager->getGame($game_id);
 
         $developerManager = new DeveloperManager();
         $developers = $developerManager->getDevelopers($game_id);
@@ -193,6 +193,41 @@ use App\Core\View;
 
         if (ConnectionController::isSessionValid()) {
 
+            // Add games informations
+            // $gameManager = new GameManager();
+            // $game_id = $gameManager->addGame($params);
+
+            // // Add games developers
+            // $developerManager = new DeveloperManager();
+            foreach($params['developer'] as $developer_id) {
+
+                // $developerManager->addGameDeveloper($game_id, $developer_id);
+            }
+
+            // Add games genres
+            $genreManager = new GenreManager();
+            foreach($params['genre'] as $genre_id) {
+
+                // $genreManager->addGameGenre($game_id, $genre_id);
+            }
+
+            // Add games modes
+            $modeManager = new ModeManager();
+            foreach($params['mode'] as $mode_id) {
+                
+                // $modeManager->addGameMode($game_id, $mode_id);
+            }
+
+            $releaseDateManager = new ReleaseDateManager();
+            foreach($params['releaseDate'] as $releaseDate_array) {
+                
+                echo "<pre>";
+                var_dump($releaseDate_id);
+                echo "</pre>";
+            }
+die;
+            $view = new View();
+            $view->redirect('home');
 
         } else {
 

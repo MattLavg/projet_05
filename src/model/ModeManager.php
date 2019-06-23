@@ -55,4 +55,15 @@ use App\Core\Manager;
 
     }
 
+    /**
+     * Allows to ad a game mode
+     * 
+     * @param array $game_id, $mode_id
+     */
+    public function addGameMode($game_id, $mode_id)
+    {
+        $req = $this->_db->prepare('INSERT INTO games_modes (id_game, id_mode) VALUES (?, ?)');
+        $req->execute(array($game_id, $mode_id));
+    }
+
  }

@@ -86,7 +86,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
             <p>
                 ";
             // line 22
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getContent", [], "any", false, false, false, 22), "html", null, true);
+            echo twig_get_attribute($this->env, $this->source, $context["game"], "getContent", [], "any", false, false, false, 22);
             echo "<br>
                 <a href=\"";
             // line 23
@@ -157,7 +157,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
                 <a href=\"{{ HOST }}game/id/{{ game.getId }}\">{{ game.getName }}</a>
             </h3>
             <p>
-                {{ game.getContent }}<br>
+                {{ game.getContent|raw }}<br>
                 <a href=\"{{ HOST }}game/id/{{ game.getId }}\">Voir la suite</a>
             </p>
 

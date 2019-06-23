@@ -28,6 +28,8 @@
                 dayNamesMin: [ "D","L","M","M","J","V","S" ],
                 weekHeader: "Sem.",
                 dateFormat: "dd/mm/yy",
+                // altFormat: 'yy-mm-dd',
+                // altField: '#altDatepicker0',
                 firstDay: 1,
                 isRTL: false,
                 showMonthAfterYear: false,

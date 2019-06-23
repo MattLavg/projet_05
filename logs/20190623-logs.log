@@ -1,2 +1,3 @@
 2019-06-23 00:04:54 - Unknown error : [0], message : "404 : Cette page n'existe pas.", in file : /Users/mathias/Sites/projet_05/src/core/Routeur.php line : 117
 2019-06-23 00:04:56 - Unknown error : [0], message : "404 : Cette page n'existe pas.", in file : /Users/mathias/Sites/projet_05/src/core/Routeur.php line : 117
+2019-06-23 23:08:39 - Notice : [0], message : "Undefined variable: releaseDate_id", in file : /Users/mathias/Sites/projet_05/src/controller/GameController.php line : 225

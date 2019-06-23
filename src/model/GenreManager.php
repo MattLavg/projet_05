@@ -55,4 +55,15 @@ use App\Core\Manager;
 
     }
 
+    /**
+     * Allows to ad a game genre
+     * 
+     * @param array $game_id, $genre_id
+     */
+    public function addGameGenre($game_id, $genre_id)
+    {
+        $req = $this->_db->prepare('INSERT INTO games_genres (id_game, id_genre) VALUES (?, ?)');
+        $req->execute(array($game_id, $genre_id));
+    }
+
  }

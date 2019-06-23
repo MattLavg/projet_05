@@ -77,7 +77,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"developer[1]\" class=\"form-control developerList mb-2\">
+                    <select name=\"developer[0]\" class=\"form-control developerList mb-2\">
                             <option selected>Choisissez un développeur</option>
                         ";
         // line 31
@@ -109,7 +109,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"genre[1]\" class=\"form-control genreList mb-2\">
+                    <select name=\"genre[0]\" class=\"form-control genreList mb-2\">
                             <option selected>Choisissez un genre</option>
                         ";
         // line 49
@@ -142,7 +142,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"mode[1]\" class=\"form-control modeList mb-2\">
+                    <select name=\"mode[0]\" class=\"form-control modeList mb-2\">
                             <option selected>Choisissez un mode</option>
                         ";
         // line 68
@@ -175,7 +175,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel-release\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                    <select name=\"releaseDate[0][platform]\" class=\"form-control platformList mb-2\">
                             <option selected>Choisissez un support</option>
                         ";
         // line 87
@@ -195,7 +195,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 90
         echo "                    </select>
-                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                    <select name=\"releaseDate[0][publisher]\" class=\"form-control publisherList mb-2\">
                             <option selected>Choisissez un éditeur</option>
                         ";
         // line 93
@@ -215,7 +215,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 96
         echo "                    </select>
-                        <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                        <select name=\"releaseDate[0][region]\" class=\"form-control regionList mb-2\">
                             <option selected>Choisissez une région</option>
                         ";
         // line 99
@@ -235,7 +235,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 102
         echo "                    </select>
-                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate\" id=\"datepicker1\" placeholder=\"Choisissez une date\" readonly>
+                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate[0][date]\" id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly>
                 </div>
             </div>
 
@@ -295,7 +295,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"developer[1]\" class=\"form-control developerList mb-2\">
+                    <select name=\"developer[0]\" class=\"form-control developerList mb-2\">
                             <option selected>Choisissez un développeur</option>
                         {% for developer in developers %}
                             <option value=\"{{ developer.getId }}\">{{ developer.getName }}</option>
@@ -313,7 +313,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"genre[1]\" class=\"form-control genreList mb-2\">
+                    <select name=\"genre[0]\" class=\"form-control genreList mb-2\">
                             <option selected>Choisissez un genre</option>
                         {% for genre in genres %}
                             <option value=\"{{ genre.getId }}\">{{ genre.getName }}</option>
@@ -332,7 +332,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"mode[1]\" class=\"form-control modeList mb-2\">
+                    <select name=\"mode[0]\" class=\"form-control modeList mb-2\">
                             <option selected>Choisissez un mode</option>
                         {% for mode in modes %}
                             <option value=\"{{ mode.getId }}\">{{ mode.getName }}</option>
@@ -351,25 +351,25 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <div class=\"entity-group-game-edit\">
                 <div class=\"form-group bloc-entity-game-edit\" >
                     <a href=\"#\" class=\"cross-cancel-release\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                    <select name=\"releaseDate[0][platform]\" class=\"form-control platformList mb-2\">
                             <option selected>Choisissez un support</option>
                         {% for platform in platforms %}
                             <option value=\"{{ platform.getId }}\">{{ platform.getName }}</option>
                         {% endfor %}
                     </select>
-                    <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                    <select name=\"releaseDate[0][publisher]\" class=\"form-control publisherList mb-2\">
                             <option selected>Choisissez un éditeur</option>
                         {% for publisher in publishers %}
                             <option value=\"{{ publisher.getId }}\">{{ publisher.getName }}</option>
                         {% endfor %}
                     </select>
-                        <select name=\"releaseDate[1]\" class=\"form-control releaseDateList mb-2\">
+                        <select name=\"releaseDate[0][region]\" class=\"form-control regionList mb-2\">
                             <option selected>Choisissez une région</option>
                         {% for region in regions %}
                             <option value=\"{{ region.getId }}\">{{ region.getName }}</option>
                         {% endfor %}
                     </select>
-                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate\" id=\"datepicker1\" placeholder=\"Choisissez une date\" readonly>
+                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate[0][date]\" id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly>
                 </div>
             </div>
 

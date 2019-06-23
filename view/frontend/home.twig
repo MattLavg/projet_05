@@ -19,7 +19,7 @@
                 <a href="{{ HOST }}game/id/{{ game.getId }}">{{ game.getName }}</a>
             </h3>
             <p>
-                {{ game.getContent }}<br>
+                {{ game.getContent|raw }}<br>
                 <a href="{{ HOST }}game/id/{{ game.getId }}">Voir la suite</a>
             </p>
 

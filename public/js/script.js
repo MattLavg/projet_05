@@ -178,8 +178,8 @@ $(document).ready(function () {
     };
 
     // ADD and DELETE DEVELOPER INPUT IN FORM GAME EDIT
-    var nbList = 1;
-    var nbDatepicker = 1;
+    var nbList = 0;
+    // var nbDatepicker = 1;
 
     $('.addEntityForm').click(function(e) {
         nbList++;
@@ -211,11 +211,14 @@ $(document).ready(function () {
     });
 
     // $( ".date" ).datepicker( $.datepicker.regional[ "fr" ] );
-    $( ".date" ).datepicker($.datepicker.regional[ "fr" ]);
+    $( '.date' ).datepicker($.datepicker.regional[ 'fr' ]);
+
+    //   $( '.date' ).datepicker( 'option', 'altFormat', 'yy-mm-dd' );
 
     $('#addReleaseDateForm').click(function(e) {
         nbList++;
-        nbDatepicker++;
+        // nbDatepicker++;
+
         // get the bloc where list of entities are duplicated
         var blocEntityList = $(this).parent().find('.entity-group-game-edit');
         // clone the entity list
@@ -229,19 +232,17 @@ $(document).ready(function () {
         // add the padding class
         $(this).parent().find('.bloc-entity-game-edit:last').addClass('pl-5');
 
-        $(this).parent().find('.bloc-entity-game-edit:last').find('select').attr('name', 'releadeDate[' + nbList + ']');
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.platformList').attr('name', 'releaseDate[' + nbList + '][platform]');
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.publisherList').attr('name', 'releaseDate[' + nbList + '][publisher]');
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.regionList').attr('name', 'releaseDate[' + nbList + '][region]');
+
 
         // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeAttr('id');
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeData('datepicker');
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeClass('hasDatepicker');
-        
 
-        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker("destroy");
-        console.log('plop');
-        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeClass('hasDatepicker');
-        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeData('datepicker');
-
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('id', 'datepicker' + nbDatepicker);
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('id', 'datepicker' + nbList);
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('name', 'releaseDate[' + nbList + '][date]');
 
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker();
 // console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date'));

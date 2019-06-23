@@ -53,4 +53,15 @@ use App\Core\Manager;
 
         return $developers;
     }
+
+    /**
+     * Allows to ad a game developer
+     * 
+     * @param array $game_id, $developer_id
+     */
+    public function addGameDeveloper($game_id, $developer_id)
+    {
+        $req = $this->_db->prepare('INSERT INTO games_developers (id_game, id_developer) VALUES (?, ?)');
+        $req->execute(array($game_id, $developer_id));
+    }
  }

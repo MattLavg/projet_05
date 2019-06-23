@@ -78,6 +78,7 @@ abstract class Manager
      * insert name in tables developers, genres, modes, platforms, publishers and regions
      * 
      * @param array $values
+     * @return int $id
      */
     public function insertEntity($values)
     {

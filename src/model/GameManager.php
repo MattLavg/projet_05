@@ -48,4 +48,22 @@ use App\Model\Game;
         return $game;
     }
 
+    /**
+     * Allows to add a game
+     * 
+     * @param array $values
+     */
+    public function addGame($values)
+    { 
+        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name, content) VALUES(?, ?)');
+        $req->execute(array($values['name'], $values['content']));
+
+        $count = $req->rowCount();
+
+        if (!empty($count)) {
+            $id = $this->_db->lastInsertId();
+            return $id;
+        }
+    }
+
  }

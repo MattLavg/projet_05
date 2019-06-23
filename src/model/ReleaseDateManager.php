@@ -13,7 +13,6 @@ use App\model\ReleaseDate;
 
  class ReleaseDateManager extends Manager
  {
-    
     /**
      * Allows to get the platform, region, publisher by release date for a game
      * 
@@ -35,7 +34,7 @@ use App\model\ReleaseDate;
             ON rd.id_region = r.id
             INNER JOIN publishers AS pu
             ON rd.id_publisher = pu.id
-            WHERE rd.id_game = 8
+            WHERE rd.id_game = ?
             ORDER BY release_date DESC');
 
         $req->execute(array($game_id));
@@ -54,4 +53,17 @@ use App\model\ReleaseDate;
         return $releaseDates;
 
     }
+
+    /**
+     * Allows to add a releade date
+     * 
+     * @param int $game_id
+     * @param array $values
+     */
+    public function addReleaseDate($game_id, $values)
+    {
+        $req = $this->_db->prepare('INSERT INTO release_date (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
+        $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
+    }
+
  }
