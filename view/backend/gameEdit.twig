@@ -100,7 +100,8 @@
                             <option value="{{ region.getId }}">{{ region.getName }}</option>
                         {% endfor %}
                     </select>
-                    <input type="text" class="form-control date" name="releaseDate[0][date]" id="datepicker0" placeholder="Choisissez une date" readonly>
+                    <input type="text" class="form-control date"  id="datepicker0" placeholder="Choisissez une date" readonly>
+                    <input type="hidden" class="form-control date altDate" name="releaseDate[0][date]" id="altDatepicker0" readonly>
                 </div>
             </div>
 

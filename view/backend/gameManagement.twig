@@ -27,10 +27,10 @@
 
                     {% set elementsOnPage = true %}
 
-                    <tr id="{{ game.getId }}">
-                        <td id="gameName">{{ game.getName }}</td>
+                    <tr>
+                        <td>{{ game.getName }}</td>
                         <td><a href="{{ HOST }}update-game/id/{{ game.getId }}" id="updateGame">Modifier</a></td>
-                        <td><a href="#" data-url="{{ HOST }}delete-game/id/{{ game.getId }}" id="entityDeleteBtn" data-entity="{{ jeu }}" data-entity-name="{{ game.getName }}" data-entity-id="{{ game.getId }}"  data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
+                        <td><a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
                     </tr> 
 
                 {% endfor %}

@@ -84,11 +84,8 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
             $context["elementsOnPage"] = true;
             // line 29
             echo "
-                    <tr id=\"";
-            // line 30
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 30), "html", null, true);
-            echo "\">
-                        <td id=\"gameName\">";
+                    <tr>
+                        <td>";
             // line 31
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getName", [], "any", false, false, false, 31), "html", null, true);
             echo "</td>
@@ -98,18 +95,14 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
             echo "update-game/id/";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 32), "html", null, true);
             echo "\" id=\"updateGame\">Modifier</a></td>
-                        <td><a href=\"#\" data-url=\"";
+                        <td><a href=\"#\" data-url-delete-game=\"";
             // line 33
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "delete-game/id/";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 33), "html", null, true);
-            echo "\" id=\"entityDeleteBtn\" data-entity=\"";
-            echo twig_escape_filter($this->env, ($context["jeu"] ?? null), "html", null, true);
-            echo "\" data-entity-name=\"";
+            echo "\" id=\"gameDeleteBtn\" data-game-name=\"";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getName", [], "any", false, false, false, 33), "html", null, true);
-            echo "\" data-entity-id=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 33), "html", null, true);
-            echo "\"  data-toggle=\"modal\" data-target=\"#deleteModal\">Supprimer</a></td>
+            echo "\" data-toggle=\"modal\" data-target=\"#deleteModal\">Supprimer</a></td>
                     </tr> 
 
                 ";
@@ -147,7 +140,7 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
 
     public function getDebugInfo()
     {
-        return array (  134 => 45,  130 => 43,  128 => 42,  121 => 37,  103 => 33,  97 => 32,  93 => 31,  89 => 30,  86 => 29,  84 => 28,  81 => 27,  77 => 26,  59 => 10,  56 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
+        return array (  127 => 45,  123 => 43,  121 => 42,  114 => 37,  100 => 33,  94 => 32,  90 => 31,  86 => 29,  84 => 28,  81 => 27,  77 => 26,  59 => 10,  56 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -181,10 +174,10 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
 
                     {% set elementsOnPage = true %}
 
-                    <tr id=\"{{ game.getId }}\">
-                        <td id=\"gameName\">{{ game.getName }}</td>
+                    <tr>
+                        <td>{{ game.getName }}</td>
                         <td><a href=\"{{ HOST }}update-game/id/{{ game.getId }}\" id=\"updateGame\">Modifier</a></td>
-                        <td><a href=\"#\" data-url=\"{{ HOST }}delete-game/id/{{ game.getId }}\" id=\"entityDeleteBtn\" data-entity=\"{{ jeu }}\" data-entity-name=\"{{ game.getName }}\" data-entity-id=\"{{ game.getId }}\"  data-toggle=\"modal\" data-target=\"#deleteModal\">Supprimer</a></td>
+                        <td><a href=\"#\" data-url-delete-game=\"{{ HOST }}delete-game/id/{{ game.getId }}\" id=\"gameDeleteBtn\" data-game-name=\"{{ game.getName }}\" data-toggle=\"modal\" data-target=\"#deleteModal\">Supprimer</a></td>
                     </tr> 
 
                 {% endfor %}

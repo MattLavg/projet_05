@@ -240,7 +240,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>
-                            <button type=\"button\" class=\"btn btn-primary\" id=\"modalConfirmBtn\">Effacer</button>
+                            <a href=\"\"><button type=\"button\" class=\"btn btn-primary\" id=\"modalConfirmBtn\">Effacer</button></a>
                         </div>
                     </div>
                 </div>
@@ -457,7 +457,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>
-                            <button type=\"button\" class=\"btn btn-primary\" id=\"modalConfirmBtn\">Effacer</button>
+                            <a href=\"\"><button type=\"button\" class=\"btn btn-primary\" id=\"modalConfirmBtn\">Effacer</button></a>
                         </div>
                     </div>
                 </div>

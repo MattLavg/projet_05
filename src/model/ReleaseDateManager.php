@@ -26,7 +26,7 @@ use App\model\ReleaseDate;
             p.name AS platform, 
             r.name AS region, 
             pu.name AS publisher, 
-            rd.release_date AS releaseDate
+            DATE_FORMAT(rd.release_date, \'%d/%m/%Y\') AS releaseDate
             FROM release_dates AS rd
             INNER JOIN platforms AS p
             ON rd.id_platform = p.id
@@ -62,7 +62,8 @@ use App\model\ReleaseDate;
      */
     public function addReleaseDate($game_id, $values)
     {
-        $req = $this->_db->prepare('INSERT INTO release_date (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
+        // var_dump($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']);die;
+        $req = $this->_db->prepare('INSERT INTO release_dates (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
         $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
     }
 

@@ -186,46 +186,98 @@ use App\Core\View;
      */
     public function addGame($params = [])
     {
-        echo "<pre>";
-        print_r($params);
-        echo "</pre>";die;
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
         $params['name'] = trim(strip_tags($params['name']));
 
         if (ConnectionController::isSessionValid()) {
 
-            // Add games informations
-            // $gameManager = new GameManager();
-            // $game_id = $gameManager->addGame($params);
+            // Add game informations
+            $gameManager = new GameManager();
+            $game_id = $gameManager->addGame($params);
 
-            // // Add games developers
-            // $developerManager = new DeveloperManager();
+            // Add games developers
+            $developerManager = new DeveloperManager();
             foreach($params['developer'] as $developer_id) {
 
-                // $developerManager->addGameDeveloper($game_id, $developer_id);
+                $developerManager->addGameDeveloper($game_id, $developer_id);
             }
 
             // Add games genres
             $genreManager = new GenreManager();
             foreach($params['genre'] as $genre_id) {
 
-                // $genreManager->addGameGenre($game_id, $genre_id);
+                $genreManager->addGameGenre($game_id, $genre_id);
             }
 
             // Add games modes
             $modeManager = new ModeManager();
             foreach($params['mode'] as $mode_id) {
                 
-                // $modeManager->addGameMode($game_id, $mode_id);
+                $modeManager->addGameMode($game_id, $mode_id);
             }
 
+            // Add games release
             $releaseDateManager = new ReleaseDateManager();
             foreach($params['releaseDate'] as $releaseDate_array) {
                 
-                echo "<pre>";
-                var_dump($releaseDate_id);
-                echo "</pre>";
+                $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
             }
-die;
+
+            $view = new View();
+            $view->redirect('home');
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
+
+    /**
+     * Allows to delete a game
+     * 
+     * @param array $params
+     */
+    public function deleteGame($params = [])
+    {
+        if (ConnectionController::isSessionValid()) {
+
+            // Delete game informations
+            $gameManager = new GameManager();
+            $game_id = $gameManager->addGame($params);
+
+            // Add games developers
+            $developerManager = new DeveloperManager();
+            foreach($params['developer'] as $developer_id) {
+
+                $developerManager->addGameDeveloper($game_id, $developer_id);
+            }
+
+            // Add games genres
+            $genreManager = new GenreManager();
+            foreach($params['genre'] as $genre_id) {
+
+                $genreManager->addGameGenre($game_id, $genre_id);
+            }
+
+            // Add games modes
+            $modeManager = new ModeManager();
+            foreach($params['mode'] as $mode_id) {
+                
+                $modeManager->addGameMode($game_id, $mode_id);
+            }
+
+            // Add games release
+            $releaseDateManager = new ReleaseDateManager();
+            foreach($params['releaseDate'] as $releaseDate_array) {
+                
+                $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+            }
+
             $view = new View();
             $view->redirect('home');
 

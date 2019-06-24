@@ -4,19 +4,16 @@ $(document).ready(function () {
     $('#deleteModal').on('shown.bs.modal', function (e) {
 
         var button = $(e.relatedTarget); // Button that triggered the modal
-        var url = button.data('url'); // Extract info from data-* attributes
-        var entityName = button.data('entity-name');
-        var entityId = button.data('entity-id');
-        var currentEntity = button.data('entity');
+        var urlDeleteGame = button.data('url-delete-game'); // Extract info from data-* attributes
+        var gameName = button.data('game-name');
  
         var modal = $(this);
 
-        if (currentEntity) {
-            modal.find('.modal-text').text('le ' + currentEntity + ' : ' + entityName);
-            modal.find('#modalConfirmBtn').attr('data-entity-id', entityId);
+        if (gameName) {
+            modal.find('.modal-text').text('le jeu : ' + gameName);
+            modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteGame);
         } 
 
-        modal.find('#modalConfirmBtn').attr('data-url', url);
     })
 
     // ADD ENTITY AJAX
@@ -211,7 +208,15 @@ $(document).ready(function () {
     });
 
     // $( ".date" ).datepicker( $.datepicker.regional[ "fr" ] );
-    $( '.date' ).datepicker($.datepicker.regional[ 'fr' ]);
+
+
+    $( ".date" ).datepicker( 
+        $.extend({ 
+            altFormat: 'yy-mm-dd',
+            altField: '#altDatepicker0'
+         },
+        $.datepicker.regional[ "fr" ])
+    );
 
     //   $( '.date' ).datepicker( 'option', 'altFormat', 'yy-mm-dd' );
 
@@ -242,9 +247,16 @@ $(document).ready(function () {
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeClass('hasDatepicker');
 
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('id', 'datepicker' + nbList);
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('name', 'releaseDate[' + nbList + '][date]');
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.altDate').attr('name', 'releaseDate[' + nbList + '][date]');
+        
 
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker();
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker($.extend({ 
+            altFormat: 'yy-mm-dd',
+            altField: '#altDatepicker' + nbList
+         },
+        $.datepicker.regional[ "fr" ]));
+
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.altDate').attr('id', 'altDatepicker' + nbList);
 // console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date'));
         // $('#table-dev tbody tr:first .updateEntity').click(updateAction);
     });

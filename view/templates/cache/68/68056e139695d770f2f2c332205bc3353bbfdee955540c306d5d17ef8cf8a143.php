@@ -235,7 +235,8 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 102
         echo "                    </select>
-                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate[0][date]\" id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly>
+                    <input type=\"text\" class=\"form-control date\"  id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly>
+                    <input type=\"hidden\" class=\"form-control date altDate\" name=\"releaseDate[0][date]\" id=\"altDatepicker0\" readonly>
                 </div>
             </div>
 
@@ -369,7 +370,8 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                             <option value=\"{{ region.getId }}\">{{ region.getName }}</option>
                         {% endfor %}
                     </select>
-                    <input type=\"text\" class=\"form-control date\" name=\"releaseDate[0][date]\" id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly>
+                    <input type=\"text\" class=\"form-control date\"  id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly>
+                    <input type=\"hidden\" class=\"form-control date altDate\" name=\"releaseDate[0][date]\" id=\"altDatepicker0\" readonly>
                 </div>
             </div>
 
