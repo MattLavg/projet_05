@@ -6,111 +6,228 @@
 
 {% block content %}
 
-<h1>Ajouter un jeu</h1>
-<hr>
-    <form method="post" action="{{ HOST }}add-game">
-        <div class="form-group">
-            <label for="name">Le titre du jeu :</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Titre">
-        </div>
+    {% if game_id %}
 
-        <div class="form-group">
-            <label>Description du jeu :</label>
-            <textarea id="tinymcetextarea" name="content"></textarea>
-        </div>
-
+        <h1>Modifier un jeu</h1>
         <hr>
+            <form method="post" action="{{ HOST }}add-game">
+                <div class="form-group">
+                    <label for="name">Le titre du jeu :</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{{ game.getName }}">
+                </div>
         
-        <h4>Le ou les développeur(s) du jeu :</h4>
-        <div>
-            <div class="entity-group-game-edit">
-                <div class="form-group bloc-entity-game-edit" >
-                    <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                    <select name="developer[0]" class="form-control developerList mb-2">
-                            <option selected>Choisissez un développeur</option>
-                        {% for developer in developers %}
-                            <option value="{{ developer.getId }}">{{ developer.getName }}</option>
-                        {% endfor %}
-                    </select>
+                <div class="form-group">
+                    <label>Description du jeu :</label>
+                    <textarea id="tinymcetextarea" name="content">{{ game.getContent }}</textarea>
                 </div>
-            </div>
-
-            <button type="button" class="btn btn-primary addEntityForm">Ajouter un développeur</button>
-        </div>
-        <hr>
         
-        <h4>Le ou les genre(s) du jeu :</h4>
-        <div>
-            <div class="entity-group-game-edit">
-                <div class="form-group bloc-entity-game-edit" >
-                    <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                    <select name="genre[0]" class="form-control genreList mb-2">
-                            <option selected>Choisissez un genre</option>
-                        {% for genre in genres %}
-                            <option value="{{ genre.getId }}">{{ genre.getName }}</option>
+                <hr>
+                
+                <h4>Le ou les développeur(s) du jeu :</h4>
+                <div>
+                    <div class="entity-group-game-edit">
+                        {% for developer in developers%}
+                            <div class="form-group bloc-entity-game-edit">
+                                <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                                <select name="developer[{{ developer.getName }}]" class="form-control developerList mb-2">
+                                        <option value="">Choisissez un développeur</option>
+                                    {% for oneDeveloper in allDevelopers %}
+                                        <option {% if oneDeveloper.getId == developer.getId %}selected {% endif %}value="{{ oneDeveloper.getId }}">
+                                            {{ oneDeveloper.getName }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         {% endfor %}
-                    </select>
-                </div>
-            </div>
-
-            <button type="button" class="btn btn-primary addEntityForm">Ajouter un genre</button>
-        </div>
-        <hr>
-
+                    </div>
         
-        <h4>Le ou les mode(s) du jeu :</h4>
-        <div>
-            <div class="entity-group-game-edit">
-                <div class="form-group bloc-entity-game-edit" >
-                    <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                    <select name="mode[0]" class="form-control modeList mb-2">
-                            <option selected>Choisissez un mode</option>
-                        {% for mode in modes %}
-                            <option value="{{ mode.getId }}">{{ mode.getName }}</option>
-                        {% endfor %}
-                    </select>
+                    <button type="button" class="btn btn-primary addEntityFormGameEdit">Ajouter un développeur</button>
                 </div>
-            </div>
-
-            <button type="button" class="btn btn-primary addEntityForm">Ajouter un mode</button>
-        </div>
-        <hr>
-
-        <h4>La ou les dates de sorties :</h4>
-        <p>Pour valider une date vous devez sélectionner un support, un éditeur, une région et une date.</p>
-        <div>
-            <div class="entity-group-game-edit">
-                <div class="form-group bloc-entity-game-edit" >
-                    <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                    <select name="releaseDate[0][platform]" class="form-control platformList mb-2">
-                            <option selected>Choisissez un support</option>
-                        {% for platform in platforms %}
-                            <option value="{{ platform.getId }}">{{ platform.getName }}</option>
-                        {% endfor %}
-                    </select>
-                    <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
-                            <option selected>Choisissez un éditeur</option>
-                        {% for publisher in publishers %}
-                            <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
-                        {% endfor %}
-                    </select>
-                        <select name="releaseDate[0][region]" class="form-control regionList mb-2">
-                            <option selected>Choisissez une région</option>
-                        {% for region in regions %}
-                            <option value="{{ region.getId }}">{{ region.getName }}</option>
-                        {% endfor %}
-                    </select>
-                    <input type="text" class="form-control date"  id="datepicker0" placeholder="Choisissez une date" readonly>
-                    <input type="hidden" class="form-control date altDate" name="releaseDate[0][date]" id="altDatepicker0" readonly>
+                <hr>
+                
+                <h4>Le ou les genre(s) du jeu :</h4>
+                <div>
+                    <div class="entity-group-game-edit">
+                        <div class="form-group bloc-entity-game-edit" >
+                            <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <select name="genre[0]" class="form-control genreList mb-2">
+                                    <option selected>Choisissez un genre</option>
+                                {% for genre in genres %}
+                                    <option value="{{ genre.getId }}">{{ genre.getName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary addEntityForm">Ajouter un genre</button>
                 </div>
-            </div>
+                <hr>
+        
+                
+                <h4>Le ou les mode(s) du jeu :</h4>
+                <div>
+                    <div class="entity-group-game-edit">
+                        <div class="form-group bloc-entity-game-edit" >
+                            <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <select name="mode[0]" class="form-control modeList mb-2">
+                                    <option selected>Choisissez un mode</option>
+                                {% for mode in modes %}
+                                    <option value="{{ mode.getId }}">{{ mode.getName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary addEntityForm">Ajouter un mode</button>
+                </div>
+                <hr>
+        
+                <h4>La ou les dates de sorties :</h4>
+                <p>Pour valider une date vous devez sélectionner un support, un éditeur, une région et une date.</p>
+                <div>
+                    <div class="entity-group-game-edit">
+                        <div class="form-group bloc-entity-game-edit" >
+                            <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <select name="releaseDate[0][platform]" class="form-control platformList mb-2">
+                                    <option selected>Choisissez un support</option>
+                                {% for platform in platforms %}
+                                    <option value="{{ platform.getId }}">{{ platform.getName }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
+                                    <option selected>Choisissez un éditeur</option>
+                                {% for publisher in publishers %}
+                                    <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
+                                {% endfor %}
+                            </select>
+                                <select name="releaseDate[0][region]" class="form-control regionList mb-2">
+                                    <option selected>Choisissez une région</option>
+                                {% for region in regions %}
+                                    <option value="{{ region.getId }}">{{ region.getName }}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="text" class="form-control date"  id="datepicker0" placeholder="Choisissez une date" readonly>
+                            <input type="hidden" class="form-control date altDate" name="releaseDate[0][date]" id="altDatepicker0" readonly>
+                        </div>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary" id="addReleaseDateForm">Ajouter une date</button>
+                </div>
+                <hr>
+        
+                <button type="submit" class="btn btn-primary">Valider</button>
+        
+            </form>
 
-            <button type="button" class="btn btn-primary" id="addReleaseDateForm">Ajouter une date</button>
-        </div>
+    {% else %}
+
+        <h1>Ajouter un jeu</h1>
         <hr>
+            <form method="post" action="{{ HOST }}add-game">
+                <div class="form-group">
+                    <label for="name">Le titre du jeu :</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Titre">
+                </div>
+        
+                <div class="form-group">
+                    <label>Description du jeu :</label>
+                    <textarea id="tinymcetextarea" name="content"></textarea>
+                </div>
+        
+                <hr>
+                
+                <h4>Le ou les développeur(s) du jeu :</h4>
+                <div>
+                    <div class="entity-group-game-edit">
+                        <div class="form-group bloc-entity-game-edit" >
+                            <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <select name="developer[0]" class="form-control developerList mb-2">
+                                    <option selected>Choisissez un développeur</option>
+                                {% for developer in developers %}
+                                    <option value="{{ developer.getId }}">{{ developer.getName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary addEntityForm">Ajouter un développeur</button>
+                </div>
+                <hr>
+                
+                <h4>Le ou les genre(s) du jeu :</h4>
+                <div>
+                    <div class="entity-group-game-edit">
+                        <div class="form-group bloc-entity-game-edit" >
+                            <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <select name="genre[0]" class="form-control genreList mb-2">
+                                    <option selected>Choisissez un genre</option>
+                                {% for genre in genres %}
+                                    <option value="{{ genre.getId }}">{{ genre.getName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary addEntityForm">Ajouter un genre</button>
+                </div>
+                <hr>
+        
+                
+                <h4>Le ou les mode(s) du jeu :</h4>
+                <div>
+                    <div class="entity-group-game-edit">
+                        <div class="form-group bloc-entity-game-edit" >
+                            <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <select name="mode[0]" class="form-control modeList mb-2">
+                                    <option selected>Choisissez un mode</option>
+                                {% for mode in modes %}
+                                    <option value="{{ mode.getId }}">{{ mode.getName }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary addEntityForm">Ajouter un mode</button>
+                </div>
+                <hr>
+        
+                <h4>La ou les dates de sorties :</h4>
+                <p>Pour valider une date vous devez sélectionner un support, un éditeur, une région et une date.</p>
+                <div>
+                    <div class="entity-group-game-edit">
+                        <div class="form-group bloc-entity-game-edit" >
+                            <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <select name="releaseDate[0][platform]" class="form-control platformList mb-2">
+                                    <option selected>Choisissez un support</option>
+                                {% for platform in platforms %}
+                                    <option value="{{ platform.getId }}">{{ platform.getName }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
+                                    <option selected>Choisissez un éditeur</option>
+                                {% for publisher in publishers %}
+                                    <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
+                                {% endfor %}
+                            </select>
+                                <select name="releaseDate[0][region]" class="form-control regionList mb-2">
+                                    <option selected>Choisissez une région</option>
+                                {% for region in regions %}
+                                    <option value="{{ region.getId }}">{{ region.getName }}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="text" class="form-control date"  id="datepicker0" placeholder="Choisissez une date" readonly>
+                            <input type="hidden" class="form-control date altDate" name="releaseDate[0][date]" id="altDatepicker0" readonly>
+                        </div>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary" id="addReleaseDateForm">Ajouter une date</button>
+                </div>
+                <hr>
+        
+                <button type="submit" class="btn btn-primary">Valider</button>
+        
+            </form>
 
-        <button type="submit" class="btn btn-primary">Valider</button>
-
-    </form>
+    {% endif %}
 
 {% endblock %}

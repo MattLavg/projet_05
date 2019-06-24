@@ -207,6 +207,36 @@ $(document).ready(function () {
         }
     });
 
+    // ADD and DELETE entities on game edit
+    $('.addEntityFormGameEdit').click(function(e) {
+        nbList++;
+
+        // get the bloc where list of entities are duplicated
+        var blocEntityList = $(this).parent().find('.entity-group-game-edit');
+        // clone the entity list
+        $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
+        // display cross
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
+        // apply the delete function to the new cross icon
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').click(deleteEntityList);
+        // add the padding class
+        $(this).parent().find('.bloc-entity-game-edit:last').addClass('pl-5');
+
+        if ($(this).parent().find('select:last').hasClass('developerList')) {
+
+            $(this).parent().find('select:last').attr('name', 'developer[' + nbList + ']');
+
+        } else if ($(this).parent().find('select:last').hasClass('genreList')) {
+
+            $(this).parent().find('select:last').attr('name', 'genre[' + nbList + ']');
+
+        } else if ($(this).parent().find('select:last').hasClass('modeList')) {
+
+            $(this).parent().find('select:last').attr('name', 'mode[' + nbList + ']');
+
+        }
+    });
+
     // $( ".date" ).datepicker( $.datepicker.regional[ "fr" ] );
 
 

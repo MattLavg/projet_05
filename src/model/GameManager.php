@@ -66,4 +66,17 @@ use App\Model\Game;
         }
     }
 
+    /**
+     * Allows to delete a game
+     * 
+     * @param int $game_id
+     */
+    public function deleteGame($game_id)
+    {
+        $req = $this->_db->prepare('DELETE FROM ' . $this->_table . ' WHERE id = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+    }
+
  }

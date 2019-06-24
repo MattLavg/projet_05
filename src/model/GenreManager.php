@@ -66,4 +66,17 @@ use App\Core\Manager;
         $req->execute(array($game_id, $genre_id));
     }
 
+    /**
+     * Allows to delete a genre
+     * 
+     * @param int $game_id
+     */
+    public function deleteGameGenres($game_id)
+    {
+        $req = $this->_db->prepare('DELETE FROM games_genres WHERE id_game = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+    }
+
  }

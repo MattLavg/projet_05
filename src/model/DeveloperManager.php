@@ -32,6 +32,7 @@ use App\Core\Manager;
     {
         $req = $this->_db->prepare(
             'SELECT
+            d.id,
             d.name 
             FROM developers AS d
             INNER JOIN games_developers AS gd
@@ -63,5 +64,18 @@ use App\Core\Manager;
     {
         $req = $this->_db->prepare('INSERT INTO games_developers (id_game, id_developer) VALUES (?, ?)');
         $req->execute(array($game_id, $developer_id));
+    }
+
+    /**
+     * Allows to delete a developer
+     * 
+     * @param int $game_id
+     */
+    public function deleteGameDevelopers($game_id)
+    {
+        $req = $this->_db->prepare('DELETE FROM games_developers WHERE id_game = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
     }
  }

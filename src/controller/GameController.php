@@ -132,11 +132,52 @@ use App\Core\View;
 
                 extract($params); // Allows to extract the $id variable
 
+                $game_id = $id;
+
+                // get the game
                 $gameManager = new GameManager();
-                $post = $postManager->getgame($id);
+                $game = $gameManager->getGame($game_id);
+
+                // get the game developers and all developers for list
+                $developerManager = new DeveloperManager();
+                $developers = $developerManager->getDevelopers($game_id);
+                $allDevelopers = $developerManager->getAll();
+
+                $genreManager = new GenreManager();
+                $genres = $genreManager->getGenres($game_id);
+                $allGenres = $genreManager->getAll();
+
+                $modeManager = new ModeManager();
+                $modes = $modeManager->getModes($game_id);
+                $allModes = $modeManager->getAll();
+
+                $platformManager = new PlatformManager();
+                $allPlatforms = $platformManager->getAll();
+
+                $publisherManager = new PublisherManager();
+                $allPublishers = $publisherManager->getAll();
+
+                $regionManager = new RegionManager();
+                $allRegions = $regionManager->getAll();
+
+                $releaseDateManager = new ReleaseDateManager();
+                $releaseDates = $releaseDateManager->getReleases($game_id);
 
                 $view = new View('gameEdit');
-                $view->render('back', array('post' => $post, 'errorMessage' => $errorMessage));
+                $view->render('back', array(
+                    'game_id' => $game_id,
+                    'game' => $game, 
+                    'developers' => $developers,
+                    'genres' => $genres,
+                    'modes' => $modes,
+                    'releaseDates' => $releaseDates,
+                    'allDevelopers' => $allDevelopers,
+                    'allGenres' => $allGenres,
+                    'allModes' => $allModes,
+                    'allPlatforms' => $allPlatforms,
+                    'allPublishers' => $allPublishers,
+                    'allRegions' => $allRegions,
+                    'errorMessage' => $errorMessage));
 
                 unset($_SESSION['errorMessage']);
 
@@ -246,37 +287,25 @@ use App\Core\View;
     {
         if (ConnectionController::isSessionValid()) {
 
+            // Delete game developers
+            $developerManager = new DeveloperManager();
+            $developerManager->deleteGameDevelopers($params['id']);
+
+            // Delete games genres
+            $genreManager = new GenreManager();
+            $genreManager->deleteGameGenres($params['id']);
+
+            // Delete games modes
+            $modeManager = new ModeManager();
+            $modeManager->deleteGameModes($params['id']);
+
+            // Delete games release
+            $releaseDateManager = new ReleaseDateManager();
+            $releaseDateManager->deleteGameReleaseDates($params['id']);
+
             // Delete game informations
             $gameManager = new GameManager();
-            $game_id = $gameManager->addGame($params);
-
-            // Add games developers
-            $developerManager = new DeveloperManager();
-            foreach($params['developer'] as $developer_id) {
-
-                $developerManager->addGameDeveloper($game_id, $developer_id);
-            }
-
-            // Add games genres
-            $genreManager = new GenreManager();
-            foreach($params['genre'] as $genre_id) {
-
-                $genreManager->addGameGenre($game_id, $genre_id);
-            }
-
-            // Add games modes
-            $modeManager = new ModeManager();
-            foreach($params['mode'] as $mode_id) {
-                
-                $modeManager->addGameMode($game_id, $mode_id);
-            }
-
-            // Add games release
-            $releaseDateManager = new ReleaseDateManager();
-            foreach($params['releaseDate'] as $releaseDate_array) {
-                
-                $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
-            }
+            $gameManager->deleteGame($params['id']);
 
             $view = new View();
             $view->redirect('home');

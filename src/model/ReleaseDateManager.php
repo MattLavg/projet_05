@@ -67,4 +67,17 @@ use App\model\ReleaseDate;
         $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
     }
 
+    /**
+     * Allows to delete a release date
+     * 
+     * @param int $game_id
+     */
+    public function deleteGameReleaseDates($game_id)
+    {
+        $req = $this->_db->prepare('DELETE FROM release_dates WHERE id_game = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+    }
+
  }

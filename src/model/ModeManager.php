@@ -66,4 +66,17 @@ use App\Core\Manager;
         $req->execute(array($game_id, $mode_id));
     }
 
+    /**
+     * Allows to delete a mode
+     * 
+     * @param int $game_id
+     */
+    public function deleteGameModes($game_id)
+    {
+        $req = $this->_db->prepare('DELETE FROM games_modes WHERE id_game = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+    }
+
  }
