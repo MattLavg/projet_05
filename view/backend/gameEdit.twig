@@ -94,29 +94,35 @@
                 <p>Pour valider une date vous devez sélectionner un support, un éditeur, une région et une date.</p>
                 <div>
                     <div class="entity-group-game-edit">
-                        <div class="form-group bloc-entity-game-edit" >
-                            <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                            <select name="releaseDate[0][platform]" class="form-control platformList mb-2">
-                                    <option selected>Choisissez un support</option>
-                                {% for platform in platforms %}
-                                    <option value="{{ platform.getId }}">{{ platform.getName }}</option>
-                                {% endfor %}
-                            </select>
-                            <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
-                                    <option selected>Choisissez un éditeur</option>
-                                {% for publisher in publishers %}
-                                    <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
-                                {% endfor %}
-                            </select>
-                                <select name="releaseDate[0][region]" class="form-control regionList mb-2">
-                                    <option selected>Choisissez une région</option>
-                                {% for region in regions %}
-                                    <option value="{{ region.getId }}">{{ region.getName }}</option>
-                                {% endfor %}
-                            </select>
-                            <input type="text" class="form-control date"  id="datepicker0" placeholder="Choisissez une date" readonly>
-                            <input type="hidden" class="form-control date altDate" name="releaseDate[0][date]" id="altDatepicker0" readonly>
-                        </div>
+                        {% for releaseDate in releaseDates %}
+                            <div class="form-group bloc-entity-game-edit" >
+                                <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                                <select name="releaseDate[{{ releaseDate.getPlatform }}][platform]" class="form-control platformList mb-2">
+                                        <option value="">Choisissez un support</option>
+                                    {% for onePlatform in allPlatforms %}
+                                        <option {% if onePlatform.getId == releaseDate.getPlatformId %}selected {% endif %}value="{{ onePlatform.getId }}">
+                                            {{ onePlatform.getName }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <select name="releaseDate[{{ releaseDate.getPublisher }}][publisher]" class="form-control publisherList mb-2">
+                                        <option value="">Choisissez un éditeur</option>
+                                    {% for onePublisher in allPublishers %}
+                                        <option {% if onePublisher.getId == releaseDate.getPublisherId %}selected {% endif %}value="{{ onePublisher.getId }}">
+                                            {{ onePublisher.getName }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                    <select name="releaseDate[{{ releaseDate.getRegion }}][region]" class="form-control regionList mb-2">
+                                        <option value="">Choisissez une région</option>
+                                    {% for oneRegion in allRegions %}
+                                        <option {% if oneRegion.getId == releaseDate.getRegionId %}selected {% endif %}value="{{ oneRegion.getId }}">{{ oneRegion.getName }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input type="text" class="form-control date" value="{{ releaseDate.getReleaseDate }}" readonly>
+                                <input type="text" class="form-control altDate" name="releaseDate[][date]" readonly>
+                            </div>
+                        {% endfor %}
                     </div>
         
                     <button type="button" class="btn btn-primary" id="addReleaseDateForm">Ajouter une date</button>
@@ -223,8 +229,9 @@
                                     <option value="{{ region.getId }}">{{ region.getName }}</option>
                                 {% endfor %}
                             </select>
-                            <input type="text" class="form-control date"  id="datepicker0" placeholder="Choisissez une date" readonly>
-                            <input type="hidden" class="form-control date altDate" name="releaseDate[0][date]" id="altDatepicker0" readonly>
+                            <input type="text" class="form-control date" placeholder="Choisissez une date" readonly>
+                            <!-- <input type="text" class="form-control date" id="datepicker0" placeholder="Choisissez une date" readonly> -->
+                            <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
                         </div>
                     </div>
         

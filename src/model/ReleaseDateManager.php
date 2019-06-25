@@ -23,6 +23,9 @@ use App\model\ReleaseDate;
     {
         $req = $this->_db->prepare(
             'SELECT 
+            p.id AS platformId,
+            r.id AS regionId,
+            pu.id AS publisherId,
             p.name AS platform, 
             r.name AS region, 
             pu.name AS publisher, 

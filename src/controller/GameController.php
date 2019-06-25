@@ -164,7 +164,7 @@ use App\Core\View;
                 $releaseDates = $releaseDateManager->getReleases($game_id);
 
                 // echo "<pre>";
-                // print_r($genres);
+                // print_r($releaseDates);
                 // echo "</pre>";die;
 
                 $view = new View('gameEdit');

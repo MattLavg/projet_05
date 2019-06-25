@@ -231,13 +231,71 @@ console.log('plop');
     // $( ".date" ).datepicker( $.datepicker.regional[ "fr" ] );
 
 
-    $( ".date" ).datepicker( 
-        $.extend({ 
+    // $( ".date" ).datepicker( 
+    //     $.extend({ 
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         showButtonPanel: true,
+    //         yearRange: "1980:c+2", // c is current selected year
+    //         altFormat: 'yy-mm-dd',
+    //         altField: $('.date').next()
+    //      },
+    //     $.datepicker.regional[ "fr" ])
+    // );
+
+    // function modifyDatepickerUpdateGame() {
+    //     nbList++;
+
+    //     $('.datpicker-update-game').removeData('datepicker');
+    //     $('.datpicker-update-game').removeClass('hasDatepicker');
+
+    //     $('.datpicker-update-game').attr('id', 'datepicker-update-game' + nbList);
+    //     $('.datpicker-update-game').next().attr('id', 'altDatepicker-update-game' + nbList);
+    //     $('.datpicker-update-game').datepicker($.extend({ 
+    //         altFormat: 'yy-mm-dd',
+    //         altField: '#altDatepicker-update-game' + nbList
+    //      },
+    //     $.datepicker.regional[ "fr" ]));
+    // }
+
+//     $('.datpicker-update-game').each(function(i) {
+//         var count = i;
+// console.log(i);
+//         $('.datpicker-update-game').removeClass('hasDatepicker');
+//         console.log('je compte');
+//         $('.datpicker-update-game').attr('id', 'datepicker-update-game' + count);
+//         // $('.datpicker-update-game').next().attr('id', 'altDatepicker-update-game' + nbList);
+//         $('.datpicker-update-game').datepicker($.extend({ 
+//             altFormat: 'yy-mm-dd',
+//             altField: $('.datpicker-update-game').next()
+//          },
+//         $.datepicker.regional[ "fr" ]));
+//       });
+    // var nbDatepickerUpdategame = $('.datpicker-update-game').length;
+    // for (var i = 0; i < nbDatepickerUpdategame; i++) {
+
+    // }
+
+    $('.date').each(function(index) {
+       
+        $(this).datepicker($.extend({ 
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: "1980:c+2", // c is current selected year
             altFormat: 'yy-mm-dd',
-            altField: '#altDatepicker0'
-         },
-        $.datepicker.regional[ "fr" ])
-    );
+            altField: $(this).next()
+        },
+        $.datepicker.regional[ "fr" ]));
+    });
+
+
+    //   $('.datpicker-update-game').removeClass('hasDatepicker');
+    //   $('.datpicker-update-game').datepicker($.extend({ 
+    //     altFormat: 'yy-mm-dd',
+    //     altField: $('.datpicker-update-game').next()
+    //  },
+    // $.datepicker.regional[ "fr" ]));
 
     //   $( '.date' ).datepicker( 'option', 'altFormat', 'yy-mm-dd' );
 
@@ -262,24 +320,33 @@ console.log('plop');
         $(this).parent().find('.bloc-entity-game-edit:last').find('.publisherList').attr('name', 'releaseDate[' + nbList + '][publisher]');
         $(this).parent().find('.bloc-entity-game-edit:last').find('.regionList').attr('name', 'releaseDate[' + nbList + '][region]');
 
-
-        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeAttr('id');
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeData('datepicker');
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeAttr('id');
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeClass('hasDatepicker');
 
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('id', 'datepicker' + nbList);
+        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('id', 'datepicker' + nbList);
         $(this).parent().find('.bloc-entity-game-edit:last').find('.altDate').attr('name', 'releaseDate[' + nbList + '][date]');
         
 
+        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker($.extend({ 
+        //     altFormat: 'yy-mm-dd',
+        //     altField: '#altDatepicker' + nbList
+        //  },
+        // $.datepicker.regional[ "fr" ]));
+console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date'));
+console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date').next());
+
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker($.extend({ 
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: "1980:c+2", // c is current selected year
             altFormat: 'yy-mm-dd',
-            altField: '#altDatepicker' + nbList
+            altField: $(this).parent().find('.bloc-entity-game-edit:last').find('.date').next()
          },
         $.datepicker.regional[ "fr" ]));
 
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.altDate').attr('id', 'altDatepicker' + nbList);
-// console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date'));
-        // $('#table-dev tbody tr:first .updateEntity').click(updateAction);
+        // $(this).parent().find('.bloc-entity-game-edit:last').find('.altDate').attr('id', 'altDatepicker' + nbList);
+
     });
     
     
