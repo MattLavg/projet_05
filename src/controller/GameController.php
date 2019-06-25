@@ -163,6 +163,10 @@ use App\Core\View;
                 $releaseDateManager = new ReleaseDateManager();
                 $releaseDates = $releaseDateManager->getReleases($game_id);
 
+                // echo "<pre>";
+                // print_r($genres);
+                // echo "</pre>";die;
+
                 $view = new View('gameEdit');
                 $view->render('back', array(
                     'game_id' => $game_id,
@@ -265,6 +269,50 @@ use App\Core\View;
                 
                 $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
             }
+
+            $view = new View();
+            $view->redirect('home');
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
+
+    /**
+     * Allows to update a game
+     * 
+     * @param array $params
+     */
+    public function updateGame($params = [])
+    {
+        echo "<pre>";
+        print_r($params);
+        echo "</pre>";die;
+        if (ConnectionController::isSessionValid()) {
+
+            // Delete game developers
+            $developerManager = new DeveloperManager();
+            $developerManager->deleteGameDevelopers($params['id']);
+
+            // Delete games genres
+            $genreManager = new GenreManager();
+            $genreManager->deleteGameGenres($params['id']);
+
+            // Delete games modes
+            $modeManager = new ModeManager();
+            $modeManager->deleteGameModes($params['id']);
+
+            // Delete games release
+            $releaseDateManager = new ReleaseDateManager();
+            $releaseDateManager->deleteGameReleaseDates($params['id']);
+
+            // Delete game informations
+            $gameManager = new GameManager();
+            $gameManager->deleteGame($params['id']);
 
             $view = new View();
             $view->redirect('home');

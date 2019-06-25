@@ -32,6 +32,7 @@ use App\Core\Manager;
     {
         $req = $this->_db->prepare(
             'SELECT
+            g.id,
             g.name 
             FROM genres AS g
             INNER JOIN games_genres AS gg

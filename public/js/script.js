@@ -165,14 +165,18 @@ $(document).ready(function () {
 
 
 
-
-
+    // Update page with informations already set
+    $('.entity-group-game-edit').find('.bloc-entity-game-edit:first').find('.cross-cancel-game-update').css('display', 'none');
+    $('.entity-group-game-edit').find('.bloc-entity-game-edit:first').removeClass('pl-5');
 
     // put the delete entity in variable
     var deleteEntityList = function(e) {
         e.preventDefault();
         $(this).parent().remove();
     };
+
+    // DELETE DEVELOPER INPUT 
+    $('.cross-cancel-game-update').click(deleteEntityList);
 
     // ADD and DELETE DEVELOPER INPUT IN FORM GAME EDIT
     var nbList = 0;
@@ -183,42 +187,29 @@ $(document).ready(function () {
 
         // get the bloc where list of entities are duplicated
         var blocEntityList = $(this).parent().find('.entity-group-game-edit');
+
         // clone the entity list
         $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
-        // display cross
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
-        // apply the delete function to the new cross icon
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').click(deleteEntityList);
-        // add the padding class
-        $(this).parent().find('.bloc-entity-game-edit:last').addClass('pl-5');
 
-        if ($(this).parent().find('select:last').hasClass('developerList')) {
+        // if cross with cross-cancel-game-update class exists
+        if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update')) {
+            console.log('pliiiiip');
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update').css('display', 'block');
+            // apply the delete function to the new cross icon on form game update
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update').click(deleteEntityList);
 
-            $(this).parent().find('select:last').attr('name', 'developer[' + nbList + ']');
-
-        } else if ($(this).parent().find('select:last').hasClass('genreList')) {
-
-            $(this).parent().find('select:last').attr('name', 'genre[' + nbList + ']');
-
-        } else if ($(this).parent().find('select:last').hasClass('modeList')) {
-
-            $(this).parent().find('select:last').attr('name', 'mode[' + nbList + ']');
+        } 
+        
+        // if cross with cross-cancel class exists
+        if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel')) {
+console.log('plop');
+            // display cross
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
+            // apply the delete function to the new cross icon
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').click(deleteEntityList);
 
         }
-    });
-
-    // ADD and DELETE entities on game edit
-    $('.addEntityFormGameEdit').click(function(e) {
-        nbList++;
-
-        // get the bloc where list of entities are duplicated
-        var blocEntityList = $(this).parent().find('.entity-group-game-edit');
-        // clone the entity list
-        $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
-        // display cross
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
-        // apply the delete function to the new cross icon
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').click(deleteEntityList);
+ 
         // add the padding class
         $(this).parent().find('.bloc-entity-game-edit:last').addClass('pl-5');
 
@@ -292,48 +283,7 @@ $(document).ready(function () {
     });
     
     
-    // DELETE DEVELOPER INPUT 
-    // $('.cross-cancel').click();
+    
 
-
-    // /* French initialisation for the jQuery UI date picker plugin. */
-    // /* Written by Keith Wood (kbwood{at}iinet.com.au),
-    //             Stéphane Nahmani (sholby@sholby.net),
-    //             Stéphane Raimbault <stephane.raimbault@gmail.com> */
-    // ( function( factory ) {
-    //     if ( typeof define === "function" && define.amd ) {
-
-    //         // AMD. Register as an anonymous module.
-    //         define( [ "../widgets/datepicker" ], factory );
-    //     } else {
-
-    //         // Browser globals
-    //         factory( jQuery.datepicker );
-    //     }
-    // }( function( datepicker ) {
-
-    // datepicker.regional.fr = {
-    //     closeText: "Fermer",
-    //     prevText: "Précédent",
-    //     nextText: "Suivant",
-    //     currentText: "Aujourd'hui",
-    //     monthNames: [ "janvier", "février", "mars", "avril", "mai", "juin",
-    //         "juillet", "août", "septembre", "octobre", "novembre", "décembre" ],
-    //     monthNamesShort: [ "janv.", "févr.", "mars", "avr.", "mai", "juin",
-    //         "juil.", "août", "sept.", "oct.", "nov.", "déc." ],
-    //     dayNames: [ "dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi" ],
-    //     dayNamesShort: [ "dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam." ],
-    //     dayNamesMin: [ "D","L","M","M","J","V","S" ],
-    //     weekHeader: "Sem.",
-    //     dateFormat: "dd/mm/yy",
-    //     firstDay: 1,
-    //     isRTL: false,
-    //     showMonthAfterYear: false,
-    //     yearSuffix: "" };
-    // datepicker.setDefaults( datepicker.regional.fr );
-
-    // return datepicker.regional.fr;
-
-    // } ) );
 
 });

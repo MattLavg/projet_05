@@ -10,7 +10,7 @@
 
         <h1>Modifier un jeu</h1>
         <hr>
-            <form method="post" action="{{ HOST }}add-game">
+            <form method="post" action="{{ HOST }}update-game">
                 <div class="form-group">
                     <label for="name">Le titre du jeu :</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="{{ game.getName }}">
@@ -27,8 +27,8 @@
                 <div>
                     <div class="entity-group-game-edit">
                         {% for developer in developers%}
-                            <div class="form-group bloc-entity-game-edit">
-                                <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                            <div class="form-group bloc-entity-game-edit pl-5">
+                                <a href="#" class="cross-cancel-game-update"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
                                 <select name="developer[{{ developer.getName }}]" class="form-control developerList mb-2">
                                         <option value="">Choisissez un développeur</option>
                                     {% for oneDeveloper in allDevelopers %}
@@ -41,22 +41,26 @@
                         {% endfor %}
                     </div>
         
-                    <button type="button" class="btn btn-primary addEntityFormGameEdit">Ajouter un développeur</button>
+                    <button type="button" class="btn btn-primary addEntityForm">Ajouter un développeur</button>
                 </div>
                 <hr>
                 
                 <h4>Le ou les genre(s) du jeu :</h4>
                 <div>
                     <div class="entity-group-game-edit">
-                        <div class="form-group bloc-entity-game-edit" >
-                            <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                            <select name="genre[0]" class="form-control genreList mb-2">
-                                    <option selected>Choisissez un genre</option>
-                                {% for genre in genres %}
-                                    <option value="{{ genre.getId }}">{{ genre.getName }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        {% for genre in genres %}
+                            <div class="form-group bloc-entity-game-edit pl-5" >
+                                <a href="#" class="cross-cancel-game-update"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                                <select name="genre[{{ genre.getName }}]" class="form-control genreList mb-2">
+                                        <option value="">Choisissez un genre</option>
+                                    {% for oneGenre in allGenres %}
+                                        <option {% if oneGenre.getId == genre.getId %}selected {% endif %}value="{{ oneGenre.getId }}">
+                                            {{ oneGenre.getName }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% endfor %}
                     </div>
         
                     <button type="button" class="btn btn-primary addEntityForm">Ajouter un genre</button>
@@ -67,15 +71,19 @@
                 <h4>Le ou les mode(s) du jeu :</h4>
                 <div>
                     <div class="entity-group-game-edit">
-                        <div class="form-group bloc-entity-game-edit" >
-                            <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                            <select name="mode[0]" class="form-control modeList mb-2">
-                                    <option selected>Choisissez un mode</option>
-                                {% for mode in modes %}
-                                    <option value="{{ mode.getId }}">{{ mode.getName }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        {% for mode in modes %}
+                            <div class="form-group bloc-entity-game-edit pl-5" >
+                                <a href="#" class="cross-cancel-game-update"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                                <select name="mode[{{ mode.getName }}]" class="form-control modeList mb-2">
+                                        <option value="">Choisissez un mode</option>
+                                    {% for oneMode in allModes %}
+                                        <option {% if oneMode.getId == mode.getId %}selected {% endif %}value="{{ oneMode.getId }}">
+                                            {{ oneMode.getName }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% endfor %}
                     </div>
         
                     <button type="button" class="btn btn-primary addEntityForm">Ajouter un mode</button>

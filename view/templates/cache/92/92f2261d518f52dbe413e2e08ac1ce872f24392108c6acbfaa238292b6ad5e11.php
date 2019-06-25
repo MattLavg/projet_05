@@ -92,7 +92,7 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
                         <td><a href=\"";
             // line 32
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-            echo "update-game/id/";
+            echo "edit-game/id/";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 32), "html", null, true);
             echo "\" id=\"updateGame\">Modifier</a></td>
                         <td><a href=\"#\" data-url-delete-game=\"";
@@ -176,7 +176,7 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
 
                     <tr>
                         <td>{{ game.getName }}</td>
-                        <td><a href=\"{{ HOST }}update-game/id/{{ game.getId }}\" id=\"updateGame\">Modifier</a></td>
+                        <td><a href=\"{{ HOST }}edit-game/id/{{ game.getId }}\" id=\"updateGame\">Modifier</a></td>
                         <td><a href=\"#\" data-url-delete-game=\"{{ HOST }}delete-game/id/{{ game.getId }}\" id=\"gameDeleteBtn\" data-game-name=\"{{ game.getName }}\" data-toggle=\"modal\" data-target=\"#deleteModal\">Supprimer</a></td>
                     </tr> 
 

@@ -89,6 +89,12 @@ h1 {
     display: none;
 }
 
+.cross-cancel-game-update {
+    position: absolute;
+    top: 4px;
+    left: 0;
+}
+
 .cross-cancel-release {
     position: absolute;
     top: 72px;

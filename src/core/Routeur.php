@@ -31,7 +31,7 @@ class Routeur
         'logout'               => ['controller' => 'App\Controller\ConnectionController', 'method' => 'logOut'],
         'edit-game'            => ['controller' => 'App\Controller\GameController',       'method' => 'showEditGame'],
         'add-game'             => ['controller' => 'App\Controller\GameController',       'method' => 'addGame'],
-        'update-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'showEditGame'],
+        'update-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'updateGame'],
         'delete-game'          => ['controller' => 'App\Controller\GameController',       'method' => 'deleteGame'],
         'game-management'      => ['controller' => 'App\Controller\GameController',       'method' => 'showGamesManagement'],
         'entity-management'    => ['controller' => 'App\Controller\EntityController',     'method' => 'showEntitiesManagement'],
