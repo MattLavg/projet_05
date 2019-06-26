@@ -79,4 +79,19 @@ use App\Model\Game;
         $count = $req->rowCount();
     }
 
+    /**
+     * Get all games names
+     * 
+     * @return array $array
+     */
+    public function getAllNames()
+    {
+        $class = $this->_class;
+        $req = $this->_db->query('SELECT name FROM ' . $this->_table . ' ORDER BY id DESC');
+
+        $array = $req->fetchAll(\PDO::FETCH_COLUMN, 0);
+
+        return $array;
+    }
+
  }

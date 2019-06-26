@@ -239,8 +239,11 @@ use App\Core\View;
 
             // Check if game name is valid
             if (isset($params['name']) && !empty($params['name'])) {
+
+                // delete tags and spaces at the beginning and the end
                 $params['name'] = trim(strip_tags($params['name']));
-    
+
+                // check if not empty again
                 if(empty($params['name'])) {
     
                     $_SESSION['errorMessage'] = 'Champ vide, vous devez renseigner le titre du jeu.';
@@ -248,8 +251,23 @@ use App\Core\View;
                     $view = new View();
                     $view->redirect('edit-game');
                 }
+
+                $gameManager = new GameManager();
+                $games = $gameManager->getAllNames();
+
+                $result = array_search($params['name'], $games);
+
+                // if true, game already exists
+                if ($result) {
+                    
+                    $_SESSION['errorMessage'] = 'Le jeu existe déjà.';
+    
+                    $view = new View();
+                    $view->redirect('edit-game');
+
+                }
             
-            } elseif (empty($params['name'])) {
+            } else  {
     
                 $_SESSION['errorMessage'] = 'Vous devez renseigner le titre du jeu.';
     
@@ -266,11 +284,16 @@ use App\Core\View;
                 $view->redirect('edit-game');
             }
             
-            // Check is game developer is valid
+            // Check if game developer is valid
             if (isset($params['developer']) && !empty($params['developer'])) {
-    
+                
+                // Allows to delete duplicates developers
+                $params['developer'] = array_unique($params['developer']);
+
+                // Allows to use a function on each element of the array
                 array_walk_recursive($params['developer'], function($item, $key) {
     
+                    // $item = value
                     $item = trim(strip_tags($item));
         
                     if(empty($item) || $item == 'Choisissez un développeur') {
@@ -292,6 +315,9 @@ use App\Core\View;
     
             // Check if game genre is valid
             if (isset($params['genre']) && !empty($params['genre'])) {
+
+                // Allows to delete duplicates genres
+                $params['genre'] = array_unique($params['genre']);
     
                 array_walk_recursive($params['genre'], function($item, $key) {
     
@@ -316,6 +342,9 @@ use App\Core\View;
     
             // Check if game mode is valid
             if (isset($params['mode']) && !empty($params['mode'])) {
+
+                // Allows to delete duplicates modes
+                $params['modes'] = array_unique($params['modes']);
     
                 array_walk_recursive($params['mode'], function($item, $key) {
     
@@ -341,18 +370,18 @@ use App\Core\View;
             // Check is release date is valid
             if (isset($params['releaseDate']) && !empty($params['releaseDate'])) {
     
-                array_walk_recursive($params['releaseDate'], function($item, $key) {
+                // array_walk_recursive($params['releaseDate'], function($item, $key) {
     
-                    $item = trim(strip_tags($item));
+                //     $item = trim(strip_tags($item));
     
-                    if(empty($item) || $item == 'Choisissez un support' || $item == 'Choisissez un éditeur' || $item == 'Choisissez une région') {
+                //     if(empty($item) || $item == 'Choisissez un support' || $item == 'Choisissez un éditeur' || $item == 'Choisissez une région') {
               
-                        $_SESSION['errorMessage'] = 'Un des champs d\'une date n\'est pas valide.';
+                //         $_SESSION['errorMessage'] = 'Un des champs d\'une date n\'est pas valide.';
     
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-                });
+                //         $view = new View();
+                //         $view->redirect('edit-game');
+                //     }
+                // });
     
             } else {
      
@@ -363,7 +392,7 @@ use App\Core\View;
             }
 
             // Add game informations
-            $gameManager = new GameManager();
+            // GameManager already launched
             $game_id = $gameManager->addGame($params);
 
             // Add games developers

@@ -289,7 +289,7 @@ $(document).ready(function () {
             changeMonth: true,
             changeYear: true,
             showButtonPanel: true,
-            yearRange: "1980:c+2", // c is current selected year
+            yearRange: "1980:2023", // c is current selected year
             altFormat: 'yy-mm-dd',
             altField: $(this).next()
         },
@@ -383,7 +383,7 @@ $(document).ready(function () {
             changeMonth: true,
             changeYear: true,
             showButtonPanel: true,
-            yearRange: "1980:c+2", // c is current selected year
+            yearRange: "1980:2023", // c is current selected year
             altFormat: 'yy-mm-dd',
             altField: $(this).parent().find('.bloc-entity-game-edit:last').find('.date').next()
          },
