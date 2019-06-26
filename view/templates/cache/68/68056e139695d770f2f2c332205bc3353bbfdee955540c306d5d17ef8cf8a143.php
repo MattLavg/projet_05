@@ -256,12 +256,9 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             $context['_seq'] = twig_ensure_traversable(($context["releaseDates"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["releaseDate"]) {
                 // line 98
-                echo "                            <div class=\"form-group bloc-entity-game-edit\" >
-                                <a href=\"#\" class=\"cross-cancel-release\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                                <select name=\"releaseDate[";
-                // line 100
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getPlatform", [], "any", false, false, false, 100), "html", null, true);
-                echo "][platform]\" class=\"form-control platformList mb-2\">
+                echo "                            <div class=\"form-group bloc-entity-game-edit background-release-game-update pl-5\" >
+                                <a href=\"#\" class=\"cross-cancel-release-game-update\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
+                                <select name=\"releaseDate[0][platform]\" class=\"form-control platformList mb-2\">
                                         <option value=\"\">Choisissez un support</option>
                                     ";
                 // line 102
@@ -288,10 +285,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 $context = array_intersect_key($context, $_parent) + $_parent;
                 // line 107
                 echo "                                </select>
-                                <select name=\"releaseDate[";
-                // line 108
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getPublisher", [], "any", false, false, false, 108), "html", null, true);
-                echo "][publisher]\" class=\"form-control publisherList mb-2\">
+                                <select name=\"releaseDate[0][publisher]\" class=\"form-control publisherList mb-2\">
                                         <option value=\"\">Choisissez un éditeur</option>
                                     ";
                 // line 110
@@ -318,10 +312,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 $context = array_intersect_key($context, $_parent) + $_parent;
                 // line 115
                 echo "                                </select>
-                                    <select name=\"releaseDate[";
-                // line 116
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getRegion", [], "any", false, false, false, 116), "html", null, true);
-                echo "][region]\" class=\"form-control regionList mb-2\">
+                                    <select name=\"releaseDate[0][region]\" class=\"form-control regionList mb-2\">
                                         <option value=\"\">Choisissez une région</option>
                                     ";
                 // line 118
@@ -349,7 +340,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 // line 122
                 echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getReleaseDate", [], "any", false, false, false, 122), "html", null, true);
                 echo "\" readonly>
-                                <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[][date]\" readonly>
+                                <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[0][date]\" readonly>
                             </div>
                         ";
             }
@@ -553,7 +544,6 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             // line 231
             echo "                            </select>
                             <input type=\"text\" class=\"form-control date\" placeholder=\"Choisissez une date\" readonly>
-                            <!-- <input type=\"text\" class=\"form-control date\" id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly> -->
                             <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[0][date]\" readonly>
                         </div>
                     </div>
@@ -568,7 +558,24 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
     ";
         }
+        // line 246
+        echo "
+    ";
         // line 247
+        if (($context["errorMessage"] ?? null)) {
+            // line 248
+            echo "        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+            ";
+            // line 249
+            echo twig_escape_filter($this->env, ($context["errorMessage"] ?? null), "html", null, true);
+            echo "
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                <span aria-hidden=\"true\">&times;</span>
+            </button>
+        </div>
+    ";
+        }
+        // line 255
         echo "
 ";
     }
@@ -585,7 +592,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
     public function getDebugInfo()
     {
-        return array (  572 => 247,  554 => 231,  543 => 229,  539 => 228,  534 => 225,  523 => 223,  519 => 222,  514 => 219,  503 => 217,  499 => 216,  481 => 200,  470 => 198,  466 => 197,  448 => 181,  437 => 179,  433 => 178,  416 => 163,  405 => 161,  401 => 160,  378 => 140,  373 => 137,  360 => 126,  350 => 122,  347 => 121,  332 => 119,  328 => 118,  323 => 116,  320 => 115,  311 => 112,  302 => 111,  298 => 110,  293 => 108,  290 => 107,  281 => 104,  272 => 103,  268 => 102,  263 => 100,  259 => 98,  255 => 97,  243 => 87,  235 => 84,  226 => 81,  217 => 80,  213 => 79,  208 => 77,  204 => 75,  200 => 74,  188 => 64,  180 => 61,  171 => 58,  162 => 57,  158 => 56,  153 => 54,  149 => 52,  145 => 51,  134 => 42,  126 => 39,  117 => 36,  108 => 35,  104 => 34,  99 => 32,  95 => 30,  91 => 29,  80 => 21,  72 => 16,  66 => 13,  61 => 10,  59 => 9,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
+        return array (  579 => 255,  570 => 249,  567 => 248,  565 => 247,  562 => 246,  545 => 231,  534 => 229,  530 => 228,  525 => 225,  514 => 223,  510 => 222,  505 => 219,  494 => 217,  490 => 216,  472 => 200,  461 => 198,  457 => 197,  439 => 181,  428 => 179,  424 => 178,  407 => 163,  396 => 161,  392 => 160,  369 => 140,  364 => 137,  351 => 126,  341 => 122,  338 => 121,  323 => 119,  319 => 118,  314 => 115,  305 => 112,  296 => 111,  292 => 110,  287 => 107,  278 => 104,  269 => 103,  265 => 102,  259 => 98,  255 => 97,  243 => 87,  235 => 84,  226 => 81,  217 => 80,  213 => 79,  208 => 77,  204 => 75,  200 => 74,  188 => 64,  180 => 61,  171 => 58,  162 => 57,  158 => 56,  153 => 54,  149 => 52,  145 => 51,  134 => 42,  126 => 39,  117 => 36,  108 => 35,  104 => 34,  99 => 32,  95 => 30,  91 => 29,  80 => 21,  72 => 16,  66 => 13,  61 => 10,  59 => 9,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -687,9 +694,9 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 <div>
                     <div class=\"entity-group-game-edit\">
                         {% for releaseDate in releaseDates %}
-                            <div class=\"form-group bloc-entity-game-edit\" >
-                                <a href=\"#\" class=\"cross-cancel-release\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
-                                <select name=\"releaseDate[{{ releaseDate.getPlatform }}][platform]\" class=\"form-control platformList mb-2\">
+                            <div class=\"form-group bloc-entity-game-edit background-release-game-update pl-5\" >
+                                <a href=\"#\" class=\"cross-cancel-release-game-update\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
+                                <select name=\"releaseDate[0][platform]\" class=\"form-control platformList mb-2\">
                                         <option value=\"\">Choisissez un support</option>
                                     {% for onePlatform in allPlatforms %}
                                         <option {% if onePlatform.getId == releaseDate.getPlatformId %}selected {% endif %}value=\"{{ onePlatform.getId }}\">
@@ -697,7 +704,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <select name=\"releaseDate[{{ releaseDate.getPublisher }}][publisher]\" class=\"form-control publisherList mb-2\">
+                                <select name=\"releaseDate[0][publisher]\" class=\"form-control publisherList mb-2\">
                                         <option value=\"\">Choisissez un éditeur</option>
                                     {% for onePublisher in allPublishers %}
                                         <option {% if onePublisher.getId == releaseDate.getPublisherId %}selected {% endif %}value=\"{{ onePublisher.getId }}\">
@@ -705,14 +712,14 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                                         </option>
                                     {% endfor %}
                                 </select>
-                                    <select name=\"releaseDate[{{ releaseDate.getRegion }}][region]\" class=\"form-control regionList mb-2\">
+                                    <select name=\"releaseDate[0][region]\" class=\"form-control regionList mb-2\">
                                         <option value=\"\">Choisissez une région</option>
                                     {% for oneRegion in allRegions %}
                                         <option {% if oneRegion.getId == releaseDate.getRegionId %}selected {% endif %}value=\"{{ oneRegion.getId }}\">{{ oneRegion.getName }}</option>
                                     {% endfor %}
                                 </select>
                                 <input type=\"text\" class=\"form-control date\" value=\"{{ releaseDate.getReleaseDate }}\" readonly>
-                                <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[][date]\" readonly>
+                                <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[0][date]\" readonly>
                             </div>
                         {% endfor %}
                     </div>
@@ -822,7 +829,6 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                                 {% endfor %}
                             </select>
                             <input type=\"text\" class=\"form-control date\" placeholder=\"Choisissez une date\" readonly>
-                            <!-- <input type=\"text\" class=\"form-control date\" id=\"datepicker0\" placeholder=\"Choisissez une date\" readonly> -->
                             <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[0][date]\" readonly>
                         </div>
                     </div>
@@ -835,6 +841,15 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         
             </form>
 
+    {% endif %}
+
+    {% if errorMessage %}
+        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+            {{ errorMessage }}
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                <span aria-hidden=\"true\">&times;</span>
+            </button>
+        </div>
     {% endif %}
 
 {% endblock %}", "gameEdit.twig", "/Users/mathias/Sites/projet_05/view/backend/gameEdit.twig");

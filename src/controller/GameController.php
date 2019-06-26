@@ -234,9 +234,133 @@ use App\Core\View;
         // echo "<pre>";
         // print_r($params);
         // echo "</pre>";die;
-        $params['name'] = trim(strip_tags($params['name']));
 
         if (ConnectionController::isSessionValid()) {
+
+            // Check if game name is valid
+            if (isset($params['name']) && !empty($params['name'])) {
+                $params['name'] = trim(strip_tags($params['name']));
+    
+                if(empty($params['name'])) {
+    
+                    $_SESSION['errorMessage'] = 'Champ vide, vous devez renseigner le titre du jeu.';
+    
+                    $view = new View();
+                    $view->redirect('edit-game');
+                }
+            
+            } elseif (empty($params['name'])) {
+    
+                $_SESSION['errorMessage'] = 'Vous devez renseigner le titre du jeu.';
+    
+                $view = new View();
+                $view->redirect('edit-game');
+            }
+    
+            // Check if game content is valid
+            if (isset($params['content']) && empty($params['content'])) {
+    
+                $_SESSION['errorMessage'] = 'Vous devez renseigner la description du jeu.';
+    
+                $view = new View();
+                $view->redirect('edit-game');
+            }
+            
+            // Check is game developer is valid
+            if (isset($params['developer']) && !empty($params['developer'])) {
+    
+                array_walk_recursive($params['developer'], function($item, $key) {
+    
+                    $item = trim(strip_tags($item));
+        
+                    if(empty($item) || $item == 'Choisissez un développeur') {
+              
+                        $_SESSION['errorMessage'] = 'Un nom de développeur n\'est pas valide.';
+    
+                        $view = new View();
+                        $view->redirect('edit-game');
+                    }
+                });
+    
+            } else {
+     
+                $_SESSION['errorMessage'] = 'Vous devez renseigner un développeur pour le jeu.';
+    
+                $view = new View();
+                $view->redirect('edit-game');
+            }
+    
+            // Check if game genre is valid
+            if (isset($params['genre']) && !empty($params['genre'])) {
+    
+                array_walk_recursive($params['genre'], function($item, $key) {
+    
+                    $item = trim(strip_tags($item));
+        
+                    if(empty($item) || $item == 'Choisissez un genre') {
+              
+                        $_SESSION['errorMessage'] = 'Un nom de genre n\'est pas valide.';
+    
+                        $view = new View();
+                        $view->redirect('edit-game');
+                    }
+                });
+    
+            } else {
+     
+                $_SESSION['errorMessage'] = 'Vous devez renseigner un genre pour le jeu.';
+    
+                $view = new View();
+                $view->redirect('edit-game');
+            }
+    
+            // Check if game mode is valid
+            if (isset($params['mode']) && !empty($params['mode'])) {
+    
+                array_walk_recursive($params['mode'], function($item, $key) {
+    
+                    $item = trim(strip_tags($item));
+        
+                    if(empty($item) || $item == 'Choisissez un mode') {
+              
+                        $_SESSION['errorMessage'] = 'Un nom de mode n\'est pas valide.';
+    
+                        $view = new View();
+                        $view->redirect('edit-game');
+                    }
+                });
+    
+            } else {
+     
+                $_SESSION['errorMessage'] = 'Vous devez renseigner un mode pour le jeu.';
+    
+                $view = new View();
+                $view->redirect('edit-game');
+            }
+            
+            // Check is release date is valid
+            if (isset($params['releaseDate']) && !empty($params['releaseDate'])) {
+    
+                array_walk_recursive($params['releaseDate'], function($item, $key) {
+    
+                    $item = trim(strip_tags($item));
+    
+                    if(empty($item) || $item == 'Choisissez un support' || $item == 'Choisissez un éditeur' || $item == 'Choisissez une région') {
+              
+                        $_SESSION['errorMessage'] = 'Un des champs d\'une date n\'est pas valide.';
+    
+                        $view = new View();
+                        $view->redirect('edit-game');
+                    }
+                });
+    
+            } else {
+     
+                $_SESSION['errorMessage'] = 'Vous devez renseigner une date pour le jeu.';
+    
+                $view = new View();
+                $view->redirect('edit-game');
+            }
 
             // Add game informations
             $gameManager = new GameManager();

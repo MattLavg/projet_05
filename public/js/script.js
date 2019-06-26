@@ -165,11 +165,17 @@ $(document).ready(function () {
 
 
 
-    // Update page with informations already set
+    // On update (game-edit) page with informations already set
+    // get the first element and do not display delete cross
     $('.entity-group-game-edit').find('.bloc-entity-game-edit:first').find('.cross-cancel-game-update').css('display', 'none');
     $('.entity-group-game-edit').find('.bloc-entity-game-edit:first').removeClass('pl-5');
 
-    // put the delete entity in variable
+    $('.entity-group-game-edit').find('.bloc-entity-game-edit:first').find('.cross-cancel-release-game-update').css('display', 'none');
+    $('.entity-group-game-edit').find('.bloc-entity-game-edit:first').removeClass('background-release-game-update');
+
+
+
+    // put the delete entity list in variable
     var deleteEntityList = function(e) {
         e.preventDefault();
         $(this).parent().remove();
@@ -178,7 +184,7 @@ $(document).ready(function () {
     // DELETE DEVELOPER INPUT 
     $('.cross-cancel-game-update').click(deleteEntityList);
 
-    // ADD and DELETE DEVELOPER INPUT IN FORM GAME EDIT
+    // ADD and DELETE entity list INPUT IN FORM GAME EDIT
     var nbList = 0;
     // var nbDatepicker = 1;
 
@@ -193,7 +199,7 @@ $(document).ready(function () {
 
         // if cross with cross-cancel-game-update class exists
         if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update')) {
-            console.log('pliiiiip');
+            // console.log('pliiiiip');
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update').css('display', 'block');
             // apply the delete function to the new cross icon on form game update
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update').click(deleteEntityList);
@@ -202,7 +208,7 @@ $(document).ready(function () {
         
         // if cross with cross-cancel class exists
         if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel')) {
-console.log('plop');
+// console.log('plop');
             // display cross
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
             // apply the delete function to the new cross icon
@@ -277,7 +283,8 @@ console.log('plop');
     // }
 
     $('.date').each(function(index) {
-       
+        nbList++;
+
         $(this).datepicker($.extend({ 
             changeMonth: true,
             changeYear: true,
@@ -287,7 +294,30 @@ console.log('plop');
             altField: $(this).next()
         },
         $.datepicker.regional[ "fr" ]));
+
+        $(this).datepicker('option', 'altField', $(this).next());
+
+        // apply the delete function to the cross icon available
+        $(this).parent().find('.cross-cancel-release-game-update').click(deleteEntityList);
+
+        if ($(this).parent().find('.platformList')) {
+            $(this).parent().find('.platformList').attr('name', 'releaseDate[' + nbList + '][platform]');
+        }
+
+        if ($(this).parent().find('.publisherList')) {
+            $(this).parent().find('.publisherList').attr('name', 'releaseDate[' + nbList + '][publisher]');
+        }
+
+        if ($(this).parent().find('.regionList')) {
+            $(this).parent().find('.regionList').attr('name', 'releaseDate[' + nbList + '][region]');
+        }
+
+        if ($(this).parent().find('.altDate')) {
+            $(this).parent().find('.altDate').attr('name', 'releaseDate[' + nbList + '][date]');
+        }
+
     });
+
 
 
     //   $('.datpicker-update-game').removeClass('hasDatepicker');
@@ -307,10 +337,24 @@ console.log('plop');
         var blocEntityList = $(this).parent().find('.entity-group-game-edit');
         // clone the entity list
         $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
-        // display the first cross
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release').css('display', 'block');
-        // apply the delete function to the new cross icon
-        $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release').click(deleteEntityList);
+
+        // if delete cross 
+        if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release')) {
+            // display the first cross
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release').css('display', 'block');
+            // apply the delete function to the new cross icon
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release').click(deleteEntityList);
+        }
+
+        // iff delete cross on update page
+        if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release-game-update')) {
+            // display the first cross
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release-game-update').css('display', 'block');
+            // apply the delete function to the new cross icon
+            $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release-game-update').click(deleteEntityList);
+        }
+
+        
         // add a background color, border-radius and padding
         $(this).parent().find('.bloc-entity-game-edit:last').css({'background-color': '#F2F2F2', 'border-radius': '10px', 'padding': '10px'});
         // add the padding class
@@ -332,8 +376,8 @@ console.log('plop');
         //     altField: '#altDatepicker' + nbList
         //  },
         // $.datepicker.regional[ "fr" ]));
-console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date'));
-console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date').next());
+// console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date'));
+// console.log($(this).parent().find('.bloc-entity-game-edit:last').find('.date').next());
 
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').datepicker($.extend({ 
             changeMonth: true,

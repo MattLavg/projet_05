@@ -95,9 +95,9 @@
                 <div>
                     <div class="entity-group-game-edit">
                         {% for releaseDate in releaseDates %}
-                            <div class="form-group bloc-entity-game-edit" >
-                                <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
-                                <select name="releaseDate[{{ releaseDate.getPlatform }}][platform]" class="form-control platformList mb-2">
+                            <div class="form-group bloc-entity-game-edit background-release-game-update pl-5" >
+                                <a href="#" class="cross-cancel-release-game-update"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
+                                <select name="releaseDate[0][platform]" class="form-control platformList mb-2">
                                         <option value="">Choisissez un support</option>
                                     {% for onePlatform in allPlatforms %}
                                         <option {% if onePlatform.getId == releaseDate.getPlatformId %}selected {% endif %}value="{{ onePlatform.getId }}">
@@ -105,7 +105,7 @@
                                         </option>
                                     {% endfor %}
                                 </select>
-                                <select name="releaseDate[{{ releaseDate.getPublisher }}][publisher]" class="form-control publisherList mb-2">
+                                <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
                                         <option value="">Choisissez un éditeur</option>
                                     {% for onePublisher in allPublishers %}
                                         <option {% if onePublisher.getId == releaseDate.getPublisherId %}selected {% endif %}value="{{ onePublisher.getId }}">
@@ -113,14 +113,14 @@
                                         </option>
                                     {% endfor %}
                                 </select>
-                                    <select name="releaseDate[{{ releaseDate.getRegion }}][region]" class="form-control regionList mb-2">
+                                    <select name="releaseDate[0][region]" class="form-control regionList mb-2">
                                         <option value="">Choisissez une région</option>
                                     {% for oneRegion in allRegions %}
                                         <option {% if oneRegion.getId == releaseDate.getRegionId %}selected {% endif %}value="{{ oneRegion.getId }}">{{ oneRegion.getName }}</option>
                                     {% endfor %}
                                 </select>
                                 <input type="text" class="form-control date" value="{{ releaseDate.getReleaseDate }}" readonly>
-                                <input type="text" class="form-control altDate" name="releaseDate[][date]" readonly>
+                                <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
                             </div>
                         {% endfor %}
                     </div>
@@ -230,7 +230,6 @@
                                 {% endfor %}
                             </select>
                             <input type="text" class="form-control date" placeholder="Choisissez une date" readonly>
-                            <!-- <input type="text" class="form-control date" id="datepicker0" placeholder="Choisissez une date" readonly> -->
                             <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
                         </div>
                     </div>
@@ -243,6 +242,15 @@
         
             </form>
 
+    {% endif %}
+
+    {% if errorMessage %}
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     {% endif %}
 
 {% endblock %}

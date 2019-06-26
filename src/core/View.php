@@ -51,6 +51,13 @@ class View
 
         $view = $this->_view;
 
+        $errorMessage = null;
+
+        // ckeck if error message
+        if (isset($_SESSION['errorMessage'])) {
+            $errorMessage = $_SESSION['errorMessage'];
+        }
+
         // Load Twig
         $loader = new \Twig\Loader\FilesystemLoader([
             dirname(dirname(__DIR__)) . '/view/frontend', 
@@ -67,10 +74,13 @@ class View
         $params['HOST'] = HOST;
         $params['ASSETS'] = ASSETS;
         $params['VENDOR'] = VENDOR;
+        $params['errorMessage'] = $errorMessage;
         // echo "<pre>";
         // print_r($params);
         // echo "</pre>";die;
         echo $twig->render($view . '.twig', $params);
+
+        unset($_SESSION['errorMessage']);
   
     }
 
