@@ -118,6 +118,9 @@ use App\Core\View;
      */
     public function showEditGame($params = [])
     {
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
         if (ConnectionController::isSessionValid()) {
 
             // Default error message to null
@@ -231,11 +234,36 @@ use App\Core\View;
      */
     public function addGame($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
+        // var_dump($params);
+        echo "<pre>";
+        print_r($params);
+        echo "</pre>";
+// if (empty($params['developer'])) {
+//     echo 'ok';
+// }die;
         if (ConnectionController::isSessionValid()) {
+
+            // Allows to use a function on each element of multidimensionnal array
+            array_walk_recursive($params, function($item, $key) {
+
+                if ($key != 'content') {
+                    $item = trim(strip_tags($item));
+                }
+    
+                // if(empty($item)) {
+          
+                //     $_SESSION['errorMessage'] = 'Un nom de développeur n\'est pas valide.';
+
+                //     $view = new View();
+                //     $view->redirect('edit-game');
+                // }
+            });
+            
+            echo "<pre>";
+            print_r($params);
+            echo "</pre>";
+
+            die;
 
             // Check if game name is valid
             if (isset($params['name']) && !empty($params['name'])) {
@@ -284,19 +312,44 @@ use App\Core\View;
                 $view->redirect('edit-game');
             }
             
-            // Check if game developer is valid
-            if (isset($params['developer']) && !empty($params['developer'])) {
-                
-                // Allows to delete duplicates developers
-                $params['developer'] = array_unique($params['developer']);
 
-                // Allows to use a function on each element of the array
+            // Check if game developer is a valid array
+            $params['developer'] = array_filter($params['developer']);
+
+            if ($params['developer']) {
+                
+                // Allows to delete duplicated developers
+                $params['developer'] = array_unique($params['developer']);
+         
+                // Check if array contains integers as expected
+                $filterArray = filter_var_array($params['developer'], FILTER_VALIDATE_INT);
+                // var_dump($filterArray);die;
+                foreach ($filterArray as $key => $value) {
+                    if ($value == false) {
+
+                        $_SESSION['errorMessage'] = 'Valeur reçue non valide.';
+    
+                        $view = new View();
+                        $view->redirect('edit-game');
+                    }
+                }
+
+          
+                // if (!$filterArray || empty($filterArray)) {
+
+                //     $_SESSION['errorMessage'] = 'La valeur reçue n\'est pas valide pour un développeur.';
+    
+                //     $view = new View();
+                //     $view->redirect('edit-game');
+                // }
+
+                // Allows to use a function on each element of multidimensionnal array
                 array_walk_recursive($params['developer'], function($item, $key) {
     
                     // $item = value
                     $item = trim(strip_tags($item));
         
-                    if(empty($item) || $item == 'Choisissez un développeur') {
+                    if(empty($item)) {
               
                         $_SESSION['errorMessage'] = 'Un nom de développeur n\'est pas valide.';
     
@@ -304,6 +357,7 @@ use App\Core\View;
                         $view->redirect('edit-game');
                     }
                 });
+                
     
             } else {
      
@@ -344,7 +398,7 @@ use App\Core\View;
             if (isset($params['mode']) && !empty($params['mode'])) {
 
                 // Allows to delete duplicates modes
-                $params['modes'] = array_unique($params['modes']);
+                $params['mode'] = array_unique($params['mode']);
     
                 array_walk_recursive($params['mode'], function($item, $key) {
     
@@ -368,60 +422,65 @@ use App\Core\View;
             }
             
             // Check is release date is valid
-            if (isset($params['releaseDate']) && !empty($params['releaseDate'])) {
+            // if (isset($params['releaseDate']) && !empty($params['releaseDate'])) {
     
-                // array_walk_recursive($params['releaseDate'], function($item, $key) {
+            //     array_walk_recursive($params['releaseDate'], function($item, $key) {
     
-                //     $item = trim(strip_tags($item));
+            //         $item = trim(strip_tags($item));
     
-                //     if(empty($item) || $item == 'Choisissez un support' || $item == 'Choisissez un éditeur' || $item == 'Choisissez une région') {
+            //         if(empty($item) || $item == 'Choisissez un support' || $item == 'Choisissez un éditeur' || $item == 'Choisissez une région') {
               
-                //         $_SESSION['errorMessage'] = 'Un des champs d\'une date n\'est pas valide.';
+            //             $_SESSION['errorMessage'] = 'Un des champs d\'une date n\'est pas valide.';
     
-                //         $view = new View();
-                //         $view->redirect('edit-game');
-                //     }
-                // });
+            //             $view = new View();
+            //             $view->redirect('edit-game');
+            //         }
+            //     });
     
-            } else {
+            // } else {
      
-                $_SESSION['errorMessage'] = 'Vous devez renseigner une date pour le jeu.';
+            //     $_SESSION['errorMessage'] = 'Vous devez renseigner une date pour le jeu.';
     
-                $view = new View();
-                $view->redirect('edit-game');
-            }
+            //     $view = new View();
+            //     $view->redirect('edit-game');
+            // }
 
-            // Add game informations
-            // GameManager already launched
-            $game_id = $gameManager->addGame($params);
 
-            // Add games developers
-            $developerManager = new DeveloperManager();
-            foreach($params['developer'] as $developer_id) {
+            // echo "<pre>";
+            // print_r($params);
+            // echo "</pre>";die;
 
-                $developerManager->addGameDeveloper($game_id, $developer_id);
-            }
+            // // Add game informations
+            // // GameManager already launched
+            // $game_id = $gameManager->addGame($params);
 
-            // Add games genres
-            $genreManager = new GenreManager();
-            foreach($params['genre'] as $genre_id) {
+            // // Add games developers
+            // $developerManager = new DeveloperManager();
+            // foreach($params['developer'] as $developer_id) {
 
-                $genreManager->addGameGenre($game_id, $genre_id);
-            }
+            //     $developerManager->addGameDeveloper($game_id, $developer_id);
+            // }
 
-            // Add games modes
-            $modeManager = new ModeManager();
-            foreach($params['mode'] as $mode_id) {
+            // // Add games genres
+            // $genreManager = new GenreManager();
+            // foreach($params['genre'] as $genre_id) {
+
+            //     $genreManager->addGameGenre($game_id, $genre_id);
+            // }
+
+            // // Add games modes
+            // $modeManager = new ModeManager();
+            // foreach($params['mode'] as $mode_id) {
                 
-                $modeManager->addGameMode($game_id, $mode_id);
-            }
+            //     $modeManager->addGameMode($game_id, $mode_id);
+            // }
 
-            // Add games release
-            $releaseDateManager = new ReleaseDateManager();
-            foreach($params['releaseDate'] as $releaseDate_array) {
+            // // Add games release
+            // $releaseDateManager = new ReleaseDateManager();
+            // foreach($params['releaseDate'] as $releaseDate_array) {
                 
-                $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
-            }
+            //     $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+            // }
 
             $view = new View();
             $view->redirect('home');
@@ -447,28 +506,32 @@ use App\Core\View;
         echo "</pre>";die;
         if (ConnectionController::isSessionValid()) {
 
-            // Delete game developers
-            $developerManager = new DeveloperManager();
-            $developerManager->deleteGameDevelopers($params['id']);
+            extract($params); // Allows to extract the $id variable
 
-            // Delete games genres
-            $genreManager = new GenreManager();
-            $genreManager->deleteGameGenres($params['id']);
+            $game_id = $id;
 
-            // Delete games modes
-            $modeManager = new ModeManager();
-            $modeManager->deleteGameModes($params['id']);
+            // // Delete game developers
+            // $developerManager = new DeveloperManager();
+            // $developerManager->deleteGameDevelopers($game_id);
 
-            // Delete games release
-            $releaseDateManager = new ReleaseDateManager();
-            $releaseDateManager->deleteGameReleaseDates($params['id']);
+            // // Delete games genres
+            // $genreManager = new GenreManager();
+            // $genreManager->deleteGameGenres($params['id']);
 
-            // Delete game informations
-            $gameManager = new GameManager();
-            $gameManager->deleteGame($params['id']);
+            // // Delete games modes
+            // $modeManager = new ModeManager();
+            // $modeManager->deleteGameModes($params['id']);
 
-            $view = new View();
-            $view->redirect('home');
+            // // Delete games release
+            // $releaseDateManager = new ReleaseDateManager();
+            // $releaseDateManager->deleteGameReleaseDates($params['id']);
+
+            // // Delete game informations
+            // $gameManager = new GameManager();
+            // $gameManager->deleteGame($params['id']);
+
+            // $view = new View();
+            // $view->redirect('home');
 
         } else {
 
@@ -486,6 +549,9 @@ use App\Core\View;
      */
     public function deleteGame($params = [])
     {
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
         if (ConnectionController::isSessionValid()) {
 
             // Delete game developers

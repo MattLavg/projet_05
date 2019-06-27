@@ -11,9 +11,14 @@
         <h1>Modifier un jeu</h1>
         <hr>
             <form method="post" action="{{ HOST }}update-game">
+
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="id" name="id" value="{{ game.getid }}">
+                </div>
+
                 <div class="form-group">
                     <label for="name">Le titre du jeu :</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="{{ game.getName }}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ game.getName }}">
                 </div>
         
                 <div class="form-group">
@@ -156,7 +161,7 @@
                         <div class="form-group bloc-entity-game-edit" >
                             <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
                             <select name="developer[0]" class="form-control developerList mb-2">
-                                    <option selected>Choisissez un développeur</option>
+                                    <option value="">Choisissez un développeur</option>
                                 {% for developer in developers %}
                                     <option value="{{ developer.getId }}">{{ developer.getName }}</option>
                                 {% endfor %}
@@ -174,7 +179,7 @@
                         <div class="form-group bloc-entity-game-edit" >
                             <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
                             <select name="genre[0]" class="form-control genreList mb-2">
-                                    <option selected>Choisissez un genre</option>
+                                    <option value="">Choisissez un genre</option>
                                 {% for genre in genres %}
                                     <option value="{{ genre.getId }}">{{ genre.getName }}</option>
                                 {% endfor %}
@@ -193,7 +198,7 @@
                         <div class="form-group bloc-entity-game-edit" >
                             <a href="#" class="cross-cancel"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
                             <select name="mode[0]" class="form-control modeList mb-2">
-                                    <option selected>Choisissez un mode</option>
+                                    <option value="">Choisissez un mode</option>
                                 {% for mode in modes %}
                                     <option value="{{ mode.getId }}">{{ mode.getName }}</option>
                                 {% endfor %}
@@ -212,19 +217,19 @@
                         <div class="form-group bloc-entity-game-edit" >
                             <a href="#" class="cross-cancel-release"><i class="fas fa-times-circle fa-2x cross-game-edit"></i></a>
                             <select name="releaseDate[0][platform]" class="form-control platformList mb-2">
-                                    <option selected>Choisissez un support</option>
+                                    <option value="">Choisissez un support</option>
                                 {% for platform in platforms %}
                                     <option value="{{ platform.getId }}">{{ platform.getName }}</option>
                                 {% endfor %}
                             </select>
                             <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
-                                    <option selected>Choisissez un éditeur</option>
+                                    <option value="">Choisissez un éditeur</option>
                                 {% for publisher in publishers %}
                                     <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
                                 {% endfor %}
                             </select>
                                 <select name="releaseDate[0][region]" class="form-control regionList mb-2">
-                                    <option selected>Choisissez une région</option>
+                                    <option value="">Choisissez une région</option>
                                 {% for region in regions %}
                                     <option value="{{ region.getId }}">{{ region.getName }}</option>
                                 {% endfor %}
