@@ -234,30 +234,104 @@ use App\Core\View;
      */
     public function addGame($params = [])
     {
-        // var_dump($params);
         echo "<pre>";
         print_r($params);
         echo "</pre>";
-// if (empty($params['developer'])) {
-//     echo 'ok';
-// }die;
+
         if (ConnectionController::isSessionValid()) {
 
             // Allows to use a function on each element of multidimensionnal array
-            array_walk_recursive($params, function($item, $key) {
+            // Variable must be passed by reference to be modified by the function
+            array_walk_recursive($params, function(&$item, $key) {
 
                 if ($key != 'content') {
-                    $item = trim(strip_tags($item));
-                }
-    
-                // if(empty($item)) {
-          
-                //     $_SESSION['errorMessage'] = 'Un nom de développeur n\'est pas valide.';
 
-                //     $view = new View();
-                //     $view->redirect('edit-game');
-                // }
+                    $item = trim(strip_tags($item));
+
+                } elseif ($key == '0') {
+
+                    $item = trim(strip_tags($item));
+
+                }
+
+                if(empty($item)) {
+          
+                    $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+
+                    $view = new View();
+                    $view->redirect('edit-game');
+                }
             });
+
+            $gameManager = new GameManager();
+            $games = $gameManager->getAllNames();
+
+            // Check if game already exists
+            $result = array_search($params['name'], $games);
+
+            if ($result) {
+                
+                $_SESSION['errorMessage'] = 'Le jeu existe déjà.';
+
+                $view = new View();
+                $view->redirect('edit-game');
+
+            }
+
+            // Allows to delete duplicated developers
+            $params['developer'] = array_unique($params['developer']);
+
+            // Check if array developer contains integers as expected
+            // return array with successfull values
+            $filterDeveloperArray = filter_var_array($params['developer'], FILTER_VALIDATE_INT);
+
+            // Check if somes values are false or null
+            foreach ($filterDeveloperArray as $key => $value) {
+                if (empty($value) || $value == false) {
+
+                    $_SESSION['errorMessage'] = 'Valeur reçue pour développeur, non valide.';
+
+                    $view = new View();
+                    $view->redirect('edit-game');
+                }
+            }
+
+            // Allows to delete duplicated genres
+            $params['genre'] = array_unique($params['genre']);
+
+            // Check if array developer contains integers as expected
+            // return array with successfull values
+            $filterGenreArray = filter_var_array($params['genre'], FILTER_VALIDATE_INT);
+
+            // Check if somes values are false or null
+            foreach ($filterGenreArray as $key => $value) {
+                if (empty($value) || $value == false) {
+
+                    $_SESSION['errorMessage'] = 'Valeur reçue pour genre, non valide.';
+
+                    $view = new View();
+                    $view->redirect('edit-game');
+                }
+            }
+
+            // Allows to delete duplicates modes
+            $params['mode'] = array_unique($params['mode']);
+
+            // Check if array developer contains integers as expected
+            // return array with successfull values
+            $filterModeArray = filter_var_array($params['mode'], FILTER_VALIDATE_INT);
+
+            // Check if somes values are false or null
+            foreach ($filterModeArray as $key => $value) {
+                if (empty($value) || $value == false) {
+
+                    $_SESSION['errorMessage'] = 'Valeur reçue pour mode, non valide.';
+
+                    $view = new View();
+                    $view->redirect('edit-game');
+                }
+            }
+
             
             echo "<pre>";
             print_r($params);
