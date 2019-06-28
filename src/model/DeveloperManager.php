@@ -64,6 +64,9 @@ use App\Core\Manager;
     {
         $req = $this->_db->prepare('INSERT INTO games_developers (id_game, id_developer) VALUES (?, ?)');
         $req->execute(array($game_id, $developer_id));
+
+        $count = $req->rowCount();
+        return $count;
     }
 
     /**

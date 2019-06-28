@@ -234,9 +234,9 @@ use App\Core\View;
      */
     public function addGame($params = [])
     {
-        echo "<pre>";
-        print_r($params);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";
 
         if (ConnectionController::isSessionValid()) {
 
@@ -281,7 +281,7 @@ use App\Core\View;
             // Allows to delete duplicated developers
             $params['developer'] = array_unique($params['developer']);
 
-            // Check if array developer contains integers as expected
+            // Check if developer's array contains integers as expected
             // return array with successfull values
             $filterDeveloperArray = filter_var_array($params['developer'], FILTER_VALIDATE_INT);
 
@@ -299,7 +299,7 @@ use App\Core\View;
             // Allows to delete duplicated genres
             $params['genre'] = array_unique($params['genre']);
 
-            // Check if array developer contains integers as expected
+            // Check if genre's array contains integers as expected
             // return array with successfull values
             $filterGenreArray = filter_var_array($params['genre'], FILTER_VALIDATE_INT);
 
@@ -317,7 +317,7 @@ use App\Core\View;
             // Allows to delete duplicates modes
             $params['mode'] = array_unique($params['mode']);
 
-            // Check if array developer contains integers as expected
+            // Check if mode's array contains integers as expected
             // return array with successfull values
             $filterModeArray = filter_var_array($params['mode'], FILTER_VALIDATE_INT);
 
@@ -332,229 +332,135 @@ use App\Core\View;
                 }
             }
 
-            
-            echo "<pre>";
-            print_r($params);
-            echo "</pre>";
+            // Check if releaseDate's array contains integers as expected
+            // return array with successfull values
+                             // $filterModeArray = filter_var_array($params['releaseDate'], FILTER_VALIDATE_INT);
 
-            die;
+            // Allows to use a function on each element of multidimensionnal array
+            array_walk_recursive($params['releaseDate'], function($item, $key) {
 
-            // Check if game name is valid
-            if (isset($params['name']) && !empty($params['name'])) {
+                if ($key == 'platform' || $key == 'publisher' || $key == 'region') {
 
-                // delete tags and spaces at the beginning and the end
-                $params['name'] = trim(strip_tags($params['name']));
+                    if (!is_numeric($item)) {
 
-                // check if not empty again
-                if(empty($params['name'])) {
-    
-                    $_SESSION['errorMessage'] = 'Champ vide, vous devez renseigner le titre du jeu.';
-    
-                    $view = new View();
-                    $view->redirect('edit-game');
-                }
+                        $_SESSION['errorMessage'] = 'Valeur reçue pour support, éditeur ou region, non valide.';
 
-                $gameManager = new GameManager();
-                $games = $gameManager->getAllNames();
-
-                $result = array_search($params['name'], $games);
-
-                // if true, game already exists
-                if ($result) {
-                    
-                    $_SESSION['errorMessage'] = 'Le jeu existe déjà.';
-    
-                    $view = new View();
-                    $view->redirect('edit-game');
-
-                }
-            
-            } else  {
-    
-                $_SESSION['errorMessage'] = 'Vous devez renseigner le titre du jeu.';
-    
-                $view = new View();
-                $view->redirect('edit-game');
-            }
-    
-            // Check if game content is valid
-            if (isset($params['content']) && empty($params['content'])) {
-    
-                $_SESSION['errorMessage'] = 'Vous devez renseigner la description du jeu.';
-    
-                $view = new View();
-                $view->redirect('edit-game');
-            }
-            
-
-            // Check if game developer is a valid array
-            $params['developer'] = array_filter($params['developer']);
-
-            if ($params['developer']) {
-                
-                // Allows to delete duplicated developers
-                $params['developer'] = array_unique($params['developer']);
-         
-                // Check if array contains integers as expected
-                $filterArray = filter_var_array($params['developer'], FILTER_VALIDATE_INT);
-                // var_dump($filterArray);die;
-                foreach ($filterArray as $key => $value) {
-                    if ($value == false) {
-
-                        $_SESSION['errorMessage'] = 'Valeur reçue non valide.';
-    
                         $view = new View();
                         $view->redirect('edit-game');
                     }
                 }
-
-          
-                // if (!$filterArray || empty($filterArray)) {
-
-                //     $_SESSION['errorMessage'] = 'La valeur reçue n\'est pas valide pour un développeur.';
-    
-                //     $view = new View();
-                //     $view->redirect('edit-game');
-                // }
-
-                // Allows to use a function on each element of multidimensionnal array
-                array_walk_recursive($params['developer'], function($item, $key) {
-    
-                    // $item = value
-                    $item = trim(strip_tags($item));
-        
-                    if(empty($item)) {
+                if ($key == 'date') {
               
-                        $_SESSION['errorMessage'] = 'Un nom de développeur n\'est pas valide.';
-    
+                    $itemArray = explode('-', $item);
+
+                    if (!checkdate($itemArray[1], $itemArray[2], $itemArray[0])) {
+
+                        $_SESSION['errorMessage'] = 'La date n\'est pas valide.';
+
                         $view = new View();
                         $view->redirect('edit-game');
                     }
-                });
-                
-    
-            } else {
-     
-                $_SESSION['errorMessage'] = 'Vous devez renseigner un développeur pour le jeu.';
-    
-                $view = new View();
-                $view->redirect('edit-game');
-            }
-    
-            // Check if game genre is valid
-            if (isset($params['genre']) && !empty($params['genre'])) {
+                } 
+            });
 
-                // Allows to delete duplicates genres
-                $params['genre'] = array_unique($params['genre']);
-    
-                array_walk_recursive($params['genre'], function($item, $key) {
-    
-                    $item = trim(strip_tags($item));
-        
-                    if(empty($item) || $item == 'Choisissez un genre') {
-              
-                        $_SESSION['errorMessage'] = 'Un nom de genre n\'est pas valide.';
-    
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-                });
-    
-            } else {
-     
-                $_SESSION['errorMessage'] = 'Vous devez renseigner un genre pour le jeu.';
-    
-                $view = new View();
-                $view->redirect('edit-game');
-            }
-    
-            // Check if game mode is valid
-            if (isset($params['mode']) && !empty($params['mode'])) {
 
-                // Allows to delete duplicates modes
-                $params['mode'] = array_unique($params['mode']);
-    
-                array_walk_recursive($params['mode'], function($item, $key) {
-    
-                    $item = trim(strip_tags($item));
-        
-                    if(empty($item) || $item == 'Choisissez un mode') {
-              
-                        $_SESSION['errorMessage'] = 'Un nom de mode n\'est pas valide.';
-    
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-                });
-    
-            } else {
-     
-                $_SESSION['errorMessage'] = 'Vous devez renseigner un mode pour le jeu.';
-    
-                $view = new View();
-                $view->redirect('edit-game');
-            }
+
             
-            // Check is release date is valid
-            // if (isset($params['releaseDate']) && !empty($params['releaseDate'])) {
-    
-            //     array_walk_recursive($params['releaseDate'], function($item, $key) {
-    
-            //         $item = trim(strip_tags($item));
-    
-            //         if(empty($item) || $item == 'Choisissez un support' || $item == 'Choisissez un éditeur' || $item == 'Choisissez une région') {
-              
-            //             $_SESSION['errorMessage'] = 'Un des champs d\'une date n\'est pas valide.';
-    
-            //             $view = new View();
-            //             $view->redirect('edit-game');
-            //         }
-            //     });
-    
-            // } else {
-     
-            //     $_SESSION['errorMessage'] = 'Vous devez renseigner une date pour le jeu.';
-    
-            //     $view = new View();
-            //     $view->redirect('edit-game');
-            // }
+            // echo "<pre>";
+            // print_r($params);
+            // echo "</pre>";
+
+            // die;
+
+   
 
 
             // echo "<pre>";
             // print_r($params);
             // echo "</pre>";die;
 
-            // // Add game informations
-            // // GameManager already launched
-            // $game_id = $gameManager->addGame($params);
+            // Add game informations
+            $game_id = $gameManager->addGame($params);
 
-            // // Add games developers
-            // $developerManager = new DeveloperManager();
-            // foreach($params['developer'] as $developer_id) {
+            if ($game_id) {
 
-            //     $developerManager->addGameDeveloper($game_id, $developer_id);
-            // }
+                // // Add games developers
+                $developerManager = new DeveloperManager();
+                foreach($params['developer'] as $developer_id) {
 
-            // // Add games genres
-            // $genreManager = new GenreManager();
-            // foreach($params['genre'] as $genre_id) {
+                    $addedDevelopers [] = $developerManager->addGameDeveloper($game_id, $developer_id);
+                }
 
-            //     $genreManager->addGameGenre($game_id, $genre_id);
-            // }
+                // Add games genres
+                $genreManager = new GenreManager();
+                foreach($params['genre'] as $genre_id) {
 
-            // // Add games modes
-            // $modeManager = new ModeManager();
-            // foreach($params['mode'] as $mode_id) {
-                
-            //     $modeManager->addGameMode($game_id, $mode_id);
-            // }
+                    $addedGenres [] = $genreManager->addGameGenre($game_id, $genre_id);
+                }
 
-            // // Add games release
-            // $releaseDateManager = new ReleaseDateManager();
-            // foreach($params['releaseDate'] as $releaseDate_array) {
-                
-            //     $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
-            // }
+                // Add games modes
+                $modeManager = new ModeManager();
+                foreach($params['mode'] as $mode_id) {
+                    
+                    $addedModes [] = $modeManager->addGameMode($game_id, $mode_id);
+                }
+
+                // Add games release
+                $releaseDateManager = new ReleaseDateManager();
+                foreach($params['releaseDate'] as $releaseDate_array) {
+                    
+                   $addedReleases [] = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+                }
+
+                $addedAll = array_merge($addedDevelopers, $addedGenres, $addedModes, $addedReleases);
+
+                echo "<pre>";
+                print_r($addedAll);
+                echo "</pre>";die;
+
+                foreach($addedAll as $value) {
+                    
+                    if (empty($value)) {
+
+                        $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
+
+                        // Delete game developers
+                        $developerManager = new DeveloperManager();
+                        $developerManager->deleteGameDevelopers($game_id);
+
+                        // Delete games genres
+                        $genreManager = new GenreManager();
+                        $genreManager->deleteGameGenres($game_id);
+
+                        // Delete games modes
+                        $modeManager = new ModeManager();
+                        $modeManager->deleteGameModes($game_id);
+
+                        // Delete games release
+                        $releaseDateManager = new ReleaseDateManager();
+                        $releaseDateManager->deleteGameReleaseDates($game_id);
+
+                        // Delete game informations
+                        $gameManager = new GameManager();
+                        $gameManager->deleteGame($game_id);
+
+                        $view = new View();
+                        $view->redirect('edit-game');
+                    }
+                 }
+
+            } else {
+
+                $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
+
+                $view = new View();
+                $view->redirect('edit-game');
+
+            }
+
+            
+
+            
 
             $view = new View();
             $view->redirect('home');

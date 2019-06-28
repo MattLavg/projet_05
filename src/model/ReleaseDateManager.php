@@ -65,9 +65,34 @@ use App\model\ReleaseDate;
      */
     public function addReleaseDate($game_id, $values)
     {
-        // var_dump($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']);die;
-        $req = $this->_db->prepare('INSERT INTO release_dates (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
-        $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
+        $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+        try {
+
+            // var_dump($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']);die;
+            $req = $this->_db->prepare('INSERT INTO release_dates (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
+            $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
+
+            $count = $req->rowCount();
+            return $count;
+
+        } catch (\PDOException $e) {
+
+            if ($e->getCode() == 23000) {
+
+                $error = $req->errorInfo();
+
+                if ($error == 1062) {
+
+                    $_SESSION['errorMessage'] = 'Vous ne pouvez enregistrer deux fois la même date avec les mêmes informations pour un jeu.';
+
+                    $view = new View();
+                    $view->redirect('edit-game');
+
+                }
+
+            }
+        }
     }
 
     /**
