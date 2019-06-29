@@ -58,8 +58,8 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
         echo "
     <img src=\"";
         // line 9
-        echo twig_escape_filter($this->env, ($context["IMAGE"] ?? null), "html", null, true);
-        echo "covers/";
+        echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+        echo "public/images/covers/";
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getCover", [], "any", false, false, false, 9), "html", null, true);
         echo "\" alt=\"";
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getName", [], "any", false, false, false, 9), "html", null, true);
@@ -185,7 +185,7 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 
 {% block content %}
 
-    <img src=\"{{ IMAGE }}covers/{{ game.getCover }}\" alt=\"{{ game.getName }} image\">
+    <img src=\"{{ HOST }}public/images/covers/{{ game.getCover }}\" alt=\"{{ game.getName }} image\">
 
     <h1>{{ game.getName }}</h1>
 
