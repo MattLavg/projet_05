@@ -414,15 +414,18 @@ use App\Core\View;
 
                 $addedAll = array_merge($addedDevelopers, $addedGenres, $addedModes, $addedReleases);
 
-                echo "<pre>";
-                print_r($addedAll);
-                echo "</pre>";die;
+                // echo "<pre>";
+                // print_r($addedAll);
+                // echo "</pre>";die;
 
                 foreach($addedAll as $value) {
                     
                     if (empty($value)) {
 
-                        $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
+                        if (!$_SESSION['errorMessage']) {
+
+                            $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
+                        }
 
                         // Delete game developers
                         $developerManager = new DeveloperManager();
@@ -554,8 +557,10 @@ use App\Core\View;
             $gameManager = new GameManager();
             $gameManager->deleteGame($params['id']);
 
+            $_SESSION['actionMessage'] = 'Vous avez effacé un jeu.';
+
             $view = new View();
-            $view->redirect('home');
+            $view->redirect('game-management');
 
         } else {
 

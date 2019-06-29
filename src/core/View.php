@@ -51,11 +51,18 @@ class View
 
         $view = $this->_view;
 
+        // Default 
         $errorMessage = null;
+        $actionMessage = null;
 
         // ckeck if error message
         if (isset($_SESSION['errorMessage'])) {
             $errorMessage = $_SESSION['errorMessage'];
+        }
+
+        // ckeck if action message
+        if (isset($_SESSION['actionMessage'])) {
+            $actionMessage = $_SESSION['actionMessage'];
         }
 
         // Load Twig
@@ -75,6 +82,7 @@ class View
         $params['ASSETS'] = ASSETS;
         $params['VENDOR'] = VENDOR;
         $params['errorMessage'] = $errorMessage;
+        $params['actionMessage'] = $actionMessage;
         // echo "<pre>";
         // print_r($params);
         // echo "</pre>";die;

@@ -3,6 +3,7 @@
 namespace App\model;
 
 use App\Core\Manager;
+use App\Core\View;
 use App\model\ReleaseDate;
 
 /**
@@ -65,13 +66,25 @@ use App\model\ReleaseDate;
      */
     public function addReleaseDate($game_id, $values)
     {
-        $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        
+        // $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        //     // var_dump($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']);die;
+        //     $req = $this->_db->prepare('INSERT INTO release_dates (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
+        //     $result = $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
+
+        //     $count = $req->rowCount();
+        //     return $count;
+
+
+
+
 
         try {
 
-            // var_dump($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']);die;
+            $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
             $req = $this->_db->prepare('INSERT INTO release_dates (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
-            $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
+            $result = $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
 
             $count = $req->rowCount();
             return $count;
@@ -79,20 +92,27 @@ use App\model\ReleaseDate;
         } catch (\PDOException $e) {
 
             if ($e->getCode() == 23000) {
-
+                
                 $error = $req->errorInfo();
 
-                if ($error == 1062) {
+                if ($error[1] == 1062) {
 
                     $_SESSION['errorMessage'] = 'Vous ne pouvez enregistrer deux fois la même date avec les mêmes informations pour un jeu.';
 
-                    $view = new View();
-                    $view->redirect('edit-game');
+                    // $view = new View();
+                    // $view->redirect('edit-game');
+                    $count = $req->rowCount();
+                    return $count;
 
                 }
 
             }
         }
+
+
+
+
+
     }
 
     /**
