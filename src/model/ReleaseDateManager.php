@@ -66,19 +66,6 @@ use App\model\ReleaseDate;
      */
     public function addReleaseDate($game_id, $values)
     {
-        
-        // $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        //     // var_dump($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']);die;
-        //     $req = $this->_db->prepare('INSERT INTO release_dates (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
-        //     $result = $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
-
-        //     $count = $req->rowCount();
-        //     return $count;
-
-
-
-
-
         try {
 
             $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -99,17 +86,16 @@ use App\model\ReleaseDate;
 
                     $_SESSION['errorMessage'] = 'Vous ne pouvez enregistrer deux fois la même date avec les mêmes informations pour un jeu.';
 
-                    // $view = new View();
-                    // $view->redirect('edit-game');
                     $count = $req->rowCount();
                     return $count;
-
                 }
-
             }
+
+            $_SESSION['errorMessage'] = 'Impossible d\'enregistrer la date de sortie.';
+
+            $count = $req->rowCount();
+            return $count;
         }
-
-
 
 
 

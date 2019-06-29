@@ -364,21 +364,6 @@ use App\Core\View;
             });
 
 
-
-            
-            // echo "<pre>";
-            // print_r($params);
-            // echo "</pre>";
-
-            // die;
-
-   
-
-
-            // echo "<pre>";
-            // print_r($params);
-            // echo "</pre>";die;
-
             // Add game informations
             $game_id = $gameManager->addGame($params);
 
@@ -414,13 +399,9 @@ use App\Core\View;
 
                 $addedAll = array_merge($addedDevelopers, $addedGenres, $addedModes, $addedReleases);
 
-                // echo "<pre>";
-                // print_r($addedAll);
-                // echo "</pre>";die;
-
                 foreach($addedAll as $value) {
                     
-                    if (empty($value)) {
+                    if (empty($value) || $value == 0) {
 
                         if (!$_SESSION['errorMessage']) {
 
@@ -461,10 +442,7 @@ use App\Core\View;
 
             }
 
-            
-
-            
-
+            // if game added, display home
             $view = new View();
             $view->redirect('home');
 
