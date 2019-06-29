@@ -56,96 +56,105 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
     {
         // line 8
         echo "
-    <h1>";
+    <img src=\"";
         // line 9
+        echo twig_escape_filter($this->env, ($context["IMAGE"] ?? null), "html", null, true);
+        echo "covers/";
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getCover", [], "any", false, false, false, 9), "html", null, true);
+        echo "\" alt=\"";
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getName", [], "any", false, false, false, 9), "html", null, true);
+        echo " image\">
+
+    <h1>";
+        // line 11
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getName", [], "any", false, false, false, 11), "html", null, true);
         echo "</h1>
 
     <p>Développeur(s) :<br>
         ";
-        // line 12
+        // line 14
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["developers"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["developer"]) {
             echo " 
             <p>- ";
-            // line 13
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 13), "html", null, true);
+            // line 15
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 15), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['developer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 15
+        // line 17
         echo "    </p>
 
     <p>Genre(s) :<br>
         ";
-        // line 18
+        // line 20
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["genres"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
             echo " 
             <p>- ";
-            // line 19
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 19), "html", null, true);
+            // line 21
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 21), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 21
+        // line 23
         echo "    </p>
 
     <p>Mode(s) de jeu :<br>
         ";
-        // line 24
+        // line 26
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["modes"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["mode"]) {
             echo " 
             <p>- ";
-            // line 25
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 25), "html", null, true);
+            // line 27
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 27), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['mode'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 27
+        // line 29
         echo "    </p>
 
     <p>Sorties :<br>
         ";
-        // line 30
+        // line 32
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["releases"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["release"]) {
             echo " 
             <p>- Sur ";
-            // line 31
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPlatform", [], "any", false, false, false, 31), "html", null, true);
+            // line 33
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPlatform", [], "any", false, false, false, 33), "html", null, true);
             echo ", édité par ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPublisher", [], "any", false, false, false, 31), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPublisher", [], "any", false, false, false, 33), "html", null, true);
             echo " - ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getRegion", [], "any", false, false, false, 31), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getRegion", [], "any", false, false, false, 33), "html", null, true);
             echo " - ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getReleaseDate", [], "any", false, false, false, 31), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getReleaseDate", [], "any", false, false, false, 33), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['release'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 33
+        // line 35
         echo "    </p>
 
     <p>";
-        // line 35
-        echo twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getContent", [], "any", false, false, false, 35);
+        // line 37
+        echo twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getContent", [], "any", false, false, false, 37);
         echo "</p>
     <hr>
 ";
@@ -163,7 +172,7 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 
     public function getDebugInfo()
     {
-        return array (  148 => 35,  144 => 33,  130 => 31,  124 => 30,  119 => 27,  111 => 25,  105 => 24,  100 => 21,  92 => 19,  86 => 18,  81 => 15,  73 => 13,  67 => 12,  61 => 9,  58 => 8,  55 => 7,  48 => 4,  45 => 3,  35 => 1,);
+        return array (  157 => 37,  153 => 35,  139 => 33,  133 => 32,  128 => 29,  120 => 27,  114 => 26,  109 => 23,  101 => 21,  95 => 20,  90 => 17,  82 => 15,  76 => 14,  70 => 11,  61 => 9,  58 => 8,  55 => 7,  48 => 4,  45 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -175,6 +184,8 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 {% endblock %}
 
 {% block content %}
+
+    <img src=\"{{ IMAGE }}covers/{{ game.getCover }}\" alt=\"{{ game.getName }} image\">
 
     <h1>{{ game.getName }}</h1>
 

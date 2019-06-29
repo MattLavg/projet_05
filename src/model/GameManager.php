@@ -67,6 +67,21 @@ use App\Model\Game;
     }
 
     /**
+     * Allows to add a game cover name
+     * 
+     * @param string $cover
+     */
+    public function addCover($game_id, $cover)
+    { 
+        $req = $this->_db->prepare('UPDATE games SET cover = ? WHERE id = ?');
+        $req->execute(array($cover, $game_id));
+
+        $count = $req->rowCount();
+
+        return $count;
+    }
+
+    /**
      * Allows to delete a game
      * 
      * @param int $game_id

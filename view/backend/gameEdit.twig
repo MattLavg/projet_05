@@ -10,7 +10,7 @@
 
         <h1>Modifier un jeu</h1>
         <hr>
-            <form method="post" action="{{ HOST }}update-game">
+            <form method="post" action="{{ HOST }}update-game" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="id" name="id" value="{{ game.getid }}">
@@ -26,6 +26,14 @@
                     <textarea id="tinymcetextarea" name="content">{{ game.getContent }}</textarea>
                 </div>
         
+                <hr>
+
+                <div class="form-group">
+                    <label for="cover">Télécharger une image pour le jeu.</label>
+                    <input type="file" class="form-control-file" id="cover" name="cover">
+                    <small id="cover" class="form-text text-muted">L'image ne doit pas dépasser 3 Mo.</small>
+                </div>
+
                 <hr>
                 
                 <h4>Le ou les développeur(s) du jeu :</h4>
@@ -142,7 +150,7 @@
 
         <h1>Ajouter un jeu</h1>
         <hr>
-            <form method="post" action="{{ HOST }}add-game">
+            <form method="post" action="{{ HOST }}add-game" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Le titre du jeu :</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Titre">
@@ -153,6 +161,14 @@
                     <textarea id="tinymcetextarea" name="content"></textarea>
                 </div>
         
+                <hr>
+
+                <div class="form-group">
+                    <label for="cover">Télécharger une image pour le jeu.</label>
+                    <input type="file" class="form-control-file" id="cover" name="cover">
+                    <small id="cover" class="form-text text-muted">L'image ne doit pas dépasser 3 Mo.</small>
+                </div>
+
                 <hr>
                 
                 <h4>Le ou les développeur(s) du jeu :</h4>

@@ -64,7 +64,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             <form method=\"post\" action=\"";
             // line 13
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-            echo "update-game\">
+            echo "update-game\" enctype=\"multipart/form-data\">
 
                 <div class=\"form-group\">
                     <input type=\"hidden\" class=\"form-control\" id=\"id\" name=\"id\" value=\"";
@@ -90,39 +90,47 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 </div>
         
                 <hr>
+
+                <div class=\"form-group\">
+                    <label for=\"cover\">Télécharger une image pour le jeu.</label>
+                    <input type=\"file\" class=\"form-control-file\" id=\"cover\" name=\"cover\">
+                    <small id=\"cover\" class=\"form-text text-muted\">L'image ne doit pas dépasser 3 Mo.</small>
+                </div>
+
+                <hr>
                 
                 <h4>Le ou les développeur(s) du jeu :</h4>
                 <div>
                     <div class=\"entity-group-game-edit\">
                         ";
-            // line 34
+            // line 42
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["developers"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["developer"]) {
-                // line 35
+                // line 43
                 echo "                            <div class=\"form-group bloc-entity-game-edit pl-5\">
                                 <a href=\"#\" class=\"cross-cancel-game-update\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
                                 <select name=\"developer[";
-                // line 37
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 37), "html", null, true);
+                // line 45
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 45), "html", null, true);
                 echo "]\" class=\"form-control developerList mb-2\">
                                         <option value=\"\">Choisissez un développeur</option>
                                     ";
-                // line 39
+                // line 47
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["allDevelopers"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["oneDeveloper"]) {
-                    // line 40
+                    // line 48
                     echo "                                        <option ";
-                    if ((twig_get_attribute($this->env, $this->source, $context["oneDeveloper"], "getId", [], "any", false, false, false, 40) == twig_get_attribute($this->env, $this->source, $context["developer"], "getId", [], "any", false, false, false, 40))) {
+                    if ((twig_get_attribute($this->env, $this->source, $context["oneDeveloper"], "getId", [], "any", false, false, false, 48) == twig_get_attribute($this->env, $this->source, $context["developer"], "getId", [], "any", false, false, false, 48))) {
                         echo "selected ";
                     }
                     echo "value=\"";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneDeveloper"], "getId", [], "any", false, false, false, 40), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneDeveloper"], "getId", [], "any", false, false, false, 48), "html", null, true);
                     echo "\">
                                             ";
-                    // line 41
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneDeveloper"], "getName", [], "any", false, false, false, 41), "html", null, true);
+                    // line 49
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneDeveloper"], "getName", [], "any", false, false, false, 49), "html", null, true);
                     echo "
                                         </option>
                                     ";
@@ -130,7 +138,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['oneDeveloper'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 44
+                // line 52
                 echo "                                </select>
                             </div>
                         ";
@@ -138,7 +146,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['developer'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 47
+            // line 55
             echo "                    </div>
         
                     <button type=\"button\" class=\"btn btn-primary addEntityForm\">Ajouter un développeur</button>
@@ -149,34 +157,34 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 <div>
                     <div class=\"entity-group-game-edit\">
                         ";
-            // line 56
+            // line 64
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["genres"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
-                // line 57
+                // line 65
                 echo "                            <div class=\"form-group bloc-entity-game-edit pl-5\" >
                                 <a href=\"#\" class=\"cross-cancel-game-update\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
                                 <select name=\"genre[";
-                // line 59
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 59), "html", null, true);
+                // line 67
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 67), "html", null, true);
                 echo "]\" class=\"form-control genreList mb-2\">
                                         <option value=\"\">Choisissez un genre</option>
                                     ";
-                // line 61
+                // line 69
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["allGenres"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["oneGenre"]) {
-                    // line 62
+                    // line 70
                     echo "                                        <option ";
-                    if ((twig_get_attribute($this->env, $this->source, $context["oneGenre"], "getId", [], "any", false, false, false, 62) == twig_get_attribute($this->env, $this->source, $context["genre"], "getId", [], "any", false, false, false, 62))) {
+                    if ((twig_get_attribute($this->env, $this->source, $context["oneGenre"], "getId", [], "any", false, false, false, 70) == twig_get_attribute($this->env, $this->source, $context["genre"], "getId", [], "any", false, false, false, 70))) {
                         echo "selected ";
                     }
                     echo "value=\"";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneGenre"], "getId", [], "any", false, false, false, 62), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneGenre"], "getId", [], "any", false, false, false, 70), "html", null, true);
                     echo "\">
                                             ";
-                    // line 63
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneGenre"], "getName", [], "any", false, false, false, 63), "html", null, true);
+                    // line 71
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneGenre"], "getName", [], "any", false, false, false, 71), "html", null, true);
                     echo "
                                         </option>
                                     ";
@@ -184,7 +192,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['oneGenre'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 66
+                // line 74
                 echo "                                </select>
                             </div>
                         ";
@@ -192,7 +200,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 69
+            // line 77
             echo "                    </div>
         
                     <button type=\"button\" class=\"btn btn-primary addEntityForm\">Ajouter un genre</button>
@@ -204,34 +212,34 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 <div>
                     <div class=\"entity-group-game-edit\">
                         ";
-            // line 79
+            // line 87
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["modes"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["mode"]) {
-                // line 80
+                // line 88
                 echo "                            <div class=\"form-group bloc-entity-game-edit pl-5\" >
                                 <a href=\"#\" class=\"cross-cancel-game-update\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
                                 <select name=\"mode[";
-                // line 82
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 82), "html", null, true);
+                // line 90
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 90), "html", null, true);
                 echo "]\" class=\"form-control modeList mb-2\">
                                         <option value=\"\">Choisissez un mode</option>
                                     ";
-                // line 84
+                // line 92
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["allModes"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["oneMode"]) {
-                    // line 85
+                    // line 93
                     echo "                                        <option ";
-                    if ((twig_get_attribute($this->env, $this->source, $context["oneMode"], "getId", [], "any", false, false, false, 85) == twig_get_attribute($this->env, $this->source, $context["mode"], "getId", [], "any", false, false, false, 85))) {
+                    if ((twig_get_attribute($this->env, $this->source, $context["oneMode"], "getId", [], "any", false, false, false, 93) == twig_get_attribute($this->env, $this->source, $context["mode"], "getId", [], "any", false, false, false, 93))) {
                         echo "selected ";
                     }
                     echo "value=\"";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneMode"], "getId", [], "any", false, false, false, 85), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneMode"], "getId", [], "any", false, false, false, 93), "html", null, true);
                     echo "\">
                                             ";
-                    // line 86
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneMode"], "getName", [], "any", false, false, false, 86), "html", null, true);
+                    // line 94
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneMode"], "getName", [], "any", false, false, false, 94), "html", null, true);
                     echo "
                                         </option>
                                     ";
@@ -239,7 +247,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['oneMode'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 89
+                // line 97
                 echo "                                </select>
                             </div>
                         ";
@@ -247,7 +255,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['mode'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 92
+            // line 100
             echo "                    </div>
         
                     <button type=\"button\" class=\"btn btn-primary addEntityForm\">Ajouter un mode</button>
@@ -259,31 +267,31 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 <div>
                     <div class=\"entity-group-game-edit\">
                         ";
-            // line 102
+            // line 110
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["releaseDates"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["releaseDate"]) {
-                // line 103
+                // line 111
                 echo "                            <div class=\"form-group bloc-entity-game-edit background-release-game-update pl-5\" >
                                 <a href=\"#\" class=\"cross-cancel-release-game-update\"><i class=\"fas fa-times-circle fa-2x cross-game-edit\"></i></a>
                                 <select name=\"releaseDate[0][platform]\" class=\"form-control platformList mb-2\">
                                         <option value=\"\">Choisissez un support</option>
                                     ";
-                // line 107
+                // line 115
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["allPlatforms"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["onePlatform"]) {
-                    // line 108
+                    // line 116
                     echo "                                        <option ";
-                    if ((twig_get_attribute($this->env, $this->source, $context["onePlatform"], "getId", [], "any", false, false, false, 108) == twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getPlatformId", [], "any", false, false, false, 108))) {
+                    if ((twig_get_attribute($this->env, $this->source, $context["onePlatform"], "getId", [], "any", false, false, false, 116) == twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getPlatformId", [], "any", false, false, false, 116))) {
                         echo "selected ";
                     }
                     echo "value=\"";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePlatform"], "getId", [], "any", false, false, false, 108), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePlatform"], "getId", [], "any", false, false, false, 116), "html", null, true);
                     echo "\">
                                             ";
-                    // line 109
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePlatform"], "getName", [], "any", false, false, false, 109), "html", null, true);
+                    // line 117
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePlatform"], "getName", [], "any", false, false, false, 117), "html", null, true);
                     echo "
                                         </option>
                                     ";
@@ -291,26 +299,26 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['onePlatform'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 112
+                // line 120
                 echo "                                </select>
                                 <select name=\"releaseDate[0][publisher]\" class=\"form-control publisherList mb-2\">
                                         <option value=\"\">Choisissez un éditeur</option>
                                     ";
-                // line 115
+                // line 123
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["allPublishers"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["onePublisher"]) {
-                    // line 116
+                    // line 124
                     echo "                                        <option ";
-                    if ((twig_get_attribute($this->env, $this->source, $context["onePublisher"], "getId", [], "any", false, false, false, 116) == twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getPublisherId", [], "any", false, false, false, 116))) {
+                    if ((twig_get_attribute($this->env, $this->source, $context["onePublisher"], "getId", [], "any", false, false, false, 124) == twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getPublisherId", [], "any", false, false, false, 124))) {
                         echo "selected ";
                     }
                     echo "value=\"";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePublisher"], "getId", [], "any", false, false, false, 116), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePublisher"], "getId", [], "any", false, false, false, 124), "html", null, true);
                     echo "\">
                                             ";
-                    // line 117
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePublisher"], "getName", [], "any", false, false, false, 117), "html", null, true);
+                    // line 125
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["onePublisher"], "getName", [], "any", false, false, false, 125), "html", null, true);
                     echo "
                                         </option>
                                     ";
@@ -318,35 +326,35 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['onePublisher'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 120
+                // line 128
                 echo "                                </select>
                                     <select name=\"releaseDate[0][region]\" class=\"form-control regionList mb-2\">
                                         <option value=\"\">Choisissez une région</option>
                                     ";
-                // line 123
+                // line 131
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["allRegions"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["oneRegion"]) {
-                    // line 124
+                    // line 132
                     echo "                                        <option ";
-                    if ((twig_get_attribute($this->env, $this->source, $context["oneRegion"], "getId", [], "any", false, false, false, 124) == twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getRegionId", [], "any", false, false, false, 124))) {
+                    if ((twig_get_attribute($this->env, $this->source, $context["oneRegion"], "getId", [], "any", false, false, false, 132) == twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getRegionId", [], "any", false, false, false, 132))) {
                         echo "selected ";
                     }
                     echo "value=\"";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneRegion"], "getId", [], "any", false, false, false, 124), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneRegion"], "getId", [], "any", false, false, false, 132), "html", null, true);
                     echo "\">";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneRegion"], "getName", [], "any", false, false, false, 124), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["oneRegion"], "getName", [], "any", false, false, false, 132), "html", null, true);
                     echo "</option>
                                     ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['oneRegion'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 126
+                // line 134
                 echo "                                </select>
                                 <input type=\"text\" class=\"form-control date\" value=\"";
-                // line 127
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getReleaseDate", [], "any", false, false, false, 127), "html", null, true);
+                // line 135
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["releaseDate"], "getReleaseDate", [], "any", false, false, false, 135), "html", null, true);
                 echo "\" readonly>
                                 <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[0][date]\" readonly>
                             </div>
@@ -355,7 +363,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['releaseDate'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 131
+            // line 139
             echo "                    </div>
         
                     <button type=\"button\" class=\"btn btn-primary\" id=\"addReleaseDateForm\">Ajouter une date</button>
@@ -368,14 +376,14 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
     ";
         } else {
-            // line 142
+            // line 150
             echo "
         <h1>Ajouter un jeu</h1>
         <hr>
             <form method=\"post\" action=\"";
-            // line 145
+            // line 153
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-            echo "add-game\">
+            echo "add-game\" enctype=\"multipart/form-data\">
                 <div class=\"form-group\">
                     <label for=\"name\">Le titre du jeu :</label>
                     <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Titre\">
@@ -387,6 +395,14 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                 </div>
         
                 <hr>
+
+                <div class=\"form-group\">
+                    <label for=\"cover\">Télécharger une image pour le jeu.</label>
+                    <input type=\"file\" class=\"form-control-file\" id=\"cover\" name=\"cover\">
+                    <small id=\"cover\" class=\"form-text text-muted\">L'image ne doit pas dépasser 3 Mo.</small>
+                </div>
+
+                <hr>
                 
                 <h4>Le ou les développeur(s) du jeu :</h4>
                 <div>
@@ -396,22 +412,22 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                             <select name=\"developer[0]\" class=\"form-control developerList mb-2\">
                                     <option value=\"\">Choisissez un développeur</option>
                                 ";
-            // line 165
+            // line 181
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["developers"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["developer"]) {
-                // line 166
+                // line 182
                 echo "                                    <option value=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getId", [], "any", false, false, false, 166), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getId", [], "any", false, false, false, 182), "html", null, true);
                 echo "\">";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 166), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 182), "html", null, true);
                 echo "</option>
                                 ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['developer'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 168
+            // line 184
             echo "                            </select>
                         </div>
                     </div>
@@ -428,22 +444,22 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                             <select name=\"genre[0]\" class=\"form-control genreList mb-2\">
                                     <option value=\"\">Choisissez un genre</option>
                                 ";
-            // line 183
+            // line 199
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["genres"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
-                // line 184
+                // line 200
                 echo "                                    <option value=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getId", [], "any", false, false, false, 184), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getId", [], "any", false, false, false, 200), "html", null, true);
                 echo "\">";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 184), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 200), "html", null, true);
                 echo "</option>
                                 ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 186
+            // line 202
             echo "                            </select>
                         </div>
                     </div>
@@ -461,22 +477,22 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                             <select name=\"mode[0]\" class=\"form-control modeList mb-2\">
                                     <option value=\"\">Choisissez un mode</option>
                                 ";
-            // line 202
+            // line 218
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["modes"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["mode"]) {
-                // line 203
+                // line 219
                 echo "                                    <option value=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getId", [], "any", false, false, false, 203), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getId", [], "any", false, false, false, 219), "html", null, true);
                 echo "\">";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 203), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 219), "html", null, true);
                 echo "</option>
                                 ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['mode'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 205
+            // line 221
             echo "                            </select>
                         </div>
                     </div>
@@ -494,62 +510,62 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                             <select name=\"releaseDate[0][platform]\" class=\"form-control platformList mb-2\">
                                     <option value=\"\">Choisissez un support</option>
                                 ";
-            // line 221
+            // line 237
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["platforms"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["platform"]) {
-                // line 222
+                // line 238
                 echo "                                    <option value=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["platform"], "getId", [], "any", false, false, false, 222), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["platform"], "getId", [], "any", false, false, false, 238), "html", null, true);
                 echo "\">";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["platform"], "getName", [], "any", false, false, false, 222), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["platform"], "getName", [], "any", false, false, false, 238), "html", null, true);
                 echo "</option>
                                 ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['platform'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 224
+            // line 240
             echo "                            </select>
                             <select name=\"releaseDate[0][publisher]\" class=\"form-control publisherList mb-2\">
                                     <option value=\"\">Choisissez un éditeur</option>
                                 ";
-            // line 227
+            // line 243
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["publishers"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["publisher"]) {
-                // line 228
+                // line 244
                 echo "                                    <option value=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["publisher"], "getId", [], "any", false, false, false, 228), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["publisher"], "getId", [], "any", false, false, false, 244), "html", null, true);
                 echo "\">";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["publisher"], "getName", [], "any", false, false, false, 228), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["publisher"], "getName", [], "any", false, false, false, 244), "html", null, true);
                 echo "</option>
                                 ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['publisher'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 230
+            // line 246
             echo "                            </select>
                                 <select name=\"releaseDate[0][region]\" class=\"form-control regionList mb-2\">
                                     <option value=\"\">Choisissez une région</option>
                                 ";
-            // line 233
+            // line 249
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["regions"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["region"]) {
-                // line 234
+                // line 250
                 echo "                                    <option value=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["region"], "getId", [], "any", false, false, false, 234), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["region"], "getId", [], "any", false, false, false, 250), "html", null, true);
                 echo "\">";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["region"], "getName", [], "any", false, false, false, 234), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["region"], "getName", [], "any", false, false, false, 250), "html", null, true);
                 echo "</option>
                                 ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['region'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 236
+            // line 252
             echo "                            </select>
                             <input type=\"text\" class=\"form-control date\" placeholder=\"Choisissez une date\" readonly>
                             <input type=\"text\" class=\"form-control altDate\" name=\"releaseDate[0][date]\" readonly>
@@ -566,15 +582,15 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
     ";
         }
-        // line 251
+        // line 267
         echo "
     ";
-        // line 252
+        // line 268
         if (($context["errorMessage"] ?? null)) {
-            // line 253
+            // line 269
             echo "        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             ";
-            // line 254
+            // line 270
             echo twig_escape_filter($this->env, ($context["errorMessage"] ?? null), "html", null, true);
             echo "
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
@@ -583,7 +599,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
         </div>
     ";
         }
-        // line 260
+        // line 276
         echo "
 ";
     }
@@ -600,7 +616,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
     public function getDebugInfo()
     {
-        return array (  587 => 260,  578 => 254,  575 => 253,  573 => 252,  570 => 251,  553 => 236,  542 => 234,  538 => 233,  533 => 230,  522 => 228,  518 => 227,  513 => 224,  502 => 222,  498 => 221,  480 => 205,  469 => 203,  465 => 202,  447 => 186,  436 => 184,  432 => 183,  415 => 168,  404 => 166,  400 => 165,  377 => 145,  372 => 142,  359 => 131,  349 => 127,  346 => 126,  331 => 124,  327 => 123,  322 => 120,  313 => 117,  304 => 116,  300 => 115,  295 => 112,  286 => 109,  277 => 108,  273 => 107,  267 => 103,  263 => 102,  251 => 92,  243 => 89,  234 => 86,  225 => 85,  221 => 84,  216 => 82,  212 => 80,  208 => 79,  196 => 69,  188 => 66,  179 => 63,  170 => 62,  166 => 61,  161 => 59,  157 => 57,  153 => 56,  142 => 47,  134 => 44,  125 => 41,  116 => 40,  112 => 39,  107 => 37,  103 => 35,  99 => 34,  88 => 26,  80 => 21,  72 => 16,  66 => 13,  61 => 10,  59 => 9,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
+        return array (  603 => 276,  594 => 270,  591 => 269,  589 => 268,  586 => 267,  569 => 252,  558 => 250,  554 => 249,  549 => 246,  538 => 244,  534 => 243,  529 => 240,  518 => 238,  514 => 237,  496 => 221,  485 => 219,  481 => 218,  463 => 202,  452 => 200,  448 => 199,  431 => 184,  420 => 182,  416 => 181,  385 => 153,  380 => 150,  367 => 139,  357 => 135,  354 => 134,  339 => 132,  335 => 131,  330 => 128,  321 => 125,  312 => 124,  308 => 123,  303 => 120,  294 => 117,  285 => 116,  281 => 115,  275 => 111,  271 => 110,  259 => 100,  251 => 97,  242 => 94,  233 => 93,  229 => 92,  224 => 90,  220 => 88,  216 => 87,  204 => 77,  196 => 74,  187 => 71,  178 => 70,  174 => 69,  169 => 67,  165 => 65,  161 => 64,  150 => 55,  142 => 52,  133 => 49,  124 => 48,  120 => 47,  115 => 45,  111 => 43,  107 => 42,  88 => 26,  80 => 21,  72 => 16,  66 => 13,  61 => 10,  59 => 9,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -617,7 +633,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
         <h1>Modifier un jeu</h1>
         <hr>
-            <form method=\"post\" action=\"{{ HOST }}update-game\">
+            <form method=\"post\" action=\"{{ HOST }}update-game\" enctype=\"multipart/form-data\">
 
                 <div class=\"form-group\">
                     <input type=\"hidden\" class=\"form-control\" id=\"id\" name=\"id\" value=\"{{ game.getid }}\">
@@ -633,6 +649,14 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                     <textarea id=\"tinymcetextarea\" name=\"content\">{{ game.getContent }}</textarea>
                 </div>
         
+                <hr>
+
+                <div class=\"form-group\">
+                    <label for=\"cover\">Télécharger une image pour le jeu.</label>
+                    <input type=\"file\" class=\"form-control-file\" id=\"cover\" name=\"cover\">
+                    <small id=\"cover\" class=\"form-text text-muted\">L'image ne doit pas dépasser 3 Mo.</small>
+                </div>
+
                 <hr>
                 
                 <h4>Le ou les développeur(s) du jeu :</h4>
@@ -749,7 +773,7 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
 
         <h1>Ajouter un jeu</h1>
         <hr>
-            <form method=\"post\" action=\"{{ HOST }}add-game\">
+            <form method=\"post\" action=\"{{ HOST }}add-game\" enctype=\"multipart/form-data\">
                 <div class=\"form-group\">
                     <label for=\"name\">Le titre du jeu :</label>
                     <input type=\"text\" class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Titre\">
@@ -760,6 +784,14 @@ class __TwigTemplate_685eed9286e1f81b5d5dea55744ef3997ca748ef84b78c80ce7d470be5f
                     <textarea id=\"tinymcetextarea\" name=\"content\"></textarea>
                 </div>
         
+                <hr>
+
+                <div class=\"form-group\">
+                    <label for=\"cover\">Télécharger une image pour le jeu.</label>
+                    <input type=\"file\" class=\"form-control-file\" id=\"cover\" name=\"cover\">
+                    <small id=\"cover\" class=\"form-text text-muted\">L'image ne doit pas dépasser 3 Mo.</small>
+                </div>
+
                 <hr>
                 
                 <h4>Le ou les développeur(s) du jeu :</h4>

@@ -278,6 +278,39 @@ use App\Core\View;
 
             }
 
+            // Check if file is present
+            if (isset($_FILES['cover']) && $_FILES['cover']['error']  == 0) {
+
+                // Check file size
+                if ($_FILES['cover']['size'] <= 3000000 ) {
+                    $fileInfos = pathinfo($_FILES['cover']['name']);
+                    $fileExtension = $fileInfos['extension'];
+                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
+
+                    if (in_array($fileExtension, $authorizedExtensions)) {
+
+                        $validCover = true;
+                        
+                    }
+
+                } else {
+
+                    $_SESSION['errorMessage'] = 'L\'image ne doit pas dépasser les 3 Mo.';
+
+                    $view = new View();
+                    $view->redirect('edit-game');
+
+                }
+
+            } else {
+
+                $_SESSION['errorMessage'] = 'Vous devez télécharger une image pour le jeu.';
+
+                $view = new View();
+                $view->redirect('edit-game');
+
+            }
+
             // Allows to delete duplicated developers
             $params['developer'] = array_unique($params['developer']);
 
@@ -332,9 +365,6 @@ use App\Core\View;
                 }
             }
 
-            // Check if releaseDate's array contains integers as expected
-            // return array with successfull values
-                             // $filterModeArray = filter_var_array($params['releaseDate'], FILTER_VALIDATE_INT);
 
             // Allows to use a function on each element of multidimensionnal array
             array_walk_recursive($params['releaseDate'], function($item, $key) {
@@ -369,7 +399,21 @@ use App\Core\View;
 
             if ($game_id) {
 
-                // // Add games developers
+                // Add game cover in folder
+                if ($validCover) {
+
+                    // Validate file and store it in "covers" folder
+                    move_uploaded_file(
+                        $_FILES['cover']['tmp_name'],
+                        IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']
+                    );
+                }
+
+                $cover = 'cover_game_id_' . $game_id . '.' . $fileInfos['extension'];
+                // Add game cover name in bdd
+                $addedCover [] = $gameManager->addCover($game_id, $cover);
+
+                // Add games developers
                 $developerManager = new DeveloperManager();
                 foreach($params['developer'] as $developer_id) {
 

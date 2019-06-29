@@ -26,9 +26,9 @@ class Game
     protected $_content;
 
     /**
-     * @var string $_image, the cover of a game
+     * @var string $_cover, the cover of a game
      */
-    protected $_image;
+    protected $_cover;
 
     /**
      * Set automatically elements in methods
@@ -82,11 +82,11 @@ class Game
     /**
      * Allows to get the cover of a game
      * 
-     * @return string $_image
+     * @return string $_cover
      */
-    public function getImage()
+    public function getCover()
     {
-        return $this->_image;
+        return $this->_cover;
     }
 
     // SETTERS
@@ -124,11 +124,11 @@ class Game
     /**
      * Allows to set the cover of a game
      * 
-     * @param string $image
+     * @param string $cover
      */
-    public function setImage(string $image)
+    public function setCover(string $cover)
     {
-        $this->_image = $image;
+        $this->_cover = $cover;
     }
 
 }

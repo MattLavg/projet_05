@@ -81,6 +81,7 @@ class View
         $params['HOST'] = HOST;
         $params['ASSETS'] = ASSETS;
         $params['VENDOR'] = VENDOR;
+        $params['IMAGE'] = IMAGE;
         $params['errorMessage'] = $errorMessage;
         $params['actionMessage'] = $actionMessage;
         // echo "<pre>";
@@ -89,6 +90,7 @@ class View
         echo $twig->render($view . '.twig', $params);
 
         unset($_SESSION['errorMessage']);
+        unset($_SESSION['actionMessage']);
   
     }
 
