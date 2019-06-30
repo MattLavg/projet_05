@@ -5,8 +5,8 @@
     padding-bottom : 100px;
 }
 
-.mainContainerHome {
-    padding-top : 50px;
+.gameViewContainer {  /* When game view is displayed */
+    padding-top : 20px;
     padding-bottom : 100px;
 }
 
@@ -31,7 +31,7 @@ h1 {
     background-color: rgb(226, 0, 0);
 }
 
-/* CONNEXION */
+/* CONNEXION PAGE */
 
 .col-connexion-left {
     border-right: 1px solid rgb(202, 202, 202);
@@ -61,19 +61,33 @@ h1 {
 }
 
 
-/* POSTS */
+/* HOME */
 
-.listPosts {
+.listGames {
     -webkit-transition : background-color 0.5s ease;
     transition : background-color 0.5s ease;
 }
 
-.listPosts:hover {
+.listGames:hover {
     background-color: #F0F0F0;
 }
 
 .modificationColor {
     color: rgb(141, 141, 141);
+}
+
+/* GAME VUE */
+
+/* .game_image {
+    width: 100%;
+} */
+
+.background_game_image {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
 }
 
 /* GAME EDIT */

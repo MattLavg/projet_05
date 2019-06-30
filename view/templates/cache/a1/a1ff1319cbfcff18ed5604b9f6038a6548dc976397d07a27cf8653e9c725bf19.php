@@ -71,7 +71,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
             $context["elementsOnPage"] = true;
             // line 15
             echo "
-        <div class=\"listPosts\">
+        <div class=\"listGames\">
             
             <h3>
                 <a href=\"";
@@ -151,7 +151,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
         {% set elementsOnPage = true %}
 
-        <div class=\"listPosts\">
+        <div class=\"listGames\">
             
             <h3>
                 <a href=\"{{ HOST }}game/id/{{ game.getId }}\">{{ game.getName }}</a>

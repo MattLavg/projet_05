@@ -25,6 +25,7 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
+            'cover' => [$this, 'block_cover'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -37,6 +38,9 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 
     protected function doDisplay(array $context, array $blocks = [])
     {
+        // line 7
+        $context["cover"] = true;
+        // line 1
         $this->parent = $this->loadTemplate("front.twig", "game.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
@@ -51,110 +55,123 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 ";
     }
 
-    // line 7
-    public function block_content($context, array $blocks = [])
+    // line 9
+    public function block_cover($context, array $blocks = [])
     {
-        // line 8
-        echo "
-    <img src=\"";
-        // line 9
+        // line 10
+        echo "    <div class=\"background_game_image container-fluid\" style=\"background-image: url('";
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "public/images/covers/";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getCover", [], "any", false, false, false, 9), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getCover", [], "any", false, false, false, 10), "html", null, true);
+        echo "')\"></div>
+";
+    }
+
+    // line 13
+    public function block_content($context, array $blocks = [])
+    {
+        // line 14
+        echo "
+ 
+    <!-- <img src=\"";
+        // line 16
+        echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+        echo "public/images/covers/";
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getCover", [], "any", false, false, false, 16), "html", null, true);
         echo "\" alt=\"";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getName", [], "any", false, false, false, 9), "html", null, true);
-        echo " image\">
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getName", [], "any", false, false, false, 16), "html", null, true);
+        echo " image\" class=\"game_image\"> -->
 
     <h1>";
-        // line 11
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getName", [], "any", false, false, false, 11), "html", null, true);
+        // line 18
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getName", [], "any", false, false, false, 18), "html", null, true);
         echo "</h1>
 
     <p>Développeur(s) :<br>
         ";
-        // line 14
+        // line 21
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["developers"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["developer"]) {
             echo " 
             <p>- ";
-            // line 15
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 15), "html", null, true);
+            // line 22
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["developer"], "getName", [], "any", false, false, false, 22), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['developer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 17
+        // line 24
         echo "    </p>
 
     <p>Genre(s) :<br>
         ";
-        // line 20
+        // line 27
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["genres"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
             echo " 
             <p>- ";
-            // line 21
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 21), "html", null, true);
+            // line 28
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "getName", [], "any", false, false, false, 28), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 23
+        // line 30
         echo "    </p>
 
     <p>Mode(s) de jeu :<br>
         ";
-        // line 26
+        // line 33
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["modes"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["mode"]) {
             echo " 
             <p>- ";
-            // line 27
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 27), "html", null, true);
+            // line 34
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mode"], "getName", [], "any", false, false, false, 34), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['mode'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 29
+        // line 36
         echo "    </p>
 
     <p>Sorties :<br>
         ";
-        // line 32
+        // line 39
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["releases"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["release"]) {
             echo " 
             <p>- Sur ";
-            // line 33
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPlatform", [], "any", false, false, false, 33), "html", null, true);
+            // line 40
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPlatform", [], "any", false, false, false, 40), "html", null, true);
             echo ", édité par ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPublisher", [], "any", false, false, false, 33), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getPublisher", [], "any", false, false, false, 40), "html", null, true);
             echo " - ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getRegion", [], "any", false, false, false, 33), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getRegion", [], "any", false, false, false, 40), "html", null, true);
             echo " - ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getReleaseDate", [], "any", false, false, false, 33), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["release"], "getReleaseDate", [], "any", false, false, false, 40), "html", null, true);
             echo "</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['release'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 35
+        // line 42
         echo "    </p>
 
     <p>";
-        // line 37
-        echo twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getContent", [], "any", false, false, false, 37);
+        // line 44
+        echo twig_get_attribute($this->env, $this->source, ($context["game"] ?? null), "getContent", [], "any", false, false, false, 44);
         echo "</p>
     <hr>
 ";
@@ -172,7 +189,7 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
 
     public function getDebugInfo()
     {
-        return array (  157 => 37,  153 => 35,  139 => 33,  133 => 32,  128 => 29,  120 => 27,  114 => 26,  109 => 23,  101 => 21,  95 => 20,  90 => 17,  82 => 15,  76 => 14,  70 => 11,  61 => 9,  58 => 8,  55 => 7,  48 => 4,  45 => 3,  35 => 1,);
+        return array (  174 => 44,  170 => 42,  156 => 40,  150 => 39,  145 => 36,  137 => 34,  131 => 33,  126 => 30,  118 => 28,  112 => 27,  107 => 24,  99 => 22,  93 => 21,  87 => 18,  78 => 16,  74 => 14,  71 => 13,  62 => 10,  59 => 9,  52 => 4,  49 => 3,  44 => 1,  42 => 7,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -183,9 +200,16 @@ class __TwigTemplate_c52af23f4a45cafc95078f2918eedb7947de7d3f3d077032e78713542f4
     <title>{{ game.getName }} | LISTaGAME</title>
 {% endblock %}
 
+{% set cover = true %}
+
+{% block cover %}
+    <div class=\"background_game_image container-fluid\" style=\"background-image: url('{{ HOST }}public/images/covers/{{ game.getCover }}')\"></div>
+{% endblock %}
+
 {% block content %}
 
-    <img src=\"{{ HOST }}public/images/covers/{{ game.getCover }}\" alt=\"{{ game.getName }} image\">
+ 
+    <!-- <img src=\"{{ HOST }}public/images/covers/{{ game.getCover }}\" alt=\"{{ game.getName }} image\" class=\"game_image\"> -->
 
     <h1>{{ game.getName }}</h1>
 

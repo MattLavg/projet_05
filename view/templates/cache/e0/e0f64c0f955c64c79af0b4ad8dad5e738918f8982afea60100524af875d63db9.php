@@ -27,6 +27,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
+            'cover' => [$this, 'block_cover'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -184,13 +185,24 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             
         </nav>
     
-
-        <main role=\"main\" class=\"mainContainer container\">
+        ";
+        // line 90
+        $this->displayBlock('cover', $context, $blocks);
+        // line 91
+        echo "
+        <main role=\"main\" ";
+        // line 92
+        if (($context["cover"] ?? null)) {
+            echo " class=\"gameViewContainer container\" ";
+        } else {
+            echo " class=\"mainContainer container\" ";
+        }
+        echo ">
 
             ";
-        // line 93
-        $this->displayBlock('content', $context, $blocks);
         // line 94
+        $this->displayBlock('content', $context, $blocks);
+        // line 95
         echo "
             <!-- DELETE MODAL -->
             <div class=\"modal fade\" id=\"deleteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteModalLabel\" aria-hidden=\"true\">
@@ -217,7 +229,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
                 <p><span class=\"text-light\">ListaGame - </span><a href=\"";
-        // line 119
+        // line 120
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "connection\">Connexion</a></p>
             </footer>
@@ -231,7 +243,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- JQUERY UI -->
     <script src=\"";
-        // line 130
+        // line 131
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/jquery-ui.min.js\"></script>
 
@@ -241,7 +253,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 137
+        // line 138
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
@@ -256,7 +268,12 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     {
     }
 
-    // line 93
+    // line 90
+    public function block_cover($context, array $blocks = [])
+    {
+    }
+
+    // line 94
     public function block_content($context, array $blocks = [])
     {
     }
@@ -273,7 +290,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  260 => 93,  255 => 7,  245 => 137,  235 => 130,  221 => 119,  194 => 94,  192 => 93,  176 => 79,  170 => 76,  167 => 75,  161 => 72,  154 => 68,  150 => 67,  146 => 66,  142 => 65,  138 => 64,  134 => 63,  130 => 62,  126 => 61,  122 => 60,  117 => 57,  115 => 56,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
+        return array (  277 => 94,  272 => 90,  267 => 7,  257 => 138,  247 => 131,  233 => 120,  206 => 95,  204 => 94,  195 => 92,  192 => 91,  190 => 90,  177 => 79,  171 => 76,  168 => 75,  162 => 72,  155 => 68,  151 => 67,  147 => 66,  143 => 65,  139 => 64,  135 => 63,  131 => 62,  127 => 61,  123 => 60,  118 => 57,  116 => 56,  110 => 53,  99 => 45,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -367,8 +384,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             
         </nav>
     
+        {% block cover %}{% endblock %}
 
-        <main role=\"main\" class=\"mainContainer container\">
+        <main role=\"main\" {% if cover %} class=\"gameViewContainer container\" {% else %} class=\"mainContainer container\" {% endif %}>
 
             {% block content %}{% endblock %}
 

@@ -87,8 +87,9 @@
             
         </nav>
     
+        {% block cover %}{% endblock %}
 
-        <main role="main" class="mainContainer container">
+        <main role="main" {% if cover %} class="gameViewContainer container" {% else %} class="mainContainer container" {% endif %}>
 
             {% block content %}{% endblock %}
 
