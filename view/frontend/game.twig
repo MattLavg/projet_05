@@ -7,7 +7,7 @@
 {% set cover = true %}
 
 {% block cover %}
-    <div class="background_game_image container-fluid" style="background-image: url('{{ HOST }}public/images/covers/{{ game.getCover }}')"></div>
+    <div class="background_game_image container-fluid" style="background-image: url('{{ HOST }}public/images/covers/game_cover_{{ game.getId }}.{{ game.getCover }}')"></div>
 {% endblock %}
 
 {% block content %}

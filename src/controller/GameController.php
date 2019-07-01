@@ -10,6 +10,7 @@ use App\Model\PlatformManager;
 use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
+use App\Core\Registry;
 // use App\Model\CommentManager;
 // use App\Model\Pagination;
 // use App\Controller\ConnectionController;
@@ -232,7 +233,7 @@ use App\Core\View;
     {
         // echo "<pre>";
         // print_r($params);
-        // echo "</pre>";
+        // echo "</pre>";die;
 
         if (ConnectionController::isSessionValid()) {
 
@@ -389,11 +390,18 @@ use App\Core\View;
                 } 
             });
 
+            try {
 
-            // Add game informations
-            $game_id = $gameManager->addGame($params);
+                $db = Registry::getDb();
+                
+                $db->beginTransaction();
 
-            if ($game_id) {
+                // Add game informations (name, content, cover)
+                $game_id = $gameManager->addGame($params, $fileExtension);
+
+                if (!$game_id) {
+                    throw new \Exception('Impossible d\'enregistrer les informations du jeu');
+                } 
 
                 // Add game cover in folder
                 if ($validCover) {
@@ -405,15 +413,15 @@ use App\Core\View;
                     );
                 }
 
-                $cover = 'cover_game_id_' . $game_id . '.' . $fileInfos['extension'];
-                // Add game cover name in bdd
-                $addedCover [] = $gameManager->addCover($game_id, $cover);
-
                 // Add games developers
                 $developerManager = new DeveloperManager();
                 foreach($params['developer'] as $developer_id) {
 
-                    $addedDevelopers [] = $developerManager->addGameDeveloper($game_id, $developer_id);
+                    $addedDeveloper = $developerManager->addGameDeveloper($game_id, $developer_id);
+var_dump($addedDeveloper);die;
+                    if (!$addedDeveloper) {
+                        throw new \Exception('Impossible d\'enregistrer les développeurs du jeu');
+                    }
                 }
 
                 // Add games genres
@@ -434,56 +442,30 @@ use App\Core\View;
                 $releaseDateManager = new ReleaseDateManager();
                 foreach($params['releaseDate'] as $releaseDate_array) {
                     
-                   $addedReleases [] = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+                    $addedReleases [] = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
                 }
 
                 $addedAll = array_merge($addedDevelopers, $addedGenres, $addedModes, $addedReleases);
+    
+    
+                
 
-                foreach($addedAll as $value) {
-                    
-                    if (empty($value) || $value == 0) {
+                // $db->commit();
+                $db->rollBack();
 
-                        if (!$_SESSION['errorMessage']) {
+            } catch (\Exception $e) {
 
-                            $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
-                        }
-
-                        // Delete game cover
-                        unlink(IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']);
-
-                        // Delete game developers
-                        $developerManager = new DeveloperManager();
-                        $developerManager->deleteGameDevelopers($game_id);
-
-                        // Delete games genres
-                        $genreManager = new GenreManager();
-                        $genreManager->deleteGameGenres($game_id);
-
-                        // Delete games modes
-                        $modeManager = new ModeManager();
-                        $modeManager->deleteGameModes($game_id);
-
-                        // Delete games release
-                        $releaseDateManager = new ReleaseDateManager();
-                        $releaseDateManager->deleteGameReleaseDates($game_id);
-
-                        // Delete game informations
-                        $gameManager = new GameManager();
-                        $gameManager->deleteGame($game_id);
-
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-                 }
-
-            } else {
+                $db->rollBack();
 
                 $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
 
                 $view = new View();
                 $view->redirect('edit-game');
-
             }
+
+            
+
+            
 
             // if game added, display home
             $view = new View();
@@ -568,7 +550,7 @@ use App\Core\View;
 
                     if (in_array($fileExtension, $authorizedExtensions)) {
 
-                        $validCover = true;
+                        $updateCover = true;
                         
                     }
 
@@ -686,50 +668,62 @@ use App\Core\View;
             });
 
 
-            // Update game informations
+            
 
             if ($game_id) {
 
                 // Add game cover in folder
-                if ($validCover) {
+                if ($updateCover) {
 
                     // Validate file and store it in "covers" folder
                     move_uploaded_file(
                         $_FILES['cover']['tmp_name'],
                         IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']
                     );
+
+                    $cover = 'cover_game_id_' . $game_id . '.' . $fileInfos['extension'];
+                    // Add game cover name in bdd
+                    $updatedCover [] = $gameManager->addCover($game_id, $cover);
+
                 }
 
-                $cover = 'cover_game_id_' . $game_id . '.' . $fileInfos['extension'];
-                // Add game cover name in bdd
-                $updatedCover [] = $gameManager->updateCover($game_id, $cover);
+                // Update game informations
+                $updatedGame = $gameManager->updateGame($params, $game_id);
 
-                // Add games developers
+                // Add and update games developers
                 $developerManager = new DeveloperManager();
-                foreach($params['developer'] as $developer_id) {
+                $gameDevelopers = $developerManager->getDevelopers($game_id);
 
-                    $addedDevelopers [] = $developerManager->addGameDeveloper($game_id, $developer_id);
+                foreach($params['developer'] as $developer_id) {
+                    foreach($gameDevelopers as $gameDeveloper) {
+
+                        if ($developer_id == $gameDeveloper->getId()) {
+                            $updatedDevelopers [] = $developerManager->updateGameDeveloper($game_id, $developer_id);
+                        } else {
+                            $addedDevelopers [] = $developerManager->addGameDeveloper($game_id, $developer_id);
+                        }
+                    }
                 }
 
                 // Add games genres
                 $genreManager = new GenreManager();
                 foreach($params['genre'] as $genre_id) {
 
-                    $addedGenres [] = $genreManager->addGameGenre($game_id, $genre_id);
+                    $addedGenres [] = $genreManager->updateGameGenre($game_id, $genre_id);
                 }
 
                 // Add games modes
                 $modeManager = new ModeManager();
                 foreach($params['mode'] as $mode_id) {
                     
-                    $addedModes [] = $modeManager->addGameMode($game_id, $mode_id);
+                    $addedModes [] = $modeManager->updateGameMode($game_id, $mode_id);
                 }
 
                 // Add games release
                 $releaseDateManager = new ReleaseDateManager();
                 foreach($params['releaseDate'] as $releaseDate_array) {
                     
-                   $addedReleases [] = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+                   $addedReleases [] = $releaseDateManager->updateReleaseDate($game_id, $releaseDate_array);
                 }
 
                 $addedAll = array_merge($addedDevelopers, $addedGenres, $addedModes, $addedReleases);

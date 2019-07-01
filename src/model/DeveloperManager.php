@@ -33,7 +33,8 @@ use App\Core\Manager;
         $req = $this->_db->prepare(
             'SELECT
             d.id,
-            d.name 
+            d.name,
+            gd.id 
             FROM developers AS d
             INNER JOIN games_developers AS gd
             ON gd.id_developer = d.id
@@ -68,6 +69,17 @@ use App\Core\Manager;
         $count = $req->rowCount();
         return $count;
     }
+
+    /**
+     * Allows to update game developers informations
+     * 
+     * @param int $game_id
+     * @param int $developer_id
+     */
+    // public function updateGameDeveloper($game_id, $developer_id)
+    // {
+    //     $req = $this->_db->prepare('UPDATE games_developers SET ')
+    // }
 
     /**
      * Allows to delete a developer

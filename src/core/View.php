@@ -85,8 +85,6 @@ class View
         $params['errorMessage'] = $errorMessage;
         $params['actionMessage'] = $actionMessage;
 
-        $_SESSION['savedParams'] = $params;
-
         // echo "<pre>";
         // print_r($_SESSION['savedParams']);
         // echo "</pre>";die;

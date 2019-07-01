@@ -53,10 +53,10 @@ use App\Model\Game;
      * 
      * @param array $values
      */
-    public function addGame($values)
+    public function addGame($values, $fileExtension)
     { 
-        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name, content) VALUES(?, ?)');
-        $req->execute(array($values['name'], $values['content']));
+        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name, content, cover) VALUES(?, ?, )');
+        $req->execute(array($values['name'], $values['content'], $fileExtension));
 
         $count = $req->rowCount();
 
@@ -64,6 +64,22 @@ use App\Model\Game;
             $id = $this->_db->lastInsertId();
             return $id;
         }
+    }
+
+    /**
+     * Allows to update game informations
+     * 
+     * @param array $values
+     * @param int $game_id
+     */
+    public function updateGame($values, $game_id)
+    {
+        $req = $this->_db->prepare('UPDATE games SET name = ?, content = ? WHERE id = ?');
+        $req->execute(array($values['name'], $values['content'], $game_id));
+
+        $count = $req->rowCount();
+
+        return $count;
     }
 
     /**
