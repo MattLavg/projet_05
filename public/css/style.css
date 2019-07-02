@@ -135,6 +135,10 @@ h1 {
     padding: 10px;
 }
 
+.redText {
+    color: rgb(255, 0, 0);
+}
+
 /* COMMENTS */
 
 .comment.container {

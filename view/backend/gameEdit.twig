@@ -10,7 +10,7 @@
 
         <h1>Modifier un jeu</h1>
         <hr>
-            <form method="post" action="{{ HOST }}update-game" enctype="multipart/form-data">
+            <form method="post" action="{{ HOST }}update-game" enctype="multipart/form-data" novalidate>
 
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="id" name="id" value="{{ game.getid }}">
@@ -150,15 +150,17 @@
 
         <h1>Ajouter un jeu</h1>
         <hr>
-            <form method="post" action="{{ HOST }}add-game" enctype="multipart/form-data">
+            <form method="post" action="{{ HOST }}add-game" enctype="multipart/form-data" novalidate>
                 <div class="form-group">
                     <label for="name">Le titre du jeu :</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Titre">
+                    <span class="missName redText"></span>
                 </div>
         
                 <div class="form-group">
                     <label>Description du jeu :</label>
                     <textarea id="tinymcetextarea" name="content"></textarea>
+                    <span class="missContent redText"></span>
                 </div>
         
                 <hr>
@@ -186,6 +188,7 @@
                     </div>
         
                     <button type="button" class="btn btn-primary addEntityForm">Ajouter un développeur</button>
+                    <span class="missDev redText"></span>
                 </div>
                 <hr>
                 
