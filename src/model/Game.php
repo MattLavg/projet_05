@@ -26,9 +26,9 @@ class Game
     protected $_content;
 
     /**
-     * @var string $_cover, the cover of a game
+     * @var string $_cover_extension, the cover extension of a game
      */
-    protected $_cover;
+    protected $_cover_extension;
 
     /**
      * Set automatically elements in methods
@@ -80,13 +80,13 @@ class Game
     }
 
     /**
-     * Allows to get the cover of a game
+     * Allows to get the cover extension of a game
      * 
-     * @return string $_cover
+     * @return string $_cover_extension
      */
-    public function getCover()
+    public function getCover_extension()
     {
-        return $this->_cover;
+        return $this->_cover_extension;
     }
 
     // SETTERS
@@ -122,13 +122,13 @@ class Game
     }
 
     /**
-     * Allows to set the cover of a game
+     * Allows to set the cover extension of a game
      * 
-     * @param string $cover
+     * @param string $cover_extension
      */
-    public function setCover(string $cover)
+    public function setCover_extension(string $coverExtension)
     {
-        $this->_cover = $cover;
+        $this->_cover_extension = $coverExtension;
     }
 
 }

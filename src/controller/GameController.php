@@ -411,6 +411,8 @@ use App\Core\View;
                         $_FILES['cover']['tmp_name'],
                         IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']
                     );
+                } else {
+                    throw new \Exception('Impossible d\'enregistrer l\'image du jeu');
                 }
 
                 // Add games developers
@@ -418,9 +420,9 @@ use App\Core\View;
                 foreach($params['developer'] as $developer_id) {
 
                     $addedDeveloper = $developerManager->addGameDeveloper($game_id, $developer_id);
-var_dump($addedDeveloper);die;
+
                     if (!$addedDeveloper) {
-                        throw new \Exception('Impossible d\'enregistrer les développeurs du jeu');
+                        throw new \Exception('Impossible d\'enregistrer le ou les développeurs du jeu');
                     }
                 }
 
@@ -428,44 +430,46 @@ var_dump($addedDeveloper);die;
                 $genreManager = new GenreManager();
                 foreach($params['genre'] as $genre_id) {
 
-                    $addedGenres [] = $genreManager->addGameGenre($game_id, $genre_id);
+                    $addedGenre = $genreManager->addGameGenre($game_id, $genre_id);
+
+                    if (!$addedGenre) {
+                        throw new \Exception('Impossible d\'enregistrer le ou les genres du jeu');
+                    }
                 }
 
                 // Add games modes
                 $modeManager = new ModeManager();
                 foreach($params['mode'] as $mode_id) {
                     
-                    $addedModes [] = $modeManager->addGameMode($game_id, $mode_id);
+                    $addedMode = $modeManager->addGameMode($game_id, $mode_id);
+
+                    if (!$addedMode) {
+                        throw new \Exception('Impossible d\'enregistrer le ou les modes du jeu');
+                    }
                 }
 
                 // Add games release
                 $releaseDateManager = new ReleaseDateManager();
                 foreach($params['releaseDate'] as $releaseDate_array) {
                     
-                    $addedReleases [] = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+                    $addedRelease = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+
+                    if (!$addedRelease) {
+                        throw new \Exception('Impossible d\'enregistrer les dates du jeu');
+                    }
                 }
 
-                $addedAll = array_merge($addedDevelopers, $addedGenres, $addedModes, $addedReleases);
-    
-    
-                
-
-                // $db->commit();
-                $db->rollBack();
+                $db->commit();
 
             } catch (\Exception $e) {
 
                 $db->rollBack();
 
-                $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
+                $_SESSION['errorMessage'] = $e->getMessage();;
 
                 $view = new View();
                 $view->redirect('edit-game');
             }
-
-            
-
-            
 
             // if game added, display home
             $view = new View();
@@ -489,11 +493,7 @@ var_dump($addedDeveloper);die;
     {
         // echo "<pre>";
         // print_r($params);
-        // echo "</pre>";die;
-
-        echo "<pre>";
-        print_r($_SESSION['savedParams']);
-        echo "</pre>";die;
+        // echo "</pre>";
 
         if (ConnectionController::isSessionValid()) {
 
@@ -524,20 +524,20 @@ var_dump($addedDeveloper);die;
                 }
             });
 
-            $gameManager = new GameManager();
-            $games = $gameManager->getAllNames();
+            // $gameManager = new GameManager();
+            // $games = $gameManager->getAll();
 
-            // Check if game already exists
-            $result = array_search($params['name'], $games);
+            // // Check if game already exists
+            // $result = array_search($params['name'], $games);
 
-            if ($result) {
+            // if ($result) {
                 
-                $_SESSION['errorMessage'] = 'Le jeu existe déjà.';
+            //     $_SESSION['errorMessage'] = 'Le jeu existe déjà.';
 
-                $view = new View();
-                $view->redirect('edit-game/id/' . $game_id);
+            //     $view = new View();
+            //     $view->redirect('edit-game/id/' . $game_id);
 
-            }
+            // }
 
             // Check if file is present
             if (isset($_FILES['cover']) && $_FILES['cover']['error']  == 0) {
@@ -548,9 +548,11 @@ var_dump($addedDeveloper);die;
                     $fileExtension = $fileInfos['extension'];
                     $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
 
+                    $validCover = false;
+
                     if (in_array($fileExtension, $authorizedExtensions)) {
 
-                        $updateCover = true;
+                        $validCover = true;
                         
                     }
 
@@ -563,26 +565,8 @@ var_dump($addedDeveloper);die;
 
                 }
 
-            } elseif (!isset($_FILE['cover'])) {
-
-                $game = $gameManager->getGame($game_id);
-
-                if (!$game->getCover()) {
-
-                    $_SESSION['errorMessage'] = 'Vous devez télécharger une image pour le jeu.';
-
-                    $view = new View();
-                    $view->redirect('edit-game/id/' . $game_id);
-
-                }
-
             } else {
-
-                $_SESSION['errorMessage'] = 'Vous devez télécharger une image pour le jeu.';
-
-                $view = new View();
-                $view->redirect('edit-game/id/' . $game_id);
-
+                $fileExtension = false;
             }
 
             // Allows to delete duplicated developers
@@ -668,110 +652,92 @@ var_dump($addedDeveloper);die;
             });
 
 
-            
+            try {
 
-            if ($game_id) {
+                $db = Registry::getDb();
+                
+                $db->beginTransaction();
+
+                // Add game informations (name, content, cover)
+                $gameManager = new GameManager();
+                $updatedGame = $gameManager->updateGame($params, $fileExtension, $game_id);
+
+                if (!$updatedGame) {
+                    throw new \Exception('Impossible de modifier les informations du jeu');
+                } 
 
                 // Add game cover in folder
-                if ($updateCover) {
+                if (isset($validCover) && $validCover == true) {
 
                     // Validate file and store it in "covers" folder
                     move_uploaded_file(
                         $_FILES['cover']['tmp_name'],
                         IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']
                     );
-
-                    $cover = 'cover_game_id_' . $game_id . '.' . $fileInfos['extension'];
-                    // Add game cover name in bdd
-                    $updatedCover [] = $gameManager->addCover($game_id, $cover);
-
                 }
 
-                // Update game informations
-                $updatedGame = $gameManager->updateGame($params, $game_id);
-
-                // Add and update games developers
+                // Delete game developers before adding new ones
                 $developerManager = new DeveloperManager();
-                $gameDevelopers = $developerManager->getDevelopers($game_id);
-
+                $developerManager->deleteGameDevelopers($game_id);
+                // Add games developers
                 foreach($params['developer'] as $developer_id) {
-                    foreach($gameDevelopers as $gameDeveloper) {
 
-                        if ($developer_id == $gameDeveloper->getId()) {
-                            $updatedDevelopers [] = $developerManager->updateGameDeveloper($game_id, $developer_id);
-                        } else {
-                            $addedDevelopers [] = $developerManager->addGameDeveloper($game_id, $developer_id);
-                        }
+                    $addedDeveloper = $developerManager->addGameDeveloper($game_id, $developer_id);
+
+                    if (!$addedDeveloper) {
+                        throw new \Exception('Impossible d\'enregistrer le ou les développeurs du jeu');
                     }
                 }
 
-                // Add games genres
+                // Delete games genres
                 $genreManager = new GenreManager();
+                $genreManager->deleteGameGenres($game_id);
+                // Add games genres
                 foreach($params['genre'] as $genre_id) {
 
-                    $addedGenres [] = $genreManager->updateGameGenre($game_id, $genre_id);
+                    $addedGenre = $genreManager->addGameGenre($game_id, $genre_id);
+
+                    if (!$addedGenre) {
+                        throw new \Exception('Impossible d\'enregistrer le ou les genres du jeu');
+                    }
                 }
 
-                // Add games modes
+                // Delete games modes
                 $modeManager = new ModeManager();
+                $modeManager->deleteGameModes($game_id);
+                // Add games modes
                 foreach($params['mode'] as $mode_id) {
                     
-                    $addedModes [] = $modeManager->updateGameMode($game_id, $mode_id);
+                    $addedMode = $modeManager->addGameMode($game_id, $mode_id);
+
+                    if (!$addedMode) {
+                        throw new \Exception('Impossible d\'enregistrer le ou les modes du jeu');
+                    }
                 }
 
-                // Add games release
+                // Delete games release
                 $releaseDateManager = new ReleaseDateManager();
+                $releaseDateManager->deleteGameReleaseDates($game_id);
+                // Add games release
                 foreach($params['releaseDate'] as $releaseDate_array) {
                     
-                   $addedReleases [] = $releaseDateManager->updateReleaseDate($game_id, $releaseDate_array);
+                    $addedRelease = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+
+                    if (!$addedRelease) {
+                        throw new \Exception('Impossible d\'enregistrer les dates du jeu');
+                    }
                 }
 
-                $addedAll = array_merge($addedDevelopers, $addedGenres, $addedModes, $addedReleases);
+                $db->commit();
 
-                foreach($addedAll as $value) {
-                    
-                    if (empty($value) || $value == 0) {
+            } catch (\Exception $e) {
 
-                        if (!$_SESSION['errorMessage']) {
+                $db->rollBack();
 
-                            $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
-                        }
-
-                        // Delete game cover
-                        unlink(IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']);
-
-                        // Delete game developers
-                        $developerManager = new DeveloperManager();
-                        $developerManager->deleteGameDevelopers($game_id);
-
-                        // Delete games genres
-                        $genreManager = new GenreManager();
-                        $genreManager->deleteGameGenres($game_id);
-
-                        // Delete games modes
-                        $modeManager = new ModeManager();
-                        $modeManager->deleteGameModes($game_id);
-
-                        // Delete games release
-                        $releaseDateManager = new ReleaseDateManager();
-                        $releaseDateManager->deleteGameReleaseDates($game_id);
-
-                        // Delete game informations
-                        $gameManager = new GameManager();
-                        $gameManager->deleteGame($game_id);
-
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-                 }
-
-            } else {
-
-                $_SESSION['errorMessage'] = 'Impossible d\'ajouter le jeu.';
+                $_SESSION['errorMessage'] = $e->getMessage();;
 
                 $view = new View();
-                $view->redirect('edit-game');
-
+                $view->redirect('edit-game/id/' . $game_id);
             }
 
             // if game added, display home
@@ -821,8 +787,10 @@ var_dump($addedDeveloper);die;
             $game = $gameManager->getGame($params['id']);
 
             // Delete game cover
-            unlink(IMAGE .'covers/' . $game->getCover());
-
+            if (file_exists(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension())) {
+                unlink(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension());
+            }
+            
             $gameManager->deleteGame($params['id']);
 
             $_SESSION['actionMessage'] = 'Vous avez effacé un jeu.';

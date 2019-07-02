@@ -84,17 +84,12 @@ use App\model\ReleaseDate;
 
                 if ($error[1] == 1062) {
 
-                    $_SESSION['errorMessage'] = 'Vous ne pouvez enregistrer deux fois la même date avec les mêmes informations pour un jeu.';
+                    throw new \Exception('Vous ne pouvez enregistrer deux fois la même date avec les mêmes informations pour un jeu.');
 
-                    $count = $req->rowCount();
-                    return $count;
                 }
             }
 
-            $_SESSION['errorMessage'] = 'Impossible d\'enregistrer la date de sortie.';
-
-            $count = $req->rowCount();
-            return $count;
+            throw new \Exception('Impossible d\'enregistrer la ou les dates de sortie.');
         }
 
 

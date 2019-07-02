@@ -55,7 +55,7 @@ use App\Model\Game;
      */
     public function addGame($values, $fileExtension)
     { 
-        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name, content, cover) VALUES(?, ?, )');
+        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name, content, cover_extension) VALUES(?, ?, ?)');
         $req->execute(array($values['name'], $values['content'], $fileExtension));
 
         $count = $req->rowCount();
@@ -72,29 +72,38 @@ use App\Model\Game;
      * @param array $values
      * @param int $game_id
      */
-    public function updateGame($values, $game_id)
+    public function updateGame($values, $fileExtension = 0, $game_id)
     {
-        $req = $this->_db->prepare('UPDATE games SET name = ?, content = ? WHERE id = ?');
-        $req->execute(array($values['name'], $values['content'], $game_id));
+        try {
 
-        $count = $req->rowCount();
+            $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-        return $count;
-    }
+            if ($fileExtension) {
+                $req = $this->_db->prepare('UPDATE games SET name = ?, content = ?, cover_extension = ? WHERE id = ?');
+                $req->execute(array($values['name'], $values['content'], $fileExtension, $game_id));
+            } else {
+                $req = $this->_db->prepare('UPDATE gmes SET name = ?, content = ? WHERE id = ?');
+                $req->execute(array($values['name'], $values['content'], $game_id));
+            }
 
-    /**
-     * Allows to add a game cover name
-     * 
-     * @param string $cover
-     */
-    public function addCover($game_id, $cover)
-    { 
-        $req = $this->_db->prepare('UPDATE games SET cover = ? WHERE id = ?');
-        $req->execute(array($cover, $game_id));
+            $count = $req->rowCount();
+            return $count;
 
-        $count = $req->rowCount();
+        } catch (\PDOException $e) {
 
-        return $count;
+            if ($e->getCode() == 23000) {
+                
+                $error = $req->errorInfo();
+
+                if ($error[1] == 1062) {
+
+                    throw new \Exception('Vous ne pouvez enregistrer un titre de jeu qui existe déjà.');
+
+                }
+            }
+
+            throw new \Exception('Impossible de modifier les informations du jeu');
+        }
     }
 
     /**
