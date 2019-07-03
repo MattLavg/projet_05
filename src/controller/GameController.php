@@ -288,6 +288,11 @@ use App\Core\View;
 
                         $validCover = true;
                         
+                    } else {
+                        $_SESSION['errorMessage'] = 'L\'image doit être aux formats jpg, jpeg, gif ou png.';
+
+                        $view = new View();
+                        $view->redirect('edit-game');
                     }
 
                 } else {
@@ -554,6 +559,11 @@ use App\Core\View;
 
                         $validCover = true;
                         
+                    } else {
+                        $_SESSION['errorMessage'] = 'L\'image doit être aux formats jpg, jpeg, gif ou png.';
+
+                        $view = new View();
+                        $view->redirect('edit-game');
                     }
 
                 } else {
@@ -658,16 +668,20 @@ use App\Core\View;
                 
                 $db->beginTransaction();
 
-                // Add game informations (name, content, cover)
+                
                 $gameManager = new GameManager();
-                $updatedGame = $gameManager->updateGame($params, $fileExtension, $game_id);
 
-                if (!$updatedGame) {
-                    throw new \Exception('Impossible de modifier les informations du jeu');
-                } 
+                // Get the game to access cover_extension
+                $game = $gameManager->getGame($game_id);
+
 
                 // Add game cover in folder
                 if (isset($validCover) && $validCover == true) {
+
+                    // Delete current game cover
+                    if (file_exists(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension())) {
+                        unlink(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension());
+                    }
 
                     // Validate file and store it in "covers" folder
                     move_uploaded_file(
@@ -675,6 +689,9 @@ use App\Core\View;
                         IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']
                     );
                 }
+
+                // Update game informations (name, content, cover)
+                $gameManager->updateGame($params, $fileExtension, $game_id);
 
                 // Delete game developers before adding new ones
                 $developerManager = new DeveloperManager();

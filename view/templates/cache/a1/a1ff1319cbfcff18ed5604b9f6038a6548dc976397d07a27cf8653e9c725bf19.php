@@ -73,26 +73,34 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
             echo "
         <div class=\"listGames\">
             
+            <div class=\"background_game_image_home container\" style=\"background-image: url('";
+            // line 18
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "public/images/covers/cover_game_id_";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 18), "html", null, true);
+            echo ".";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getCover_extension", [], "any", false, false, false, 18), "html", null, true);
+            echo "')\"></div>
             <h3>
                 <a href=\"";
-            // line 19
+            // line 20
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "game/id/";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 19), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 20), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getName", [], "any", false, false, false, 19), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getName", [], "any", false, false, false, 20), "html", null, true);
             echo "</a>
             </h3>
             <p>
                 ";
-            // line 22
-            echo twig_get_attribute($this->env, $this->source, $context["game"], "getContent", [], "any", false, false, false, 22);
+            // line 23
+            echo twig_get_attribute($this->env, $this->source, $context["game"], "getContent", [], "any", false, false, false, 23);
             echo "<br>
                 <a href=\"";
-            // line 23
+            // line 24
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "game/id/";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 23), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 24), "html", null, true);
             echo "\">Voir la suite</a>
             </p>
 
@@ -105,16 +113,16 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['game'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 31
+        // line 32
         echo "
     ";
-        // line 32
+        // line 33
         if ( !($context["elementsOnPage"] ?? null)) {
-            // line 33
+            // line 34
             echo "        <p>Il n'y a actuellement aucun article</p>
     ";
         }
-        // line 35
+        // line 36
         echo "
 ";
     }
@@ -131,7 +139,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
     public function getDebugInfo()
     {
-        return array (  118 => 35,  114 => 33,  112 => 32,  109 => 31,  93 => 23,  89 => 22,  79 => 19,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
+        return array (  126 => 36,  122 => 34,  120 => 33,  117 => 32,  101 => 24,  97 => 23,  87 => 20,  78 => 18,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
     }
 
     public function getSourceContext()
@@ -153,6 +161,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
         <div class=\"listGames\">
             
+            <div class=\"background_game_image_home container\" style=\"background-image: url('{{ HOST }}public/images/covers/cover_game_id_{{ game.getId }}.{{ game.getCover_extension }}')\"></div>
             <h3>
                 <a href=\"{{ HOST }}game/id/{{ game.getId }}\">{{ game.getName }}</a>
             </h3>

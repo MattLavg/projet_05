@@ -11,14 +11,16 @@
             <h2>Déjà inscrit ?</h2>
             <p>Identifiez-vous.</p>
 
-            <form method="post" action="{{ HOST }}login">
+            <form method="post" action="{{ HOST }}login" id="loginForm" novalidate>
                 <div class="form-group">
                     <input type="email" class="form-control" id="identificationEmail" name="mail" aria-describedby="emailHelp" placeholder="Email">
+                    <span class="missLoginMail redText"></span>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="identificationPassword" name="password" placeholder="Mot de passe">
+                    <span class="missLoginPassword redText"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">S'identifier</button>   
+                <button type="submit" class="btn btn-primary loginBtn">S'identifier</button>   
             </form>
 
         </div>
@@ -43,5 +45,14 @@
             </form>
         </div>
     </div>
+
+    {% if errorMessage %}
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
 
 {% endblock %}

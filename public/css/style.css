@@ -76,6 +76,14 @@ h1 {
     color: rgb(141, 141, 141);
 }
 
+.background_game_image_home {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+}
+
 /* GAME VUE */
 
 .background_game_image {

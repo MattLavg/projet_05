@@ -86,8 +86,9 @@ class View
         $params['actionMessage'] = $actionMessage;
 
         // echo "<pre>";
-        // print_r($_SESSION['savedParams']);
-        // echo "</pre>";die;
+        // print_r($params);
+        // echo "</pre>";
+    
         echo $twig->render($view . '.twig', $params);
 
         unset($_SESSION['errorMessage']);

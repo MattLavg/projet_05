@@ -414,28 +414,28 @@ $(document).ready(function () {
     // });
     
 
-    $('#name').on('input', function(e) {
-        console.log('plop');
-        if ($('#name').val() != '') {
-            $('.missName').empty();
-            // $(this).css('background-color', '');
-            // $(this).css('border', '');
-        } 
-    });
+    // $('#name').on('input', function(e) {
+    //     console.log('plop');
+    //     if ($('#name').val() != '') {
+    //         $('.missName').empty();
+    //         $(this).css('background-color', '');
+    //         $(this).css('border', '');
+    //     } 
+    // });
 
-    $('#tinymcetextarea').on('input', function(e) {
-        console.log('paaaaap');
+    // $('#tinymcetextarea').on('input', function(e) {
+    //     console.log('paaaaap');
       
-        if ($('#tinymcetextarea').val() != '') {
-            $('.missContent').empty();
-        } 
-    });
+    //     if ($('#tinymcetextarea').val() != '') {
+    //         $('.missContent').empty();
+    //     } 
+    // });
 
-    $('.developerList').on('input', function(e) {
-        if ($('.developerList').val() != '') {
-            $('.missDev').empty();
-        } 
-    });
+    // $('.developerList').on('input', function(e) {
+    //     if ($('.developerList').val() != '') {
+    //         $('.missDev').empty();
+    //     } 
+    // });
 
 
     // $('.editBtn').click(function(e) {
@@ -455,33 +455,116 @@ $(document).ready(function () {
 
     // }
     
-    $('form').submit(function(e) {
-        e.preventDefault();
+    // $('form').submit(function(e) {
+    //     e.preventDefault();
 
-        console.log($('#name').val());
+    //     console.log($('#name').val());
+
+    //     if ($('#name').val() == '') {
+
+    //         $('.missName').text('Vous devez renseigner le titre du jeu.');
+
+    //     }
+
+    //     if ( $('#tinymcetextarea').val() == '') {
+
+    //         $('.missContent').text('Vous devez renseigner la description du jeu.');
+
+    //     }
+
+    //     if ($('.developerList').val() == '') {
+
+    //         $('.missDev').text('Vous devez renseigner un développeur pour le jeu.');
+
+    //     }
+    // });
+
+  
+
+    var mailRegexp = '^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$';
+    var passwordRegexp = '^[a-zA-Z0-9_-]{6,16}$';
+    var nameRegexp = '^[a-zA-Z0-9_-]+$';
+
+    // var passwordRegexp = '^[^\s][a-zA-Z0-9_-]{3,16}[^\s]$';
+
+    // $('#identificationEmail').on('focusout', function(e) {
+    //     console.log($('#identificationEmail').val());
+    //     if ($('#identificationEmail').val() == '') {
+    //         $('#identificationEmail').css('bagkground-color', 'red');
+    //     } else if (!$('#identificationEmail').val().match(mailRegexp)) {
+    //         $('#identificationEmail').css('bagkground-color', 'red');
+    //     }
+    // });
+
+    $('.loginBtn').click(function(e) {
+
+
+        if ($('#identificationEmail').val() == '') {
+
+            $('.missLoginMail').text('Vous devez renseigner votre email.');
+            $('.missLoginMail').css('display', 'block').fadeOut(2000);
+
+            e.preventDefault();
+
+        } else if (!$('#identificationEmail').val().match(mailRegexp)) {
+
+            $('.missLoginMail').text('L\'email n\'est pas valide.');
+            $('.missLoginMail').css('display', 'block').fadeOut(2000);
+
+            e.preventDefault();
+
+        } else if ($('#identificationPassword').val() == '') {
+
+            $('.missLoginPassword').text('Vous devez renseigner votre mot de passe.');
+            $('.missLoginPassword').css('display', 'block').fadeOut(2000);
+
+            e.preventDefault();
+
+        } else if (!$('#identificationPassword').val().match(passwordRegexp)) {
+
+            $('.missLoginPassword').text('Votre mot de passe doit contenir au moins 6 caractères.');
+            $('.missLoginPassword').css('display', 'block').fadeOut(2000);
+
+            e.preventDefault();
+
+        } else {
+            $('#loginForm').submit();
+        }   
+
+    });
+
+
+    $('.editBtn').click(function(e) {
 
         if ($('#name').val() == '') {
 
             $('.missName').text('Vous devez renseigner le titre du jeu.');
+            $('.missName').css('display', 'block');
 
-        }
+            e.preventDefault();
 
-        if ( $('#tinymcetextarea').val() == '') {
+            $('#name').focus(function(e) {
+                $('.missName').css('display', 'none');
+            });
 
-            $('.missContent').text('Vous devez renseigner la description du jeu.');
+        } else if (!$('#name').val().match(nameRegexp)) {
 
-        }
+            $('.missName').text('Le titre du jeu n\'est pas valide.');
+            $('.missName').css('display', 'block');
 
-        if ($('.developerList').val() == '') {
+            e.preventDefault();
 
-            $('.missDev').text('Vous devez renseigner un développeur pour le jeu.');
+            $('#name').focus(function(e) {
+                $('.missName').css('display', 'none');
+            });
 
-        }
+        } else {
+            $('#loginForm').submit();
+        }   
+
     });
 
-    // if ($('.redText')) {
-    //     $(this).fadeout('slow');
-    // }
+ 
     
 
 

@@ -62,14 +62,16 @@ class __TwigTemplate_49d43b2b07d975aa96584cb0c1adcfcba77f2b5dff8fd4eb28228357fdc
             <form method=\"post\" action=\"";
         // line 14
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-        echo "login\">
+        echo "login\" id=\"loginForm\" novalidate>
                 <div class=\"form-group\">
                     <input type=\"email\" class=\"form-control\" id=\"identificationEmail\" name=\"mail\" aria-describedby=\"emailHelp\" placeholder=\"Email\">
+                    <span class=\"missLoginMail redText\"></span>
                 </div>
                 <div class=\"form-group\">
                     <input type=\"password\" class=\"form-control\" id=\"identificationPassword\" name=\"password\" placeholder=\"Mot de passe\">
+                    <span class=\"missLoginPassword redText\"></span>
                 </div>
-                <button type=\"submit\" class=\"btn btn-primary\">S'identifier</button>   
+                <button type=\"submit\" class=\"btn btn-primary loginBtn\">S'identifier</button>   
             </form>
 
         </div>
@@ -95,6 +97,23 @@ class __TwigTemplate_49d43b2b07d975aa96584cb0c1adcfcba77f2b5dff8fd4eb28228357fdc
         </div>
     </div>
 
+    ";
+        // line 49
+        if (($context["errorMessage"] ?? null)) {
+            // line 50
+            echo "        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+            ";
+            // line 51
+            echo twig_escape_filter($this->env, ($context["errorMessage"] ?? null), "html", null, true);
+            echo "
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                <span aria-hidden=\"true\">&times;</span>
+            </button>
+        </div>
+    ";
+        }
+        // line 57
+        echo "
 ";
     }
 
@@ -110,7 +129,7 @@ class __TwigTemplate_49d43b2b07d975aa96584cb0c1adcfcba77f2b5dff8fd4eb28228357fdc
 
     public function getDebugInfo()
     {
-        return array (  64 => 14,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
+        return array (  116 => 57,  107 => 51,  104 => 50,  102 => 49,  64 => 14,  56 => 8,  53 => 7,  48 => 4,  45 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -128,14 +147,16 @@ class __TwigTemplate_49d43b2b07d975aa96584cb0c1adcfcba77f2b5dff8fd4eb28228357fdc
             <h2>Déjà inscrit ?</h2>
             <p>Identifiez-vous.</p>
 
-            <form method=\"post\" action=\"{{ HOST }}login\">
+            <form method=\"post\" action=\"{{ HOST }}login\" id=\"loginForm\" novalidate>
                 <div class=\"form-group\">
                     <input type=\"email\" class=\"form-control\" id=\"identificationEmail\" name=\"mail\" aria-describedby=\"emailHelp\" placeholder=\"Email\">
+                    <span class=\"missLoginMail redText\"></span>
                 </div>
                 <div class=\"form-group\">
                     <input type=\"password\" class=\"form-control\" id=\"identificationPassword\" name=\"password\" placeholder=\"Mot de passe\">
+                    <span class=\"missLoginPassword redText\"></span>
                 </div>
-                <button type=\"submit\" class=\"btn btn-primary\">S'identifier</button>   
+                <button type=\"submit\" class=\"btn btn-primary loginBtn\">S'identifier</button>   
             </form>
 
         </div>
@@ -160,6 +181,15 @@ class __TwigTemplate_49d43b2b07d975aa96584cb0c1adcfcba77f2b5dff8fd4eb28228357fdc
             </form>
         </div>
     </div>
+
+    {% if errorMessage %}
+        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+            {{ errorMessage }}
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                <span aria-hidden=\"true\">&times;</span>
+            </button>
+        </div>
+    {% endif %}
 
 {% endblock %}", "connection.twig", "/Users/mathias/Sites/projet_05/view/frontend/connection.twig");
     }

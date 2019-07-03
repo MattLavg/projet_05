@@ -82,7 +82,7 @@ use App\Model\Game;
                 $req = $this->_db->prepare('UPDATE games SET name = ?, content = ?, cover_extension = ? WHERE id = ?');
                 $req->execute(array($values['name'], $values['content'], $fileExtension, $game_id));
             } else {
-                $req = $this->_db->prepare('UPDATE gmes SET name = ?, content = ? WHERE id = ?');
+                $req = $this->_db->prepare('UPDATE games SET name = ?, content = ? WHERE id = ?');
                 $req->execute(array($values['name'], $values['content'], $game_id));
             }
 
