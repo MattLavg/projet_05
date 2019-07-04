@@ -156,6 +156,12 @@
     <script type="text/javascript">
         tinymce.init({
             selector: '#tinymcetextarea',  // change this value according to your HTML
+            init_instance_callback: function (editor) {
+                editor.on('focus', function (e) {
+                    
+                  $('.missContent').css('display', 'none');
+                });
+            },
             plugins: [
                 'advlist autolink autoresize link image lists charmap print preview hr anchor pagebreak spellchecker',
                 'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',

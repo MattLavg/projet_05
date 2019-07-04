@@ -142,7 +142,7 @@
                 </div>
                 <hr>
         
-                <button type="submit" class="btn btn-primary editBtn">Valider</button>
+                <button type="submit" class="btn btn-primary updateGameBtn">Valider</button>
         
             </form>
 
@@ -168,6 +168,7 @@
                 <div class="form-group">
                     <label for="cover">Télécharger une image pour le jeu.</label>
                     <input type="file" class="form-control-file" id="cover" name="cover">
+                    <span class="missImage redText"></span>
                     <small id="cover" class="form-text text-muted">L'image ne doit pas dépasser 3 Mo.</small>
                 </div>
 
@@ -184,6 +185,7 @@
                                     <option value="{{ developer.getId }}">{{ developer.getName }}</option>
                                 {% endfor %}
                             </select>
+                            <span class="redText"></span>
                         </div>
                     </div>
         
@@ -203,6 +205,7 @@
                                     <option value="{{ genre.getId }}">{{ genre.getName }}</option>
                                 {% endfor %}
                             </select>
+                            <span class="redText"></span>
                         </div>
                     </div>
         
@@ -222,6 +225,7 @@
                                     <option value="{{ mode.getId }}">{{ mode.getName }}</option>
                                 {% endfor %}
                             </select>
+                            <span class="redText"></span>
                         </div>
                     </div>
         
@@ -262,7 +266,7 @@
                 </div>
                 <hr>
         
-                <button type="submit" class="btn btn-primary editBtn">Valider</button>
+                <button type="submit" class="btn btn-primary addGameBtn">Valider</button>
         
             </form>
 
