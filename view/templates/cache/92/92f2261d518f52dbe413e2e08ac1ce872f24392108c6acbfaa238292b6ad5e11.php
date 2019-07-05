@@ -85,10 +85,14 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
             // line 29
             echo "
                     <tr>
-                        <td>";
+                        <td><a href=\"";
             // line 31
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "game/id/";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 31), "html", null, true);
+            echo "\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getName", [], "any", false, false, false, 31), "html", null, true);
-            echo "</td>
+            echo "</a></td>
                         <td><a href=\"";
             // line 32
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
@@ -157,7 +161,7 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
 
     public function getDebugInfo()
     {
-        return array (  144 => 54,  135 => 48,  132 => 47,  130 => 46,  127 => 45,  123 => 43,  121 => 42,  114 => 37,  100 => 33,  94 => 32,  90 => 31,  86 => 29,  84 => 28,  81 => 27,  77 => 26,  59 => 10,  56 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
+        return array (  148 => 54,  139 => 48,  136 => 47,  134 => 46,  131 => 45,  127 => 43,  125 => 42,  118 => 37,  104 => 33,  98 => 32,  90 => 31,  86 => 29,  84 => 28,  81 => 27,  77 => 26,  59 => 10,  56 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -192,7 +196,7 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
                     {% set elementsOnPage = true %}
 
                     <tr>
-                        <td>{{ game.getName }}</td>
+                        <td><a href=\"{{ HOST }}game/id/{{ game.getId }}\">{{ game.getName }}</a></td>
                         <td><a href=\"{{ HOST }}edit-game/id/{{ game.getId }}\" id=\"updateGame\">Modifier</a></td>
                         <td><a href=\"#\" data-url-delete-game=\"{{ HOST }}delete-game/id/{{ game.getId }}\" id=\"gameDeleteBtn\" data-game-name=\"{{ game.getName }}\" data-toggle=\"modal\" data-target=\"#deleteModal\">Supprimer</a></td>
                     </tr> 
