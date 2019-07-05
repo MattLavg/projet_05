@@ -8,7 +8,7 @@ use App\Model\GenreManager;
 use App\Model\ModeManager;
 use App\Model\PlatformManager;
 use App\Model\RegionManager;
-// use App\Model\Pagination;
+use App\Model\Pagination;
 use App\Controller\ConnectionController;
 use App\Core\View;
 
@@ -62,7 +62,30 @@ use App\Core\View;
                     break;
             }
 
-            $data = $manager->getAll();
+            $pageNb = 1;
+
+            if (isset($params['pageNb'])) {
+                $pageNb = $params['pageNb'];
+            }
+
+            $totalNbRows = $manager->count();
+            $url = HOST . 'entity-management/entity/' . $entity;
+
+            $pagination = new Pagination($pageNb, $totalNbRows, $url, 3);
+
+            // if descendant order wanted, set $desc on true
+            $desc = false;
+
+            // set the name of element you want the list ordered by 
+            $orderBy = 'name';
+
+            $entities = $manager->getAll($orderBy, $desc, $pagination->getFirstEntry(), $pagination->getElementNbByPage());
+
+            $renderPagination = false;
+
+            if ($pagination->getEnoughEntries()) {
+                $renderPagination = true;
+            }
 
             $urlAddEntity = HOST . 'add-entity/entity/' . $entity;
             $urlUpdateEntity = HOST . 'update-entity/entity/' . $entity;
@@ -70,8 +93,10 @@ use App\Core\View;
 
             $view = new View('entityManagement');
             $view->render('back', array(
-                'entities' => $data,
+                'entities' => $entities,
                 'entityFr' => $entityFr, 
+                'pagination' => $pagination,
+                'renderPagination' => $renderPagination,
                 'urlAddEntity' => $urlAddEntity,
                 'urlUpdateEntity' => $urlUpdateEntity,
                 'urlDeleteEntity' => $urlDeleteEntity,

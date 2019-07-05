@@ -12,7 +12,7 @@ use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
 use App\Core\Registry;
 // use App\Model\CommentManager;
-// use App\Model\Pagination;
+use App\Model\Pagination;
 // use App\Controller\ConnectionController;
 use App\Core\View;
 
@@ -77,28 +77,32 @@ use App\Core\View;
                 $pageNb = $params['pageNb'];
             } 
 
-            // Default action message to null
-            $actionDone = null;
-
-            // if user delete a post
-            if (isset($_SESSION['actionDone'])) {
-                $actionDone = $_SESSION['actionDone'];
-            }
-
             $gameManager = new GameManager();
 
-            // $totalNbRows = $postManager->count();
-            // $url = HOST . 'post-management';
+            $totalNbRows = $gameManager->count();
+            $url = HOST . 'game-management';
 
-            // $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
-            
-            // $posts = $postManager->listPosts($pagination->getFirstEntry(), $pagination->getElementNbByPage());
+            $pagination = new Pagination($pageNb, $totalNbRows, $url, 3);
 
-            $games = $gameManager->getAll();
+            // if descendant order wanted, set $desc on true
+            $desc = false;
+
+            // set the name of element you want the list ordered by 
+            $orderBy = 'name';
+
+            $games = $gameManager->getAll($orderBy, $desc, $pagination->getFirstEntry(), $pagination->getElementNbByPage());
+
+            $renderPagination = false;
+
+            if ($pagination->getEnoughEntries()) {
+                $renderPagination = true;
+            }
 
             $view = new View('gameManagement');
             $view->render('back', array(
                 'games' => $games,
+                'pagination' => $pagination,
+                'renderPagination' => $renderPagination,
                 'isSessionValid' => ConnectionController::isSessionValid()));
 
             unset($_SESSION['actionDone']);

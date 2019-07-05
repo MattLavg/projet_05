@@ -117,12 +117,19 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         echo "
     ";
         // line 33
-        if ( !($context["elementsOnPage"] ?? null)) {
+        if ((($context["elementsOnPage"] ?? null) && ($context["renderPagination"] ?? null))) {
             // line 34
+            echo "        ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["pagination"] ?? null), "render", [], "any", false, false, false, 34), "html", null, true);
+            echo "
+    ";
+        } elseif ( !        // line 35
+($context["elementsOnPage"] ?? null)) {
+            // line 36
             echo "        <p>Il n'y a actuellement aucun article</p>
     ";
         }
-        // line 36
+        // line 38
         echo "
 ";
     }
@@ -139,7 +146,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
     public function getDebugInfo()
     {
-        return array (  126 => 36,  122 => 34,  120 => 33,  117 => 32,  101 => 24,  97 => 23,  87 => 20,  78 => 18,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
+        return array (  133 => 38,  129 => 36,  127 => 35,  122 => 34,  120 => 33,  117 => 32,  101 => 24,  97 => 23,  87 => 20,  78 => 18,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
     }
 
     public function getSourceContext()
@@ -176,7 +183,9 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
     {% endfor %}
 
-    {% if not elementsOnPage %}
+    {% if elementsOnPage and renderPagination %}
+        {{ pagination.render }}
+    {% elseif not elementsOnPage %}
         <p>Il n'y a actuellement aucun article</p>
     {% endif %}
 

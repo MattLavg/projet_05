@@ -122,20 +122,27 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
 
     ";
         // line 42
-        if ( !($context["elementsOnPage"] ?? null)) {
+        if ((($context["elementsOnPage"] ?? null) && ($context["renderPagination"] ?? null))) {
             // line 43
-            echo "        <p>Il n'y a actuellement aucun article</p>
+            echo "        ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["pagination"] ?? null), "render", [], "any", false, false, false, 43), "html", null, true);
+            echo "
+    ";
+        } elseif ( !        // line 44
+($context["elementsOnPage"] ?? null)) {
+            // line 45
+            echo "        <p>Il n'y a actuellement aucun jeu</p>
     ";
         }
-        // line 45
+        // line 47
         echo "
     ";
-        // line 46
+        // line 48
         if (($context["actionMessage"] ?? null)) {
-            // line 47
+            // line 49
             echo "        <div class=\"alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             ";
-            // line 48
+            // line 50
             echo twig_escape_filter($this->env, ($context["actionMessage"] ?? null), "html", null, true);
             echo "
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
@@ -144,7 +151,7 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
         </div>
     ";
         }
-        // line 54
+        // line 56
         echo "
 ";
     }
@@ -161,7 +168,7 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
 
     public function getDebugInfo()
     {
-        return array (  148 => 54,  139 => 48,  136 => 47,  134 => 46,  131 => 45,  127 => 43,  125 => 42,  118 => 37,  104 => 33,  98 => 32,  90 => 31,  86 => 29,  84 => 28,  81 => 27,  77 => 26,  59 => 10,  56 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
+        return array (  155 => 56,  146 => 50,  143 => 49,  141 => 48,  138 => 47,  134 => 45,  132 => 44,  127 => 43,  125 => 42,  118 => 37,  104 => 33,  98 => 32,  90 => 31,  86 => 29,  84 => 28,  81 => 27,  77 => 26,  59 => 10,  56 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -207,8 +214,10 @@ class __TwigTemplate_0308943c8a89b9247d4616661a37b92d48ee7d6ce13b0b3488d39ff4e54
         </table>
     </div>
 
-    {% if not elementsOnPage %}
-        <p>Il n'y a actuellement aucun article</p>
+    {% if elementsOnPage and renderPagination %}
+        {{ pagination.render }}
+    {% elseif not elementsOnPage %}
+        <p>Il n'y a actuellement aucun jeu</p>
     {% endif %}
 
     {% if actionMessage %}

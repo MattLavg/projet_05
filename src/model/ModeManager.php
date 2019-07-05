@@ -57,6 +57,20 @@ use App\Core\Manager;
     }
 
     /**
+     * Allows to count modes
+     * 
+     * @return int $totalNbRows
+     */
+    public function count()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(*) AS nbRows FROM modes');
+        $result = $req->fetch();
+
+        return $totalNbRows = $result['nbRows'];
+    }
+
+    /**
      * Allows to ad a game mode
      * 
      * @param array $game_id, $mode_id

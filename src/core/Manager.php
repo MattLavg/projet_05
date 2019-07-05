@@ -52,10 +52,16 @@ abstract class Manager
      * 
      * @return array $array
      */
-    public function getAll()
+    public function getAll($order, $desc, $firstEntry = 0, $nbElementsByPage)
     {
+        if ($desc == false) {
+            $desc = " ";
+        } else {
+            $desc = ' DESC';
+        }
+
         $class = $this->_class;
-        $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' ORDER BY id DESC');
+        $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
 
         $array = [];
 

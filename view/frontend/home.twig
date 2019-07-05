@@ -30,7 +30,9 @@
 
     {% endfor %}
 
-    {% if not elementsOnPage %}
+    {% if elementsOnPage and renderPagination %}
+        {{ pagination.render }}
+    {% elseif not elementsOnPage %}
         <p>Il n'y a actuellement aucun article</p>
     {% endif %}
 

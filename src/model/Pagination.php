@@ -41,9 +41,9 @@ class Pagination
     protected $_nextPage;
 
     /**
-     * @var bool $_notEnoughEntries is true if there are enough elements to display on page
+     * @var bool $_enoughEntries is true if there are enough elements to display on page
      */
-    protected $_notEnoughEntries;
+    protected $_enoughEntries;
 
     /**
      * @var int $_elementNbByPage the number of elements to display on a page
@@ -63,7 +63,7 @@ class Pagination
         $this->setElementNbByPage($elementNbByPages);
         $this->firstEntry($elementNbByPages);
         $this->setCurrentUrl($url);
-        $this->notEnoughEntries($totalNbRows, $elementNbByPages);
+        $this->enoughEntries($totalNbRows, $elementNbByPages);
     }
 
     /**
@@ -107,12 +107,12 @@ class Pagination
      * @param int $totalNbRows
      * @param int $elementNbByPages
      */
-    protected function notEnoughEntries($totalNbRows, $elementNbByPages)
+    protected function enoughEntries($totalNbRows, $elementNbByPages)
     {
         if ($totalNbRows <= $elementNbByPages) {
-            $this->_notEnoughEntries = FALSE;
+            $this->_enoughEntries = FALSE;
         } else {
-            $this->_notEnoughEntries = TRUE;
+            $this->_enoughEntries = TRUE;
         }
     }
 
@@ -183,9 +183,9 @@ class Pagination
      * 
      * @return bool $_notEnoughEntries
      */
-    public function getNotEnoughEntries()
+    public function getEnoughEntries()
     {
-        return $this->_notEnoughEntries;
+        return $this->_enoughEntries;
     }
 
     /**

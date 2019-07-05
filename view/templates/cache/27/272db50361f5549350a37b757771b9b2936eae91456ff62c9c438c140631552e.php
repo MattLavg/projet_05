@@ -142,12 +142,19 @@ class __TwigTemplate_a0024513e9bfd5243f30232f5370c2325efbf95666a23bf4a72295fb851
 
     ";
         // line 54
-        if ( !($context["elementsOnPage"] ?? null)) {
+        if ((($context["elementsOnPage"] ?? null) && ($context["renderPagination"] ?? null))) {
             // line 55
-            echo "        <p>Il n'y a actuellement aucun article</p>
+            echo "        ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["pagination"] ?? null), "render", [], "any", false, false, false, 55), "html", null, true);
+            echo "
+    ";
+        } elseif ( !        // line 56
+($context["elementsOnPage"] ?? null)) {
+            // line 57
+            echo "        <p>Il n'y a actuellement aucun jeu</p>
     ";
         }
-        // line 57
+        // line 59
         echo "
 ";
     }
@@ -164,7 +171,7 @@ class __TwigTemplate_a0024513e9bfd5243f30232f5370c2325efbf95666a23bf4a72295fb851
 
     public function getDebugInfo()
     {
-        return array (  151 => 57,  147 => 55,  145 => 54,  138 => 49,  126 => 45,  120 => 44,  116 => 43,  112 => 41,  110 => 40,  107 => 39,  103 => 38,  87 => 25,  77 => 18,  72 => 16,  64 => 11,  61 => 10,  58 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
+        return array (  158 => 59,  154 => 57,  152 => 56,  147 => 55,  145 => 54,  138 => 49,  126 => 45,  120 => 44,  116 => 43,  112 => 41,  110 => 40,  107 => 39,  103 => 38,  87 => 25,  77 => 18,  72 => 16,  64 => 11,  61 => 10,  58 => 9,  51 => 4,  48 => 3,  43 => 1,  41 => 7,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -222,8 +229,10 @@ class __TwigTemplate_a0024513e9bfd5243f30232f5370c2325efbf95666a23bf4a72295fb851
         </table>
     </div>
 
-    {% if not elementsOnPage %}
-        <p>Il n'y a actuellement aucun article</p>
+    {% if elementsOnPage and renderPagination %}
+        {{ pagination.render }}
+    {% elseif not elementsOnPage %}
+        <p>Il n'y a actuellement aucun jeu</p>
     {% endif %}
 
 {% endblock %}", "entityManagement.twig", "/Users/mathias/Sites/projet_05/view/backend/entityManagement.twig");

@@ -51,7 +51,7 @@ class View
 
         $view = $this->_view;
 
-        // Default 
+        // Default messages to null
         $errorMessage = null;
         $actionMessage = null;
 
