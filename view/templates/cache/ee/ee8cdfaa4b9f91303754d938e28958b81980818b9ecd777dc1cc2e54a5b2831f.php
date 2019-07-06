@@ -92,7 +92,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
         
     </head>
     <body>
-        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg\">
+        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg nav-padding-right\">
             <a class=\"navbar-brand logo\" href=\"";
         // line 45
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
@@ -150,22 +150,26 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
         echo "reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                         </div>
                     </li>
-                    <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"";
-        // line 70
-        echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-        echo "logout\">Déconnexion</a>
-                    </li>   
                 </ul>
                 <form class=\"form-inline\">
                     <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\">
                     <button class=\"btn btn-outline-light my-2 my-sm-0\" type=\"submit\">Chercher</button>
-                </form>
+                </form>     
             </div>
-
-            
         </nav>
     
+        <div id=\"user\" class=\"dropdown\">
+            <div class=\"dropdown-toggle dropdown-user\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                <i class=\"fas fa-user-circle fa-2x\"></i>
+            </div>
+            <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+                <a class=\"dropdown-item\" href=\"#\">Profil</a>
+                <a class=\"dropdown-item\" href=\"";
+        // line 83
+        echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+        echo "logout\">Déconnexion</a>
+            </div>
+        </div>
 
         <main role=\"main\" class=\"mainContainer container-fluid\">
 
@@ -176,39 +180,39 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                     <div class=\"col-lg-4 leftMenu\">
                         <ul class=\"list-group\">
                             <a href=\"";
-        // line 91
+        // line 95
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "edit-game\"><li class=\"list-group-item\">Ajouter un jeu</li></a>
                             <a href=\"";
-        // line 92
+        // line 96
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "game-management\"><li class=\"list-group-item\">Gérer les jeux</li></a>
                             <a href=\"";
-        // line 93
+        // line 97
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/developer\"><li class=\"list-group-item\">Gérer les développeurs</li></a>
                             <a href=\"";
-        // line 94
+        // line 98
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/publisher\"><li class=\"list-group-item\">Gérer les éditeurs</li></a>
                             <a href=\"";
-        // line 95
+        // line 99
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/platform\"><li class=\"list-group-item\">Gérer les supports</li></a>
                             <a href=\"";
-        // line 96
+        // line 100
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/genre\"><li class=\"list-group-item\">Gérer les genres</li></a>
                             <a href=\"";
-        // line 97
+        // line 101
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/mode\"><li class=\"list-group-item\">Gérer les modes</li></a>
                             <a href=\"";
-        // line 98
+        // line 102
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "entity-management/entity/region\"><li class=\"list-group-item\">Gérer les régions</li></a>
                             <a href=\"";
-        // line 99
+        // line 103
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "reported-comments\"><li class=\"list-group-item\">Modérer les commentaires</li></a>
                         </ul>
@@ -217,9 +221,9 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                     <div class=\"col-lg-8\">
 
                         ";
-        // line 105
+        // line 109
         $this->displayBlock('content', $context, $blocks);
-        // line 106
+        // line 110
         echo "
                     </div>
                 </div>
@@ -248,7 +252,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
                 <p><span class=\"text-light\">ListaGame - </span><a href=\"";
-        // line 133
+        // line 137
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "connection\">Connexion</a></p>
             </footer>
@@ -262,11 +266,11 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
     <!-- JQUERY UI -->
     <script src=\"";
-        // line 144
+        // line 148
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/jquery-ui.min.js\"></script>
     <script src=\"";
-        // line 145
+        // line 149
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/datepickerFrench.js\"></script>
 
@@ -276,13 +280,13 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 152
+        // line 156
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
     <!-- TINYMCE -->
     <script src=\"";
-        // line 155
+        // line 159
         echo twig_escape_filter($this->env, ($context["VENDOR"] ?? null), "html", null, true);
         echo "tinymce/js/tinymce/tinymce.min.js\"></script>
     <script type=\"text/javascript\">
@@ -316,7 +320,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
     {
     }
 
-    // line 105
+    // line 109
     public function block_content($context, array $blocks = [])
     {
     }
@@ -333,7 +337,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
     public function getDebugInfo()
     {
-        return array (  320 => 105,  315 => 7,  286 => 155,  280 => 152,  270 => 145,  266 => 144,  252 => 133,  223 => 106,  221 => 105,  212 => 99,  208 => 98,  204 => 97,  200 => 96,  196 => 95,  192 => 94,  188 => 93,  184 => 92,  180 => 91,  156 => 70,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  133 => 62,  129 => 61,  125 => 60,  121 => 59,  117 => 58,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
+        return array (  324 => 109,  319 => 7,  290 => 159,  284 => 156,  274 => 149,  270 => 148,  256 => 137,  227 => 110,  225 => 109,  216 => 103,  212 => 102,  208 => 101,  204 => 100,  200 => 99,  196 => 98,  192 => 97,  188 => 96,  184 => 95,  169 => 83,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  133 => 62,  129 => 61,  125 => 60,  121 => 59,  117 => 58,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -381,7 +385,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
         
     </head>
     <body>
-        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg\">
+        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg nav-padding-right\">
             <a class=\"navbar-brand logo\" href=\"{{ HOST }}\">LISTaGAME</a>
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExampleDefault\" aria-controls=\"navbarsExampleDefault\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
@@ -406,19 +410,23 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
                             <a href=\"{{ HOST }}reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                         </div>
                     </li>
-                    <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"{{ HOST }}logout\">Déconnexion</a>
-                    </li>   
                 </ul>
                 <form class=\"form-inline\">
                     <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\">
                     <button class=\"btn btn-outline-light my-2 my-sm-0\" type=\"submit\">Chercher</button>
-                </form>
+                </form>     
             </div>
-
-            
         </nav>
     
+        <div id=\"user\" class=\"dropdown\">
+            <div class=\"dropdown-toggle dropdown-user\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                <i class=\"fas fa-user-circle fa-2x\"></i>
+            </div>
+            <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+                <a class=\"dropdown-item\" href=\"#\">Profil</a>
+                <a class=\"dropdown-item\" href=\"{{ HOST }}logout\">Déconnexion</a>
+            </div>
+        </div>
 
         <main role=\"main\" class=\"mainContainer container-fluid\">
 

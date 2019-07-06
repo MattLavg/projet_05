@@ -53,7 +53,7 @@ abstract class Manager
      * @return array $array
      */
     public function getAll($order, $desc, $firstEntry = 0, $nbElementsByPage)
-    {
+    {die;
         if ($desc == false) {
             $desc = " ";
         } else {

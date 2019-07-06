@@ -93,7 +93,12 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         
     </head>
     <body>
-        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg\">
+        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg ";
+        // line 44
+        if (($context["connected"] ?? null)) {
+            echo "nav-padding-right";
+        }
+        echo "\">
             <a class=\"navbar-brand logo\" href=\"";
         // line 45
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
@@ -156,42 +161,57 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             echo "reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                             </div>
                         </li>
-                        <li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"";
-            // line 72
-            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-            echo "logout\">Déconnexion</a>
-                        </li>
-                    ";
-        } else {
-            // line 75
-            echo "                        <li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"";
-            // line 76
-            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-            echo "connection\">Connexion</a>
-                        </li>
                     ";
         }
-        // line 79
+        // line 72
         echo "                    
                 </ul>
                 <form class=\"form-inline\">
                     <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\">
                     <button class=\"btn btn-outline-light my-2 my-sm-0\" type=\"submit\">Chercher</button>
                 </form>
-            </div>
 
-            
+                ";
+        // line 79
+        if ( !($context["connected"] ?? null)) {
+            // line 80
+            echo "                    <a class=\"nav-link connection-link\" href=\"";
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "connection\">Connexion</a>
+                ";
+        }
+        // line 82
+        echo "            </div>
+
         </nav>
-    
+
         ";
-        // line 90
+        // line 86
+        if (($context["connected"] ?? null)) {
+            // line 87
+            echo "            <div id=\"user\" class=\"dropdown\">
+                <div class=\"dropdown-toggle dropdown-user\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    <i class=\"fas fa-user-circle fa-2x\"></i>
+                </div>
+                <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+                    <a class=\"dropdown-item\" href=\"#\">Profil</a>
+                    <a class=\"dropdown-item\" href=\"";
+            // line 93
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "logout\">Déconnexion</a>
+                </div>
+            </div>
+        ";
+        }
+        // line 97
+        echo "    
+        ";
+        // line 98
         $this->displayBlock('cover', $context, $blocks);
-        // line 91
+        // line 99
         echo "
         <main role=\"main\" ";
-        // line 92
+        // line 100
         if (($context["cover"] ?? null)) {
             echo " class=\"gameViewContainer container\" ";
         } else {
@@ -200,9 +220,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         echo ">
 
             ";
-        // line 94
+        // line 102
         $this->displayBlock('content', $context, $blocks);
-        // line 95
+        // line 103
         echo "
             <!-- DELETE MODAL -->
             <div class=\"modal fade\" id=\"deleteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteModalLabel\" aria-hidden=\"true\">
@@ -229,7 +249,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
                 <p><span class=\"text-light\">ListaGame - </span><a href=\"";
-        // line 120
+        // line 128
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "connection\">Connexion</a></p>
             </footer>
@@ -243,7 +263,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- JQUERY UI -->
     <script src=\"";
-        // line 131
+        // line 139
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/jquery-ui.min.js\"></script>
 
@@ -253,7 +273,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 138
+        // line 146
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
@@ -268,12 +288,12 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     {
     }
 
-    // line 90
+    // line 98
     public function block_cover($context, array $blocks = [])
     {
     }
 
-    // line 94
+    // line 102
     public function block_content($context, array $blocks = [])
     {
     }
@@ -290,7 +310,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  277 => 94,  272 => 90,  267 => 7,  257 => 138,  247 => 131,  233 => 120,  206 => 95,  204 => 94,  195 => 92,  192 => 91,  190 => 90,  177 => 79,  171 => 76,  168 => 75,  162 => 72,  155 => 68,  151 => 67,  147 => 66,  143 => 65,  139 => 64,  135 => 63,  131 => 62,  127 => 61,  123 => 60,  118 => 57,  116 => 56,  110 => 53,  99 => 45,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  297 => 102,  292 => 98,  287 => 7,  277 => 146,  267 => 139,  253 => 128,  226 => 103,  224 => 102,  215 => 100,  212 => 99,  210 => 98,  207 => 97,  200 => 93,  192 => 87,  190 => 86,  184 => 82,  178 => 80,  176 => 79,  167 => 72,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -338,7 +358,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         
     </head>
     <body>
-        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg\">
+        <nav class=\"navbar navbar-expand-md navbar-dark fixed-top navbar-bg {% if connected %}nav-padding-right{% endif %}\">
             <a class=\"navbar-brand logo\" href=\"{{ HOST }}\">LISTaGAME</a>
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarsExampleDefault\" aria-controls=\"navbarsExampleDefault\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
@@ -365,13 +385,6 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                                 <a href=\"{{ HOST }}reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                             </div>
                         </li>
-                        <li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"{{ HOST }}logout\">Déconnexion</a>
-                        </li>
-                    {% else %}
-                        <li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"{{ HOST }}connection\">Connexion</a>
-                        </li>
                     {% endif %}
                     
                 </ul>
@@ -379,10 +392,25 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                     <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\">
                     <button class=\"btn btn-outline-light my-2 my-sm-0\" type=\"submit\">Chercher</button>
                 </form>
+
+                {% if not connected %}
+                    <a class=\"nav-link connection-link\" href=\"{{ HOST }}connection\">Connexion</a>
+                {% endif %}
             </div>
 
-            
         </nav>
+
+        {% if connected %}
+            <div id=\"user\" class=\"dropdown\">
+                <div class=\"dropdown-toggle dropdown-user\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    <i class=\"fas fa-user-circle fa-2x\"></i>
+                </div>
+                <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+                    <a class=\"dropdown-item\" href=\"#\">Profil</a>
+                    <a class=\"dropdown-item\" href=\"{{ HOST }}logout\">Déconnexion</a>
+                </div>
+            </div>
+        {% endif %}
     
         {% block cover %}{% endblock %}
 

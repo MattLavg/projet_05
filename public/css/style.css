@@ -26,9 +26,39 @@ h1 {
 
 /* NAVBAR and FOOTER */
 
+.nav-padding-right {
+    padding-right: 50px;
+}
+
+.connection-link {
+    color: #F0F0F0;
+}
+
 .navbar-bg,
-.footer-bg {
+.footer-bg,
+#user {
     background-color: rgb(226, 0, 0);
+}
+
+#user {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 56px;
+    z-index: 1040;
+    cursor: pointer;
+}
+
+.dropdown-user {
+    height: 56px;
+}
+
+#user i {
+    color: #F0F0F0;
+    position: relative;
+    top: 12px;
+    left: 0px;
 }
 
 /* CONNEXION PAGE */
