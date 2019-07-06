@@ -1,6 +1,6 @@
 <?php
 
-namespace Listagame\Model;
+namespace App\Model;
 
 /**
  * Member
@@ -18,17 +18,17 @@ namespace Listagame\Model;
     /**
      * @var string $_firstName, the first name of a member
      */
-    protected $_firstName;
+    protected $_first_name;
 
     /**
      * @var string $_lastName, the last name of a member
      */
-    protected $_lastName;
+    protected $_last_name;
 
     /**
      * @var string $_nickName, the nick name of a member
      */
-    protected $_nickName;
+    protected $_nick_name;
 
     /**
      * @var string $_mail, the mail of a member
@@ -38,7 +38,7 @@ namespace Listagame\Model;
     /**
      * @var string $_ipAddress, the IP address of a member
      */
-    protected $_ipAddress;
+    // protected $_ipAddress;
 
     /**
      * @var string $_birthday, the birthday of a member
@@ -48,17 +48,17 @@ namespace Listagame\Model;
     /**
      * @var string $_icon, the icon of a member
      */
-    protected $_icon;
+    // protected $_icon;
 
     /**
      * @var string $_inscriptionDate, the inscription date of a member
      */
-    protected $_inscriptionDate;
+    protected $_inscription_date;
 
     /**
      * @var string $_lastConnectionDate, the last connection date of a member
      */
-    protected $_lastConnectionDate;
+    protected $_last_connection_date;
 
     /**
      * @var string $_password, the password of a member
@@ -68,7 +68,7 @@ namespace Listagame\Model;
     /**
      * @var int $_type, the type of a member
      */
-    protected $_type;
+    protected $_id_type;
 
     /**
      * Set automatically elements in methods
@@ -104,9 +104,9 @@ namespace Listagame\Model;
      * 
      * @return string $_firstName
      */
-    public function getFirstName()
+    public function getFirst_name()
     {
-        return $this->_firstName;
+        return $this->_first_name;
     }
 
     /**
@@ -114,9 +114,9 @@ namespace Listagame\Model;
      * 
      * @return string $_lastName
      */
-    public function getLastName()
+    public function getLast_name()
     {
-        return $this->_lastName;
+        return $this->_last_name;
     }
 
     /**
@@ -124,9 +124,9 @@ namespace Listagame\Model;
      * 
      * @return string $_nickName
      */
-    public function getNickName()
+    public function getNick_name()
     {
-        return $this->_nickName;
+        return $this->_nick_name;
     }
 
     /**
@@ -144,10 +144,10 @@ namespace Listagame\Model;
      * 
      * @return string $_ipAddress
      */
-    public function getIpAddress()
-    {
-        return $this->_ipAddress;
-    }
+    // public function getIpAddress()
+    // {
+    //     return $this->_ipAddress;
+    // }
 
     /**
      * Allows to get the birthday of a member
@@ -164,19 +164,19 @@ namespace Listagame\Model;
      * 
      * @return string $_icon
      */
-    public function getIcon()
-    {
-        return $this->_icon;
-    }
+    // public function getIcon()
+    // {
+    //     return $this->_icon;
+    // }
 
     /**
      * Allows to get the inscription date of a member
      * 
      * @return string $_inscriptionDate
      */
-    public function getInscriptionDate()
+    public function getInscription_date()
     {
-        return $this->_inscriptionDate;
+        return $this->_inscription_date;
     }
 
     /**
@@ -184,9 +184,9 @@ namespace Listagame\Model;
      * 
      * @return string $_lastConnectionDate
      */
-    public function getLastConnectionDate()
+    public function getLast_connection_date()
     {
-        return $this->_lastConnectionDate;
+        return $this->_last_connection_date;
     }
 
     /**
@@ -204,9 +204,131 @@ namespace Listagame\Model;
      * 
      * @return int $_type
      */
-    public function getType()
+    public function getId_type()
     {
-        return $this->_type;
+        return $this->_id_type;
+    }
+
+    // SETTERS
+
+    /**
+     * Allows to set the id of a member
+     * 
+     * @param int $_id
+     */
+    public function setId(int $id)
+    {
+        $this->_id = $id;
+    }
+
+    /**
+     * Allows to set the first name of a member
+     * 
+     * @param string $_firstName
+     */
+    public function setFirst_name(string $firstName = null)
+    {
+        $this->_first_name = $firstName;
+    }
+
+    /**
+     * Allows to set the last name of a member
+     * 
+     * @param string $_lastName
+     */
+    public function setLast_name(string $lastName = null)
+    {
+        $this->_last_name = $lastName;
+    }
+
+    /**
+     * Allows to set the nick name of a member
+     * 
+     * @param string $_nickName
+     */
+    public function setNick_name(string $nickName)
+    {
+        $this->_nick_name = $nickName;
+    }
+
+    /**
+     * Allows to set the mail of a member
+     * 
+     * @param string $_mail
+     */
+    public function setMail(string $mail)
+    {
+        $this->_mail = $mail;
+    }
+
+    /**
+     * Allows to set the IP address of a member
+     * 
+     * @param string $_ipAddress
+     */
+    // public function setIpAddress(string $ipAdress)
+    // {
+    //     $this->_ipAddress = $ipAdress;
+    // }
+
+    /**
+     * Allows to set the birthday of a member
+     * 
+     * @param string $_birthday
+     */
+    public function setBirthday(string $birthday = null)
+    {
+        $this->_birthday = $birthday;
+    }
+
+    /**
+     * Allows to set the icon of a member
+     * 
+     * @param string $_icon
+     */
+    // public function setIcon(string $icon)
+    // {
+    //     $this->_icon = $icon;
+    // }
+
+    /**
+     * Allows to set the inscription date of a member
+     * 
+     * @param string $_inscriptionDate
+     */
+    public function setInscription_date(string $inscriptionDate)
+    {
+        $this->_inscription_date = $inscriptionDate;
+    }
+
+    /**
+     * Allows to set the last connection date of a member
+     * 
+     * @param string $_lastConnectionDate
+     */
+    public function setLast_connection_date(string $lastConnectionDate = null)
+    {
+        $this->_last_connection_date = $lastConnectionDate;
+    }
+
+    /**
+     * Allows to set the password of a member
+     * 
+     * @param string $_password
+     */
+    public function setPassword(string $password)
+    {
+        $this->_password = $password;
+    }
+
+    /**
+     * Allows to set the type of a member
+     * 
+     * @param int $_type
+     */
+    public function setId_type(int $idType = 3)
+    {
+        $this->_id_type = $idType;
     }
 
  }

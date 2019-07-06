@@ -53,15 +53,25 @@ abstract class Manager
      * @return array $array
      */
     public function getAll($order, $desc, $firstEntry = 0, $nbElementsByPage)
-    {die;
-        if ($desc == false) {
-            $desc = " ";
-        } else {
-            $desc = ' DESC';
-        }
-
+    {
         $class = $this->_class;
-        $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+
+        // if no parameters, do a simple request
+        if ($order == null && $desc == null && $firstEntry == null && $nbElementsByPage == null) {
+            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' ORDER BY name');
+
+        // else, do a request with parameters
+        } else {
+
+            if ($desc == false) {
+                $desc = " ";
+            } else {
+                $desc = ' DESC';
+            }
+    
+            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+
+        }
 
         $array = [];
 

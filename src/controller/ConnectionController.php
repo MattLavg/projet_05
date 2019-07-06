@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\View;
 use App\Model\Authentication;
+use App\Model\MemberManager;
 
 /**
  *  ConnectionController
@@ -47,17 +48,22 @@ class ConnectionController
      */
     public function loginCheck($params)
     {
-        $authentication = new Authentication();
-        $authentication = $authentication->checkLogin();
-
         // Default SESSION['valid'] to false
         $_SESSION['valid'] = false;
 
         if (isset($params['mail']) && isset($params['password']) && !empty($params['mail']) && !empty($params['password'])) {
+
+            $authentication = new Authentication();
+            $authentication = $authentication->checkLogin($params['mail']);
   
             if ($params['mail'] == $authentication['mail'] && password_verify($params['password'], $authentication['password'])) {
             
                 $_SESSION['valid'] = true;
+
+                $memberManager = new MemberManager();
+                $member = $memberManager->getMember($params['mail']);
+
+                $memberManager->updateLastConnectionDate($member->getId());
      
                 $view = new View();
                 $view->redirect('home');

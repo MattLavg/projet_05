@@ -251,10 +251,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
             </div>
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
-                <p><span class=\"text-light\">ListaGame - </span><a href=\"";
-        // line 137
-        echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-        echo "connection\">Connexion</a></p>
+                <p><span class=\"text-light\">ListaGame - Projet étudiant - Openclassrooms - 2019</span></p>
             </footer>
 
         </main><!-- /.container -->
@@ -337,7 +334,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
 
     public function getDebugInfo()
     {
-        return array (  324 => 109,  319 => 7,  290 => 159,  284 => 156,  274 => 149,  270 => 148,  256 => 137,  227 => 110,  225 => 109,  216 => 103,  212 => 102,  208 => 101,  204 => 100,  200 => 99,  196 => 98,  192 => 97,  188 => 96,  184 => 95,  169 => 83,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  133 => 62,  129 => 61,  125 => 60,  121 => 59,  117 => 58,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
+        return array (  321 => 109,  316 => 7,  287 => 159,  281 => 156,  271 => 149,  267 => 148,  227 => 110,  225 => 109,  216 => 103,  212 => 102,  208 => 101,  204 => 100,  200 => 99,  196 => 98,  192 => 97,  188 => 96,  184 => 95,  169 => 83,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  133 => 62,  129 => 61,  125 => 60,  121 => 59,  117 => 58,  109 => 53,  98 => 45,  70 => 20,  64 => 17,  58 => 14,  54 => 13,  47 => 8,  45 => 7,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -478,7 +475,7 @@ class __TwigTemplate_d9cf388c4795b2b480d1dcf94aba4b59acb7c8b0d794f6301f836367aef
             </div>
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
-                <p><span class=\"text-light\">ListaGame - </span><a href=\"{{ HOST }}connection\">Connexion</a></p>
+                <p><span class=\"text-light\">ListaGame - Projet étudiant - Openclassrooms - 2019</span></p>
             </footer>
 
         </main><!-- /.container -->

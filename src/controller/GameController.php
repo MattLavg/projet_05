@@ -149,24 +149,24 @@ use App\Core\View;
                 // get the game developers and all developers for list
                 $developerManager = new DeveloperManager();
                 $developers = $developerManager->getDevelopers($game_id);
-                $allDevelopers = $developerManager->getAll();
+                $allDevelopers = $developerManager->getAll(null, null, null, null);
 
                 $genreManager = new GenreManager();
                 $genres = $genreManager->getGenres($game_id);
-                $allGenres = $genreManager->getAll();
+                $allGenres = $genreManager->getAll(null, null, null, null);
 
                 $modeManager = new ModeManager();
                 $modes = $modeManager->getModes($game_id);
-                $allModes = $modeManager->getAll();
+                $allModes = $modeManager->getAll(null, null, null, null);
 
                 $platformManager = new PlatformManager();
-                $allPlatforms = $platformManager->getAll();
+                $allPlatforms = $platformManager->getAll(null, null, null, null);
 
                 $publisherManager = new PublisherManager();
-                $allPublishers = $publisherManager->getAll();
+                $allPublishers = $publisherManager->getAll(null, null, null, null);
 
                 $regionManager = new RegionManager();
-                $allRegions = $regionManager->getAll();
+                $allRegions = $regionManager->getAll(null, null, null, null);
 
                 $releaseDateManager = new ReleaseDateManager();
                 $releaseDates = $releaseDateManager->getReleases($game_id);
@@ -198,12 +198,12 @@ use App\Core\View;
                 $publisherManager = new PublisherManager();
                 $regionManager = new RegionManager();
 
-                $developers = $developerManager->getAll();
-                $genres = $genreManager->getAll();
-                $modes = $modeManager->getAll();
-                $platforms = $platformManager->getAll();
-                $publishers = $publisherManager->getAll();
-                $regions = $regionManager->getAll();
+                $developers = $developerManager->getAll(null, null, null, null);
+                $genres = $genreManager->getAll(null, null, null, null);
+                $modes = $modeManager->getAll(null, null, null, null);
+                $platforms = $platformManager->getAll(null, null, null, null);
+                $publishers = $publisherManager->getAll(null, null, null, null);
+                $regions = $regionManager->getAll(null, null, null, null);
 
                 $view = new View('gameEdit');
                 $view->render('back', array(

@@ -17,13 +17,13 @@ class Authentication extends Manager
      * 
      * @return array $data
      */
-    public function checkLogin()
+    public function checkLogin($member_mail)
     {
-        $db = $this->dbConnect();
-        $req = $db->query('SELECT mail, password FROM members');
+        $req = $this->_db->prepare('SELECT mail, password FROM members WHERE mail = ?');
+        $req->execute(array($member_mail));
 
         $data = $req->fetch(\PDO::FETCH_ASSOC);
-   
+
         return $data;
     }
 }

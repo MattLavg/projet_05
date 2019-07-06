@@ -248,10 +248,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             </div>
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
-                <p><span class=\"text-light\">ListaGame - </span><a href=\"";
-        // line 128
-        echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-        echo "connection\">Connexion</a></p>
+                <p><span class=\"text-light\">ListaGame - Projet étudiant - Openclassrooms - 2019</span></p>
             </footer>
 
         </main><!-- /.container -->
@@ -310,7 +307,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  297 => 102,  292 => 98,  287 => 7,  277 => 146,  267 => 139,  253 => 128,  226 => 103,  224 => 102,  215 => 100,  212 => 99,  210 => 98,  207 => 97,  200 => 93,  192 => 87,  190 => 86,  184 => 82,  178 => 80,  176 => 79,  167 => 72,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  294 => 102,  289 => 98,  284 => 7,  274 => 146,  264 => 139,  226 => 103,  224 => 102,  215 => 100,  212 => 99,  210 => 98,  207 => 97,  200 => 93,  192 => 87,  190 => 86,  184 => 82,  178 => 80,  176 => 79,  167 => 72,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -442,7 +439,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             </div>
 
             <footer class=\"container-fluid fixed-bottom d-flex justify-content-center align-items-center p-2 footer-bg\">
-                <p><span class=\"text-light\">ListaGame - </span><a href=\"{{ HOST }}connection\">Connexion</a></p>
+                <p><span class=\"text-light\">ListaGame - Projet étudiant - Openclassrooms - 2019</span></p>
             </footer>
 
         </main><!-- /.container -->
