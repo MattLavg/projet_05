@@ -38,6 +38,7 @@ class Routeur
         'add-entity'           => ['controller' => 'App\Controller\EntityController',     'method' => 'addEntity'],
         'update-entity'        => ['controller' => 'App\Controller\EntityController',     'method' => 'updateEntity'],
         'delete-entity'        => ['controller' => 'App\Controller\EntityController',     'method' => 'deleteEntity'],
+        'add-member'           => ['controller' => 'App\Controller\MemberController',     'method' => 'addMember'],
         'reported-comments'    => ['controller' => 'App\Controller\BackController',       'method' => 'showReportedComments'],
         'add-comment'          => ['controller' => 'App\Controller\CommentController',    'method' => 'addComment'],
         'delete-comment'       => ['controller' => 'App\Controller\CommentController',    'method' => 'deleteComment'],

@@ -28,20 +28,20 @@
             <h2>Créer son compte</h2>
             <p>Inscription rapide.</p>
 
-            <form>
+            <form method="post" action="{{HOST}}add-member" id="inscriptionForm" novalidate>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="inscriptionNickname" placeholder="Pseudo">
+                    <input type="text" class="form-control" id="inscriptionNickname" name="nickName" placeholder="Pseudo">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="inscriptionEmail" aria-describedby="emailHelp" placeholder="Email">
+                    <input type="email" class="form-control" id="inscriptionEmail" name="mail" aria-describedby="emailHelp" placeholder="Email">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="inscriptionPassword" placeholder="Mot de passe">
+                    <input type="password" class="form-control" id="inscriptionPassword" name="password" placeholder="Mot de passe">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="confirmationPassword" placeholder="Confirmer le mot de passe">
+                    <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword" placeholder="Confirmer le mot de passe">
                 </div>
-                <button type="submit" class="btn btn-primary">S'inscrire</button>
+                <button type="submit" class="btn btn-primary inscriptionBtn">S'inscrire</button>
             </form>
         </div>
     </div>

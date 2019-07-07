@@ -45,4 +45,53 @@ use App\Model\Member;
 
         // $count = $req->rowCount();
     }
+
+    /**
+     * Allows to get all members nicknames
+     */
+    public function getAllNickNames()
+    {
+        $req = $this->_db->query('SELECT nick_name FROM ' . $this->_table);
+
+        $array = $req->fetchAll(\PDO::FETCH_COLUMN, 0);
+
+        return $array;
+    }
+
+    /**
+     * Allows to get all members emails
+     */
+    public function getAllMails()
+    {
+        $req = $this->_db->query('SELECT mail FROM ' . $this->_table);
+
+        $array = $req->fetchAll(\PDO::FETCH_COLUMN, 0);
+
+        return $array;
+    }
+
+    /**
+     * Allows to add a member
+     * 
+     * @param array $values
+     */
+    public function addMember($values, $cryptedPassword)
+    {
+        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, password, id_type) VALUES(?, ?, NOW(), ?, ?)');
+        $req->execute(array(
+            $values['nickName'],
+            $values['mail'],
+            $cryptedPassword,
+            3
+        ));
+
+        $count = $req->rowCount();
+
+var_dump($this->_db->lastInsertId());
+        if (!empty($count)) {
+            $id = $this->_db->lastInsertId();
+            var_dump($id);die;
+            return $id;
+        }
+    }
  }

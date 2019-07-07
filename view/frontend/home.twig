@@ -36,4 +36,13 @@
         <p>Il n'y a actuellement aucun article</p>
     {% endif %}
 
+    {% if actionMessage %}
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ actionMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
 {% endblock %}

@@ -393,6 +393,13 @@ $(document).ready(function () {
         } else {
             $('#loginForm').submit();
         } 
+    });
+
+    // Check inputs in inscription form
+    $('.inscriptionBtn').click(function(e) {
+
+
+            $('#inscriptionForm').submit();
 
     });
 
