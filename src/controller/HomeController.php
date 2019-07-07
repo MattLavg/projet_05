@@ -27,6 +27,12 @@ class HomeController
         if (isset($params['pageNb'])) {
             $pageNb = $params['pageNb'];
         } 
+
+        $currentMember = null;
+
+        if (isset($_SESSION['currentMember'])) {
+            $currentMember = $_SESSION['currentMember'];
+        }
         
         $gameManager = new GameManager();
 
@@ -54,7 +60,8 @@ class HomeController
             'games' => $games,
             'pagination' => $pagination,
             'renderPagination' => $renderPagination,
-            'connected' => ConnectionController::isSessionValid()));
+            'connected' => ConnectionController::isSessionValid(),
+            'member' => $currentMember));
 
     }
 }

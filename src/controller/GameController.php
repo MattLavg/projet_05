@@ -31,6 +31,12 @@ use App\Core\View;
      */
     public function showGame($params = [])
     {
+        $currentMember = null;
+
+        if (isset($_SESSION['currentMember'])) {
+            $currentMember = $_SESSION['currentMember'];
+        }
+
         extract($params); // Allows to extract the $id variable
 
         $game_id = $id; // rename the variable for better identification
@@ -58,7 +64,8 @@ use App\Core\View;
             'genres' => $genres,
             'modes' => $modes,
             'releases' => $releaseDates,
-            'connected' => ConnectionController::isSessionValid()));
+            'connected' => ConnectionController::isSessionValid(),
+            'member' => $currentMember));
 
     }
 
@@ -76,6 +83,12 @@ use App\Core\View;
             if (isset($params['pageNb'])) {
                 $pageNb = $params['pageNb'];
             } 
+
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
 
             $gameManager = new GameManager();
 
@@ -103,7 +116,8 @@ use App\Core\View;
                 'games' => $games,
                 'pagination' => $pagination,
                 'renderPagination' => $renderPagination,
-                'isSessionValid' => ConnectionController::isSessionValid()));
+                'isSessionValid' => ConnectionController::isSessionValid(),
+                'member' => $currentMember));
 
             unset($_SESSION['actionDone']);
 
@@ -134,6 +148,12 @@ use App\Core\View;
             // if user try to post empty fields
             if (isset($_SESSION['errorMessage'])) {
                 $errorMessage = $_SESSION['errorMessage'];
+            }
+
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
             }
 
             if (isset($params['id'])) {
@@ -185,6 +205,7 @@ use App\Core\View;
                     'allPlatforms' => $allPlatforms,
                     'allPublishers' => $allPublishers,
                     'allRegions' => $allRegions,
+                    'member' => $currentMember,
                     'errorMessage' => $errorMessage));
 
                 unset($_SESSION['errorMessage']);
@@ -213,6 +234,7 @@ use App\Core\View;
                     'platforms' => $platforms,
                     'publishers' => $publishers,
                     'regions' => $regions,
+                    'member' => $currentMember,
                     'errorMessage' => $errorMessage));
 
                 unset($_SESSION['errorMessage']);

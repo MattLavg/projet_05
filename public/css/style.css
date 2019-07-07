@@ -61,6 +61,16 @@ h1 {
     left: 0px;
 }
 
+.memberNickNameDropdown {
+    font-weight: bold;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    cursor: default;
+}
+
+.memberNickNameDropdown:hover {
+    background-color: inherit;
+}
+
 /* CONNEXION PAGE */
 
 .col-connexion-left {

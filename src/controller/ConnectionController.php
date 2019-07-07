@@ -22,7 +22,7 @@ class ConnectionController
         if ($this->isSessionValid()) {
 
             $view = new View();
-            $view->redirect('post-management');
+            $view->redirect('home');
 
         } else {
 
@@ -62,6 +62,8 @@ class ConnectionController
 
                 $memberManager = new MemberManager();
                 $member = $memberManager->getMember($params['mail']);
+
+                $_SESSION['currentMember'] = $member;
 
                 $memberManager->updateLastConnectionDate($member->getId());
      

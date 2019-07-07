@@ -68,6 +68,12 @@ use App\Core\View;
                 $pageNb = $params['pageNb'];
             }
 
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
+
             $totalNbRows = $manager->count();
             $url = HOST . 'entity-management/entity/' . $entity;
 
@@ -100,7 +106,8 @@ use App\Core\View;
                 'urlAddEntity' => $urlAddEntity,
                 'urlUpdateEntity' => $urlUpdateEntity,
                 'urlDeleteEntity' => $urlDeleteEntity,
-                'isSessionValid' => ConnectionController::isSessionValid()));
+                'isSessionValid' => ConnectionController::isSessionValid(),
+                'member' => $currentMember));
 
             unset($_SESSION['actionDone']);
 
