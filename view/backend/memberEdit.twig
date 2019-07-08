@@ -8,22 +8,74 @@
 
     <div class="row">
         <div class="col">
+
+            <h3>Modifier vos informations</h3>
+
+            <hr>
+
             <form method="post" action="{{HOST}}update-infos-member" id="updateInfosMember" novalidate>
                 <div class="form-group">
+                    <input type="hidden" class="form-control" id="member_id" name="member_id" value="{{ member.getId }}">
+                </div>
+                <div class="form-group">
+                    <label for="memberNickname">Pseudo : </label>
                     <input type="text" class="form-control" id="memberNickname" name="nickName" value="{{ member.getNick_name }}">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" id="inscriptionEmail" name="mail" aria-describedby="emailHelp" placeholder="Email">
+                    <label for="memberFirstname">Prénom : </label>
+                    <input type="text" class="form-control" id="memberFirstname" name="firstName" 
+                        {% if member.getFisrt_name == null %}
+                            placeholder="Prénom"
+                        {% else %}
+                            value="{{ member.getFisrt_name }}"
+                        {% endif %}
+                    >
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="inscriptionPassword" name="password" placeholder="Mot de passe">
+                    <label for="memberLastname">Nom : </label>
+                    <input type="text" class="form-control" id="memberLastname" name="lastName" 
+                        {% if member.getLast_name == null %}
+                            placeholder="Nom"
+                        {% else %}
+                            value="{{ member.getLast_name }}"
+                        {% endif %}
+                    >
                 </div>
                 <div class="form-group">
+                    <label for="memberEmail">Email :</label>
+                    <input type="email" class="form-control" id="memberEmail" name="mail" aria-describedby="emailHelp" value="{{ member.getMail }}">
+                </div>
+                <div class="form-group">
+                    <label for="memberBirthday">Date de naissance: </label>
+                    <input type="text" class="form-control dateMember" id="memberBirthday" name="birthday" 
+                        {% if member.getBirthday == null %}
+                            placeholder="Date de naissance"
+                        {% else %}
+                            value="{{ member.getBirthday }}"
+                        {% endif %}
+                    readonly>
+                    <input type="text" class="form-control altDateMember" name="birthday" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="memberPassword">Mot de passe</label>
+                    <input type="password" class="form-control" id="memberPassword" name="password" placeholder="Mot de passe">
+                </div>
+                <div class="form-group">
+                    <label for="confirmationPassword">Confirmer le mot de passe</label>
                     <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword" placeholder="Confirmer le mot de passe">
                 </div>
-                <button type="submit" class="btn btn-primary updateInfosMemberBtn">S'inscrire</button>
+                <button type="submit" class="btn btn-primary updateInfosMemberBtn">Valider</button>
             </form>
         </div>
     </div>
+
+    {% if errorMessage %}
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
 
 {% endblock %}

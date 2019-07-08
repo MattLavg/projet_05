@@ -135,7 +135,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         // line 39
         if (($context["actionMessage"] ?? null)) {
             // line 40
-            echo "        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+            echo "        <div class=\"alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             ";
             // line 41
             echo twig_escape_filter($this->env, ($context["actionMessage"] ?? null), "html", null, true);
@@ -207,7 +207,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
     {% endif %}
 
     {% if actionMessage %}
-        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+        <div class=\"alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             {{ actionMessage }}
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
                 <span aria-hidden=\"true\">&times;</span>

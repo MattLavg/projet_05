@@ -168,4 +168,37 @@ use App\Core\View;
         $view = new View();
         $view->redirect('home');
     }
+
+    /**
+     * Allows to update members informations
+     * 
+     * @param array $params
+     */
+    public function updateInfosMember($params = [])
+    {
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
+
+        $emptyParam = false;
+
+        array_walk($params, function(&$item, $key) {
+
+            $item = trim(strip_tags($item));
+  
+            if(empty($item)) {
+
+                $emptyParam = true;
+
+            }
+        });
+var_dump($emptyParam);
+        if ($emptyParam) {
+
+            $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+
+            $view = new View();
+            $view->redirect('memberEdit/id/' . $params['member_id']);
+        }
+    }
  }
