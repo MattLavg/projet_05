@@ -396,12 +396,12 @@ $(document).ready(function () {
     });
 
     // Check inputs in inscription form
-    $('.inscriptionBtn').click(function(e) {
+    // $('.inscriptionBtn').click(function(e) {
+    //     e.preventDefault();
 
+    //         $('#inscriptionForm').submit();
 
-            $('#inscriptionForm').submit();
-
-    });
+    // });
 
     // Check inputs in Edit game form (the "add" one)
     $('.addGameBtn').click(function(e) {

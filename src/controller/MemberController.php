@@ -14,96 +14,148 @@ use App\Core\View;
  class MemberController
  {
     /**
+     * Allows to show informations member
+     * 
+     * @param array $params
+     */
+    public function showInformationsMember($params = [])
+    {
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";
+
+        if (ConnectionController::isSessionValid()) {
+
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
+
+            $view = new View('memberInfos');
+            $view->render('back', array(
+                'member' => $currentMember,
+                'connected' => ConnectionController::isSessionValid()
+            ));
+
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
+
+    /**
+     * Allows to edit members informations
+     * 
+     * @param array $params
+     */
+    public function showEditMember($params = [])
+    {
+        if (ConnectionController::isSessionValid()) {
+
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
+
+            $view = new View('memberEdit');
+            $view->render('back', array(
+                'member' => $currentMember,
+                'connected' => ConnectionController::isSessionValid()
+            ));
+
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
+
+    /**
      * Allows to add a member
      * 
      * @param array $params
      */
     public function addMember($params = [])
     {
-        echo "<pre>";
-        print_r($params);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";
 
         // Default SESSION['valid'] to false
         $_SESSION['valid'] = false;
 
-        // array_walk($params, function(&$item, $key) {
+        array_walk($params, function(&$item, $key) {
 
-        //     $item = trim(strip_tags($item));
+            $item = trim(strip_tags($item));
 
-        //     if(empty($item)) {
+            if(empty($item)) {
         
-        //         $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+                $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
 
-        //         $view = new View();
-        //         $view->redirect('connection');
-        //     }
-        // });
+                $view = new View();
+                $view->redirect('connection');
+            }
+        });
 
-        // $memberManager = new MemberManager();
-        // $allNickNames = $memberManager->getAllNickNames();
-        // $allMails = $memberManager->getAllMails();
+        $memberManager = new MemberManager();
+        $allNickNames = $memberManager->getAllNickNames();
+        $allMails = $memberManager->getAllMails();
 
-        // echo "<pre>";
-        // print_r($allNickNames);
-        // echo "</pre>";
+        // Check if nickname already exists
+        $nickNameResult = array_search($params['nickName'], $allNickNames);
 
-        // echo "<pre>";
-        // print_r($allMails);
-        // echo "</pre>";
+        // Check if mail already exists
+        $mailResult = array_search($params['mail'], $allMails);
 
-        // // Check if nickname already exists
-        // $nickNameResult = array_search($params['nickName'], $allNickNames);
+        if ($nickNameResult) {
+     
+            $_SESSION['errorMessage'] = 'Le pseudo existe déjà.';
 
-        // // Check if mail already exists
-        // $mailResult = array_search($params['mail'], $allMails);
+            $view = new View();
+            $view->redirect('connection');
 
-        // echo "<pre>";
-        // var_dump($nickNameResult);
-        // echo "</pre>";
-
-        // echo "<pre>";
-        // var_dump($mailResult);
-        // echo "</pre>";
-
-        // if ($nickNameResult) {
-        //     die;
-        //     $_SESSION['errorMessage'] = 'Le pseudo existe déjà.';
-
-        //     $view = new View();
-        //     $view->redirect('connection');
-
-        // } 
+        } 
         
-        // if ($mailResult) {
-        //     die;
-        //     $_SESSION['errorMessage'] = 'Le mail existe déjà.';
+        if ($mailResult) {
+            
+            $_SESSION['errorMessage'] = 'Le mail existe déjà.';
 
-        //     $view = new View();
-        //     $view->redirect('connection');
-        // }
+            $view = new View();
+            $view->redirect('connection');
+        }
 
-        // // Check password confirmation
-        // if ($params['password'] != $params['confirmationPassword']) {
+        // Check password confirmation
+        if ($params['password'] != $params['confirmationPassword']) {
 
-        //     $_SESSION['errorMessage'] = 'Le mot de passe n\'a pas été validé.';
+            $_SESSION['errorMessage'] = 'Le mot de passe n\'a pas été validé.';
 
-        //     $view = new View();
-        //     $view->redirect('connection');
-        // }
+            $view = new View();
+            $view->redirect('connection');
+        }
 
-        // var_dump(isset($_SESSION['errorMessage']));
+        var_dump(isset($_SESSION['errorMessage']));
 
         $cryptedPassword = password_hash($params['password'], PASSWORD_DEFAULT);
-        $memberManager = new MemberManager();
+        
         $lastInsertId = $memberManager->addMember($params, $cryptedPassword);
-var_dump($lastInsertId);die;
+
         if (!$lastInsertId) {
             $_SESSION['errorMessage'] = 'Impossible d\'enregistrer le membre.';
 
             $view = new View();
             $view->redirect('connection');
         }
+
+        // echo debug_print_backtrace();die;
 
         $_SESSION['valid'] = true;
         
