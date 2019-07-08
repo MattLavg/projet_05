@@ -1,0 +1,72 @@
+{% extends "back.twig" %}
+
+{% block title %}
+    <title>Afficher les informations | LISTaGAME</title>
+{% endblock %}
+
+{% set status = member.getId_type %}
+
+{% block content %}
+
+    <h3>Vos informations</h3>
+    <hr>
+
+    
+    {% if member.getId_type == 1 %}
+        <p><span class="bold">Statut :</span> Administrateur</p>
+    {% elseif member.getId_type == 2 %}
+        <p><span class="bold">Statut :</span> Modérateur</p>
+    {% elseif member.getId_type == 3 %}
+        <p><span class="bold">Statut :</span> Membre</p>
+    {% endif %}
+
+
+    <p><span class="bold">Pseudo :</span> {{ member.getNick_name }}</p>
+    <p><span class="bold">Prénom :</span> 
+        {% if member.getFirst_name == null %}
+            <span class="italic">Non renseigné</span> 
+        {% else %}
+            {{ member.getFirst_name }}
+        {% endif %}
+    </p>
+    <p><span class="bold">Nom :</span> 
+        {% if member.getLast_name == null %}
+            <span class="italic">Non renseigné</span>
+        {% else %}
+            {{ member.getLast_name }}
+        {% endif %}
+    </p>
+    <p><span class="bold">Mail :</span> {{ member.getMail }}</p>
+    <p><span class="bold">Date de naissance :</span> 
+        {% if member.getbirthday == null %}
+            <span class="italic">Non renseigné</span> 
+        {% else %}
+            {{ member.getbirthday }}
+        {% endif %}
+    </p>
+    <p><span class="bold">Date d'inscription :</span> {{ member.getInscription_date }}</p>
+    <p><span class="bold">Dernière connexion au site :</span> {{ member.getLast_connection_date }}</p>
+
+    <a href="{{ HOST }}edit-infos-member/id/{{ member.getId }}"><button type="button" class="btn btn-primary">Modifier vos informations</button></a>
+
+    <hr>
+
+    <h4>Devenir modérateur du site</h4>
+
+    <hr>
+
+    <p>Si vous souhaitez devenir modérateur du site, vous pouvez en faire la demande en cliquant sur le bouton ci-dessous.</p>
+
+    <a href="{{ HOST }}update-status-member/id/{{ member.getId }}"><button type="button" class="btn btn-secondary">Je souhaite devenir modérateur</button></a>
+
+    <hr>
+
+    <h4>Supprimer le compte</h4>
+
+    <hr>
+
+    <p>Si vous souhaitez supprimer votre compte, cliquez sur le bouton ci-dessous. Attention, la suppression est définitive.</p>
+
+    <a href="{{ HOST }}delete-member/id/{{ member.getId }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+
+{% endblock %}
