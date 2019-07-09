@@ -20,11 +20,32 @@ use App\Model\Member;
 
     /**
      * Allows to get a member
+     * 
+     * @param string $value
      */
-    public function getMember($member_mail)
+    public function getMemberById($value)
     {
-        $req = $this->_db->prepare('SELECT * FROM ' . $this->_table . ' WHERE mail = ?');
-        $req->execute(array($member_mail));
+        $req = $this->_db->prepare('SELECT id, first_name, last_name, nick_name, mail, DATE_FORMAT(inscription_date, \'%d/%m/%Y à %Hh%imin%ss\') AS inscription_date, DATE_FORMAT(last_connection_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_connection_date, password, id_type, DATE_FORMAT(birthday, \'%d/%m/%Y\') AS birthday FROM ' . $this->_table . ' WHERE id = ?');
+        $req->execute(array($value));
+
+        $data = $req->fetch(\PDO::FETCH_ASSOC);
+
+        $member = new Member();
+        $member->hydrate($data);
+
+        return $member;
+
+    }
+
+    /**
+     * Allows to get a member
+     * 
+     * @param string $value
+     */
+    public function getMemberByMail($value)
+    {
+        $req = $this->_db->prepare('SELECT id, first_name, last_name, nick_name, mail, DATE_FORMAT(inscription_date, \'%d/%m/%Y à %Hh%imin%ss\') AS inscription_date, DATE_FORMAT(last_connection_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_connection_date, password, id_type, DATE_FORMAT(birthday, \'%d/%m/%Y\') AS birthday FROM ' . $this->_table . ' WHERE mail = ?');
+        $req->execute(array($value));
 
         $data = $req->fetch(\PDO::FETCH_ASSOC);
 
@@ -101,29 +122,7 @@ use App\Model\Member;
      */
     public function addMember($values, $cryptedPassword)
     {
-        // $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, password, id_type) VALUES(?, ?, NOW(), ?, ?)');
-        // $req->execute(array(
-        //     $values['nickName'],
-        //     $values['mail'],
-        //     $values['password'],
-        //     3
-        // ));
-        // $id = $this->_db->lastInsertId();
-        // var_dump($id);die;
-//         $count = $req->rowCount();
-
-// var_dump($this->_db->lastInsertId());die;
-//         if (!empty($count)) {
-//             $id = $this->_db->lastInsertId();
-//             return $id;
-//         }
-
-
-        try {
-
-            $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
-            $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, last_connection_date, password, id_type) VALUES(?, ?, NOW(), NOW(), ?, ?)');
+        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, last_connection_date, password, id_type) VALUES(?, ?, NOW(), NOW(), ?, ?)');
             $req->execute(array(
                 $values['nickName'],
                 $values['mail'],
@@ -131,17 +130,111 @@ use App\Model\Member;
                 3
             ));
 
-            $count = $req->rowCount();
+        $count = $req->rowCount();
 
-            if (!empty($count)) {
-                $id = $this->_db->lastInsertId();
-                return $id;
-            }
+        if (!empty($count)) {
+            $id = $this->_db->lastInsertId();
+            return $id;
+        }
+
+        // try {
+
+        //     $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+        //     $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, last_connection_date, password, id_type) VALUES(?, ?, NOW(), NOW(), ?, ?)');
+        //     $req->execute(array(
+        //         $values['nickName'],
+        //         $values['mail'],
+        //         $cryptedPassword,
+        //         3
+        //     ));
+
+        //     $count = $req->rowCount();
+
+        //     if (!empty($count)) {
+        //         $id = $this->_db->lastInsertId();
+        //         return $id;
+        //     }
+
+        // } catch (\PDOException $e) {
+
+        //     throw new \Exception($e->getMessage());
+        // }
+
+    }
+
+    /**
+     * Allows to update members informations
+     * 
+     * @param array $values
+     */
+    public function updateInfosMember($values)
+    {
+        try {
+
+            $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+            $req = $this->_db->prepare('UPDATE members SET 
+            first_name = ?,
+            last_name = ?,
+            nick_name = ?,
+            mail = ?,
+            birthday = ?
+            WHERE id = ?');
+            $req->execute(array(
+                $values['firstName'], 
+                $values['lastName'], 
+                $values['nickName'],
+                $values['mail'],
+                $values['birthday'],
+                $values['member_id'],));
+  
+            $count = $req->rowCount();
+            return $count;
 
         } catch (\PDOException $e) {
 
-            throw new \Exception($e->getMessage());
-        }
+            if ($e->getCode() == 23000) {
+                
+                $error = $req->errorInfo();
 
+                if ($error[1] == 1062) {
+
+                    throw new \Exception('Vous ne pouvez enregistrer un pseudo ou un mail qui existe déjà.');
+
+                }
+            }
+
+            throw new \Exception('Impossible de modifier les informations du membre');
+        }
+    }
+
+    /**
+     * Allows to update members password
+     * 
+     * @param array $values
+     * @param string $cryptedPassword
+     */
+    public function updatePasswordMember($values, $cryptedPassword)
+    {
+        $req = $this->_db->prepare('UPDATE members SET password = ? WHERE id = ?');
+        $req->execute(array($cryptedPassword, $values['member_id'],));
+
+        $count = $req->rowCount();
+        return $count;
+    }
+
+    /**
+     * Allows to delete a member
+     * 
+     * @param string $member_id
+     */
+    public function deleteMember($member_id)
+    {
+        $req = $this->_db->prepare('DELETE FROM members WHERE id = ?');
+        $req->execute(array($member_id));
+
+        $count = $req->rowCount();
+        return $count;
     }
  }

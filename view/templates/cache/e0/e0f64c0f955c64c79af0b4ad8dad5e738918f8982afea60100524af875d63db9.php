@@ -201,7 +201,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                     <a class=\"dropdown-item\" href=\"";
             // line 93
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-            echo "infos-member\">Profil</a>
+            echo "infos-member/id/";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId", [], "any", false, false, false, 93), "html", null, true);
+            echo "\">Profil</a>
                     <a class=\"dropdown-item\" href=\"";
             // line 94
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
@@ -314,7 +316,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  301 => 103,  296 => 99,  291 => 7,  281 => 147,  271 => 140,  233 => 104,  231 => 103,  222 => 101,  219 => 100,  217 => 99,  214 => 98,  207 => 94,  203 => 93,  199 => 92,  192 => 87,  190 => 86,  184 => 82,  178 => 80,  176 => 79,  167 => 72,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  303 => 103,  298 => 99,  293 => 7,  283 => 147,  273 => 140,  235 => 104,  233 => 103,  224 => 101,  221 => 100,  219 => 99,  216 => 98,  209 => 94,  203 => 93,  199 => 92,  192 => 87,  190 => 86,  184 => 82,  178 => 80,  176 => 79,  167 => 72,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -411,7 +413,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                 </div>
                 <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                     <p class=\"dropdown-item memberNickNameDropdown\">{{ member.getNick_name}}</p>
-                    <a class=\"dropdown-item\" href=\"{{ HOST }}infos-member\">Profil</a>
+                    <a class=\"dropdown-item\" href=\"{{ HOST }}infos-member/id/{{ member.getId }}\">Profil</a>
                     <a class=\"dropdown-item\" href=\"{{ HOST }}logout\">Déconnexion</a>
                 </div>
             </div>

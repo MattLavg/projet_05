@@ -61,11 +61,13 @@ class ConnectionController
                 $_SESSION['valid'] = true;
 
                 $memberManager = new MemberManager();
-                $member = $memberManager->getMember($params['mail']);
+                $member = $memberManager->getMemberByMail($params['mail']);
 
                 $_SESSION['currentMember'] = $member;
 
                 $memberManager->updateLastConnectionDate($member->getId());
+
+                $_SESSION['actionMessage'] = 'Heureux de vous revoir ' . $member->getNick_name() . ' !';
      
                 $view = new View();
                 $view->redirect('home');

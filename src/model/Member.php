@@ -77,6 +77,10 @@ namespace App\Model;
      */
     public function hydrate($data)
     {   
+
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";die;
         foreach ($data as $key => $value) {
 
             $method = 'set' . ucfirst($key);

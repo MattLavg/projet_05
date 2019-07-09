@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\MemberManager;
 use App\Core\View;
+use App\Core\Registry;
 
 /**
  *  MemberController
@@ -26,15 +27,18 @@ use App\Core\View;
 
         if (ConnectionController::isSessionValid()) {
 
-            $currentMember = null;
+            extract($params); // Allows to extract the $id variable
 
-            if (isset($_SESSION['currentMember'])) {
-                $currentMember = $_SESSION['currentMember'];
-            }
+            $member_id = $id;
+
+            $memberManager = new MemberManager();
+            $member = $memberManager->getMemberById($member_id);
+
+            $_SESSION['currentMember'] = $member;
 
             $view = new View('memberInfos');
             $view->render('back', array(
-                'member' => $currentMember,
+                'member' => $member,
                 'connected' => ConnectionController::isSessionValid()
             ));
 
@@ -57,15 +61,16 @@ use App\Core\View;
     {
         if (ConnectionController::isSessionValid()) {
 
-            $currentMember = null;
+            extract($params); // Allows to extract the $id variable
 
-            if (isset($_SESSION['currentMember'])) {
-                $currentMember = $_SESSION['currentMember'];
-            }
+            $member_id = $id;
+
+            $memberManager = new MemberManager();
+            $member = $memberManager->getMemberById($member_id);
 
             $view = new View('memberEdit');
             $view->render('back', array(
-                'member' => $currentMember,
+                'member' => $member,
                 'connected' => ConnectionController::isSessionValid()
             ));
 
@@ -142,8 +147,6 @@ use App\Core\View;
             $view->redirect('connection');
         }
 
-        var_dump(isset($_SESSION['errorMessage']));
-
         $cryptedPassword = password_hash($params['password'], PASSWORD_DEFAULT);
         
         $lastInsertId = $memberManager->addMember($params, $cryptedPassword);
@@ -159,11 +162,11 @@ use App\Core\View;
 
         $_SESSION['valid'] = true;
         
-        $member = $memberManager->getMember($params['mail']);
+        $member = $memberManager->getMemberByMail($params['mail']);
 
         $_SESSION['currentMember'] = $member;
 
-        $_SESSION['actionMessage'] = 'Vous êtes connecté !';
+        $_SESSION['actionMessage'] = 'Bienvenue parmis nous ' . $member->getNick_name() . ' !';
 
         $view = new View();
         $view->redirect('home');
@@ -180,25 +183,153 @@ use App\Core\View;
         // print_r($params);
         // echo "</pre>";die;
 
-        $emptyParam = false;
+        foreach ($params as $key => &$value) {
 
-        array_walk($params, function(&$item, $key) {
+            $value = trim(strip_tags($value));
 
-            $item = trim(strip_tags($item));
-  
-            if(empty($item)) {
+            if (empty($value)) {
 
-                $emptyParam = true;
-
+                $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+    
+                $view = new View();
+                $view->redirect('edit-infos-member/id/' . $params['member_id']);
             }
-        });
-var_dump($emptyParam);
-        if ($emptyParam) {
+        }
 
-            $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+        $birthday = explode('-', $params['birthday']);
+
+        if (!checkdate($birthday[1], $birthday[2], $birthday[0])) {
+
+            $_SESSION['errorMessage'] = 'La date n\'est pas valide.';
 
             $view = new View();
-            $view->redirect('memberEdit/id/' . $params['member_id']);
+            $view->redirect('edit-infos-member/id/' . $params['member_id']);
         }
+
+        try {
+
+            $db = Registry::getDb();
+            
+            $db->beginTransaction();
+
+            $memberManager = new MemberManager();
+
+            // Update member's informations
+            $updatedMemberInfos = $memberManager->updateInfosMember($params);
+
+            $db->commit();
+
+        } catch (\Exception $e) {
+
+            $db->rollBack();
+
+            $_SESSION['errorMessage'] = $e->getMessage();;
+
+            $view = new View();
+            $view->redirect('infos-member/id/' . $params['member_id']);
+        }
+
+        $_SESSION['actionMessage'] = 'Vos informations ont bien été modifiées.';
+
+        $view = new View();
+        $view->redirect('infos-member/id/' . $params['member_id']);
+        
+    }
+
+    /**
+     * Allows to update members informations
+     * 
+     * @param array $params
+     */
+    public function updatePasswordMember($params = [])
+    {
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
+
+        foreach ($params as $key => &$value) {
+
+            $value = trim(strip_tags($value));
+
+            if (empty($value)) {
+
+                $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+    
+                $view = new View();
+                $view->redirect('edit-infos-member/id/' . $params['member_id']);
+            }
+        }
+
+        // Check password confirmation
+        if ($params['password'] != $params['confirmationPassword']) {
+
+            $_SESSION['errorMessage'] = 'Vous devez confirmer votre mot de passe.';
+
+            $view = new View();
+            $view->redirect('edit-infos-member/id/' . $params['member_id']);
+        }
+
+        $cryptedPassword = password_hash($params['password'], PASSWORD_DEFAULT);
+
+        try {
+
+            $db = Registry::getDb();
+            
+            $db->beginTransaction();
+
+            $memberManager = new MemberManager();
+
+            // Update member's informations
+            $updatedMemberPassword = $memberManager->updatePasswordMember($params, $cryptedPassword);
+
+            if (!$updatedMemberPassword) {
+                throw new \Exception('Impossible de modifier le mot de passe.');
+            }
+
+            $db->commit();
+
+        } catch (\Exception $e) {
+
+            $db->rollBack();
+
+            $_SESSION['errorMessage'] = $e->getMessage();;
+
+            $view = new View();
+            $view->redirect('infos-member/id/' . $params['member_id']);
+        }
+
+        $_SESSION['actionMessage'] = 'Votre mot de passe a bien été modifié.';
+
+        $view = new View();
+        $view->redirect('infos-member/id/' . $params['member_id']);
+        
+    }
+
+    /**
+     * Allows to delete a member
+     * 
+     * @param array $params
+     */
+    public function deleteMember($params = [])
+    {
+        extract($params); // Allows to extract the $id variable
+
+        $member_id = $id;
+
+        $memberManager = new MemberManager();
+        $deletedMember = $memberManager->deleteMember($member_id);
+
+        if (!$deletedMember) {
+            throw new \Exception('Impossible de supprimer le compte.');
+        }
+
+        $_SESSION['actionMessage'] = 'Votre compte a bien été supprimé.';
+
+        unset($_SESSION['valid']);
+
+        $view = new View();
+        $view->redirect('home');
+
+        
     }
  }

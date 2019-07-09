@@ -15,7 +15,7 @@
 
             <form method="post" action="{{HOST}}update-infos-member" id="updateInfosMember" novalidate>
                 <div class="form-group">
-                    <input type="hidden" class="form-control" id="member_id" name="member_id" value="{{ member.getId }}">
+                    <input type="hidden" class="form-control" name="member_id" value="{{ member.getId }}">
                 </div>
                 <div class="form-group">
                     <label for="memberNickname">Pseudo : </label>
@@ -24,10 +24,10 @@
                 <div class="form-group">
                     <label for="memberFirstname">Prénom : </label>
                     <input type="text" class="form-control" id="memberFirstname" name="firstName" 
-                        {% if member.getFisrt_name == null %}
+                        {% if member.getFirst_name == null %}
                             placeholder="Prénom"
                         {% else %}
-                            value="{{ member.getFisrt_name }}"
+                            value="{{ member.getFirst_name }}"
                         {% endif %}
                     >
                 </div>
@@ -56,6 +56,24 @@
                     readonly>
                     <input type="text" class="form-control altDateMember" name="birthday" readonly>
                 </div>
+                <button type="submit" class="btn btn-primary updateInfosMemberBtn">Valider</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col">
+
+            <h4>Modifier votre mot de passe</h4>
+
+            <hr>
+
+            <form method="post" action="{{HOST}}update-password-member" id="updatePasswordMember" novalidate>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="member_id" value="{{ member.getId }}">
+                </div>
                 <div class="form-group">
                     <label for="memberPassword">Mot de passe</label>
                     <input type="password" class="form-control" id="memberPassword" name="password" placeholder="Mot de passe">
@@ -64,7 +82,7 @@
                     <label for="confirmationPassword">Confirmer le mot de passe</label>
                     <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword" placeholder="Confirmer le mot de passe">
                 </div>
-                <button type="submit" class="btn btn-primary updateInfosMemberBtn">Valider</button>
+                <button type="submit" class="btn btn-primary updatePasswordMemberBtn">Valider</button>
             </form>
         </div>
     </div>

@@ -87,7 +87,7 @@ class View
 
         // echo "<pre>";
         // print_r($params);
-        // echo "</pre>";
+        // echo "</pre>";die;
     
         echo $twig->render($view . '.twig', $params);
 

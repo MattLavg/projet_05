@@ -4,8 +4,6 @@
     <title>Afficher les informations | LISTaGAME</title>
 {% endblock %}
 
-{% set status = member.getId_type %}
-
 {% block content %}
 
     <h3>Vos informations</h3>
@@ -67,6 +65,15 @@
 
     <p>Si vous souhaitez supprimer votre compte, cliquez sur le bouton ci-dessous. Attention, la suppression est définitive.</p>
 
-    <a href="{{ HOST }}delete-member/id/{{ member.getId }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-url-delete-member="{{ HOST }}delete-member/id/{{ member.getId }}">Supprimer</button>
+
+    {% if actionMessage %}
+        <div class="alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ actionMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
 
 {% endblock %}

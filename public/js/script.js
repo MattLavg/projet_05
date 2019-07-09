@@ -4,15 +4,23 @@ $(document).ready(function () {
     $('#deleteModal').on('shown.bs.modal', function (e) {
 
         var button = $(e.relatedTarget); // Button that triggered the modal
+
+        // for deleting a game
         var urlDeleteGame = button.data('url-delete-game'); // Extract info from data-* attributes
         var gameName = button.data('game-name');
+
+        // for deleting a member
+        var urlDeleteMember = button.data('url-delete-member')
  
         var modal = $(this);
 
-        if (gameName) {
+        if (urlDeleteGame) {
             modal.find('.modal-text').text('le jeu : ' + gameName);
             modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteGame);
-        } 
+        } else if (urlDeleteMember) {
+            modal.find('.modal-text').text('votre profil');
+            modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteMember);
+        }
 
     })
 
@@ -329,21 +337,33 @@ $(document).ready(function () {
     });
 
 
-    $('.dateMember').each(function(index) {
+    // $('.dateMember').each(function(index) {
 
-        $(this).datepicker($.extend({ 
-            changeMonth: true,
-            changeYear: true,
-            showButtonPanel: true,
-            yearRange: "1950:2020", 
-            altFormat: 'yy-mm-dd',
-            altField: $(this).next()
-        },
-        $.datepicker.regional[ "fr" ]));
+    //     $(this).datepicker($.extend({ 
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         showButtonPanel: true,
+    //         yearRange: "1950:2020", 
+    //         altFormat: 'yy-mm-dd',
+    //         altField: $(this).next()
+    //     },
+    //     $.datepicker.regional[ "fr" ]));
 
-        $(this).datepicker('option', 'altFieldMember', $(this).next());
+    //     $(this).datepicker('option', 'altField', $(this).next());
 
-    });
+    // });
+
+    $('.dateMember').datepicker($.extend({ 
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        yearRange: "1950:2020", 
+        altFormat: 'yy-mm-dd',
+        altField: $(this).next()
+    },
+    $.datepicker.regional[ "fr" ]));
+
+    $('.dateMember').datepicker('option', 'altField', $('.dateMember').next());
 
 
 
