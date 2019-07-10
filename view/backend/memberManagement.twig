@@ -1,0 +1,72 @@
+{% extends "back.twig" %}
+
+{% block title %}
+    <title>Gestion des membres | LISTaGAME</title>
+{% endblock %}
+
+{% set elementsOnPage = false %}
+
+{% block content %}
+
+<h1>Gestion - membres</h1>
+
+<h3>Liste des membres inscrits.</h3>
+
+<form method="post" action="{{HOST}}member-management" class="form-inline">
+    <div class="form-group pr-2">
+        <select class="form-control" name="displayedMembers">
+            <option value=" ">Chosissez les membres à afficher</option>
+            <option value="all">Tous</option>
+            <option value="members">Membres</option>
+            <option value="moderators">Modérateurs</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>
+
+    <div class="table-responsive tableMargin" id="table-dev">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Modifier le statut</th>
+                    <th scope="col">Suppression</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for member in members %}
+
+                    {% set elementsOnPage = true %}
+
+                    <tr>
+                        <td>{{ member.getNick_name }}</td>
+                        <td>{% if member.getId_type == 3 %}Membre{% elseif member.getId_type == 2 %}Modérateur{% endif %}</td>
+                        <td><a href="{{ HOST }}update-status-member/id/{{ member.getId }}" id="updateStatusMember">Modifier</a></td>
+                        <td><a href="#" data-url-delete-member-by-admin="{{ HOST }}delete-member/id/{{ member.getId }}/origin/admin" id="memberDeleteBtn" data-member-name="{{ member.getNick_name }}" data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
+                    </tr> 
+
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+
+    {% if elementsOnPage and renderPagination %}
+    {{ pagination.render }}
+    {% elseif not elementsOnPage %}
+    <p>Il n'y a actuellement aucun membre inscrit.</p>
+    {% endif %}
+
+    {% if actionMessage %}
+    <div class="alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+        {{ actionMessage }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+
+{% endblock %}
