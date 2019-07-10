@@ -45,6 +45,7 @@ class Routeur
         'update-password-member'  => ['controller' => 'App\Controller\MemberController',     'method' => 'updatePasswordMember'],
         'update-status-member'    => ['controller' => 'App\Controller\MemberController',     'method' => 'updateStatusMember'],
         'delete-member'           => ['controller' => 'App\Controller\MemberController',     'method' => 'deleteMember'],
+        'member-management'       => ['controller' => 'App\Controller\MemberController',     'method' => 'showMemberManagement'],
         'reported-comments'       => ['controller' => 'App\Controller\BackController',       'method' => 'showReportedComments'],
         'add-comment'             => ['controller' => 'App\Controller\CommentController',    'method' => 'addComment'],
         'delete-comment'          => ['controller' => 'App\Controller\CommentController',    'method' => 'deleteComment'],

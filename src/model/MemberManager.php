@@ -19,6 +19,11 @@ use App\Model\Member;
     protected $_table = 'members';
 
     /**
+     * @var string $_class
+     */
+    protected $_class = 'App\Model\Member';
+
+    /**
      * Allows to get a member
      * 
      * @param string $value
@@ -54,6 +59,54 @@ use App\Model\Member;
 
         return $member;
 
+    }
+
+    /**
+     * Get all the members from a table
+     * 
+     * @return array $array
+     */
+    public function getAllMembers($order, $desc, $firstEntry = 0, $nbElementsByPage, $displayedMembers)
+    {
+        $class = $this->_class;
+
+        if ($displayedMembers == 'members') {
+            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+        } else if ($displayedMembers == 'moderators') {
+            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+        } else {
+            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 OR id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+        }
+
+        $array = [];
+
+        if ($req) {
+
+            while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
+
+                $object = new $class();
+                $object->hydrate($data);
+    
+                $array[] = $object;
+    
+            }
+        }
+
+        return $array;
+    }
+
+    /**
+     * Allows to count member without the Admin
+     * 
+     * @return int $totalNbRows
+     */
+    public function count()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(*) AS nbRows FROM members WHERE NOT id_type = 1');
+        $result = $req->fetch();
+
+        return $totalNbRows = $result['nbRows'];
     }
 
     /**
@@ -218,7 +271,21 @@ use App\Model\Member;
     public function updatePasswordMember($values, $cryptedPassword)
     {
         $req = $this->_db->prepare('UPDATE members SET password = ? WHERE id = ?');
-        $req->execute(array($cryptedPassword, $values['member_id'],));
+        $req->execute(array($cryptedPassword, $values['member_id']));
+
+        $count = $req->rowCount();
+        return $count;
+    }
+
+    /**
+     * Allows to update members status
+     * 
+     * @param array $status
+     */
+    public function updateStatusMember($member_id, $status)
+    {
+        $req = $this->_db->prepare('UPDATE members SET id_type = ? WHERE id = ?');
+        $req->execute(array($status, $member_id));
 
         $count = $req->rowCount();
         return $count;

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\MemberManager;
 use App\Core\View;
 use App\Core\Registry;
+use App\Model\Pagination;
 
 /**
  *  MemberController
@@ -34,6 +35,7 @@ use App\Core\Registry;
             $memberManager = new MemberManager();
             $member = $memberManager->getMemberById($member_id);
 
+            // update member's infos in session
             $_SESSION['currentMember'] = $member;
 
             $view = new View('memberInfos');
@@ -82,6 +84,80 @@ use App\Core\Registry;
             $view = new View();
             $view->redirect('connection');
         }
+    }
+
+    /**
+     * Allows to showMemberManagement
+     * 
+     * @param array $params
+     */
+    public function showMemberManagement($params = [])
+    {
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";
+
+        $currentMember = null;
+
+        if (isset($_SESSION['currentMember'])) {
+            $currentMember = $_SESSION['currentMember'];
+        }
+
+        // Members can not access the member mangement page
+        if ($currentMember->getId_type() != 1) {
+            $_SESSION['errorMessage'] = 'Vous n\'avez pas les droits pour accéder à cette page.';
+
+            $view = new View();
+            $view->redirect('home');
+        }
+
+        $pageNb = 1;
+
+        if (isset($params['pageNb'])) {
+            $pageNb = $params['pageNb'];
+        }
+
+        $memberManager = new MemberManager();
+
+        $totalNbRows = $memberManager->count();
+        $url = HOST . 'member-management';
+
+        $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
+
+        // if descendant order wanted, set $desc on true
+        $desc = false;
+
+        // set the name of element you want the list ordered by 
+        $orderBy = 'nick_name';
+
+        // type of member displayed, all by default
+        $displayedMembers = 'all';
+
+        if (isset($params['displayedMembers'])) {
+            if ($params['displayedMembers'] == 'members') {
+                $displayedMembers = 'members';
+            } else if ($params['displayedMembers'] == 'moderators') {
+                $displayedMembers = 'moderators';
+            }
+        }
+
+        $members = $memberManager->getAllMembers($orderBy, $desc, $pagination->getFirstEntry(), $pagination->getElementNbByPage(), $displayedMembers);
+
+        $renderPagination = false;
+
+        if ($pagination->getEnoughEntries()) {
+            $renderPagination = true;
+        }
+
+        $view = new View('memberManagement');
+        $view->render('back', array(
+            'members' => $members,
+            'pagination' => $pagination,
+            'renderPagination' => $renderPagination,
+            'isSessionValid' => ConnectionController::isSessionValid(),
+            'member' => $currentMember
+        ));
+
     }
 
     /**
@@ -306,6 +382,40 @@ use App\Core\Registry;
     }
 
     /**
+     * Allows to update status member
+     * 
+     * @param array $params
+     */
+    public function updateStatusMember($params = [])
+    {
+        extract($params); // Allows to extract the $id variable
+
+        $member_id = $id;
+
+        $memberManager = new MemberManager();
+        $member = $memberManager->getMemberByid($member_id);
+
+        $status = null;
+
+        if ($member->getId_type() == 3) {
+            $status = 2;
+        } else {
+            $status = 3;
+        }
+
+        $statusUpdated = $memberManager->updateStatusMember($member_id, $status);
+
+        if (!$statusUpdated) {
+            $_SESSION['errorMessage'] = 'Impossible de modifier le statut du membre.';
+        } else {
+            $_SESSION['actionMessage'] = 'Le statut du membre a bien été modifié.';
+        }
+
+        $view = new View();
+        $view->redirect('member-management');
+    }
+
+    /**
      * Allows to delete a member
      * 
      * @param array $params
@@ -323,13 +433,19 @@ use App\Core\Registry;
             throw new \Exception('Impossible de supprimer le compte.');
         }
 
+        if (isset($params['origin']) && $params['origin'] == "admin") {
+            $_SESSION['actionMessage'] = 'Le compte a bien été supprimé.';
+
+            $view = new View();
+            $view->redirect('member-management');
+        }
+
         $_SESSION['actionMessage'] = 'Votre compte a bien été supprimé.';
 
         unset($_SESSION['valid']);
+        unset($_SESSION['currentMember']);
 
         $view = new View();
         $view->redirect('home');
-
-        
     }
  }

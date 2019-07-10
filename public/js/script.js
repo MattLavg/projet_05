@@ -9,8 +9,12 @@ $(document).ready(function () {
         var urlDeleteGame = button.data('url-delete-game'); // Extract info from data-* attributes
         var gameName = button.data('game-name');
 
-        // for deleting a member
+        // for deleting a member 
         var urlDeleteMember = button.data('url-delete-member')
+        // for deleting a member by admin
+        var urlDeleteMemberByAdmin = button.data('url-delete-member-by-admin')
+        var memberName = button.data('member-name');
+        
  
         var modal = $(this);
 
@@ -20,6 +24,9 @@ $(document).ready(function () {
         } else if (urlDeleteMember) {
             modal.find('.modal-text').text('votre profil');
             modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteMember);
+        } else if (urlDeleteMemberByAdmin) {
+            modal.find('.modal-text').text('le compte de : ' + memberName);
+            modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteMemberByAdmin);
         }
 
     })

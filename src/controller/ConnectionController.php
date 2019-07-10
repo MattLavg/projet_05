@@ -95,7 +95,10 @@ class ConnectionController
      */
     public function logOut()
     {
-        session_destroy();
+        $_SESSION['actionMessage'] = 'Vous avez été déconnecté.';
+
+        unset($_SESSION['valid']);
+        unset($_SESSION['currentMember']);
 
         $view = new View();
         $view->redirect('home');

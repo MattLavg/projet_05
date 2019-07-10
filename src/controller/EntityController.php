@@ -107,9 +107,8 @@ use App\Core\View;
                 'urlUpdateEntity' => $urlUpdateEntity,
                 'urlDeleteEntity' => $urlDeleteEntity,
                 'isSessionValid' => ConnectionController::isSessionValid(),
-                'member' => $currentMember));
-
-            unset($_SESSION['actionDone']);
+                'member' => $currentMember
+            ));
 
         } else {
             

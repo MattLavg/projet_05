@@ -155,15 +155,24 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             // line 67
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "entity-management/entity/region\" class=\"dropdown-item\">Gérer les régions</a>
-                                <a href=\"";
+                                ";
             // line 68
+            if ((twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId_type", [], "any", false, false, false, 68) == 1)) {
+                // line 69
+                echo "                                <a href=\"";
+                echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+                echo "member-management\" class=\"dropdown-item\">Gérer les membres</a>
+                                ";
+            }
+            // line 71
+            echo "                                <a href=\"";
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                             </div>
                         </li>
                     ";
         }
-        // line 72
+        // line 75
         echo "                    
                 </ul>
                 <form class=\"form-inline\">
@@ -172,55 +181,55 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                 </form>
 
                 ";
-        // line 79
+        // line 82
         if ( !($context["connected"] ?? null)) {
-            // line 80
+            // line 83
             echo "                    <a class=\"nav-link connection-link\" href=\"";
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "connection\">Connexion</a>
                 ";
         }
-        // line 82
+        // line 85
         echo "            </div>
 
         </nav>
 
         ";
-        // line 86
+        // line 89
         if (($context["connected"] ?? null)) {
-            // line 87
+            // line 90
             echo "            <div id=\"user\" class=\"dropdown\">
                 <div class=\"dropdown-toggle dropdown-user\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     <i class=\"fas fa-user-circle fa-2x\"></i>
                 </div>
                 <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                     <p class=\"dropdown-item memberNickNameDropdown\">";
-            // line 92
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getNick_name", [], "any", false, false, false, 92), "html", null, true);
+            // line 95
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getNick_name", [], "any", false, false, false, 95), "html", null, true);
             echo "</p>
                     <a class=\"dropdown-item\" href=\"";
-            // line 93
+            // line 96
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "infos-member/id/";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId", [], "any", false, false, false, 93), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId", [], "any", false, false, false, 96), "html", null, true);
             echo "\">Profil</a>
                     <a class=\"dropdown-item\" href=\"";
-            // line 94
+            // line 97
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "logout\">Déconnexion</a>
                 </div>
             </div>
         ";
         }
-        // line 98
+        // line 101
         echo "    
         ";
-        // line 99
+        // line 102
         $this->displayBlock('cover', $context, $blocks);
-        // line 100
+        // line 103
         echo "
         <main role=\"main\" ";
-        // line 101
+        // line 104
         if (($context["cover"] ?? null)) {
             echo " class=\"gameViewContainer container\" ";
         } else {
@@ -229,9 +238,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         echo ">
 
             ";
-        // line 103
+        // line 106
         $this->displayBlock('content', $context, $blocks);
-        // line 104
+        // line 107
         echo "
             <!-- DELETE MODAL -->
             <div class=\"modal fade\" id=\"deleteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteModalLabel\" aria-hidden=\"true\">
@@ -269,7 +278,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- JQUERY UI -->
     <script src=\"";
-        // line 140
+        // line 143
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/jquery-ui.min.js\"></script>
 
@@ -279,7 +288,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 147
+        // line 150
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
@@ -294,12 +303,12 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     {
     }
 
-    // line 99
+    // line 102
     public function block_cover($context, array $blocks = [])
     {
     }
 
-    // line 103
+    // line 106
     public function block_content($context, array $blocks = [])
     {
     }
@@ -316,7 +325,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  303 => 103,  298 => 99,  293 => 7,  283 => 147,  273 => 140,  235 => 104,  233 => 103,  224 => 101,  221 => 100,  219 => 99,  216 => 98,  209 => 94,  203 => 93,  199 => 92,  192 => 87,  190 => 86,  184 => 82,  178 => 80,  176 => 79,  167 => 72,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  312 => 106,  307 => 102,  302 => 7,  292 => 150,  282 => 143,  244 => 107,  242 => 106,  233 => 104,  230 => 103,  228 => 102,  225 => 101,  218 => 97,  212 => 96,  208 => 95,  201 => 90,  199 => 89,  193 => 85,  187 => 83,  185 => 82,  176 => 75,  168 => 71,  162 => 69,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -388,6 +397,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                                 <a href=\"{{ HOST }}entity-management/entity/genre\" class=\"dropdown-item\">Gérer les genres</a>
                                 <a href=\"{{ HOST }}entity-management/entity/mode\" class=\"dropdown-item\">Gérer les modes</a>
                                 <a href=\"{{ HOST }}entity-management/entity/region\" class=\"dropdown-item\">Gérer les régions</a>
+                                {% if member.getId_type == 1 %}
+                                <a href=\"{{ HOST }}member-management\" class=\"dropdown-item\">Gérer les membres</a>
+                                {% endif %}
                                 <a href=\"{{ HOST }}reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                             </div>
                         </li>

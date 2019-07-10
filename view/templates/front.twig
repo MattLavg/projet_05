@@ -65,6 +65,9 @@
                                 <a href="{{ HOST }}entity-management/entity/genre" class="dropdown-item">Gérer les genres</a>
                                 <a href="{{ HOST }}entity-management/entity/mode" class="dropdown-item">Gérer les modes</a>
                                 <a href="{{ HOST }}entity-management/entity/region" class="dropdown-item">Gérer les régions</a>
+                                {% if member.getId_type == 1 %}
+                                <a href="{{ HOST }}member-management" class="dropdown-item">Gérer les membres</a>
+                                {% endif %}
                                 <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
                             </div>
                         </li>

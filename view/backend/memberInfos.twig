@@ -49,23 +49,30 @@
 
     <hr>
 
+    {% if member.getId_type == 3 %}
+
     <h4>Devenir modérateur du site</h4>
 
-    <hr>
+        <hr>
 
-    <p>Si vous souhaitez devenir modérateur du site, vous pouvez en faire la demande en cliquant sur le bouton ci-dessous.</p>
+        <p>Si vous souhaitez devenir modérateur du site, vous pouvez en faire la demande en cliquant sur le bouton ci-dessous.</p>
 
-    <a href="{{ HOST }}update-status-member/id/{{ member.getId }}"><button type="button" class="btn btn-secondary">Je souhaite devenir modérateur</button></a>
+        <a href="{{ HOST }}update-status-member/id/{{ member.getId }}"><button type="button" class="btn btn-secondary">Je souhaite devenir modérateur</button></a>
 
-    <hr>
+        <hr>
 
-    <h4>Supprimer le compte</h4>
+    {% endif %}
 
-    <hr>
+    {% if member.getId_type == 2 or member.getId_type == 3 %}
+        <h4>Supprimer le compte</h4>
 
-    <p>Si vous souhaitez supprimer votre compte, cliquez sur le bouton ci-dessous. Attention, la suppression est définitive.</p>
+        <hr>
 
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-url-delete-member="{{ HOST }}delete-member/id/{{ member.getId }}">Supprimer</button>
+        <p>Si vous souhaitez supprimer votre compte, cliquez sur le bouton ci-dessous. Attention, la suppression est définitive.</p>
+
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-url-delete-member="{{ HOST }}delete-member/id/{{ member.getId }}">Supprimer</button>
+        
+    {% endif %}
 
     {% if actionMessage %}
         <div class="alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">

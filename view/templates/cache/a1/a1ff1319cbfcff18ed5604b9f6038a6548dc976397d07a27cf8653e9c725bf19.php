@@ -148,6 +148,23 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         }
         // line 47
         echo "
+    ";
+        // line 48
+        if (($context["errorMessage"] ?? null)) {
+            // line 49
+            echo "        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+            ";
+            // line 50
+            echo twig_escape_filter($this->env, ($context["errorMessage"] ?? null), "html", null, true);
+            echo "
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                <span aria-hidden=\"true\">&times;</span>
+            </button>
+        </div>
+    ";
+        }
+        // line 56
+        echo "
 ";
     }
 
@@ -163,7 +180,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
     public function getDebugInfo()
     {
-        return array (  150 => 47,  141 => 41,  138 => 40,  136 => 39,  133 => 38,  129 => 36,  127 => 35,  122 => 34,  120 => 33,  117 => 32,  101 => 24,  97 => 23,  87 => 20,  78 => 18,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
+        return array (  167 => 56,  158 => 50,  155 => 49,  153 => 48,  150 => 47,  141 => 41,  138 => 40,  136 => 39,  133 => 38,  129 => 36,  127 => 35,  122 => 34,  120 => 33,  117 => 32,  101 => 24,  97 => 23,  87 => 20,  78 => 18,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
     }
 
     public function getSourceContext()
@@ -209,6 +226,15 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
     {% if actionMessage %}
         <div class=\"alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             {{ actionMessage }}
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                <span aria-hidden=\"true\">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    {% if errorMessage %}
+        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
+            {{ errorMessage }}
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
                 <span aria-hidden=\"true\">&times;</span>
             </button>
