@@ -97,13 +97,14 @@ use App\Core\View;
 
             $pagination = new Pagination($pageNb, $totalNbRows, $url, 3);
 
-            // if descendant order wanted, set $desc on true
-            $desc = false;
+            // if descendant order wanted, set 'DESC' 
+            // if not set ''
+            $desc = ' ';
 
             // set the name of element you want the list ordered by 
-            $orderBy = 'name';
+            $orderBy = ' ORDER BY name';
 
-            $games = $gameManager->getAll($orderBy, $desc, $pagination->getFirstEntry(), $pagination->getElementNbByPage());
+            $games = $gameManager->getAll($orderBy, $desc, 'LIMIT ' . $pagination->getFirstEntry() . ',', $pagination->getElementNbByPage());
 
             $renderPagination = false;
 
@@ -169,24 +170,24 @@ use App\Core\View;
                 // get the game developers and all developers for list
                 $developerManager = new DeveloperManager();
                 $developers = $developerManager->getDevelopers($game_id);
-                $allDevelopers = $developerManager->getAll(null, null, null, null);
+                $allDevelopers = $developerManager->getAll(' ORDER BY name');
 
                 $genreManager = new GenreManager();
                 $genres = $genreManager->getGenres($game_id);
-                $allGenres = $genreManager->getAll(null, null, null, null);
+                $allGenres = $genreManager->getAll(' ORDER BY name');
 
                 $modeManager = new ModeManager();
                 $modes = $modeManager->getModes($game_id);
-                $allModes = $modeManager->getAll(null, null, null, null);
+                $allModes = $modeManager->getAll(' ORDER BY name');
 
                 $platformManager = new PlatformManager();
-                $allPlatforms = $platformManager->getAll(null, null, null, null);
+                $allPlatforms = $platformManager->getAll(' ORDER BY name');
 
                 $publisherManager = new PublisherManager();
-                $allPublishers = $publisherManager->getAll(null, null, null, null);
+                $allPublishers = $publisherManager->getAll(' ORDER BY name');
 
                 $regionManager = new RegionManager();
-                $allRegions = $regionManager->getAll(null, null, null, null);
+                $allRegions = $regionManager->getAll(' ORDER BY name');
 
                 $releaseDateManager = new ReleaseDateManager();
                 $releaseDates = $releaseDateManager->getReleases($game_id);
@@ -219,12 +220,12 @@ use App\Core\View;
                 $publisherManager = new PublisherManager();
                 $regionManager = new RegionManager();
 
-                $developers = $developerManager->getAll(null, null, null, null);
-                $genres = $genreManager->getAll(null, null, null, null);
-                $modes = $modeManager->getAll(null, null, null, null);
-                $platforms = $platformManager->getAll(null, null, null, null);
-                $publishers = $publisherManager->getAll(null, null, null, null);
-                $regions = $regionManager->getAll(null, null, null, null);
+                $developers = $developerManager->getAll(' ORDER BY name');
+                $genres = $genreManager->getAll(' ORDER BY name');
+                $modes = $modeManager->getAll(' ORDER BY name');
+                $platforms = $platformManager->getAll(' ORDER BY name');
+                $publishers = $publisherManager->getAll(' ORDER BY name');
+                $regions = $regionManager->getAll(' ORDER BY name');
 
                 $view = new View('gameEdit');
                 $view->render('back', array(

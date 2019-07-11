@@ -61,39 +61,39 @@ use App\Model\Member;
 
     }
 
-    /**
-     * Get all the members from a table
-     * 
-     * @return array $array
-     */
-    public function getAllMembers($order, $desc, $firstEntry = 0, $nbElementsByPage, $displayedMembers)
-    {
-        $class = $this->_class;
+    // /**
+    //  * Get all the members from a table
+    //  * 
+    //  * @return array $array
+    //  */
+    // public function getAllMembers($order, $desc, $firstEntry = 0, $nbElementsByPage, $displayedMembers)
+    // {
+    //     $class = $this->_class;
 
-        if ($displayedMembers == 'members') {
-            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
-        } else if ($displayedMembers == 'moderators') {
-            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
-        } else {
-            $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 OR id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
-        }
+    //     if ($displayedMembers == 'members') {
+    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+    //     } else if ($displayedMembers == 'moderators') {
+    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+    //     } else {
+    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 OR id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+    //     }
 
-        $array = [];
+    //     $array = [];
 
-        if ($req) {
+    //     if ($req) {
 
-            while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
+    //         while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
 
-                $object = new $class();
-                $object->hydrate($data);
+    //             $object = new $class();
+    //             $object->hydrate($data);
     
-                $array[] = $object;
+    //             $array[] = $object;
     
-            }
-        }
+    //         }
+    //     }
 
-        return $array;
-    }
+    //     return $array;
+    // }
 
     /**
      * Allows to count member without the Admin

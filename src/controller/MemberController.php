@@ -124,24 +124,25 @@ use App\Model\Pagination;
 
         $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
 
-        // if descendant order wanted, set $desc on true
-        $desc = false;
+        // if descendant order wanted, set 'DESC' 
+        // if not set ''
+        $desc = '';
 
         // set the name of element you want the list ordered by 
         $orderBy = 'nick_name';
 
         // type of member displayed, all by default
-        $displayedMembers = 'all';
+        $displayedMembers = ' WHERE id_type = 3 OR id_type = 2';
 
         if (isset($params['displayedMembers'])) {
             if ($params['displayedMembers'] == 'members') {
-                $displayedMembers = 'members';
+                $displayedMembers = ' WHERE id_type = 3';
             } else if ($params['displayedMembers'] == 'moderators') {
-                $displayedMembers = 'moderators';
+                $displayedMembers = ' WHERE id_type = 2';
             }
         }
 
-        $members = $memberManager->getAllMembers($orderBy, $desc, $pagination->getFirstEntry(), $pagination->getElementNbByPage(), $displayedMembers);
+        $members = $memberManager->getAll(' ORDER BY nick_name', ' ', 'LIMIT ' . $pagination->getFirstEntry() . ',', $pagination->getElementNbByPage(), $displayedMembers);
 
         $renderPagination = false;
 
@@ -291,7 +292,7 @@ use App\Model\Pagination;
             $memberManager = new MemberManager();
 
             // Update member's informations
-            $updatedMemberInfos = $memberManager->updateInfosMember($params);
+            $memberManager->updateInfosMember($params);
 
             $db->commit();
 

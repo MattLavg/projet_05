@@ -77,15 +77,9 @@ use App\Core\View;
             $totalNbRows = $manager->count();
             $url = HOST . 'entity-management/entity/' . $entity;
 
-            $pagination = new Pagination($pageNb, $totalNbRows, $url, 3);
+            $pagination = new Pagination($pageNb, $totalNbRows, $url, 10);
 
-            // if descendant order wanted, set $desc on true
-            $desc = false;
-
-            // set the name of element you want the list ordered by 
-            $orderBy = 'name';
-
-            $entities = $manager->getAll($orderBy, $desc, $pagination->getFirstEntry(), $pagination->getElementNbByPage());
+            $entities = $manager->getAll(' ORDER BY name', ' ', 'LIMIT ' . $pagination->getFirstEntry() . ',', $pagination->getElementNbByPage());
 
             $renderPagination = false;
 

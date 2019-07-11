@@ -41,13 +41,14 @@ class HomeController
 
         $pagination = new Pagination($pageNb, $totalNbRows, $url, 5);
 
-        // if descendant order wanted, set $desc on true
-        $desc = true;
+        // if descendant order wanted, set 'DESC' 
+        // if not set ''
+        $desc = ' DESC ';
 
         // set the name of element you want the list ordered by 
-        $orderBy = 'id';
+        $orderBy = ' ORDER BY id';
         
-        $games = $gameManager->getAll($orderBy, $desc, $pagination->getFirstEntry(), $pagination->getElementNbByPage());
+        $games = $gameManager->getAll($orderBy, $desc, 'LIMIT ' . $pagination->getFirstEntry() . ',', $pagination->getElementNbByPage());
 
         $renderPagination = false;
 
