@@ -27,8 +27,26 @@ class CommentManager extends Manager
      */
     public function listComments($game_id, $firstEntry = 0, $nbElementsByPage)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, post_id, author, content, reported, isAdmin, DATE_FORMAT(creationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS creationDate FROM comments WHERE post_id = ? ORDER BY comments.creationDate DESC LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+        $db = $this->_db;
+
+        $req = $db->prepare(
+            'SELECT
+            com.id AS id,
+            com.content AS content,
+            DATE_FORMAT(com.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creationDate,
+            com.reported AS reported,
+            mem.id AS memberId,
+            mem.nick_name AS memberNickName,
+            games.id AS gameId
+            FROM comments AS com
+            INNER JOIN members AS mem
+            ON com.id_member = mem.id
+            INNER JOIN games AS games
+            ON com.id_game = games.id
+            WHERE com.id_game = ?
+            ORDER BY com.creation_date
+            DESC LIMIT ' . $firstEntry . ',' . $nbElementsByPage
+        );
 
         $req->execute(array($game_id));
 
@@ -37,7 +55,7 @@ class CommentManager extends Manager
         if ($req) {
 
             while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
-  
+
                 $comment = new Comment();
                 $comment->hydrate($data);
     
@@ -117,16 +135,16 @@ class CommentManager extends Manager
      * 
      * @return int the last insert id
      */
-    public function addComment($values, $admin = null)
+    public function addComment($values)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO comments (game_id, author, content, isAdmin, creationDate) VALUES(?, ?, ?, ?, NOW())');
+        // echo "<pre>";
+        // print_r($values);
+        // echo "</pre>";die;
 
-        if ($admin) {
-            $req->execute(array($values['game-id'], $values['author'], $values['content'], 1));
-        } else {
-            $req->execute(array($values['game-id'], $values['author'], $values['content'], 0));
-        }
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO comments (id_member, id_game, content, creation_date) VALUES(?, ?, ?, NOW())');
+
+        $req->execute(array($values['member_id'], $values['game_id'], $values['content']));
 
         $count = $req->rowCount();
         

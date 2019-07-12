@@ -20,36 +20,32 @@ class CommentController
      */
     public function addComment($params = [])
     {
-        echo "<pre>";
-        print_r($params);
-        echo "</pre>";die;
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
 
-        $params['author'] = trim(strip_tags($params['author']));
+        $params['game_id'] = trim(strip_tags($params['game_id']));
+        $params['member_id'] = trim(strip_tags($params['member_id']));
         $params['content'] = trim(strip_tags($params['content']));
 
-        if (!empty($params['author']) && !empty($params['content'])) {
+        if (!empty($params['game_id']) && !empty($params['member_id']) && !empty($params['content'])) {
 
             $commentManager = new CommentManager();
-
-            if (ConnectionController::isSessionValid()) {
-                $commentId = $commentManager->addComment($params, $admin = true);
-            } else {
-                $commentId = $commentManager->addComment($params);
-            }
+            $commentId = $commentManager->addComment($params);
 
             if ($commentId) {
                 $_SESSION['actionDone'] = 'Votre commentaire a bien été publié.';
             }
 
             $view = new View();
-            $view->redirect('game/id/' . $params['game-id'] . '#anchorGame');
+            $view->redirect('game/id/' . $params['game_id'] . '#anchorGame');
 
         } else {
 
             $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs du formulaire.';
 
             $view = new View();
-            $view->redirect('game/id/' . $params['game-id'] . '#anchorGame');
+            $view->redirect('game/id/' . $params['game_id'] . '#anchorGame');
         }
     }
 

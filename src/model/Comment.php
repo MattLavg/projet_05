@@ -1,6 +1,6 @@
 <?php
 
-namespace Listagame\Model;
+namespace App\Model;
 
 /**
  * Comment
@@ -18,12 +18,17 @@ class Comment
     /**
      * @var int $_memberId the id of the member who wrote the comment
      */
-    protected $_memberId;
+    protected $_id_member;
+
+    /**
+     * @var string $_member_nick_name the nickname of the member who wrote the comment
+     */
+    protected $_member_nick_name;
 
     /**
      * @var int $_gameId the id of the game where the comment is displayed
      */
-    protected $_gameId;
+    protected $_id_game;
 
     /**
      * @var string $_content the content of a comment
@@ -33,7 +38,7 @@ class Comment
     /**
      * @var string $_creationDate the creation date of a comment
      */
-    protected $_creationDate;
+    protected $_creation_date;
 
     /**
      * @var bool $_reported is true if comment is reported
@@ -77,7 +82,17 @@ class Comment
      */
     public function getMemberId()
     {
-        return $this->_memberId;
+        return $this->_id_member;
+    }
+
+    /**
+     * Allows to get the member nickname of a comment
+     * 
+     * @return int $_member_nick_name
+     */
+    public function getMemberNickName()
+    {
+        return $this->_member_nick_name;
     }
 
     /**
@@ -87,7 +102,7 @@ class Comment
      */
     public function getGameId()
     {
-        return $this->_gameId;
+        return $this->_id_game;
     }
 
     /**
@@ -107,7 +122,7 @@ class Comment
      */
     public function getCreationDate()
     {
-        return $this->_creationDate;
+        return $this->_creation_date;
     }
 
     /**
@@ -140,7 +155,17 @@ class Comment
      */
     public function setMemberId(int $memberId)
     {
-        $this->_memberId = $memberId;
+        $this->_id_member = $memberId;
+    }
+
+    /**
+     * Allows to set the member nickname of a comment
+     * 
+     * @param int $member_nick_name
+     */
+    public function setMemberNickName(string $memberNickName)
+    {
+        $this->_member_nick_name = $memberNickName;
     }
 
     /**
@@ -148,9 +173,9 @@ class Comment
      * 
      * @param int $gameId
      */
-    public function setGameId(string $gameId)
+    public function setGameId(int $gameId)
     {
-        $this->_gameId = $gameId;
+        $this->_id_game = $gameId;
     }
 
     /**
@@ -170,7 +195,7 @@ class Comment
      */
     public function setCreationDate($creationDate)
     {
-        $this->_creationDate = $creationDate;
+        $this->_creation_date = $creationDate;
     }
 
     /**

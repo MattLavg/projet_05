@@ -11,7 +11,7 @@ use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
 use App\Core\Registry;
-// use App\Model\CommentManager;
+use App\Model\CommentManager;
 use App\Model\Pagination;
 // use App\Controller\ConnectionController;
 use App\Core\View;
@@ -57,6 +57,28 @@ use App\Core\View;
         $releaseDateManager = new ReleaseDateManager();
         $releaseDates = $releaseDateManager->getReleases($game_id);
 
+        $pageNb = 1;
+
+        if (isset($params['pageNb'])) {
+            $pageNb = $params['pageNb'];
+        }
+
+        $commentManager = new CommentManager();
+
+        $totalNbRows = $commentManager->count($game_id);
+        $url = HOST . 'game/id/' . $game_id;
+// var_dump($pageNb);die;
+        $pagination = new Pagination($pageNb, $totalNbRows, $url, 3);
+
+        $comments = $commentManager->listComments($game_id, $pagination->getFirstEntry(), $pagination->getElementNbByPage());
+        // var_dump($comments);die;
+
+        $renderPagination = false;
+
+        if ($pagination->getEnoughEntries()) {
+            $renderPagination = true;
+        }
+
         $view = new View('game');
         $view->render('front', array(
             'game' => $game,
@@ -65,7 +87,11 @@ use App\Core\View;
             'modes' => $modes,
             'releases' => $releaseDates,
             'connected' => ConnectionController::isSessionValid(),
-            'member' => $currentMember));
+            'member' => $currentMember,
+            'pagination' => $pagination,
+            'renderPagination' => $renderPagination,
+            'comments' => $comments
+            ));
 
     }
 

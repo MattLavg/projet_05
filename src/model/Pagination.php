@@ -210,6 +210,10 @@ class Pagination
 
             if ($this->_currentPage > $this->_totalPages) {
                 $this->_currentPage = $this->_totalPages;
+
+                if ($this->_currentPage == 0) {
+                    $this->_currentPage = 1;
+                }
             }
 
         } else {
