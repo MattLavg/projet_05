@@ -24,11 +24,9 @@ class CommentController
         // print_r($params);
         // echo "</pre>";die;
 
-        $params['game_id'] = trim(strip_tags($params['game_id']));
-        $params['member_id'] = trim(strip_tags($params['member_id']));
         $params['content'] = trim(strip_tags($params['content']));
 
-        if (!empty($params['game_id']) && !empty($params['member_id']) && !empty($params['content'])) {
+        if (!empty($params['game-id']) && !empty($params['member-id']) && !empty($params['content'])) {
 
             $commentManager = new CommentManager();
             $commentId = $commentManager->addComment($params);
@@ -38,14 +36,14 @@ class CommentController
             }
 
             $view = new View();
-            $view->redirect('game/id/' . $params['game_id'] . '#anchorGame');
+            $view->redirect('game/id/' . $params['game-id'] . '#anchorGame');
 
         } else {
 
-            $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs du formulaire.';
+            $_SESSION['errorMessage'] = 'Vous devez renseigner un message.';
 
             $view = new View();
-            $view->redirect('game/id/' . $params['game_id'] . '#anchorGame');
+            $view->redirect('game/id/' . $params['game-id'] . '#anchorGame');
         }
     }
 

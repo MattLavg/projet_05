@@ -181,7 +181,7 @@ class Pagination
     /**
      * Allows to check if the are enough entries to dipslay on page
      * 
-     * @return bool $_notEnoughEntries
+     * @return bool $_enoughEntries
      */
     public function getEnoughEntries()
     {

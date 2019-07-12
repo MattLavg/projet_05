@@ -67,11 +67,10 @@ use App\Core\View;
 
         $totalNbRows = $commentManager->count($game_id);
         $url = HOST . 'game/id/' . $game_id;
-// var_dump($pageNb);die;
-        $pagination = new Pagination($pageNb, $totalNbRows, $url, 3);
+
+        $pagination = new Pagination($pageNb, $totalNbRows, $url, 10);
 
         $comments = $commentManager->listComments($game_id, $pagination->getFirstEntry(), $pagination->getElementNbByPage());
-        // var_dump($comments);die;
 
         $renderPagination = false;
 
@@ -144,9 +143,8 @@ use App\Core\View;
                 'pagination' => $pagination,
                 'renderPagination' => $renderPagination,
                 'isSessionValid' => ConnectionController::isSessionValid(),
-                'member' => $currentMember));
-
-            unset($_SESSION['actionDone']);
+                'member' => $currentMember
+            ));
 
         } else {
             
@@ -168,14 +166,6 @@ use App\Core\View;
         // print_r($params);
         // echo "</pre>";die;
         if (ConnectionController::isSessionValid()) {
-
-            // Default error message to null
-            $errorMessage = null;
-
-            // if user try to post empty fields
-            if (isset($_SESSION['errorMessage'])) {
-                $errorMessage = $_SESSION['errorMessage'];
-            }
 
             $currentMember = null;
 
@@ -233,9 +223,8 @@ use App\Core\View;
                     'allPublishers' => $allPublishers,
                     'allRegions' => $allRegions,
                     'member' => $currentMember,
-                    'errorMessage' => $errorMessage));
-
-                unset($_SESSION['errorMessage']);
+                    'errorMessage' => $errorMessage
+                ));
 
             } else {
 
@@ -262,9 +251,8 @@ use App\Core\View;
                     'publishers' => $publishers,
                     'regions' => $regions,
                     'member' => $currentMember,
-                    'errorMessage' => $errorMessage));
-
-                unset($_SESSION['errorMessage']);
+                    'errorMessage' => $errorMessage
+                ));
 
             }
 
@@ -863,7 +851,7 @@ use App\Core\View;
             
             $gameManager->deleteGame($params['id']);
 
-            $_SESSION['actionMessage'] = 'Vous avez effacé un jeu.';
+            $_SESSION['actionDOne'] = 'Vous avez effacé un jeu.';
 
             $view = new View();
             $view->redirect('game-management');

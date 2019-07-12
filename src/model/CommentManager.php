@@ -37,6 +37,7 @@ class CommentManager extends Manager
             com.reported AS reported,
             mem.id AS memberId,
             mem.nick_name AS memberNickName,
+            mem.id_type AS memberType,
             games.id AS gameId
             FROM comments AS com
             INNER JOIN members AS mem
@@ -76,7 +77,7 @@ class CommentManager extends Manager
     public function count($game_id)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT COUNT(*) AS nbRows FROM comments WHERE game_id = ?');
+        $req = $db->prepare('SELECT COUNT(*) AS nbRows FROM comments WHERE id_game = ?');
         $req->execute(array($game_id));
         $result = $req->fetch();
 
@@ -144,7 +145,7 @@ class CommentManager extends Manager
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO comments (id_member, id_game, content, creation_date) VALUES(?, ?, ?, NOW())');
 
-        $req->execute(array($values['member_id'], $values['game_id'], $values['content']));
+        $req->execute(array($values['member-id'], $values['game-id'], $values['content']));
 
         $count = $req->rowCount();
         

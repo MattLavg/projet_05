@@ -18,13 +18,6 @@ class ErrorController
      */
     public function showError() {
 
-        // Default error message to null
-        $errorMessage = null;
-
-        if (isset($_SESSION['errorMessage'])) {
-            $errorMessage = $_SESSION['errorMessage'];
-        }
-
         $view = new View('error');
 
         if (!ConnectionController::isSessionValid()) {
@@ -32,8 +25,6 @@ class ErrorController
         } else {
             $view->render('back', array('errorMessage' => $errorMessage));
         }
-
-        unset($_SESSION['errorMessage']);
 
     }
 

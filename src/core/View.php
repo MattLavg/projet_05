@@ -53,7 +53,7 @@ class View
 
         // Default messages to null
         $errorMessage = null;
-        $actionMessage = null;
+        $actionDone = null;
 
         // ckeck if error message
         if (isset($_SESSION['errorMessage'])) {
@@ -61,8 +61,8 @@ class View
         }
 
         // ckeck if action message
-        if (isset($_SESSION['actionMessage'])) {
-            $actionMessage = $_SESSION['actionMessage'];
+        if (isset($_SESSION['actionDone'])) {
+            $actionDone = $_SESSION['actionDone'];
         }
 
         // Load Twig
@@ -83,7 +83,7 @@ class View
         $params['VENDOR'] = VENDOR;
         $params['IMAGE'] = IMAGE;
         $params['errorMessage'] = $errorMessage;
-        $params['actionMessage'] = $actionMessage;
+        $params['actionDone'] = $actionDone;
 
         // echo "<pre>";
         // print_r($params);
@@ -92,7 +92,7 @@ class View
         echo $twig->render($view . '.twig', $params);
 
         unset($_SESSION['errorMessage']);
-        unset($_SESSION['actionMessage']);
+        unset($_SESSION['actionDone']);
   
     }
 

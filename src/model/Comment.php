@@ -26,6 +26,11 @@ class Comment
     protected $_member_nick_name;
 
     /**
+     * @var int $_member_id_type the member's type
+     */
+    protected $_member_id_type;
+
+    /**
      * @var int $_gameId the id of the game where the comment is displayed
      */
     protected $_id_game;
@@ -93,6 +98,16 @@ class Comment
     public function getMemberNickName()
     {
         return $this->_member_nick_name;
+    }
+
+    /**
+     * Allows to get the member type of a comment
+     * 
+     * @return int $_member_id_type
+     */
+    public function getMemberType()
+    {
+        return $this->_member_id_type;
     }
 
     /**
@@ -166,6 +181,16 @@ class Comment
     public function setMemberNickName(string $memberNickName)
     {
         $this->_member_nick_name = $memberNickName;
+    }
+
+    /**
+     * Allows to set the member type of a comment
+     * 
+     * @param int $member_id_type
+     */
+    public function setMemberType(int $memberType)
+    {
+        $this->_member_id_type = $memberType;
     }
 
     /**

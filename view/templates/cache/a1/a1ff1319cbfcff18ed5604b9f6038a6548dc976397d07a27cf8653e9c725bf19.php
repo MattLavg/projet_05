@@ -133,12 +133,12 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         echo "
     ";
         // line 39
-        if (($context["actionMessage"] ?? null)) {
+        if (($context["actionDone"] ?? null)) {
             // line 40
             echo "        <div class=\"alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             ";
             // line 41
-            echo twig_escape_filter($this->env, ($context["actionMessage"] ?? null), "html", null, true);
+            echo twig_escape_filter($this->env, ($context["actionDone"] ?? null), "html", null, true);
             echo "
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
                 <span aria-hidden=\"true\">&times;</span>
@@ -223,9 +223,9 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         <p>Il n'y a actuellement aucun article</p>
     {% endif %}
 
-    {% if actionMessage %}
+    {% if actionDone %}
         <div class=\"alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
-            {{ actionMessage }}
+            {{ actionDone }}
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
                 <span aria-hidden=\"true\">&times;</span>
             </button>

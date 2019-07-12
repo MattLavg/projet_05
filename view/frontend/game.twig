@@ -51,19 +51,14 @@
         <form method="post" action="{{ HOST }}add-comment">
 
             <div class="form-group">
-                <input type="hidden" name="game_id" value="{{ game.getId }}" />
+                <input type="hidden" name="game-id" value="{{ game.getId }}" />
             </div>
 
             <div class="form-group">
-                <input type="hidden" name="member_id" value="{{ member.getId }}" />
+                <input type="hidden" name="member-id" value="{{ member.getId }}" />
             </div>
-<!-- 
-            <div class="form-group">
-                <input type="hidden" name="author" value="{{ member.getNick_name }}" />
-            </div> -->
 
             <div class="form-group">
-                <label for="content">Votre commentaire :</label>
                 <textarea class="form-control" id="content" name="content" rows="5"></textarea>
             </div>
         
@@ -75,35 +70,48 @@
 
     <hr>
 
+    <h4>Commentaires</h4>
+
     {% for comment in comments %}
+
+        {% set commentsOnPage = true %}
 
         <div class="comment container">
 
-                <p>ID : {{ comment.getId }}</p>
-                <p>ID member : {{ comment.getMemberId }}</p>
-                <p>Member nickname : {{ comment.getMemberNickName }}</p>
-                <p>ID game : {{ comment.getGameId }}</p>
-                <p>Content : {{ comment.getContent }}</p>
-                <p>Reported : {{ comment.getReported }}</p>
-                <p>Date : {{ comment.getCreationDate }}</p>
+            {% if comment.getMemberType == 1 or comment.getMemberType == 2 %}
+                {% set backgroundComment = 'bg-dark text-light' %}
+            {% else %}
+                {% set backgroundComment = 'bg-secondary text-light' %}
+            {% endif %}
+
+            {% if comment.getReported == true %}
+                {% set backgroundComment = 'bg-warning text-dark' %}
+            {% endif %}
 
             <div class="row">
                 
-                <p class="col-12 authorCommentBloc bg-secondary"><span id="commentAuthor{{ member.getId }}" class="font-weight-bold">{{ comment.getMemberNickName }}</span> (publié le {{ comment.getCreationDate }})</p>
-                <p class="col-12 textComment">{{ comment.getContent }}</p>
+                <p class="col-12 authorCommentBloc {{ backgroundComment }}">
+                    <span id="commentAuthor{{ member.getId }}" class="font-weight-bold">{{ comment.getMemberNickName }}</span> (publié le {{ comment.getCreationDate }}) - <span class="italic">{% if comment.getMemberType == 1 %}Administrateur{% elseif comment.getMemberType == 2 %}Modérateur{% else %}Membre{% endif %}</span>
+                </p>
+                <p class="col-12 textComment">{% if comment.getReported == true %}Commentaire signalé par la communauté.{% else %}{{ comment.getContent }}{% endif %}</p>
                 <div class="col-12 commentButtonBloc d-flex justify-content-end">
         
-                <a href="{{ HOST }}report-comment/id/{{ comment.getId }}/post-id/{{ game.getId }}">
+                <a href="{{ HOST }}report-comment/id/{{ comment.getId }}/game-id/{{ game.getId }}">
                     <button type="button" class="btn btn-warning btn-sm">Signaler</button>
                 </a>
         
+                <!-- If admin or moderator, comments can be published or deleted -->
+                {% if member.getId_type == 1 or member.getId_type == 2 %}
 
-                    <a class="ml-2" href="{{ HOST }}valid-comment/id/{{ comment.getId }}/post-id/{{ game.getId }}">
+                {% if comment.getReported == true %}
+                    <a class="ml-2" href="{{ HOST }}valid-comment/id/{{ comment.getId }}/game-id/{{ game.getId }}">
                         <button type="button" class="btn btn-success btn-sm">Publier</button>
                     </a>
+                {% endif %}
         
-
                     <button type="button" class="btn btn-danger btn-sm ml-2" data-toggle="modal" data-target="#deleteModal" data-author="{{ comment.getAuthor }}" data-url="{{ HOST }}delete-comment/id/{{ comment.getId }}/post-id/{{ game.getId }}">Supprimer</button>
+
+                {% endif %}
 
                 </div>
             </div>
@@ -115,6 +123,24 @@
         {{ pagination.render }}
     {% elseif not commentsOnPage %}
         <p>Il n'y a actuellement aucun commentaire</p>
+    {% endif %}
+
+    {% if actionDone %}
+        <div class="alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ actionDone }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    {% if errorMessage %}
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     {% endif %}
 
 {% endblock %}

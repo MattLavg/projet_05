@@ -67,7 +67,7 @@ class ConnectionController
 
                 $memberManager->updateLastConnectionDate($member->getId());
 
-                $_SESSION['actionMessage'] = 'Heureux de vous revoir ' . $member->getNick_name() . ' !';
+                $_SESSION['actionDone'] = 'Heureux de vous revoir ' . $member->getNick_name() . ' !';
      
                 $view = new View();
                 $view->redirect('home');
@@ -95,7 +95,7 @@ class ConnectionController
      */
     public function logOut()
     {
-        $_SESSION['actionMessage'] = 'Vous avez été déconnecté.';
+        $_SESSION['actionDone'] = 'Vous avez été déconnecté.';
 
         unset($_SESSION['valid']);
         unset($_SESSION['currentMember']);
