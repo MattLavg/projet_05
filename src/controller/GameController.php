@@ -90,7 +90,7 @@ use App\Core\View;
             'pagination' => $pagination,
             'renderPagination' => $renderPagination,
             'comments' => $comments
-            ));
+        ));
 
     }
 
@@ -222,8 +222,7 @@ use App\Core\View;
                     'allPlatforms' => $allPlatforms,
                     'allPublishers' => $allPublishers,
                     'allRegions' => $allRegions,
-                    'member' => $currentMember,
-                    'errorMessage' => $errorMessage
+                    'member' => $currentMember
                 ));
 
             } else {
@@ -250,8 +249,7 @@ use App\Core\View;
                     'platforms' => $platforms,
                     'publishers' => $publishers,
                     'regions' => $regions,
-                    'member' => $currentMember,
-                    'errorMessage' => $errorMessage
+                    'member' => $currentMember
                 ));
 
             }

@@ -115,52 +115,5 @@ class BackController
     }
 
     
-    /**
-     * Allows to show the reported comments page
-     * 
-     * @param array $params optionnal
-     */
-    public function showReportedComments($params = [])
-    {
-        if (ConnectionController::isSessionValid()) {
-
-            $pageNb = 1;
-
-            if (isset($params['pageNb'])) {
-                $pageNb = $params['pageNb'];
-            } 
-
-            // Default action message to null
-            $actionDone = null;
-
-            // if user publish or delete a comment
-            if (isset($_SESSION['actionDone'])) {
-                $actionDone = $_SESSION['actionDone'];
-            }
-
-            $commentManager = new CommentManager();
-
-            $totalNbRows = $commentManager->countReportedComments();
-            $url = HOST . 'reported-comments';
-
-            $pagination = new Pagination($pageNb, $totalNbRows, $url, 10);
-
-            $reportedComments = $commentManager->listReportedComments($pagination->getFirstEntry(), $pagination->getElementNbByPage());
-
-            $view = new View('reportedComments');
-            $view->render('back', array(
-                'reportedComments' => $reportedComments, 
-                'pagination' => $pagination,
-                'actionDone' => $actionDone));
-
-            unset($_SESSION['actionDone']);
-
-        } else {
-            
-            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
-
-            $view = new View();
-            $view->redirect('connection');
-        }
-    }
+    
 }

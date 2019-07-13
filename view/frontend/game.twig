@@ -91,7 +91,7 @@
             <div class="row">
                 
                 <p class="col-12 authorCommentBloc {{ backgroundComment }}">
-                    <span id="commentAuthor{{ member.getId }}" class="font-weight-bold">{{ comment.getMemberNickName }}</span> (publié le {{ comment.getCreationDate }}) - <span class="italic">{% if comment.getMemberType == 1 %}Administrateur{% elseif comment.getMemberType == 2 %}Modérateur{% else %}Membre{% endif %}</span>
+                    <span id="commentAuthor{{ comment.getMemberNickName }}" class="font-weight-bold">{{ comment.getMemberNickName }}</span> (publié le {{ comment.getCreationDate }}) - <span class="italic">{% if comment.getMemberType == 1 %}Administrateur{% elseif comment.getMemberType == 2 %}Modérateur{% else %}Membre{% endif %}</span>
                 </p>
                 <p class="col-12 textComment">{% if comment.getReported == true %}Commentaire signalé par la communauté.{% else %}{{ comment.getContent }}{% endif %}</p>
                 <div class="col-12 commentButtonBloc d-flex justify-content-end">
@@ -103,13 +103,13 @@
                 <!-- If admin or moderator, comments can be published or deleted -->
                 {% if member.getId_type == 1 or member.getId_type == 2 %}
 
-                {% if comment.getReported == true %}
-                    <a class="ml-2" href="{{ HOST }}valid-comment/id/{{ comment.getId }}/game-id/{{ game.getId }}">
-                        <button type="button" class="btn btn-success btn-sm">Publier</button>
-                    </a>
-                {% endif %}
+                    {% if comment.getReported == true %}
+                        <a class="ml-2" href="{{ HOST }}valid-comment/id/{{ comment.getId }}/game-id/{{ game.getId }}">
+                            <button type="button" class="btn btn-success btn-sm">Publier</button>
+                        </a>
+                    {% endif %}
         
-                    <button type="button" class="btn btn-danger btn-sm ml-2" data-toggle="modal" data-target="#deleteModal" data-author="{{ comment.getAuthor }}" data-url="{{ HOST }}delete-comment/id/{{ comment.getId }}/post-id/{{ game.getId }}">Supprimer</button>
+                    <button type="button" class="btn btn-danger btn-sm ml-2" data-toggle="modal" data-target="#deleteModal" data-member-author="{{ comment.getMemberNickName }}" data-url-delete-comment="{{ HOST }}delete-comment/id/{{ comment.getId }}/game-id/{{ game.getId }}">Supprimer</button>
 
                 {% endif %}
 

@@ -30,7 +30,7 @@ use App\Model\Member;
      */
     public function getMemberById($value)
     {
-        $req = $this->_db->prepare('SELECT id, first_name, last_name, nick_name, mail, DATE_FORMAT(inscription_date, \'%d/%m/%Y à %Hh%imin%ss\') AS inscription_date, DATE_FORMAT(last_connection_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_connection_date, password, id_type, DATE_FORMAT(birthday, \'%d/%m/%Y\') AS birthday FROM ' . $this->_table . ' WHERE id = ?');
+        $req = $this->_db->prepare('SELECT id, first_name, last_name, nick_name, mail, DATE_FORMAT(inscription_date, \'%d/%m/%Y à %Hh%imin%ss\') AS inscription_date, DATE_FORMAT(last_connection_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_connection_date, password, id_type, becoming_moderator, DATE_FORMAT(birthday, \'%d/%m/%Y\') AS birthday FROM ' . $this->_table . ' WHERE id = ?');
         $req->execute(array($value));
 
         $data = $req->fetch(\PDO::FETCH_ASSOC);
@@ -49,7 +49,7 @@ use App\Model\Member;
      */
     public function getMemberByMail($value)
     {
-        $req = $this->_db->prepare('SELECT id, first_name, last_name, nick_name, mail, DATE_FORMAT(inscription_date, \'%d/%m/%Y à %Hh%imin%ss\') AS inscription_date, DATE_FORMAT(last_connection_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_connection_date, password, id_type, DATE_FORMAT(birthday, \'%d/%m/%Y\') AS birthday FROM ' . $this->_table . ' WHERE mail = ?');
+        $req = $this->_db->prepare('SELECT id, first_name, last_name, nick_name, mail, DATE_FORMAT(inscription_date, \'%d/%m/%Y à %Hh%imin%ss\') AS inscription_date, DATE_FORMAT(last_connection_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_connection_date, password, id_type, becoming_moderator, DATE_FORMAT(birthday, \'%d/%m/%Y\') AS birthday FROM ' . $this->_table . ' WHERE mail = ?');
         $req->execute(array($value));
 
         $data = $req->fetch(\PDO::FETCH_ASSOC);
@@ -289,6 +289,50 @@ use App\Model\Member;
 
         $count = $req->rowCount();
         return $count;
+    }
+
+    /**
+     * Allows to set the 'becoming moderator' column on true in a member
+     * 
+     * @param int $member_id
+     */
+    public function updateBecomingModerator($member_id, $cancelModeratorAsk = null)
+    {
+        $becoming_moderator = 'becoming_moderator = true';
+
+        if (isset($cancelModeratorAsk) && $cancelModeratorAsk == 'true') {
+            $becoming_moderator = 'becoming_moderator = false';
+        }
+
+        $req = $this->_db->prepare('UPDATE members SET ' . $becoming_moderator . ' WHERE id = ?');
+        $req->execute(array($member_id));
+
+        $count = $req->rowCount();
+        return $count;
+    }
+
+    /**
+     * Allows to get members requesting to be moderator
+     */
+    public function getMembersRequestingToBeModerator($firstEntry = 0, $nbElementsByPage)
+    {
+        $req = $this->_db->query('SELECT id, first_name, last_name, nick_name, mail, DATE_FORMAT(inscription_date, \'%d/%m/%Y à %Hh%imin%ss\') AS inscription_date, DATE_FORMAT(last_connection_date, \'%d/%m/%Y à %Hh%imin%ss\') AS last_connection_date, password, id_type,  DATE_FORMAT(birthday, \'%d/%m/%Y\') AS birthday FROM ' . $this->_table . ' WHERE becoming_moderator = 1 ORDER BY nick_name DESC LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+
+        $array = [];
+
+        if ($req) {
+
+            while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
+
+                $object = new $this->_class();
+                $object->hydrate($data);
+    
+                $array[] = $object;
+    
+            }
+        }
+
+        return $array;
     }
 
     /**

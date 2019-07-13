@@ -71,6 +71,11 @@ namespace App\Model;
     protected $_id_type;
 
     /**
+     * @var bool $_becoming_moderator, if member wants to be moderator
+     */
+    protected $_becoming_moderator;
+
+    /**
      * Set automatically elements in methods
      * 
      * @param array $data
@@ -213,6 +218,16 @@ namespace App\Model;
         return $this->_id_type;
     }
 
+    /**
+     * Allows to get if member wants to be moderator
+     * 
+     * @return bool $_becoming_moderator
+     */
+    public function getBecoming_moderator()
+    {
+        return $this->_becoming_moderator;
+    }
+
     // SETTERS
 
     /**
@@ -333,6 +348,16 @@ namespace App\Model;
     public function setId_type(int $idType = 3)
     {
         $this->_id_type = $idType;
+    }
+
+    /**
+     * Allows to set if member wants to be moderator
+     * 
+     * @param bool $_becoming_moderator
+     */
+    public function setBecoming_moderator($becomingModerator)
+    {
+        $this->_becoming_moderator = $becomingModerator;
     }
 
  }

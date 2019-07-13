@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\CommentManager;
 use App\Core\View;
+use App\Model\Pagination;
 
 /**
  *  CommentController
@@ -54,6 +55,10 @@ class CommentController
      */
     public function deleteComment($params)
     { 
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
+
         $commentManager = new CommentManager();
         $commentManager->deleteComment($params['id']);
 
@@ -114,6 +119,59 @@ class CommentController
         } else {
             $view = new View();
             $view->redirect('reported-comments');
+        }
+    }
+
+    /**
+     * Allows to show the reported comments page
+     * 
+     * @param array $params optionnal
+     */
+    public function showReportedComments($params = [])
+    {
+        if (ConnectionController::isSessionValid()) {
+
+            $pageNb = 1;
+
+            if (isset($params['pageNb'])) {
+                $pageNb = $params['pageNb'];
+            } 
+
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
+
+            $commentManager = new CommentManager();
+
+            $totalNbRows = $commentManager->countReportedComments();
+            $url = HOST . 'reported-comments';
+
+            $pagination = new Pagination($pageNb, $totalNbRows, $url, 10);
+
+            $reportedComments = $commentManager->listReportedComments($pagination->getFirstEntry(), $pagination->getElementNbByPage());
+
+            $renderPagination = false;
+
+            if ($pagination->getEnoughEntries()) {
+                $renderPagination = true;
+            }
+
+            $view = new View('reportedComments');
+            $view->render('back', array(
+                'comments' => $reportedComments, 
+                'pagination' => $pagination,
+                'renderPagination' => $renderPagination,
+                'member' => $currentMember
+            ));
+
+        } else {
+            
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
         }
     }
 }

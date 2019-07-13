@@ -67,6 +67,7 @@
                             <a href="{{ HOST }}member-management" class="dropdown-item">Gérer les membres</a>
                             {% endif %}
                             <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
+                            <a href="{{ HOST }}requests-moderators" class="dropdown-item">Demandes pour être modérateur</a>
                         </div>
                     </li>
                 </ul>
@@ -108,6 +109,7 @@
                             <a href="{{ HOST }}member-management"><li class="list-group-item">Gérer les membres</li></a>
                             {% endif %}
                             <a href="{{ HOST }}reported-comments"><li class="list-group-item">Modérer les commentaires</li></a>
+                            <a href="{{ HOST }}requests-moderators"><li class="list-group-item">Demandes pour être modérateur</li></a>
                         </ul>
                     </div>
 
@@ -134,7 +136,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <a href=""><button type="button" class="btn btn-primary" id="modalConfirmBtn">Effacer</button></a>
+                            <a href="">
+                                <button type="button" class="btn btn-primary" id="modalConfirmBtn">Effacer</button>
+                            </a>
                         </div>
                     </div>
                 </div>

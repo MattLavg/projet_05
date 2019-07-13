@@ -168,11 +168,15 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             echo "                                <a href=\"";
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
+                                <a href=\"";
+            // line 72
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "requests-moderators\" class=\"dropdown-item\">Demandes pour être modérateur</a>
                             </div>
                         </li>
                     ";
         }
-        // line 75
+        // line 76
         echo "                    
                 </ul>
                 <form class=\"form-inline\">
@@ -181,55 +185,55 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                 </form>
 
                 ";
-        // line 82
+        // line 83
         if ( !($context["connected"] ?? null)) {
-            // line 83
+            // line 84
             echo "                    <a class=\"nav-link connection-link\" href=\"";
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "connection\">Connexion</a>
                 ";
         }
-        // line 85
+        // line 86
         echo "            </div>
 
         </nav>
 
         ";
-        // line 89
+        // line 90
         if (($context["connected"] ?? null)) {
-            // line 90
+            // line 91
             echo "            <div id=\"user\" class=\"dropdown\">
                 <div class=\"dropdown-toggle dropdown-user\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     <i class=\"fas fa-user-circle fa-2x\"></i>
                 </div>
                 <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                     <p class=\"dropdown-item memberNickNameDropdown\">";
-            // line 95
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getNick_name", [], "any", false, false, false, 95), "html", null, true);
+            // line 96
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getNick_name", [], "any", false, false, false, 96), "html", null, true);
             echo "</p>
                     <a class=\"dropdown-item\" href=\"";
-            // line 96
+            // line 97
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "infos-member/id/";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId", [], "any", false, false, false, 96), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId", [], "any", false, false, false, 97), "html", null, true);
             echo "\">Profil</a>
                     <a class=\"dropdown-item\" href=\"";
-            // line 97
+            // line 98
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "logout\">Déconnexion</a>
                 </div>
             </div>
         ";
         }
-        // line 101
+        // line 102
         echo "    
         ";
-        // line 102
-        $this->displayBlock('cover', $context, $blocks);
         // line 103
+        $this->displayBlock('cover', $context, $blocks);
+        // line 104
         echo "
         <main role=\"main\" ";
-        // line 104
+        // line 105
         if (($context["cover"] ?? null)) {
             echo " class=\"gameViewContainer container\" ";
         } else {
@@ -238,9 +242,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         echo ">
 
             ";
-        // line 106
-        $this->displayBlock('content', $context, $blocks);
         // line 107
+        $this->displayBlock('content', $context, $blocks);
+        // line 108
         echo "
             <!-- DELETE MODAL -->
             <div class=\"modal fade\" id=\"deleteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteModalLabel\" aria-hidden=\"true\">
@@ -257,8 +261,8 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>
-                            <a id=\"modalConfirmBtn\" href=\"\">
-                                <button type=\"button\" class=\"btn btn-primary\">Effacer</button>
+                            <a href=\"\">
+                                <button type=\"button\" class=\"btn btn-primary\" id=\"modalConfirmBtn\">Effacer</button>
                             </a>
                         </div>
                     </div>
@@ -278,7 +282,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- JQUERY UI -->
     <script src=\"";
-        // line 143
+        // line 144
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/jquery-ui.min.js\"></script>
 
@@ -288,7 +292,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 150
+        // line 151
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
@@ -303,12 +307,12 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     {
     }
 
-    // line 102
+    // line 103
     public function block_cover($context, array $blocks = [])
     {
     }
 
-    // line 106
+    // line 107
     public function block_content($context, array $blocks = [])
     {
     }
@@ -325,7 +329,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  312 => 106,  307 => 102,  302 => 7,  292 => 150,  282 => 143,  244 => 107,  242 => 106,  233 => 104,  230 => 103,  228 => 102,  225 => 101,  218 => 97,  212 => 96,  208 => 95,  201 => 90,  199 => 89,  193 => 85,  187 => 83,  185 => 82,  176 => 75,  168 => 71,  162 => 69,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  316 => 107,  311 => 103,  306 => 7,  296 => 151,  286 => 144,  248 => 108,  246 => 107,  237 => 105,  234 => 104,  232 => 103,  229 => 102,  222 => 98,  216 => 97,  212 => 96,  205 => 91,  203 => 90,  197 => 86,  191 => 84,  189 => 83,  180 => 76,  173 => 72,  168 => 71,  162 => 69,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -401,6 +405,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                                 <a href=\"{{ HOST }}member-management\" class=\"dropdown-item\">Gérer les membres</a>
                                 {% endif %}
                                 <a href=\"{{ HOST }}reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
+                                <a href=\"{{ HOST }}requests-moderators\" class=\"dropdown-item\">Demandes pour être modérateur</a>
                             </div>
                         </li>
                     {% endif %}
@@ -452,8 +457,8 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Annuler</button>
-                            <a id=\"modalConfirmBtn\" href=\"\">
-                                <button type=\"button\" class=\"btn btn-primary\">Effacer</button>
+                            <a href=\"\">
+                                <button type=\"button\" class=\"btn btn-primary\" id=\"modalConfirmBtn\">Effacer</button>
                             </a>
                         </div>
                     </div>

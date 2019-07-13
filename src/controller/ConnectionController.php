@@ -26,18 +26,8 @@ class ConnectionController
 
         } else {
 
-            // Default error message to null
-            $errorMessage = null;
-
-            // if user try to connect with empty fields or wrong name and password
-            if (isset($_SESSION['errorMessage'])) {
-                $errorMessage = $_SESSION['errorMessage'];
-            }
-
             $view = new View('connection');
-            $view->render('front', array('errorMessage' => $errorMessage));
-
-            unset($_SESSION['errorMessage']);
+            $view->render('front');
         }
     }
 

@@ -103,7 +103,7 @@ use App\Model\Pagination;
             $currentMember = $_SESSION['currentMember'];
         }
 
-        // Members can not access the member mangement page
+        // Members can not access the member management page
         if ($currentMember->getId_type() != 1) {
             $_SESSION['errorMessage'] = 'Vous n\'avez pas les droits pour accéder à cette page.';
 
@@ -243,7 +243,7 @@ use App\Model\Pagination;
 
         $_SESSION['currentMember'] = $member;
 
-        $_SESSION['actionMessage'] = 'Bienvenue parmis nous ' . $member->getNick_name() . ' !';
+        $_SESSION['actionDone'] = 'Bienvenue parmis nous ' . $member->getNick_name() . ' !';
 
         $view = new View();
         $view->redirect('home');
@@ -306,7 +306,7 @@ use App\Model\Pagination;
             $view->redirect('infos-member/id/' . $params['member_id']);
         }
 
-        $_SESSION['actionMessage'] = 'Vos informations ont bien été modifiées.';
+        $_SESSION['actionDone'] = 'Vos informations ont bien été modifiées.';
 
         $view = new View();
         $view->redirect('infos-member/id/' . $params['member_id']);
@@ -375,7 +375,7 @@ use App\Model\Pagination;
             $view->redirect('infos-member/id/' . $params['member_id']);
         }
 
-        $_SESSION['actionMessage'] = 'Votre mot de passe a bien été modifié.';
+        $_SESSION['actionDone'] = 'Votre mot de passe a bien été modifié.';
 
         $view = new View();
         $view->redirect('infos-member/id/' . $params['member_id']);
@@ -409,7 +409,7 @@ use App\Model\Pagination;
         if (!$statusUpdated) {
             $_SESSION['errorMessage'] = 'Impossible de modifier le statut du membre.';
         } else {
-            $_SESSION['actionMessage'] = 'Le statut du membre a bien été modifié.';
+            $_SESSION['actionDone'] = 'Le statut du membre a bien été modifié.';
         }
 
         $view = new View();
@@ -435,18 +435,107 @@ use App\Model\Pagination;
         }
 
         if (isset($params['origin']) && $params['origin'] == "admin") {
-            $_SESSION['actionMessage'] = 'Le compte a bien été supprimé.';
+            $_SESSION['actionDone'] = 'Le compte a bien été supprimé.';
 
             $view = new View();
             $view->redirect('member-management');
         }
 
-        $_SESSION['actionMessage'] = 'Votre compte a bien été supprimé.';
+        $_SESSION['actionDone'] = 'Votre compte a bien été supprimé.';
 
         unset($_SESSION['valid']);
         unset($_SESSION['currentMember']);
 
         $view = new View();
         $view->redirect('home');
+    }
+
+    /**
+     * Allows to set the 'becoming moderator' column on true in a member
+     */
+    public function askBecomingModerator($params = [])
+    {
+        // echo "<pre>";
+        // print_r($params);
+        // echo "</pre>";die;
+
+        extract($params); // Allows to extract the $id variable
+
+        $member_id = $id;
+
+        if (isset($params['moderatorAsk']) && $params['moderatorAsk'] == 'cancel') {
+
+            $cancelModeratorAsk = true;
+
+            $memberManager = new MemberManager();
+            $askedBecomingModerator = $memberManager->updateBecomingModerator($member_id, $cancelModeratorAsk);
+
+            if (!$askedBecomingModerator) {
+                throw new \Exception('Impossible d\'annuler demande.');
+            }
+
+            $_SESSION['actionDone'] = 'La demande d\'annulation a bien été prise en compte.';
+
+        } else {
+            $memberManager = new MemberManager();
+            $askedBecomingModerator = $memberManager->updateBecomingModerator($member_id);
+
+            if (!$askedBecomingModerator) {
+                throw new \Exception('Impossible de faire la demande.');
+            }
+    
+            $_SESSION['actionDone'] = 'La demande a bien été prise en compte.';
+        }
+
+        $view = new View();
+        $view->redirect('infos-member/id/' . $member_id);
+    }
+
+    /**
+     * Allows to show members request to be moderator
+     */
+    public function showRequestsToBeModerator()
+    {
+        $currentMember = null;
+
+        if (isset($_SESSION['currentMember'])) {
+            $currentMember = $_SESSION['currentMember'];
+        }
+
+        $pageNb = 1;
+
+        if (isset($params['pageNb'])) {
+            $pageNb = $params['pageNb'];
+        }
+
+        $memberManager = new MemberManager();
+
+        $totalNbRows = $memberManager->count();
+        $url = HOST . 'requests-moderators';
+
+        $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
+
+        $membersRequests = $memberManager->getMembersRequestingToBeModerator($pagination->getFirstEntry(), $pagination->getElementNbByPage());
+
+        if (!$membersRequests) {
+            throw new \Exception('Impossible de récupérer les membres souhaitant être modérateurs.');
+        }
+
+        $renderPagination = false;
+
+        if ($pagination->getEnoughEntries()) {
+            $renderPagination = true;
+        }
+
+        $view = new View('requestsModerators');
+        $view->render('back', array(
+            'membersRequests' => $membersRequests,
+            'pagination' => $pagination,
+            'renderPagination' => $renderPagination,
+            'isSessionValid' => ConnectionController::isSessionValid(),
+            'member' => $currentMember
+        ));
+
+        
     }
  }

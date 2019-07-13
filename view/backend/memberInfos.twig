@@ -54,11 +54,15 @@
     <h4>Devenir modérateur du site</h4>
 
         <hr>
+        {% if member.getBecoming_moderator == true %}
+            <p>Votre demande pour être modérateur est en cours de traitement, vous pouvez l'annuler si vous le souhaitez.</p>
 
-        <p>Si vous souhaitez devenir modérateur du site, vous pouvez en faire la demande en cliquant sur le bouton ci-dessous.</p>
+            <a href="{{ HOST }}ask-becoming-moderator/id/{{ member.getId }}/moderatorAsk/cancel"><button type="button" class="btn btn-danger">Annuler la demande</button></a>
+        {% else %}
+            <p>Si vous souhaitez devenir modérateur du site, vous pouvez en faire la demande en cliquant sur le bouton ci-dessous.</p>
 
-        <a href="{{ HOST }}update-status-member/id/{{ member.getId }}"><button type="button" class="btn btn-secondary">Je souhaite devenir modérateur</button></a>
-
+            <a href="{{ HOST }}ask-becoming-moderator/id/{{ member.getId }}"><button type="button" class="btn btn-secondary">Je souhaite devenir modérateur</button></a>
+        {% endif %}
         <hr>
 
     {% endif %}

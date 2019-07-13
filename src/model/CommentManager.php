@@ -92,7 +92,7 @@ class CommentManager extends Manager
     public function countReportedComments()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT COUNT(*) nbReportedComments FROM comments WHERE reported = 1');
+        $req = $db->query('SELECT COUNT(*) AS nbReportedComments FROM comments WHERE reported = 1');
 
         $result = $req->fetch();
 
@@ -110,7 +110,27 @@ class CommentManager extends Manager
     public function listReportedComments($firstEntry = 0, $nbElementsByPage)
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, post_id, author, content, reported, DATE_FORMAT(creationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS creationDate FROM comments WHERE reported = 1 ORDER BY comments.creationDate DESC LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+        // $req = $db->query('SELECT id, post_id, author, content, reported, DATE_FORMAT(creationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS creationDate FROM comments WHERE reported = 1 ORDER BY comments.creationDate DESC LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
+
+        $req = $db->query(
+            'SELECT
+            com.id AS id,
+            com.content AS content,
+            DATE_FORMAT(com.creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creationDate,
+            com.reported AS reported,
+            mem.id AS memberId,
+            mem.nick_name AS memberNickName,
+            mem.id_type AS memberType,
+            games.id AS gameId
+            FROM comments AS com
+            INNER JOIN members AS mem
+            ON com.id_member = mem.id
+            INNER JOIN games AS games
+            ON com.id_game = games.id
+            WHERE com.reported = 1
+            ORDER BY com.creation_date
+            DESC LIMIT ' . $firstEntry . ',' . $nbElementsByPage
+        );
 
         $comments = [];
 

@@ -14,7 +14,11 @@ $(document).ready(function () {
         // for deleting a member by admin
         var urlDeleteMemberByAdmin = button.data('url-delete-member-by-admin')
         var memberName = button.data('member-name');
-        
+
+        // for deleting a comment
+        var urlDeleteComment = button.data('url-delete-comment');
+        var commentAuthor = button.data('member-author');
+        console.log(urlDeleteComment);
  
         var modal = $(this);
 
@@ -27,6 +31,9 @@ $(document).ready(function () {
         } else if (urlDeleteMemberByAdmin) {
             modal.find('.modal-text').text('le compte de : ' + memberName);
             modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteMemberByAdmin);
+        } else if (urlDeleteComment) {
+            modal.find('.modal-text').text('le commentaire de : ' + commentAuthor);
+            modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteComment);
         }
 
     })

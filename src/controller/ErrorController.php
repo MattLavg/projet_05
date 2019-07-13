@@ -21,9 +21,9 @@ class ErrorController
         $view = new View('error');
 
         if (!ConnectionController::isSessionValid()) {
-            $view->render('front', array('errorMessage' => $errorMessage));
+            $view->render('front');
         } else {
-            $view->render('back', array('errorMessage' => $errorMessage));
+            $view->render('back');
         }
 
     }
