@@ -86,7 +86,7 @@ class Pagination
      * @param int $elementNbByPages
      */
     protected function firstEntry($elementNbByPages)
-    {
+    {   
         $currentPage = $this->_currentPage - 1;
         $firstEntry = $currentPage * $elementNbByPages;
 

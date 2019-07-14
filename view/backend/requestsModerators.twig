@@ -13,33 +13,33 @@
     <p>Liste des membres souhaitant accéder au statut de modérateur.</p>
 
     <div class="table-responsive tableMargin" id="table-dev">
-            <table class="table table-striped">
-                <thead class="thead-dark">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Date d'inscription</th>
+                    <th scope="col">Accepter</th>
+                    <th scope="col">Refuser</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for membersRequest in membersRequests %}
+
+                    {% set elementsOnPage = true %}
+
                     <tr>
-                        <th scope="col">Pseudo</th>
-                        <th scope="col">Date d'inscription</th>
-                        <th scope="col">Accepter</th>
-                        <th scope="col">Refuser</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    {% for membersRequest in membersRequests %}
-    
-                        {% set elementsOnPage = true %}
-    
-                        <tr>
-                            <td>{{ membersRequest.getNick_name }}</td>
-                            <td>{{ membersRequest.getInscription_date }}</td>
-                            <td><a href="{{ HOST }}edit-game/id/{{ game.getId }}" id="updateGame">Accepter</a></td>
-                            <td><a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">Refuser</a></td>
-                        </tr> 
-    
-                    {% endfor %}
-                    
-                </tbody>
-            </table>
-        </div>
+                        <td>{{ membersRequest.getNick_name }}</td>
+                        <td>{{ membersRequest.getInscription_date }}</td>
+                        <td><a href="{{ HOST }}update-status-member/id/{{ membersRequest.getId }}/page/requestsModerators">Accepter</a></td>
+                        <td><a href="{{ HOST }}refuse-moderator-status/id/{{ membersRequest.getId }}">Refuser</a></td>
+                    </tr> 
+
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
 
     {% if elementsOnPage and renderPagination %}
         {{ pagination.render }}

@@ -412,8 +412,17 @@ use App\Model\Pagination;
             $_SESSION['actionDone'] = 'Le statut du membre a bien été modifié.';
         }
 
-        $view = new View();
-        $view->redirect('member-management');
+        $cancelModeratorAsk = true;
+        // Set 'becoming moderator' on false in member column
+        $memberManager->updateBecomingModerator($member_id, $cancelModeratorAsk);
+
+        if (isset($params['page']) && $params['page'] == 'requestsModerators') {
+            $view = new View();
+            $view->redirect('requests-moderators');
+        } else {
+            $view = new View();
+            $view->redirect('member-management');
+        }
     }
 
     /**
@@ -471,7 +480,7 @@ use App\Model\Pagination;
             $askedBecomingModerator = $memberManager->updateBecomingModerator($member_id, $cancelModeratorAsk);
 
             if (!$askedBecomingModerator) {
-                throw new \Exception('Impossible d\'annuler demande.');
+                throw new \Exception('Impossible d\'annuler la demande.');
             }
 
             $_SESSION['actionDone'] = 'La demande d\'annulation a bien été prise en compte.';
@@ -494,7 +503,7 @@ use App\Model\Pagination;
     /**
      * Allows to show members request to be moderator
      */
-    public function showRequestsToBeModerator()
+    public function showRequestsToBeModerator($params = [])
     {
         $currentMember = null;
 
@@ -510,7 +519,7 @@ use App\Model\Pagination;
 
         $memberManager = new MemberManager();
 
-        $totalNbRows = $memberManager->count();
+        $totalNbRows = $memberManager->countMembersRequestingToBeModerator();
         $url = HOST . 'requests-moderators';
 
         $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
@@ -535,7 +544,30 @@ use App\Model\Pagination;
             'isSessionValid' => ConnectionController::isSessionValid(),
             'member' => $currentMember
         ));
+    }
 
-        
+    /**
+     * Allows to cancel becoming moderator's ask
+     */
+    public function refuseModeratorStatus($params = [])
+    {
+        extract($params); // Allows to extract the $id variable
+
+        $member_id = $id;
+
+        $cancelModeratorAsk = true;
+
+        $memberManager = new MemberManager();
+        $result = $memberManager->updateBecomingModerator($member_id, $cancelModeratorAsk);
+
+        if (!$result) {
+            throw new \Exception('Impossible d\'annuler la demande.');
+        }
+
+        $_SESSION['actionDone'] = 'La demande de refus a bien été prise en compte.';
+
+        $view = new View();
+        $view->redirect('requests-moderators');
+
     }
  }

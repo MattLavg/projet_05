@@ -336,6 +336,20 @@ use App\Model\Member;
     }
 
     /**
+     * Allows to count member requesting to be moderator
+     * 
+     * @return int $totalNbRows
+     */
+    public function countMembersRequestingToBeModerator()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(*) AS nbRows FROM members WHERE becoming_moderator = 1');
+        $result = $req->fetch();
+
+        return $totalNbRows = $result['nbRows'];
+    }
+
+    /**
      * Allows to delete a member
      * 
      * @param string $member_id

@@ -47,6 +47,7 @@ class Routeur
         'delete-member'           => ['controller' => 'App\Controller\MemberController',     'method' => 'deleteMember'],
         'ask-becoming-moderator'  => ['controller' => 'App\Controller\MemberController',     'method' => 'askBecomingModerator'],
         'requests-moderators'     => ['controller' => 'App\Controller\MemberController',     'method' => 'showRequestsToBeModerator'],
+        'refuse-moderator-status' => ['controller' => 'App\Controller\MemberController',     'method' => 'refuseModeratorStatus'],
         'member-management'       => ['controller' => 'App\Controller\MemberController',     'method' => 'showMemberManagement'],
         'reported-comments'       => ['controller' => 'App\Controller\CommentController',    'method' => 'showReportedComments'],
         'add-comment'             => ['controller' => 'App\Controller\CommentController',    'method' => 'addComment'],
