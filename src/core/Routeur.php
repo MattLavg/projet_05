@@ -54,6 +54,7 @@ class Routeur
         'delete-comment'          => ['controller' => 'App\Controller\CommentController',    'method' => 'deleteComment'],
         'report-comment'          => ['controller' => 'App\Controller\CommentController',    'method' => 'reportComment'],
         'valid-comment'           => ['controller' => 'App\Controller\CommentController',    'method' => 'validComment'],
+        'search-game'             => ['controller' => 'App\Controller\SearchController',     'method' => 'searchGame'],
         'error'                   => ['controller' => 'App\Controller\ErrorController',      'method' => 'showError']
     ];
 

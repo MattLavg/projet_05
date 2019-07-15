@@ -75,8 +75,8 @@
                     {% endif %}
                     
                 </ul>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher un jeu..." aria-label="Search">
+                <form method="post" action="{{ HOST }}search-game" class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher un jeu..." aria-label="Search" name="game">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Chercher</button>
                 </form>
 

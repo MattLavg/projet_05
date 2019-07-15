@@ -179,8 +179,11 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         // line 76
         echo "                    
                 </ul>
-                <form class=\"form-inline\">
-                    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\">
+                <form method=\"post\" action=\"";
+        // line 78
+        echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+        echo "search-game\" class=\"form-inline\">
+                    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\" name=\"game\">
                     <button class=\"btn btn-outline-light my-2 my-sm-0\" type=\"submit\">Chercher</button>
                 </form>
 
@@ -329,7 +332,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  316 => 107,  311 => 103,  306 => 7,  296 => 151,  286 => 144,  248 => 108,  246 => 107,  237 => 105,  234 => 104,  232 => 103,  229 => 102,  222 => 98,  216 => 97,  212 => 96,  205 => 91,  203 => 90,  197 => 86,  191 => 84,  189 => 83,  180 => 76,  173 => 72,  168 => 71,  162 => 69,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  319 => 107,  314 => 103,  309 => 7,  299 => 151,  289 => 144,  251 => 108,  249 => 107,  240 => 105,  237 => 104,  235 => 103,  232 => 102,  225 => 98,  219 => 97,  215 => 96,  208 => 91,  206 => 90,  200 => 86,  194 => 84,  192 => 83,  184 => 78,  180 => 76,  173 => 72,  168 => 71,  162 => 69,  160 => 68,  156 => 67,  152 => 66,  148 => 65,  144 => 64,  140 => 63,  136 => 62,  132 => 61,  128 => 60,  123 => 57,  121 => 56,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -411,8 +414,8 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                     {% endif %}
                     
                 </ul>
-                <form class=\"form-inline\">
-                    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\">
+                <form method=\"post\" action=\"{{ HOST }}search-game\" class=\"form-inline\">
+                    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\" name=\"game\">
                     <button class=\"btn btn-outline-light my-2 my-sm-0\" type=\"submit\">Chercher</button>
                 </form>
 

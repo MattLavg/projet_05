@@ -141,7 +141,7 @@ use App\Model\Game;
     public function getAllNames()
     {
         $class = $this->_class;
-        $req = $this->_db->query('SELECT name FROM ' . $this->_table . ' ORDER BY id DESC');
+        $req = $this->_db->query('SELECT name FROM ' . $this->_table);
 
         $array = $req->fetchAll(\PDO::FETCH_COLUMN, 0);
 
