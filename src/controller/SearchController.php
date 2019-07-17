@@ -45,15 +45,10 @@ use App\Model\GameManager;
             $view->redirect('home');
         }
 
-        $searchedGameExploded = explode(" ", $params['game']);
-
         $gameManager = new GameManager();
         $games = $gameManager->getAll();
 
         $foundGames = [];
-
-        // $result = stripos(strtolower('mario kart 8'), strtolower('mario'));
-        // var_dump($result);die;
 
         foreach ($games as $game) {
 
@@ -63,43 +58,28 @@ use App\Model\GameManager;
                 $view->redirect('game/id/' . $game->getId()); 
 
             } 
-            // else {
-            //     foreach ($searchedGameExploded as $searchedGamePart) {
-            //         // var_dump($searchedGamePart);
-            //         if (stripos(strtolower($game->getName()), strtolower($searchedGamePart)) != false) {
-            //             $foundGames [] = $game;
-            //         }
-            //     }
 
-                
-            // }
-            var_dump(stripos(strtolower($game->getName()), strtolower($params['game'])));
-            if (stripos(strtolower($game->getName()), strtolower($params['game'])) != false) {
+            if (stripos(strtolower($game->getName()), strtolower($params['game'])) !== false) {
                 $foundGames [] = $game;
             }
-        }var_dump($foundGames);die;
 
-        // foreach ($games as $key => $value) {
-        //     var_dump($games);
-        // }die;
+        }
+        
+        if (!empty($foundGames)) {
 
-    // echo "<pre>";
-    // print_r($games);
-    // echo "</pre>";die;
-// var_dump($result);die;
-            if ($result) {
+            $view = new View('search');
+            $view->render('front', array(
+                'games' => $foundGames,
+                'searchedGame' => $params['game'],
+                'member' => $currentMember
+            ));
 
-                $view = new View('search');
-                $view->render('front', array(
-                    'member' => $currentMember
-                ));
+        } else {
+            $_SESSION['errorMessage'] = 'La recherche n\'a donné aucun résultat.';
 
-            } else {
-                $_SESSION['errorMessage'] = 'La recherche n\'a donné aucun résultat.';
-
-                $view = new View();
-                $view->redirect('home');
-            }
+            $view = new View();
+            $view->redirect('home');
+        }
     }
 
  }

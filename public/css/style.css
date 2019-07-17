@@ -229,6 +229,13 @@ h1 {
     margin-top: 20px;
 }
 
+/* SEARCH VUE */
+
+.searchLink {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
 /* FOOTER */
 
 footer p {

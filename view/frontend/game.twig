@@ -42,6 +42,19 @@
 
     <p>{{ game.getContent|raw }}</p>
 
+    {% if member.getId_type == 3 %}
+        <a href="{{ HOST }}edit-game/id/{{ game.getId }}">
+            <button type="button" class="btn btn-primary">Suggérer des modifications</button>
+        </a>
+    {% else %}
+        <a href="{{ HOST }}edit-game/id/{{ game.getId }}">
+            <button type="button" class="btn btn-primary">Modifier</button>
+        </a>
+        <a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+        </a>
+    {% endif %}
+
     {% if connected %}
 
         <hr>

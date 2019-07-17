@@ -125,9 +125,15 @@ use App\Model\Game;
      * 
      * @param int $game_id
      */
-    public function deleteGame($game_id)
+    public function deleteGameAndComments($game_id)
     {
-        $req = $this->_db->prepare('DELETE FROM ' . $this->_table . ' WHERE id = ?');
+        $req = $this->_db->prepare(
+        'DELETE G, C
+        FROM games AS G 
+        LEFT JOIN comments AS C
+        ON C.id_game = G.id
+        WHERE G.id = ?
+        ');
         $req->execute(array($game_id));
 
         $count = $req->rowCount();

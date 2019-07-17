@@ -810,11 +810,11 @@ use App\Core\View;
     }
 
     /**
-     * Allows to delete a game
+     * Allows to delete a game and the associated comments
      * 
      * @param array $params
      */
-    public function deleteGame($params = [])
+    public function deleteGameAndComments($params = [])
     {
         // echo "<pre>";
         // print_r($params);
@@ -847,9 +847,9 @@ use App\Core\View;
                 unlink(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension());
             }
             
-            $gameManager->deleteGame($params['id']);
+            $gameManager->deleteGameAndComments($params['id']);
 
-            $_SESSION['actionDOne'] = 'Vous avez effacé un jeu.';
+            $_SESSION['actionDone'] = 'Vous avez effacé un jeu.';
 
             $view = new View();
             $view->redirect('game-management');
