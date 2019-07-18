@@ -46,24 +46,7 @@ use App\Model\GameManager;
         }
 
         $gameManager = new GameManager();
-        $games = $gameManager->getAll();
-
-        $foundGames = [];
-
-        foreach ($games as $game) {
-
-            if (strtolower($params['game']) == strtolower($game->getName())) {
-
-                $view = new View();
-                $view->redirect('game/id/' . $game->getId()); 
-
-            } 
-
-            if (stripos(strtolower($game->getName()), strtolower($params['game'])) !== false) {
-                $foundGames [] = $game;
-            }
-
-        }
+        $foundGames = $gameManager->getSearchedGame($params['game']);
         
         if (!empty($foundGames)) {
 

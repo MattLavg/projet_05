@@ -52,8 +52,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ HOST }}">Accueil</a>
                     </li>
-        
-                    {% if connected %}
+                    {% if member.getId_type == 3 %}
+                        <li class="nav-item">
+                            <a href="{{ HOST }}edit-game" class="nav-link">Ajouter un jeu</a>
+                        </li>
+                    {% else %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -67,13 +70,12 @@
                                 <a href="{{ HOST }}entity-management/entity/region" class="dropdown-item">Gérer les régions</a>
                                 {% if member.getId_type == 1 %}
                                 <a href="{{ HOST }}member-management" class="dropdown-item">Gérer les membres</a>
+                                <a href="{{ HOST }}requests-moderators" class="dropdown-item">Demandes pour être modérateur</a>
                                 {% endif %}
                                 <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
-                                <a href="{{ HOST }}requests-moderators" class="dropdown-item">Demandes pour être modérateur</a>
                             </div>
                         </li>
                     {% endif %}
-                    
                 </ul>
                 <form method="post" action="{{ HOST }}search-game" class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Chercher un jeu..." aria-label="Search" name="game">

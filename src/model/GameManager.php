@@ -49,6 +49,33 @@ use App\Model\Game;
     }
 
     /**
+     * Get searched game
+     * 
+     * @return array $array
+     */
+    public function getSearchedGame($searchedGame)
+    {
+        $req = $this->_db->prepare('SELECT * FROM ' . $this->_table . ' WHERE name LIKE ?');
+        $req->execute(array('%'. $searchedGame . '%'));
+
+        $array = [];
+
+        if ($req) {
+
+            while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
+
+                $object = new $this->_class();
+                $object->hydrate($data);
+    
+                $array[] = $object;
+    
+            }
+        }
+
+        return $array;
+    }
+
+    /**
      * Allows to count games
      * 
      * @return int $totalNbRows

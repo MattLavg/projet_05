@@ -52,24 +52,30 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ HOST }}">Accueil</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a href="{{ HOST }}edit-game" class="dropdown-item">Ajouter un jeu</a>
-                            <a href="{{ HOST }}game-management" class="dropdown-item">Gérer les jeux</a>
-                            <a href="{{ HOST }}entity-management/entity/developer" class="dropdown-item">Gérer les développeurs</a>
-                            <a href="{{ HOST }}entity-management/entity/publisher" class="dropdown-item">Gérer les éditeurs</a>
-                            <a href="{{ HOST }}entity-management/entity/platform" class="dropdown-item">Gérer les supports</a>
-                            <a href="{{ HOST }}entity-management/entity/genre" class="dropdown-item">Gérer les genres</a>
-                            <a href="{{ HOST }}entity-management/entity/mode" class="dropdown-item">Gérer les modes</a>
-                            <a href="{{ HOST }}entity-management/entity/region" class="dropdown-item">Gérer les régions</a>
-                            {% if member.getId_type == 1 %}
-                            <a href="{{ HOST }}member-management" class="dropdown-item">Gérer les membres</a>
-                            {% endif %}
-                            <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
-                            <a href="{{ HOST }}requests-moderators" class="dropdown-item">Demandes pour être modérateur</a>
-                        </div>
-                    </li>
+                    {% if member.getId_type == 3 %}
+                        <li class="nav-item">
+                            <a href="{{ HOST }}edit-game" class="nav-link">Ajouter un jeu</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a href="{{ HOST }}edit-game" class="dropdown-item">Ajouter un jeu</a>
+                                <a href="{{ HOST }}game-management" class="dropdown-item">Gérer les jeux</a>
+                                <a href="{{ HOST }}entity-management/entity/developer" class="dropdown-item">Gérer les développeurs</a>
+                                <a href="{{ HOST }}entity-management/entity/publisher" class="dropdown-item">Gérer les éditeurs</a>
+                                <a href="{{ HOST }}entity-management/entity/platform" class="dropdown-item">Gérer les supports</a>
+                                <a href="{{ HOST }}entity-management/entity/genre" class="dropdown-item">Gérer les genres</a>
+                                <a href="{{ HOST }}entity-management/entity/mode" class="dropdown-item">Gérer les modes</a>
+                                <a href="{{ HOST }}entity-management/entity/region" class="dropdown-item">Gérer les régions</a>
+                                {% if member.getId_type == 1 %}
+                                <a href="{{ HOST }}member-management" class="dropdown-item">Gérer les membres</a>
+                                <a href="{{ HOST }}requests-moderators" class="dropdown-item">Demandes pour être modérateur</a>
+                                {% endif %}
+                                <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
+                            </div>
+                        </li>
+                    {% endif %}
                 </ul>
                 <form method="post" action="{{ HOST }}search-game" class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Chercher un jeu..." aria-label="Search" name="game">
@@ -91,29 +97,31 @@
 
         <main role="main" class="mainContainer container-fluid">
 
-            <div class="container-fluid">
+            <div {% if member.getId_type != 3 %}class="container-fluid"{% else %}class="container"{% endif %}>
 
                 <div class="row">
 
-                    <div class="col-lg-4 leftMenu">
-                        <ul class="list-group">
-                            <a href="{{ HOST }}edit-game"><li class="list-group-item">Ajouter un jeu</li></a>
-                            <a href="{{ HOST }}game-management"><li class="list-group-item">Gérer les jeux</li></a>
-                            <a href="{{ HOST }}entity-management/entity/developer"><li class="list-group-item">Gérer les développeurs</li></a>
-                            <a href="{{ HOST }}entity-management/entity/publisher"><li class="list-group-item">Gérer les éditeurs</li></a>
-                            <a href="{{ HOST }}entity-management/entity/platform"><li class="list-group-item">Gérer les supports</li></a>
-                            <a href="{{ HOST }}entity-management/entity/genre"><li class="list-group-item">Gérer les genres</li></a>
-                            <a href="{{ HOST }}entity-management/entity/mode"><li class="list-group-item">Gérer les modes</li></a>
-                            <a href="{{ HOST }}entity-management/entity/region"><li class="list-group-item">Gérer les régions</li></a>
-                            {% if member.getId_type == 1 %}
-                            <a href="{{ HOST }}member-management"><li class="list-group-item">Gérer les membres</li></a>
-                            {% endif %}
-                            <a href="{{ HOST }}reported-comments"><li class="list-group-item">Modérer les commentaires</li></a>
-                            <a href="{{ HOST }}requests-moderators"><li class="list-group-item">Demandes pour être modérateur</li></a>
-                        </ul>
-                    </div>
+                    {% if member.getId_type != 3 %}
+                        <div class="col-lg-4 leftMenu">
+                            <ul class="list-group">
+                                <a href="{{ HOST }}edit-game"><li class="list-group-item">Ajouter un jeu</li></a>
+                                <a href="{{ HOST }}game-management"><li class="list-group-item">Gérer les jeux</li></a>
+                                <a href="{{ HOST }}entity-management/entity/developer"><li class="list-group-item">Gérer les développeurs</li></a>
+                                <a href="{{ HOST }}entity-management/entity/publisher"><li class="list-group-item">Gérer les éditeurs</li></a>
+                                <a href="{{ HOST }}entity-management/entity/platform"><li class="list-group-item">Gérer les supports</li></a>
+                                <a href="{{ HOST }}entity-management/entity/genre"><li class="list-group-item">Gérer les genres</li></a>
+                                <a href="{{ HOST }}entity-management/entity/mode"><li class="list-group-item">Gérer les modes</li></a>
+                                <a href="{{ HOST }}entity-management/entity/region"><li class="list-group-item">Gérer les régions</li></a>
+                                {% if member.getId_type == 1 %}
+                                <a href="{{ HOST }}member-management"><li class="list-group-item">Gérer les membres</li></a>
+                                <a href="{{ HOST }}requests-moderators"><li class="list-group-item">Demandes pour être modérateur</li></a>
+                                {% endif %}
+                                <a href="{{ HOST }}reported-comments"><li class="list-group-item">Modérer les commentaires</li></a>
+                            </ul>
+                        </div>
+                    {% endif %}
 
-                    <div class="col-lg-8">
+                    <div {% if member.getId_type != 3 %}class="col-lg-8"{% else %}class="col"{% endif %}>
 
                         {% block content %}{% endblock %}
 
