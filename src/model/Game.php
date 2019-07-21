@@ -31,6 +31,11 @@ class Game
     protected $_cover_extension;
 
     /**
+     * @var bool $_member_modification, if a member modification is in progress
+     */
+    protected $_member_modification;
+
+    /**
      * Set automatically elements in methods
      * 
      * @param array $data
@@ -89,6 +94,16 @@ class Game
         return $this->_cover_extension;
     }
 
+    /**
+     * Allows to know if the game is modified by a member and waiting for validation
+     * 
+     * @return bool $_member_modification
+     */
+    public function getMember_modification()
+    {
+        return $this->_member_modification;
+    }
+
     // SETTERS
 
     /**
@@ -129,6 +144,16 @@ class Game
     public function setCover_extension(string $coverExtension)
     {
         $this->_cover_extension = $coverExtension;
+    }
+
+    /**
+     * Allows to set if the game is modified by a member and is waiting for validation
+     * 
+     * @param bool $member_modification
+     */
+    public function setMember_modification(bool $memberModification = null)
+    {
+        $this->_member_modification = $memberModification;
     }
 
 }
