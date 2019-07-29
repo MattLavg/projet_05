@@ -1,0 +1,66 @@
+{% extends "back.twig" %}
+
+{% block title %}
+    <title>Jeux à valider | LISTaGAME</title>
+{% endblock %}
+
+{% set elementsOnPage = false %}
+
+{% block content %}
+
+    <h1>Jeux à valider</h1>
+
+    <h4>Liste des jeux ajoutés par la communauté</h4>
+
+    <div class="table-responsive tableMargin" id="table-dev">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Accepter le jeu</th>
+                    <th scope="col">Supprimer le jeu</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for game in games %}
+
+                    {% set elementsOnPage = true %}
+
+                    <tr>
+                        <td><a href="{{ HOST }}game/id/{{ game.getId }}">{{ game.getName }}</a></td>
+                        <td><a href="{{ HOST }}validate-game/id/{{ game.getId }}">Accepter</a></td>
+                        <td><a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}/page/added-game" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
+                    </tr> 
+
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+
+    {% if elementsOnPage and renderPagination %}
+        {{ pagination.render }}
+    {% elseif not elementsOnPage %}
+        <p>Il n'y a actuellement aucun jeu</p>
+    {% endif %}
+
+    {% if actionDone %}
+        <div class="alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ actionDone }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    {% if errorMessage %}
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+{% endblock %}
