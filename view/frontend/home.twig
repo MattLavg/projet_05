@@ -15,7 +15,9 @@
 
         <div class="listGames">
             
-            <div class="background_game_image_home container" style="background-image: url('{{ HOST }}public/images/covers/cover_game_id_{{ game.getId }}.{{ game.getCover_extension }}')"></div>
+            <a href="{{ HOST }}game/id/{{ game.getId }}" class="image-link">
+                <div class="background_game_image_home container" style="background-image: url('{{ HOST }}public/images/covers/cover_game_id_{{ game.getId }}.{{ game.getCover_extension }}')"></div>
+            </a>
             <h3>
                 <a href="{{ HOST }}game/id/{{ game.getId }}">{{ game.getName }}</a>
             </h3>

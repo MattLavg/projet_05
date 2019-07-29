@@ -34,7 +34,7 @@
         {% endfor %}
     </p>
 
-    <p>Sorties :<br>
+    <p>Sortie(s) :<br>
         {% for release in releases %} 
             <p>- Sur {{ release.getPlatform }}, édité par {{ release.getPublisher }} - {{ release.getRegion }} - {{  release. getReleaseDate }}</p>
         {% endfor %}
@@ -42,42 +42,50 @@
 
     <p>{{ game.getContent|raw }}</p>
 
-    {% if member.getId_type == 3 %}
-        <a href="{{ HOST }}edit-game/id/{{ game.getId }}">
-            <button type="button" class="btn btn-primary">Suggérer des modifications</button>
-        </a>
+    {% if game.getTo_validate == 0 %}
+
+            {% if member.getId_type == 3 %}
+            <a href="{{ HOST }}edit-game/id/{{ game.getId }}">
+                <button type="button" class="btn btn-primary">Suggérer des modifications</button>
+            </a>
+        {% elseif member.getId_type == 1 or member.getId_type == 2 %}
+            <a href="{{ HOST }}edit-game/id/{{ game.getId }}">
+                <button type="button" class="btn btn-primary">Modifier</button>
+            </a>
+            <a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">
+                <button type="button" class="btn btn-danger">Supprimer</button>
+            </a>
+        {% endif %}
+
+        {% if connected %}
+
+            <hr>
+
+            <h4 id="anchorGame" class="anchor">Ajouter un commentaire</h4>
+
+            <form method="post" action="{{ HOST }}add-comment">
+
+                <div class="form-group">
+                    <input type="hidden" name="game-id" value="{{ game.getId }}" />
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" name="member-id" value="{{ member.getId }}" />
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+                </div>
+            
+                <input type="submit" value="Envoyer" class="btn btn-primary" />
+
+            </form>
+
+        {% endif %}
+
     {% else %}
-        <a href="{{ HOST }}edit-game/id/{{ game.getId }}">
-            <button type="button" class="btn btn-primary">Modifier</button>
-        </a>
-        <a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">
-            <button type="button" class="btn btn-danger">Supprimer</button>
-        </a>
-    {% endif %}
 
-    {% if connected %}
-
-        <hr>
-
-        <h4 id="anchorGame" class="anchor">Ajouter un commentaire</h4>
-
-        <form method="post" action="{{ HOST }}add-comment">
-
-            <div class="form-group">
-                <input type="hidden" name="game-id" value="{{ game.getId }}" />
-            </div>
-
-            <div class="form-group">
-                <input type="hidden" name="member-id" value="{{ member.getId }}" />
-            </div>
-
-            <div class="form-group">
-                <textarea class="form-control" id="content" name="content" rows="5"></textarea>
-            </div>
-        
-            <input type="submit" value="Envoyer" class="btn btn-primary" />
-
-        </form>
+        <p class="bold text-danger">Ce jeu a été ajouté récemment et est en attente de validation, il n'est pas possible de modifier la fiche ou de poster des commentaires.</p>
 
     {% endif %}
 

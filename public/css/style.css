@@ -120,6 +120,10 @@ h1 {
     color: rgb(141, 141, 141);
 }
 
+.image-link {
+    display: block;
+}
+
 .background_game_image_home {
     background-repeat: no-repeat;
     background-position: center;

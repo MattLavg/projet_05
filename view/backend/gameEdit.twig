@@ -10,7 +10,7 @@
 
         <h1>Modifier un jeu</h1>
         <hr>
-            <form method="post" {% if member.getId_type == 3 %}action="{{ HOST }}member-update-game"{% else %}action="{{ HOST }}update-game"{% endif %} enctype="multipart/form-data" novalidate>
+            <form method="post" {% if member.getId_type == 3 %}action="{{ HOST }}update-game-by-member"{% else %}action="{{ HOST }}update-game"{% endif %} enctype="multipart/form-data" novalidate>
 
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="id" name="id" value="{{ game.getid }}">
@@ -150,7 +150,7 @@
 
         <h1>Ajouter un jeu</h1>
         <hr>
-            <form method="post" {% if member.getId_type == 3 %}action="{{ HOST }}member-add-game"{% else %}action="{{ HOST }}add-game"{% endif %} enctype="multipart/form-data" novalidate>
+            <form method="post" action="{{ HOST }}add-game" enctype="multipart/form-data" novalidate>
                 <div class="form-group">
                     <label for="name">Le titre du jeu :</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Titre">

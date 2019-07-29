@@ -31,9 +31,14 @@ class Game
     protected $_cover_extension;
 
     /**
-     * @var bool $_member_modification, if a member modification is in progress
+     * @var bool $_updated_by_member, if a member modification is in progress
      */
-    protected $_member_modification;
+    protected $_updated_by_member;
+
+    /**
+     * @var bool $_to_validate, if a member add a game
+     */
+    protected $_to_validate;
 
     /**
      * Set automatically elements in methods
@@ -97,11 +102,21 @@ class Game
     /**
      * Allows to know if the game is modified by a member and waiting for validation
      * 
-     * @return bool $_member_modification
+     * @return bool $_updated_by_member
      */
-    public function getMember_modification()
+    public function getUpdated_by_member()
     {
-        return $this->_member_modification;
+        return $this->_updated_by_member;
+    }
+
+    /**
+     * Allows to know if the game has been added by a member
+     * 
+     * @return bool $_to_validate
+     */
+    public function getTo_validate()
+    {
+        return $this->_to_validate;
     }
 
     // SETTERS
@@ -149,11 +164,21 @@ class Game
     /**
      * Allows to set if the game is modified by a member and is waiting for validation
      * 
-     * @param bool $member_modification
+     * @param bool $updatedByMember
      */
-    public function setMember_modification(bool $memberModification = null)
+    public function setUpdated_by_member(bool $updatedByMember = null)
     {
-        $this->_member_modification = $memberModification;
+        $this->_updated_by_member = $updatedByMember;
+    }
+
+    /**
+     * Allows to set if the game has been added by a member
+     * 
+     * @param bool $to_validate
+     */
+    public function setTo_validate(bool $toValidate = null)
+    {
+        $this->_to_validate = $toValidate;
     }
 
 }

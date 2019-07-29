@@ -10,6 +10,11 @@ use App\Model\PlatformManager;
 use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
+use App\Model\ToValidateGameManager;
+use App\Model\ToValidateDeveloperManager;
+use App\Model\ToValidateGenreManager;
+use App\Model\ToValidateModeManager;
+use App\Model\ToValidateReleaseDateManager;
 use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
@@ -165,6 +170,7 @@ use App\Core\View;
         // echo "<pre>";
         // print_r($params);
         // echo "</pre>";die;
+
         if (ConnectionController::isSessionValid()) {
 
             $currentMember = null;
@@ -440,8 +446,13 @@ use App\Core\View;
                 
                 $db->beginTransaction();
 
-                // Add game informations (name, content, cover)
-                $game_id = $gameManager->addGame($params, $fileExtension);
+                // if it's a member
+                if ($_SESSION['currentMember']->getId_Type() == 3) {
+                    $game_id = $gameManager->addGame($params, $fileExtension, $toValidate = 1);
+                } else {
+                    // Add game informations (name, content, cover)
+                    $game_id = $gameManager->addGame($params, $fileExtension);
+                }
 
                 if (!$game_id) {
                     throw new \Exception('Impossible d\'enregistrer les informations du jeu');
@@ -484,7 +495,7 @@ use App\Core\View;
                 // Add games modes
                 $modeManager = new ModeManager();
                 foreach($params['mode'] as $mode_id) {
-                    
+
                     $addedMode = $modeManager->addGameMode($game_id, $mode_id);
 
                     if (!$addedMode) {
@@ -495,7 +506,7 @@ use App\Core\View;
                 // Add games release
                 $releaseDateManager = new ReleaseDateManager();
                 foreach($params['releaseDate'] as $releaseDate_array) {
-                    
+
                     $addedRelease = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
 
                     if (!$addedRelease) {
@@ -567,21 +578,6 @@ use App\Core\View;
                     $view->redirect('edit-game/id/' . $game_id);
                 }
             });
-
-            // $gameManager = new GameManager();
-            // $games = $gameManager->getAll();
-
-            // // Check if game already exists
-            // $result = array_search($params['name'], $games);
-
-            // if ($result) {
-                
-            //     $_SESSION['errorMessage'] = 'Le jeu existe déjà.';
-
-            //     $view = new View();
-            //     $view->redirect('edit-game/id/' . $game_id);
-
-            // }
 
             // Check if file is present
             if (isset($_FILES['cover']) && $_FILES['cover']['error']  == 0) {
@@ -850,6 +846,11 @@ use App\Core\View;
             $gameManager->deleteGameAndComments($params['id']);
 
             $_SESSION['actionDone'] = 'Vous avez effacé un jeu.';
+
+            if (isset($params['page']) && $params['page'] == 'added-game') {
+                $view = new View();
+                $view->redirect('added-game-member');
+            }
 
             $view = new View();
             $view->redirect('game-management');

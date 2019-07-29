@@ -56,7 +56,7 @@
                         <li class="nav-item">
                             <a href="{{ HOST }}edit-game" class="nav-link">Ajouter un jeu</a>
                         </li>
-                    {% else %}
+                    {% elseif member.getId_type == 1 or member.getId_type == 2 %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -72,6 +72,8 @@
                                 <a href="{{ HOST }}member-management" class="dropdown-item">Gérer les membres</a>
                                 <a href="{{ HOST }}requests-moderators" class="dropdown-item">Demandes pour être modérateur</a>
                                 {% endif %}
+                                <a href="{{ HOST }}added-game-member" class="dropdown-item">Jeux ajoutés par la communauté</a>
+                                <a href="{{ HOST }}updated-game-member" class="dropdown-item">Jeux modifiés par la communauté</a>
                                 <a href="{{ HOST }}reported-comments" class="dropdown-item">Modérer les commentaires</a>
                             </div>
                         </li>

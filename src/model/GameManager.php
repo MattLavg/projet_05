@@ -48,6 +48,34 @@ use App\Model\Game;
         return $game;
     }
 
+    // /**
+    //  * Allows to get games to validate
+    //  * 
+    //  * @param int $id
+    //  * @return object PDOStatement
+    //  */
+    // public function getGamesToValidate()
+    // { 
+    //     $db = $this->dbConnect();
+    //     $req = $db->query('SELECT * FROM games WHERE to_validate = 1');
+
+    //     $array = [];
+
+    //     if ($req) {
+
+    //         while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
+
+    //             $object = new $this->_class();
+    //             $object->hydrate($data);
+    
+    //             $array[] = $object;
+    
+    //         }
+    //     }
+
+    //     return $array;
+    // }
+
     /**
      * Get searched game
      * 
@@ -90,14 +118,28 @@ use App\Model\Game;
     }
 
     /**
+     * Allows to count games to validate
+     * 
+     * @return int $totalNbRows
+     */
+    public function countGamesToValidate()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(*) AS nbRows FROM games WHERE to_validate = 1');
+        $result = $req->fetch();
+
+        return $totalNbRows = $result['nbRows'];
+    }
+
+    /**
      * Allows to add a game
      * 
      * @param array $values
      */
-    public function addGame($values, $fileExtension)
+    public function addGame($values, $fileExtension, $toValidate = null)
     { 
-        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name, content, cover_extension) VALUES(?, ?, ?)');
-        $req->execute(array($values['name'], $values['content'], $fileExtension));
+        $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (name, content, cover_extension, to_validate) VALUES(?, ?, ?, ?)');
+        $req->execute(array($values['name'], $values['content'], $fileExtension, $toValidate));
 
         $count = $req->rowCount();
 
@@ -179,6 +221,48 @@ use App\Model\Game;
         $array = $req->fetchAll(\PDO::FETCH_COLUMN, 0);
 
         return $array;
+    }
+
+    /**
+     * Allows to validate a game
+     * 
+     * @param int $game_id
+     */
+    public function validateGame($game_id)
+    {
+        $req = $this->_db->prepare('UPDATE games SET to_validate = 0 WHERE id = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+        return $count;
+    }
+
+    /**
+     * Allows to indicate that a game is being updated by a member and waiting for validation
+     * 
+     * @param int $game_id
+     */
+    public function updatedByMember($game_id)
+    {
+        $req = $this->_db->prepare('UPDATE games SET updated_by_member = 1 WHERE id = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+        return $count;
+    }
+
+    /**
+     * Allows to indicate that a game is not being updated by a member and waiting for validation
+     * 
+     * @param int $game_id
+     */
+    public function notUpdatedByMember($game_id)
+    {
+        $req = $this->_db->prepare('UPDATE games SET updated_by_member = 0 WHERE id = ?');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+        return $count;
     }
 
  }

@@ -126,7 +126,8 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             echo "edit-game\" class=\"nav-link\">Ajouter un jeu</a>
                         </li>
                     ";
-        } else {
+        } elseif (((twig_get_attribute($this->env, $this->source,         // line 59
+($context["member"] ?? null), "getId_type", [], "any", false, false, false, 59) == 1) || (twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId_type", [], "any", false, false, false, 59) == 2))) {
             // line 60
             echo "                        <li class=\"nav-item dropdown\">
                             <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Administration</a>
@@ -179,15 +180,23 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             // line 75
             echo "                                <a href=\"";
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "added-game-member\" class=\"dropdown-item\">Jeux ajoutés par la communauté</a>
+                                <a href=\"";
+            // line 76
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "updated-game-member\" class=\"dropdown-item\">Jeux modifiés par la communauté</a>
+                                <a href=\"";
+            // line 77
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                             </div>
                         </li>
                     ";
         }
-        // line 79
+        // line 81
         echo "                </ul>
                 <form method=\"post\" action=\"";
-        // line 80
+        // line 82
         echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
         echo "search-game\" class=\"form-inline\">
                     <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Chercher un jeu...\" aria-label=\"Search\" name=\"game\">
@@ -195,55 +204,55 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                 </form>
 
                 ";
-        // line 85
+        // line 87
         if ( !($context["connected"] ?? null)) {
-            // line 86
+            // line 88
             echo "                    <a class=\"nav-link connection-link\" href=\"";
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "connection\">Connexion</a>
                 ";
         }
-        // line 88
+        // line 90
         echo "            </div>
 
         </nav>
 
         ";
-        // line 92
+        // line 94
         if (($context["connected"] ?? null)) {
-            // line 93
+            // line 95
             echo "            <div id=\"user\" class=\"dropdown\">
                 <div class=\"dropdown-toggle dropdown-user\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     <i class=\"fas fa-user-circle fa-2x\"></i>
                 </div>
                 <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                     <p class=\"dropdown-item memberNickNameDropdown\">";
-            // line 98
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getNick_name", [], "any", false, false, false, 98), "html", null, true);
+            // line 100
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getNick_name", [], "any", false, false, false, 100), "html", null, true);
             echo "</p>
                     <a class=\"dropdown-item\" href=\"";
-            // line 99
+            // line 101
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "infos-member/id/";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId", [], "any", false, false, false, 99), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["member"] ?? null), "getId", [], "any", false, false, false, 101), "html", null, true);
             echo "\">Profil</a>
                     <a class=\"dropdown-item\" href=\"";
-            // line 100
+            // line 102
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "logout\">Déconnexion</a>
                 </div>
             </div>
         ";
         }
-        // line 104
+        // line 106
         echo "    
         ";
-        // line 105
+        // line 107
         $this->displayBlock('cover', $context, $blocks);
-        // line 106
+        // line 108
         echo "
         <main role=\"main\" ";
-        // line 107
+        // line 109
         if (($context["cover"] ?? null)) {
             echo " class=\"gameViewContainer container\" ";
         } else {
@@ -252,9 +261,9 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
         echo ">
 
             ";
-        // line 109
+        // line 111
         $this->displayBlock('content', $context, $blocks);
-        // line 110
+        // line 112
         echo "
             <!-- DELETE MODAL -->
             <div class=\"modal fade\" id=\"deleteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteModalLabel\" aria-hidden=\"true\">
@@ -292,7 +301,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- JQUERY UI -->
     <script src=\"";
-        // line 146
+        // line 148
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/jquery-ui.min.js\"></script>
 
@@ -302,7 +311,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     <!-- SCRIPTS JS -->
     <script src=\"";
-        // line 153
+        // line 155
         echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
         echo "js/script.js\"></script>
 
@@ -317,12 +326,12 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     {
     }
 
-    // line 105
+    // line 107
     public function block_cover($context, array $blocks = [])
     {
     }
 
-    // line 109
+    // line 111
     public function block_content($context, array $blocks = [])
     {
     }
@@ -339,7 +348,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  326 => 109,  321 => 105,  316 => 7,  306 => 153,  296 => 146,  258 => 110,  256 => 109,  247 => 107,  244 => 106,  242 => 105,  239 => 104,  232 => 100,  226 => 99,  222 => 98,  215 => 93,  213 => 92,  207 => 88,  201 => 86,  199 => 85,  191 => 80,  188 => 79,  180 => 75,  175 => 73,  170 => 72,  168 => 71,  164 => 70,  160 => 69,  156 => 68,  152 => 67,  148 => 66,  144 => 65,  140 => 64,  136 => 63,  131 => 60,  125 => 57,  122 => 56,  120 => 55,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  335 => 111,  330 => 107,  325 => 7,  315 => 155,  305 => 148,  267 => 112,  265 => 111,  256 => 109,  253 => 108,  251 => 107,  248 => 106,  241 => 102,  235 => 101,  231 => 100,  224 => 95,  222 => 94,  216 => 90,  210 => 88,  208 => 87,  200 => 82,  197 => 81,  190 => 77,  186 => 76,  181 => 75,  176 => 73,  171 => 72,  169 => 71,  165 => 70,  161 => 69,  157 => 68,  153 => 67,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  132 => 60,  130 => 59,  125 => 57,  122 => 56,  120 => 55,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -402,7 +411,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                         <li class=\"nav-item\">
                             <a href=\"{{ HOST }}edit-game\" class=\"nav-link\">Ajouter un jeu</a>
                         </li>
-                    {% else %}
+                    {% elseif member.getId_type == 1 or member.getId_type == 2 %}
                         <li class=\"nav-item dropdown\">
                             <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Administration</a>
                             <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
@@ -418,6 +427,8 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
                                 <a href=\"{{ HOST }}member-management\" class=\"dropdown-item\">Gérer les membres</a>
                                 <a href=\"{{ HOST }}requests-moderators\" class=\"dropdown-item\">Demandes pour être modérateur</a>
                                 {% endif %}
+                                <a href=\"{{ HOST }}added-game-member\" class=\"dropdown-item\">Jeux ajoutés par la communauté</a>
+                                <a href=\"{{ HOST }}updated-game-member\" class=\"dropdown-item\">Jeux modifiés par la communauté</a>
                                 <a href=\"{{ HOST }}reported-comments\" class=\"dropdown-item\">Modérer les commentaires</a>
                             </div>
                         </li>

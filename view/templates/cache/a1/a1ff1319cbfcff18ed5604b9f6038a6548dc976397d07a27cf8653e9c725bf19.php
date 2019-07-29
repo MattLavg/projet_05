@@ -73,34 +73,41 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
             echo "
         <div class=\"listGames\">
             
-            <div class=\"background_game_image_home container\" style=\"background-image: url('";
+            <a href=\"";
             // line 18
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
-            echo "public/images/covers/cover_game_id_";
+            echo "game/id/";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 18), "html", null, true);
+            echo "\" class=\"image-link\">
+                <div class=\"background_game_image_home container\" style=\"background-image: url('";
+            // line 19
+            echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
+            echo "public/images/covers/cover_game_id_";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 19), "html", null, true);
             echo ".";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getCover_extension", [], "any", false, false, false, 18), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getCover_extension", [], "any", false, false, false, 19), "html", null, true);
             echo "')\"></div>
+            </a>
             <h3>
                 <a href=\"";
-            // line 20
+            // line 22
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "game/id/";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 20), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 22), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getName", [], "any", false, false, false, 20), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getName", [], "any", false, false, false, 22), "html", null, true);
             echo "</a>
             </h3>
             <p>
                 ";
-            // line 23
-            echo twig_get_attribute($this->env, $this->source, $context["game"], "getContent", [], "any", false, false, false, 23);
+            // line 25
+            echo twig_get_attribute($this->env, $this->source, $context["game"], "getContent", [], "any", false, false, false, 25);
             echo "<br>
                 <a href=\"";
-            // line 24
+            // line 26
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
             echo "game/id/";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 24), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["game"], "getId", [], "any", false, false, false, 26), "html", null, true);
             echo "\">Voir la suite</a>
             </p>
 
@@ -113,31 +120,31 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['game'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 32
+        // line 34
         echo "
     ";
-        // line 33
+        // line 35
         if ((($context["elementsOnPage"] ?? null) && ($context["renderPagination"] ?? null))) {
-            // line 34
+            // line 36
             echo "        ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["pagination"] ?? null), "render", [], "any", false, false, false, 34), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["pagination"] ?? null), "render", [], "any", false, false, false, 36), "html", null, true);
             echo "
     ";
-        } elseif ( !        // line 35
+        } elseif ( !        // line 37
 ($context["elementsOnPage"] ?? null)) {
-            // line 36
+            // line 38
             echo "        <p>Il n'y a actuellement aucun article</p>
     ";
         }
-        // line 38
+        // line 40
         echo "
     ";
-        // line 39
+        // line 41
         if (($context["actionDone"] ?? null)) {
-            // line 40
+            // line 42
             echo "        <div class=\"alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             ";
-            // line 41
+            // line 43
             echo twig_escape_filter($this->env, ($context["actionDone"] ?? null), "html", null, true);
             echo "
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
@@ -146,15 +153,15 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         </div>
     ";
         }
-        // line 47
+        // line 49
         echo "
     ";
-        // line 48
+        // line 50
         if (($context["errorMessage"] ?? null)) {
-            // line 49
+            // line 51
             echo "        <div class=\"alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom\" role=\"alert\">
             ";
-            // line 50
+            // line 52
             echo twig_escape_filter($this->env, ($context["errorMessage"] ?? null), "html", null, true);
             echo "
             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
@@ -163,7 +170,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         </div>
     ";
         }
-        // line 56
+        // line 58
         echo "
 ";
     }
@@ -180,7 +187,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
     public function getDebugInfo()
     {
-        return array (  167 => 56,  158 => 50,  155 => 49,  153 => 48,  150 => 47,  141 => 41,  138 => 40,  136 => 39,  133 => 38,  129 => 36,  127 => 35,  122 => 34,  120 => 33,  117 => 32,  101 => 24,  97 => 23,  87 => 20,  78 => 18,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
+        return array (  174 => 58,  165 => 52,  162 => 51,  160 => 50,  157 => 49,  148 => 43,  145 => 42,  143 => 41,  140 => 40,  136 => 38,  134 => 37,  129 => 36,  127 => 35,  124 => 34,  108 => 26,  104 => 25,  94 => 22,  84 => 19,  78 => 18,  73 => 15,  71 => 14,  64 => 12,  61 => 11,  59 => 10,  56 => 9,  53 => 8,  48 => 5,  45 => 4,  35 => 2,);
     }
 
     public function getSourceContext()
@@ -202,7 +209,9 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
 
         <div class=\"listGames\">
             
-            <div class=\"background_game_image_home container\" style=\"background-image: url('{{ HOST }}public/images/covers/cover_game_id_{{ game.getId }}.{{ game.getCover_extension }}')\"></div>
+            <a href=\"{{ HOST }}game/id/{{ game.getId }}\" class=\"image-link\">
+                <div class=\"background_game_image_home container\" style=\"background-image: url('{{ HOST }}public/images/covers/cover_game_id_{{ game.getId }}.{{ game.getCover_extension }}')\"></div>
+            </a>
             <h3>
                 <a href=\"{{ HOST }}game/id/{{ game.getId }}\">{{ game.getName }}</a>
             </h3>
