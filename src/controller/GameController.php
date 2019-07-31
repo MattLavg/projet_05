@@ -10,11 +10,11 @@ use App\Model\PlatformManager;
 use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
-use App\Model\ToValidateGameManager;
-use App\Model\ToValidateDeveloperManager;
-use App\Model\ToValidateGenreManager;
-use App\Model\ToValidateModeManager;
-use App\Model\ToValidateReleaseDateManager;
+use App\Model\UpdateByMemberGameManager;
+use App\Model\UpdateByMemberDeveloperManager;
+use App\Model\UpdateByMemberGenreManager;
+use App\Model\UpdateByMemberModeManager;
+use App\Model\UpdateByMemberReleaseDateManager;
 use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
@@ -816,6 +816,23 @@ use App\Core\View;
         // print_r($params);
         // echo "</pre>";die;
         if (ConnectionController::isSessionValid()) {
+
+            // if game is updated by member
+            // delete all updated elements linked to the game
+            $updateByMemberDeveloperManager = new UpdateByMemberDeveloperManager();
+            $updateByMemberDeveloperManager->deleteGameDeveloperUpdatedByMember($params['id']);
+
+            $updateByMemberGenreManager = new UpdateByMemberGenreManager();
+            $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($params['id']);
+
+            $updateByMemberModeManager = new UpdateByMemberModeManager();
+            $updateByMemberModeManager->deleteGameModesUpdatedByMember($params['id']);
+
+            $updateByMemberReleaseDateManager = new UpdateByMemberReleaseDateManager();
+            $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($params['id']);
+
+            $updateByMemberGameManager = new UpdateByMemberGameManager();
+            $updateByMemberGameManager->deleteGameUpdatedByMember($params['id']);
 
             // Delete game developers
             $developerManager = new DeveloperManager();

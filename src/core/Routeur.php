@@ -55,10 +55,11 @@ class Routeur
         'report-comment'          => ['controller' => 'App\Controller\CommentController',                'method' => 'reportComment'],
         'valid-comment'           => ['controller' => 'App\Controller\CommentController',                'method' => 'validComment'],
         'search-game'             => ['controller' => 'App\Controller\SearchController',                 'method' => 'searchGame'],
-        'added-game-member'       => ['controller' => 'App\Controller\ValidationGameMemberController',   'method' => 'showAddedGamesValidation'],
-        'updated-game-member'     => ['controller' => 'App\Controller\ValidationGameMemberController',   'method' => 'showModifiedGamesValidation'],
-        'validate-game'           => ['controller' => 'App\Controller\ValidationGameMemberController',   'method' => 'validateGame'],
+        'added-game-member'       => ['controller' => 'App\Controller\ValidationGameController',         'method' => 'showAddedGamesValidation'],
+        'updated-game-member'     => ['controller' => 'App\Controller\ValidationGameController',         'method' => 'showUpdatedGamesValidation'],
+        'validate-game'           => ['controller' => 'App\Controller\ValidationGameController',         'method' => 'validateGame'],
         'update-game-by-member'   => ['controller' => 'App\Controller\UpdateGameByMemberController',     'method' => 'updateGameByMember'],
+        'original-updated-game'   => ['controller' => 'App\Controller\ComparisonGameController',         'method' => 'showOriginalAndUpdatedGame'],
         'error'                   => ['controller' => 'App\Controller\ErrorController',                  'method' => 'showError']
     ];
 

@@ -132,6 +132,20 @@ use App\Model\Game;
     }
 
     /**
+     * Allows to count games updated by members
+     * 
+     * @return int $totalNbRows
+     */
+    public function countGamesUpdatedByMembers()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(*) AS nbRows FROM games WHERE updated_by_member = 1');
+        $result = $req->fetch();
+
+        return $totalNbRows = $result['nbRows'];
+    }
+
+    /**
      * Allows to add a game
      * 
      * @param array $values
