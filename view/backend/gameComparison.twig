@@ -1,0 +1,91 @@
+{% extends "comparison.twig" %}
+
+{% block title %}
+    <title>Modifications à valider | LISTaGAME</title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="background_game_image_comparison container-fluid" style="background-image: url('{{ HOST }}public/images/covers/cover_game_id_{{ game.getId }}.{{ game.getCover_extension }}')"></div>
+
+            <h1>{{ game.getName }}</h1>
+
+            <p>Développeur(s) :<br>
+                {% for developer in developers %} 
+                    <p>- {{ developer.getName }}</p>
+                {% endfor %}
+            </p>
+
+            <p>Genre(s) :<br>
+                {% for genre in genres %} 
+                    <p>- {{ genre.getName }}</p>
+                {% endfor %}
+            </p>
+
+            <p>Mode(s) de jeu :<br>
+                {% for mode in modes %} 
+                    <p>- {{ mode.getName }}</p>
+                {% endfor %}
+            </p>
+
+            <p>Sortie(s) :<br>
+                {% for release in releases %} 
+                    <p>- Sur {{ release.getPlatform }}, édité par {{ release.getPublisher }} - {{ release.getRegion }} - {{  release. getReleaseDate }}</p>
+                {% endfor %}
+            </p>
+
+            <p>{{ game.getContent|raw }}</p>
+        </div>
+        <div class="col-lg-6">
+
+            <div class="background_game_image_comparison container-fluid" style="background-image: url('{{ HOST }}public/images/covers/temp/cover_game_id_{{ game.getId }}.{{ updatedGame.getCover_extension }}')"></div>
+
+            <h1>{{ updatedGame.getName }}</h1>
+
+            <p>Développeur(s) :<br>
+                {% for updatedDeveloper in updatedDevelopers %} 
+                    <p>- {{ updatedDeveloper.getName }}</p>
+                {% endfor %}
+            </p>
+
+            <p>Genre(s) :<br>
+                {% for updatedGenre in updatedGenres %} 
+                    <p>- {{ updatedGenre.getName }}</p>
+                {% endfor %}
+            </p>
+
+            <p>Mode(s) de jeu :<br>
+                {% for updatedMode in updatedModes %} 
+                    <p>- {{ updatedMode.getName }}</p>
+                {% endfor %}
+            </p>
+
+            <p>Sortie(s) :<br>
+                {% for updatedRelease in updatedReleases %} 
+                    <p>- Sur {{ updatedRelease.getPlatform }}, édité par {{ updatedRelease.getPublisher }} - {{ updatedRelease.getRegion }} - {{  updatedRelease. getReleaseDate }}</p>
+                {% endfor %}
+            </p>
+
+            <p>{{ updatedGame.getContent|raw }}</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <a href="{{ HOST }}edit-game/id/{{ game.getId }}" class="mr-3">
+                    <button type="button" class="btn btn-primary">Accepter les modifications</button>
+                </a>
+                <a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="btn btn-danger">Refuser les modifications</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
