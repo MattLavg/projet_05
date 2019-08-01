@@ -193,7 +193,7 @@ use App\Core\View;
                 $db->beginTransaction();
 
                 $gameManager = new GameManager();
-                $gameUpdatedByMember = $gameManager->updatedByMember($game_id);
+                $gameUpdatedByMember = $gameManager->updatedByMember($game_id, true);
 
                 if (!$gameUpdatedByMember) {
                     throw new \Exception('Impossible de modifier le statut du jeu en indiquant la modification par un membre.');

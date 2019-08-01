@@ -18,7 +18,10 @@ $(document).ready(function () {
         // for deleting a comment
         var urlDeleteComment = button.data('url-delete-comment');
         var commentAuthor = button.data('member-author');
-        console.log(urlDeleteComment);
+
+        // for deleting game's infos updated by member
+        var urlDeleteUpdatedGame = button.data('url-delete-updated-game');
+        var updatedGamename = button.data('updated-game-name'); 
  
         var modal = $(this);
 
@@ -34,6 +37,9 @@ $(document).ready(function () {
         } else if (urlDeleteComment) {
             modal.find('.modal-text').text('le commentaire de : ' + commentAuthor);
             modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteComment);
+        } else if (urlDeleteUpdatedGame) {
+            modal.find('.modal-text').text('les informations modifiées pour le jeu : ' + updatedGamename);
+            modal.find('#modalConfirmBtn').parent().attr('href', urlDeleteUpdatedGame);
         }
 
     })

@@ -78,10 +78,10 @@
     <div class="container">
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <a href="{{ HOST }}edit-game/id/{{ game.getId }}" class="mr-3">
+                <a href="{{ HOST }}validate-update-by-member/id/{{ game.getId }}" class="mr-3">
                     <button type="button" class="btn btn-primary">Accepter les modifications</button>
                 </a>
-                <a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">
+                <a href="#" data-url-delete-updated-game="{{ HOST }}delete-update-by-member/id/{{ game.getId }}" id="gameDeleteBtn" data-updated-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">
                     <button type="button" class="btn btn-danger">Refuser les modifications</button>
                 </a>
             </div>

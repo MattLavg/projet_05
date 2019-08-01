@@ -30,7 +30,7 @@ use App\Model\Game;
      * @param int $id
      * @return object PDOStatement
      */
-    public function getGame($game_id)
+    public function getGame($game_id, $table = 'games')
     { 
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT * FROM games WHERE id = ?');
@@ -256,23 +256,15 @@ use App\Model\Game;
      * 
      * @param int $game_id
      */
-    public function updatedByMember($game_id)
+    public function updatedByMember($game_id, $updatedByMember)
     {
-        $req = $this->_db->prepare('UPDATE games SET updated_by_member = 1 WHERE id = ?');
-        $req->execute(array($game_id));
+        if ($updatedByMember == false) {
+            $result = 0;
+        } else {
+            $result = 1;
+        }
 
-        $count = $req->rowCount();
-        return $count;
-    }
-
-    /**
-     * Allows to indicate that a game is not being updated by a member and waiting for validation
-     * 
-     * @param int $game_id
-     */
-    public function notUpdatedByMember($game_id)
-    {
-        $req = $this->_db->prepare('UPDATE games SET updated_by_member = 0 WHERE id = ?');
+        $req = $this->_db->prepare('UPDATE games SET updated_by_member = ' . $result . ' WHERE id = ?');
         $req->execute(array($game_id));
 
         $count = $req->rowCount();

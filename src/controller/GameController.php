@@ -548,7 +548,7 @@ use App\Core\View;
     {
         // echo "<pre>";
         // print_r($params);
-        // echo "</pre>";
+        // echo "</pre>";die;
 
         if (ConnectionController::isSessionValid()) {
 
