@@ -791,12 +791,6 @@ use App\Core\View;
             }
 
             if (isset($updateByMember) && $updateByMember == true) {
-                // delete all updated elements linked to the game
-                $updateByMemberDeveloperManager->deleteGameDeveloperUpdatedByMember($game_id);
-                $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($game_id);
-                $updateByMemberModeManager->deleteGameModesUpdatedByMember($game_id);
-                $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($game_id);
-                $updateByMemberGameManager->getGameUpdatedByMember($game_id);
 
                 $_SESSION['actionDone'] = 'Vous avez accepté les modifications apportées par la communauté sur ce jeu.';
 
