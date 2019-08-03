@@ -544,7 +544,7 @@ use App\Core\View;
      * 
      * @param array $params
      */
-    public function updateGame($params = [])
+    public static function updateGame($params = [], $updateByMember = null)
     {
         // echo "<pre>";
         // print_r($params);
@@ -702,13 +702,11 @@ use App\Core\View;
                 $db = Registry::getDb();
                 
                 $db->beginTransaction();
-
                 
                 $gameManager = new GameManager();
 
                 // Get the game to access cover_extension
                 $game = $gameManager->getGame($game_id);
-
 
                 // Add game cover in folder
                 if (isset($validCover) && $validCover == true) {
@@ -790,6 +788,20 @@ use App\Core\View;
 
                 $view = new View();
                 $view->redirect('edit-game/id/' . $game_id);
+            }
+
+            if (isset($updateByMember) && $updateByMember == true) {
+                // delete all updated elements linked to the game
+                $updateByMemberDeveloperManager->deleteGameDeveloperUpdatedByMember($game_id);
+                $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($game_id);
+                $updateByMemberModeManager->deleteGameModesUpdatedByMember($game_id);
+                $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($game_id);
+                $updateByMemberGameManager->getGameUpdatedByMember($game_id);
+
+                $_SESSION['actionDone'] = 'Vous avez accepté les modifications apportées par la communauté sur ce jeu.';
+
+                $view = new View();
+                $view->redirect('updated-game-member');
             }
 
             // if game added, display home

@@ -160,8 +160,6 @@ use App\Core\View;
         extract($params); // Allows to extract the $id variable
         $game_id = $id; // rename the variable for better identification
 
-        $updatedParams = [];
-
         // Get all the updated informations for a game
         $updateByMemberGameManager = new UpdateByMemberGameManager();
         $updatedGame = $updateByMemberGameManager->getGameUpdatedByMember($game_id);
@@ -170,21 +168,22 @@ use App\Core\View;
         $updatedDevelopers = $updateByMemberDeveloperManager->getDevelopersUpdatedByMember($game_id);
 
         foreach ($updatedDevelopers as $updatedDeveloper) {
-            $updatedDevelopersArray [] = [$updatedDeveloper->getName() => $updatedDeveloper->getId()];
+            $updatedDevelopersArray [] =  $updatedDeveloper->getId();
         }
+
 
         $updateByMemberGenreManager = new UpdateByMemberGenreManager();
         $updatedGenres = $updateByMemberGenreManager->getGenresUpdatedByMember($game_id);
 
         foreach ($updatedGenres as $updatedGenre) {
-            $updatedGenresArray [] = [$updatedGenre->getName() => $updatedGenre->getId()];
+            $updatedGenresArray [] = $updatedGenre->getId();
         }
 
         $updateByMemberModeManager = new UpdateByMemberModeManager();
         $updatedModes = $updateByMemberModeManager->getModesUpdatedByMember($game_id);
 
         foreach ($updatedModes as $updatedMode) {
-            $updatedModesArray [] = [$updatedMode->getName() => $updatedMode->getId()];
+            $updatedModesArray [] = $updatedMode->getId();
         }
 
         $updateByMemberReleaseDateManager = new UpdateByMemberReleaseDateManager();
@@ -203,6 +202,8 @@ use App\Core\View;
             ];
         }
 
+        $updatedParams = [];
+
         // recreate same array as an update
         $updatedParams = [
             'id' => $updatedGame->getId(),
@@ -214,11 +215,37 @@ use App\Core\View;
             'releaseDate' => $updatedReleasesArray
         ];
 
-        var_dump($updatedReleases);
+        // Get the game to access cover_extension
+        $gameManager = new GameManager();
+        $gameManager->updatedByMember($game_id);
+        $game = $gameManager->getGame($game_id);
 
-        echo "<pre>";
-        print_r($updatedParams);
-        echo "</pre>";die;
+        // Delete game cover
+        if (file_exists(IMAGE .'covers/cover_game_id_' . $game_id . '.' . $game->getCover_extension())) {
+            unlink(IMAGE .'covers/cover_game_id_' . $game_id . '.' . $game->getCover_extension());
+
+            rename(
+                IMAGE .'covers/temp/cover_game_id_' . $game_id . '.' . $updatedGame->getCover_extension(),
+                IMAGE .'covers/cover_game_id_' . $game_id . '.' . $updatedGame->getCover_extension()
+            );
+        }
+
+        // delete all updated elements linked to the game
+        $updateByMemberDeveloperManager->deleteGameDeveloperUpdatedByMember($game_id);
+        $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($game_id);
+        $updateByMemberModeManager->deleteGameModesUpdatedByMember($game_id);
+        $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($game_id);
+        $updateByMemberGameManager->getGameUpdatedByMember($game_id);
+
+        GameController::updateGame($updatedParams, $updateByMember = true);
+
+        
+
+        // var_dump($updatedDevelopers);
+
+        // echo "<pre>";
+        // print_r($updatedParams);
+        // echo "</pre>";die;
         
     }
 
