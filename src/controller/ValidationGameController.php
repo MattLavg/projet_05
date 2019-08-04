@@ -220,8 +220,8 @@ use App\Core\View;
         $gameManager->updatedByMember($game_id);
         $game = $gameManager->getGame($game_id);
 
-        // Delete game cover
-        if (file_exists(IMAGE .'covers/cover_game_id_' . $game_id . '.' . $game->getCover_extension())) {
+        if (file_exists(IMAGE .'covers/temp/cover_game_id_' . $game_id . '.' . $updatedGame->getCover_extension())) {
+            // Delete game cover
             unlink(IMAGE .'covers/cover_game_id_' . $game_id . '.' . $game->getCover_extension());
 
             rename(
@@ -235,7 +235,7 @@ use App\Core\View;
         $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($game_id);
         $updateByMemberModeManager->deleteGameModesUpdatedByMember($game_id);
         $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($game_id);
-        $updateByMemberGameManager->getGameUpdatedByMember($game_id);
+        $updateByMemberGameManager->deleteGameUpdatedByMember($game_id);
 
         GameController::updateGame($updatedParams, $updateByMember = true);
 

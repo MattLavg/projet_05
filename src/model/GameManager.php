@@ -256,7 +256,7 @@ use App\Model\Game;
      * 
      * @param int $game_id
      */
-    public function updatedByMember($game_id, $updatedByMember)
+    public function updatedByMember($game_id, $updatedByMember = false)
     {
         if ($updatedByMember == false) {
             $result = 0;
