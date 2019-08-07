@@ -482,25 +482,23 @@ $(document).ready(function () {
     // });
 
     // Check inputs in Edit game form (the "add" one)
-    $('#addGameBtn').on('click', 'input', function(e) {
-        e.preventDefault();
-        console.log('plop');
+    $('form').on('click', '.addGameBtn', function(e) {
 
-        // if (!checkInputForm($('#name'), 'le titre du jeu', nameGameRegexp,)) {
-        //     e.preventDefault();
-        // } else if (!checkTextareaTinymceForm('la description du jeu')) {
-        //     e.preventDefault();
-        // } else if (!checkInputForm($('#cover'), 'l\'image du jeu')) {
-        //     e.preventDefault();
-        // } else if (!checkInputForm($('.developerList'), 'un développeur pour le jeu', intRegexp)) {
-        //     e.preventDefault();
-        // } else if (!checkInputForm($('.genreList'), 'un genre pour le jeu', intRegexp)) {
-        //     e.preventDefault();
-        // } else if (!checkInputForm($('.modeList'), 'un mode pour le jeu', intRegexp)) {
-        //     e.preventDefault();
-        // } else {
-        //     $('#loginForm').submit();
-        // } 
+        if (!checkInputForm($('#name'), 'le titre du jeu', nameGameRegexp,)) {
+            e.preventDefault();
+        } else if (!checkTextareaTinymceForm('la description du jeu')) {
+            e.preventDefault();
+        } else if (!checkInputForm($('#cover'), 'l\'image du jeu')) {
+            e.preventDefault();
+        } else if (!checkInputForm($('.developerList'), 'un développeur pour le jeu', intRegexp)) {
+            e.preventDefault();
+        } else if (!checkInputForm($('.genreList'), 'un genre pour le jeu', intRegexp)) {
+            e.preventDefault();
+        } else if (!checkInputForm($('.modeList'), 'un mode pour le jeu', intRegexp)) {
+            e.preventDefault();
+        } else {
+            $('#loginForm').submit();
+        } 
 
     });
     
