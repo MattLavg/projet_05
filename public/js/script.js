@@ -483,24 +483,126 @@ $(document).ready(function () {
 
     // Check inputs in Edit game form (the "add" one)
     $('form').on('click', '.addGameBtn', function(e) {
+        // console.log($(e.target));
+        // console.log($(e.currentTarget));
+        // console.log($(e.delegateTarget));
+        // console.log($('.developerList'));
+        // console.log($(this).parent().find('.developerList').val());
+
+        
 
         if (!checkInputForm($('#name'), 'le titre du jeu', nameGameRegexp,)) {
             e.preventDefault();
-        } else if (!checkTextareaTinymceForm('la description du jeu')) {
+        }
+        
+        if (!checkTextareaTinymceForm('la description du jeu')) {
             e.preventDefault();
-        } else if (!checkInputForm($('#cover'), 'l\'image du jeu')) {
+        }
+        
+        if (!checkInputForm($('#cover'), 'l\'image du jeu')) {
             e.preventDefault();
-        } else if (!checkInputForm($('.developerList'), 'un développeur pour le jeu', intRegexp)) {
-            e.preventDefault();
-        } else if (!checkInputForm($('.genreList'), 'un genre pour le jeu', intRegexp)) {
-            e.preventDefault();
-        } else if (!checkInputForm($('.modeList'), 'un mode pour le jeu', intRegexp)) {
-            e.preventDefault();
-        } else {
-            $('#loginForm').submit();
         } 
 
+        $('.developerList').each(function() {
+
+            this.focus(function(e) {
+                this.next().css('display', 'none');
+            });
+
+            if (!checkInputForm($(this), 'le développeur du jeu', intRegexp)) {
+                e.preventDefault();
+            }
+        });
+
+        $('.genreList').each(function() {
+
+            this.focus(function(e) {
+                this.next().css('display', 'none');
+            });
+
+            if (!checkInputForm($(this), 'le genre du jeu', intRegexp)) {
+                e.preventDefault();
+            }
+        });
+
+        $('.modeList').each(function() {
+
+            this.focus(function(e) {
+                this.next().css('display', 'none');
+            });
+
+            if (!checkInputForm($(this), 'le mode du jeu', intRegexp)) {
+                e.preventDefault();
+            }
+        });
+
+        $('.platformList').each(function() {
+
+            this.focus(function(e) {
+                this.next().css('display', 'none');
+            });
+
+            if (!checkInputForm($(this), 'la plateforme de la date du jeu', intRegexp)) {
+                e.preventDefault();
+            }
+        });
+
+        $('.publisherList').each(function() {
+
+            this.focus(function(e) {
+                this.next().css('display', 'none');
+            });
+
+            if (!checkInputForm($(this), 'l\'éditeur de la date du jeu', intRegexp)) {
+                e.preventDefault();
+            }
+        });
+
+        $('.regionList').each(function() {
+
+            this.focus(function(e) {
+                this.next().css('display', 'none');
+            });
+
+            if (!checkInputForm($(this), 'la région de la date du jeu', intRegexp)) {
+                e.preventDefault();
+            }
+        });
+
+        $('.date').each(function() {
+
+            this.focus(function(e) {
+                this.next().css('display', 'none');
+            });
+
+            if (!checkInputForm($(this), 'la date du jeu', intRegexp)) {
+                e.preventDefault();
+            }
+        });
+        
+        // else if (!checkInputForm($('.developerList'), 'un développeur pour le jeu', intRegexp)) {
+        //     e.preventDefault();
+        // } else if (!checkInputForm($('.genreList'), 'un genre pour le jeu', intRegexp)) {
+        //     e.preventDefault();
+        // } else if (!checkInputForm($('.modeList'), 'un mode pour le jeu', intRegexp)) {
+        //     e.preventDefault();
+        // } else {
+        //     $('#loginForm').submit();
+        // } 
+
+        $('#loginForm').submit();
+
     });
+
+    // $('form').on('click', 'select', function(e) {
+    //     console.log('INPUT');
+    //     console.log($(this).val());
+    // });
+
+    // ne fonctionne pas -> test
+    // $('select').click(function(e) {
+    //     console.log('BLOOOOP');
+    // });
     
 
 

@@ -245,19 +245,24 @@
                                     <option value="{{ platform.getId }}">{{ platform.getName }}</option>
                                 {% endfor %}
                             </select>
+                            <span class="redText"></span>
                             <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
                                     <option value="">Choisissez un éditeur</option>
                                 {% for publisher in publishers %}
                                     <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
                                 {% endfor %}
                             </select>
+                            <span class="redText"></span>
                                 <select name="releaseDate[0][region]" class="form-control regionList mb-2">
                                     <option value="">Choisissez une région</option>
                                 {% for region in regions %}
                                     <option value="{{ region.getId }}">{{ region.getName }}</option>
                                 {% endfor %}
                             </select>
+                            <span class="redText"></span>
+
                             <input type="text" class="form-control date" placeholder="Choisissez une date" readonly>
+                            <span class="redText"></span>
                             <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
                         </div>
                     </div>
