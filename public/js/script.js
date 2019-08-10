@@ -224,6 +224,9 @@ $(document).ready(function () {
         // clone the entity list
         $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
 
+        // Delete the error message in red
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.redText').css('display', 'none');
+
         // if cross with cross-cancel-game-update class exists
         if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update')) {
             // console.log('pliiiiip');
@@ -240,7 +243,6 @@ $(document).ready(function () {
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
             // apply the delete function to the new cross icon
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').click(deleteEntityList);
-
         }
  
         // add the padding class
@@ -310,6 +312,9 @@ $(document).ready(function () {
         var blocEntityList = $(this).parent().find('.entity-group-game-edit');
         // clone the entity list
         $(this).parent().find('.bloc-entity-game-edit:first').clone().appendTo(blocEntityList);
+
+        // Delete the error message in red
+        $(this).parent().find('.bloc-entity-game-edit:last').find('.redText').css('display', 'none');
 
         // if delete cross 
         if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-release')) {
@@ -392,38 +397,60 @@ $(document).ready(function () {
     var mailRegexp = '^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$';
     var passwordRegexp = '^[a-zA-Z0-9_-]{6,16}$';
     var nameGameRegexp = '^[a-zA-Z0-9 _-]+$';
+    // var nickNameRegexp = '';
     var intRegexp = '^[0-9]+$';
+    var dateRegexp = '^[0-9]{2}/[0-9]{2}/[0-9]{4}$';
 
 
-    function checkInputForm(element, elementName, regexp) {
+    function checkInputForm(element, elementName = false, regexp) {
 
         if (element.val() == '') {
 
-            element.next().text('Vous devez renseigner ' + elementName + '.');
-            element.next().css('display', 'block');
+            if (!elementName) {
+                element.parent().find('.redText').text('Vous devez renseigner tous les éléments composants la date de sortie d\'un jeu');
+                element.parent().find('.redText').css('display', 'block');
 
-            element.focus(function(e) {
-                element.next().css('display', 'none');
-            });
+                element.focus(function(e) {
+                    element.parent().find('.redText').css('display', 'none');
+                });
+            } else {
+                element.next().text('Vous devez renseigner ' + elementName + '.');
+                element.next().css('display', 'block');
+
+                element.focus(function(e) {
+                    element.next().css('display', 'none');
+                });
+            }
 
             return false;
 
         } else if (!element.val().match(regexp)) {
 
-            var elementName = elementName.replace(/^\w/, 'L');
+            if (!elementName) {
+                element.parent().find('.redText').text('La date de sortie du jeu n\'est pas valide.');
+                element.parent().find('.redText').css('display', 'block');
 
-            element.next().text(elementName + ' n\'est pas valide.');
-            element.next().css('display', 'block');
+                element.focus(function(e) {
+                    element.parent().find('.redText').css('display', 'none');
+                });
+            } else {
+                // Replace the first letter of 'elementName'
+                var elementName = elementName.replace(/^\w/, 'L');
 
-            element.focus(function(e) {
-                element.next().css('display', 'none');
-            });
+                element.next().text(elementName + ' n\'est pas valide.');
+                element.next().css('display', 'block');
 
+                element.focus(function(e) {
+                    element.next().css('display', 'none');
+                });
+            }
+            
             return false;
         } 
 
         return true;
     }
+
 
     function checkTextareaTinymceForm(elementName) {
 
@@ -436,60 +463,44 @@ $(document).ready(function () {
         } 
 
         return true;
-
     }
 
 
     // Check inputs in login form
-    $('.loginBtn').click(function(e) {
+    $('#loginForm').on('click', '.loginBtn', function(e) {
 
         if (!checkInputForm($('#identificationEmail'), 'l\'email', mailRegexp,)) {
             e.preventDefault();
-        } else if (!checkInputForm($('#identificationPassword'), 'le mot de passe', passwordRegexp,)) {
+        } 
+        
+        if (!checkInputForm($('#identificationPassword'), 'le mot de passe', passwordRegexp,)) {
             e.preventDefault();
-        } else {
-            $('#loginForm').submit();
         } 
     });
 
     // Check inputs in inscription form
-    // $('.inscriptionBtn').click(function(e) {
-    //     e.preventDefault();
+    $('#inscriptionForm').on('click', '.inscriptionBtn', function(e) {
 
-    //         $('#inscriptionForm').submit();
+        if (!checkInputForm($('#inscriptionNickname'), 'le pseudo', nameGameRegexp,)) {
+            e.preventDefault();
+        }
 
-    // });
-
-    // // Check inputs in Edit game form (the "add" one)
-    // $('.addGameBtn').click(function(e) {
-
-    //     if (!checkInputForm($('#name'), 'le titre du jeu', nameGameRegexp,)) {
-    //         e.preventDefault();
-    //     } else if (!checkTextareaTinymceForm('la description du jeu')) {
-    //         e.preventDefault();
-    //     } else if (!checkInputForm($('#cover'), 'l\'image du jeu')) {
-    //         e.preventDefault();
-    //     } else if (!checkInputForm($('.developerList'), 'un développeur pour le jeu', intRegexp)) {
-    //         e.preventDefault();
-    //     } else if (!checkInputForm($('.genreList'), 'un genre pour le jeu', intRegexp)) {
-    //         e.preventDefault();
-    //     } else if (!checkInputForm($('.modeList'), 'un mode pour le jeu', intRegexp)) {
-    //         e.preventDefault();
-    //     } else {
-    //         $('#loginForm').submit();
-    //     } 
-
-    // });
-
-    // Check inputs in Edit game form (the "add" one)
-    $('form').on('click', '.addGameBtn', function(e) {
-        // console.log($(e.target));
-        // console.log($(e.currentTarget));
-        // console.log($(e.delegateTarget));
-        // console.log($('.developerList'));
-        // console.log($(this).parent().find('.developerList').val());
-
+        if (!checkInputForm($('#inscriptionEmail'), 'l\'email', mailRegexp,)) {
+            e.preventDefault();
+        } 
         
+        if (!checkInputForm($('#inscriptionPassword'), 'le mot de passe', passwordRegexp,)) {
+            e.preventDefault();
+        } 
+
+        if (!checkInputForm($('#confirmationPassword'), 'la confirmation de mot de passe', passwordRegexp,)) {
+            e.preventDefault();
+        }
+    });
+
+
+    // Check inputs in Edit game form 
+    $('form').on('click', '.editGameBtn', function(e) {
 
         if (!checkInputForm($('#name'), 'le titre du jeu', nameGameRegexp,)) {
             e.preventDefault();
@@ -499,15 +510,14 @@ $(document).ready(function () {
             e.preventDefault();
         }
         
-        if (!checkInputForm($('#cover'), 'l\'image du jeu')) {
-            e.preventDefault();
-        } 
+        // Check the cover only if it's for adding a game, not updating
+        if ($(e.target).hasClass('addGame')) {
+            if (!checkInputForm($('#cover'), 'l\'image du jeu')) {
+                e.preventDefault();
+            }
+        }
 
         $('.developerList').each(function() {
-
-            this.focus(function(e) {
-                this.next().css('display', 'none');
-            });
 
             if (!checkInputForm($(this), 'le développeur du jeu', intRegexp)) {
                 e.preventDefault();
@@ -516,20 +526,12 @@ $(document).ready(function () {
 
         $('.genreList').each(function() {
 
-            this.focus(function(e) {
-                this.next().css('display', 'none');
-            });
-
             if (!checkInputForm($(this), 'le genre du jeu', intRegexp)) {
                 e.preventDefault();
             }
         });
 
         $('.modeList').each(function() {
-
-            this.focus(function(e) {
-                this.next().css('display', 'none');
-            });
 
             if (!checkInputForm($(this), 'le mode du jeu', intRegexp)) {
                 e.preventDefault();
@@ -538,59 +540,33 @@ $(document).ready(function () {
 
         $('.platformList').each(function() {
 
-            this.focus(function(e) {
-                this.next().css('display', 'none');
-            });
-
-            if (!checkInputForm($(this), 'la plateforme de la date du jeu', intRegexp)) {
+            if (!checkInputForm($(this), false, intRegexp)) {
                 e.preventDefault();
             }
         });
 
         $('.publisherList').each(function() {
 
-            this.focus(function(e) {
-                this.next().css('display', 'none');
-            });
-
-            if (!checkInputForm($(this), 'l\'éditeur de la date du jeu', intRegexp)) {
+            if (!checkInputForm($(this), false, intRegexp)) {
                 e.preventDefault();
             }
         });
 
         $('.regionList').each(function() {
 
-            this.focus(function(e) {
-                this.next().css('display', 'none');
-            });
-
-            if (!checkInputForm($(this), 'la région de la date du jeu', intRegexp)) {
+            if (!checkInputForm($(this), false, intRegexp)) {
                 e.preventDefault();
             }
         });
 
         $('.date').each(function() {
 
-            this.focus(function(e) {
-                this.next().css('display', 'none');
-            });
-
-            if (!checkInputForm($(this), 'la date du jeu', intRegexp)) {
+            if (!checkInputForm($(this), false, dateRegexp)) {
                 e.preventDefault();
             }
         });
-        
-        // else if (!checkInputForm($('.developerList'), 'un développeur pour le jeu', intRegexp)) {
-        //     e.preventDefault();
-        // } else if (!checkInputForm($('.genreList'), 'un genre pour le jeu', intRegexp)) {
-        //     e.preventDefault();
-        // } else if (!checkInputForm($('.modeList'), 'un mode pour le jeu', intRegexp)) {
-        //     e.preventDefault();
-        // } else {
-        //     $('#loginForm').submit();
-        // } 
 
-        $('#loginForm').submit();
+        // $('#loginForm').submit();
 
     });
 

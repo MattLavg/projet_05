@@ -19,11 +19,13 @@
                 <div class="form-group">
                     <label for="name">Le titre du jeu :</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ game.getName }}">
+                    <span class="redText"></span>
                 </div>
         
                 <div class="form-group">
                     <label>Description du jeu :</label>
                     <textarea id="tinymcetextarea" name="content">{{ game.getContent }}</textarea>
+                    <span class="missContent redText"></span>
                 </div>
         
                 <hr>
@@ -31,6 +33,7 @@
                 <div class="form-group">
                     <label for="cover">Télécharger une image pour le jeu.</label>
                     <input type="file" class="form-control-file" id="cover" name="cover">
+                    <span class="redText"></span>
                     <small id="cover" class="form-text text-muted">L'image ne doit pas dépasser 3 Mo.</small>
                 </div>
 
@@ -50,6 +53,7 @@
                                         </option>
                                     {% endfor %}
                                 </select>
+                                <span class="redText"></span>
                             </div>
                         {% endfor %}
                     </div>
@@ -72,6 +76,7 @@
                                         </option>
                                     {% endfor %}
                                 </select>
+                                <span class="redText"></span>
                             </div>
                         {% endfor %}
                     </div>
@@ -95,6 +100,7 @@
                                         </option>
                                     {% endfor %}
                                 </select>
+                                <span class="redText"></span>
                             </div>
                         {% endfor %}
                     </div>
@@ -134,6 +140,7 @@
                                 </select>
                                 <input type="text" class="form-control date" value="{{ releaseDate.getReleaseDate }}" readonly>
                                 <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
+                                <span class="redText"></span>
                             </div>
                         {% endfor %}
                     </div>
@@ -142,7 +149,7 @@
                 </div>
                 <hr>
         
-                <button type="submit" class="btn btn-primary updateGameBtn">Valider</button>
+                <button type="submit" class="btn btn-primary editGameBtn updateGame">Valider</button>
         
             </form>
 
@@ -154,7 +161,7 @@
                 <div class="form-group">
                     <label for="name">Le titre du jeu :</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Titre">
-                    <span class="missName redText"></span>
+                    <span class="redText"></span>
                 </div>
         
                 <div class="form-group">
@@ -168,7 +175,7 @@
                 <div class="form-group">
                     <label for="cover">Télécharger une image pour le jeu.</label>
                     <input type="file" class="form-control-file" id="cover" name="cover">
-                    <span class="missImage redText"></span>
+                    <span class="redText"></span>
                     <small id="cover" class="form-text text-muted">L'image ne doit pas dépasser 3 Mo.</small>
                 </div>
 
@@ -190,7 +197,6 @@
                     </div>
         
                     <button type="button" class="btn btn-primary addEntityForm">Ajouter un développeur</button>
-                    <span class="missDev redText"></span>
                 </div>
                 <hr>
                 
@@ -245,25 +251,24 @@
                                     <option value="{{ platform.getId }}">{{ platform.getName }}</option>
                                 {% endfor %}
                             </select>
-                            <span class="redText"></span>
+
                             <select name="releaseDate[0][publisher]" class="form-control publisherList mb-2">
                                     <option value="">Choisissez un éditeur</option>
                                 {% for publisher in publishers %}
                                     <option value="{{ publisher.getId }}">{{ publisher.getName }}</option>
                                 {% endfor %}
                             </select>
-                            <span class="redText"></span>
+
                                 <select name="releaseDate[0][region]" class="form-control regionList mb-2">
                                     <option value="">Choisissez une région</option>
                                 {% for region in regions %}
                                     <option value="{{ region.getId }}">{{ region.getName }}</option>
                                 {% endfor %}
                             </select>
-                            <span class="redText"></span>
 
                             <input type="text" class="form-control date" placeholder="Choisissez une date" readonly>
-                            <span class="redText"></span>
                             <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
+                            <span class="redText"></span>
                         </div>
                     </div>
         
@@ -271,7 +276,7 @@
                 </div>
                 <hr>
         
-                <button type="submit" class="btn btn-primary addGameBtn">Valider</button>
+                <button type="submit" class="btn btn-primary editGameBtn addGame">Valider</button>
         
             </form>
 
