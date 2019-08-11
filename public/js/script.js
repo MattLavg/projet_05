@@ -498,6 +498,30 @@ $(document).ready(function () {
         }
     });
 
+    // Check inputs for update member informations form
+    $('#updateInfosMember').on('click', '.updateInfosMemberBtn', function(e) {
+
+        if (!checkInputForm($('#memberNickname'), 'le pseudo', nameGameRegexp,)) {
+            e.preventDefault();
+        }
+
+        if (!checkInputForm($('#memberEmail'), 'l\'email', mailRegexp,)) {
+            e.preventDefault();
+        } 
+    });
+
+    // Check inputs for update member password form
+    $('#updatePasswordMember').on('click', '.updatePasswordMemberBtn', function(e) {
+
+        if (!checkInputForm($('#updateMemberPassword'), 'le mot de passe', passwordRegexp,)) {
+            e.preventDefault();
+        } 
+
+        if (!checkInputForm($('#updateConfirmationPassword'), 'la confirmation de mot de passe', passwordRegexp,)) {
+            e.preventDefault();
+        }
+    });
+
 
     // Check inputs in Edit game form 
     $('form').on('click', '.editGameBtn', function(e) {
