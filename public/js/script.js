@@ -410,14 +410,14 @@ $(document).ready(function () {
                 element.parent().find('.redText').text('Vous devez renseigner tous les éléments composants la date de sortie d\'un jeu');
                 element.parent().find('.redText').css('display', 'block');
 
-                element.focus(function(e) {
+                element.change(function(e) {
                     element.parent().find('.redText').css('display', 'none');
                 });
             } else {
                 element.next().text('Vous devez renseigner ' + elementName + '.');
                 element.next().css('display', 'block');
 
-                element.focus(function(e) {
+                element.change(function(e) {
                     element.next().css('display', 'none');
                 });
             }
@@ -430,7 +430,7 @@ $(document).ready(function () {
                 element.parent().find('.redText').text('La date de sortie du jeu n\'est pas valide.');
                 element.parent().find('.redText').css('display', 'block');
 
-                element.focus(function(e) {
+                element.change(function(e) {
                     element.parent().find('.redText').css('display', 'none');
                 });
             } else {
@@ -440,7 +440,7 @@ $(document).ready(function () {
                 element.next().text(elementName + ' n\'est pas valide.');
                 element.next().css('display', 'block');
 
-                element.focus(function(e) {
+                element.change(function(e) {
                     element.next().css('display', 'none');
                 });
             }

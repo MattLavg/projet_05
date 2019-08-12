@@ -204,7 +204,7 @@ use App\Core\View;
 
         $updatedParams = [];
 
-        // recreate same array as an update
+        // recreate same array as for an update
         $updatedParams = [
             'id' => $updatedGame->getId(),
             'name' => $updatedGame->getName(),
@@ -215,9 +215,13 @@ use App\Core\View;
             'releaseDate' => $updatedReleasesArray
         ];
 
-        // Get the game to access cover_extension
+        
         $gameManager = new GameManager();
-        $gameManager->updatedByMember($game_id);
+
+        // Change the status of the "updated_by_member" column
+        $gameManager->updatedByMember($game_id, false);
+
+        // Get the game to access cover_extension
         $game = $gameManager->getGame($game_id);
 
         if (file_exists(IMAGE .'covers/temp/cover_game_id_' . $game_id . '.' . $updatedGame->getCover_extension())) {

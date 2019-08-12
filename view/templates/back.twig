@@ -184,7 +184,7 @@
         tinymce.init({
             selector: '#tinymcetextarea',  // change this value according to your HTML
             init_instance_callback: function (editor) {
-                editor.on('focus', function (e) {
+                editor.on('change', function (e) {
                     
                   $('.missContent').css('display', 'none');
                 });
