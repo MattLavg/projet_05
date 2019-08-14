@@ -60,8 +60,7 @@ try
 }
 catch (MyException $e)
 {
-    echo $e;
-    $_SESSION['errorMessage'] = '<strong>Erreur !</strong><br>' . '<strong>Message :</strong> ' . $e->getMessage() . '<br>';
+    $_SESSION['errorMessage'] = $e->getMessage();
 
     $myException = new MyException($e->getMessage(), $e->getCode(), $e->getSeverity(), $e->getFile(), $e->getLine());
     $myException->writeLogs();

@@ -63,6 +63,9 @@ use App\Core\View;
             $updateByMemberGameManager = new UpdateByMemberGameManager();
             $gameUpdatedByMember = $updateByMemberGameManager->getGameUpdatedByMember($game_id);
 
+            // Check if an updated cover is registered
+            $gameUpdatedCover = $gameUpdatedByMember->getCover_extension();
+
             $updateByMemberDeveloperManager = new UpdateByMemberDeveloperManager();
             $developersUpdatedByMember = $updateByMemberDeveloperManager->getDevelopersUpdatedByMember($game_id);
 
@@ -87,6 +90,7 @@ use App\Core\View;
                 'updatedGenres' => $genresUpdatedByMember,
                 'updatedModes' => $modesUpdatedByMember,
                 'updatedReleases' => $releasesUpdatedByMember,
+                'updatedCover' => $gameUpdatedCover,
                 'member' => $currentMember
             ));
 

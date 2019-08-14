@@ -16,31 +16,31 @@
 
     <h1>{{ game.getName }}</h1>
 
-    <p>Développeur(s) :<br>
+    <div><span class="bold">Développeur(s) :</span><br>
         {% for developer in developers %} 
             <p>- {{ developer.getName }}</p>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>Genre(s) :<br>
+    <div><span class="bold">Genre(s) :</span><br>
         {% for genre in genres %} 
             <p>- {{ genre.getName }}</p>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>Mode(s) de jeu :<br>
+    <div><span class="bold">Mode(s) de jeu :</span><br>
         {% for mode in modes %} 
             <p>- {{ mode.getName }}</p>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>Sortie(s) :<br>
+    <div><span class="bold">Sortie(s) :</span><br>
         {% for release in releases %} 
             <p>- Sur {{ release.getPlatform }}, édité par {{ release.getPublisher }} - {{ release.getRegion }} - {{  release. getReleaseDate }}</p>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>{{ game.getContent|raw }}</p>
+    <div>{{ game.getContent|raw }}</div>
 
     {% if game.getTo_validate == 0 %}
 

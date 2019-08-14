@@ -154,6 +154,15 @@ h1 {
 
 }
 
+.redBackground {
+    background-color: rgb(255, 0, 0);
+    color: #FFFFFF;
+}
+
+.noImage {
+    background-color: rgb(194, 194, 194);
+}
+
 /* GAME EDIT */
 
 .bloc-entity-game-edit {

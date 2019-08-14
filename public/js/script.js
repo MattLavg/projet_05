@@ -407,7 +407,7 @@ $(document).ready(function () {
         if (element.val() == '') {
 
             if (!elementName) {
-                element.parent().find('.redText').text('Vous devez renseigner tous les éléments composants la date de sortie d\'un jeu');
+                element.parent().find('.redText').text('Vous devez renseigner tous les éléments composant la date de sortie d\'un jeu');
                 element.parent().find('.redText').css('display', 'block');
 
                 element.change(function(e) {
