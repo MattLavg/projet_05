@@ -524,7 +524,7 @@ $(document).ready(function () {
 
 
     // Check inputs in Edit game form 
-    $('form').on('click', '.editGameBtn', function(e) {
+    $('faorm').on('click', '.editGameBtn', function(e) {
 
         if (!checkInputForm($('#name'), 'le titre du jeu', nameGameRegexp,)) {
             e.preventDefault();

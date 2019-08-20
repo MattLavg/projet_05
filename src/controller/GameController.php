@@ -18,6 +18,7 @@ use App\Model\UpdateByMemberReleaseDateManager;
 use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
+use App\model\CheckData;
 // use App\Controller\ConnectionController;
 use App\Core\View;
 
@@ -282,28 +283,10 @@ use App\Core\View;
 
         if (ConnectionController::isSessionValid()) {
 
-            // Allows to use a function on each element of multidimensionnal array
-            // Variable must be passed by reference to be modified by the function
-            array_walk_recursive($params, function(&$item, $key) {
-
-                if ($key != 'content') {
-
-                    $item = trim(strip_tags($item));
-
-                } elseif ($key == '0') {
-
-                    $item = trim(strip_tags($item));
-
-                }
-
-                if(empty($item)) {
-          
-                    $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
-
-                    $view = new View();
-                    $view->redirect('edit-game');
-                }
-            });
+            // Check if data is not null
+            // return a modified array
+            $checkData = new CheckData();
+            $params = $checkData->checkDataNotNull($params);
 
             $gameManager = new GameManager();
             $games = $gameManager->getAllNames();
@@ -320,125 +303,21 @@ use App\Core\View;
 
             }
 
-            // Check if file is present
-            if (isset($_FILES['cover']) && $_FILES['cover']['error']  == 0) {
+            // Check if file is valid
+            $file = $checkData->checkFile();
 
-                // Check file size
-                if ($_FILES['cover']['size'] <= 3000000 ) {
-                    $fileInfos = pathinfo($_FILES['cover']['name']);
-                    $fileExtension = $fileInfos['extension'];
-                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-
-                    if (in_array($fileExtension, $authorizedExtensions)) {
-
-                        $validCover = true;
-                        
-                    } else {
-                        $_SESSION['errorMessage'] = 'L\'image doit être aux formats jpg, jpeg, gif ou png.';
-
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-
-                } else {
-
-                    $_SESSION['errorMessage'] = 'L\'image ne doit pas dépasser les 3 Mo.';
-
-                    $view = new View();
-                    $view->redirect('edit-game');
-
-                }
-
-            } else {
-
-                $_SESSION['errorMessage'] = 'Vous devez télécharger une image pour le jeu.';
-
-                $view = new View();
-                $view->redirect('edit-game');
-
-            }
-
-            // Allows to delete duplicated developers
+            // Allows to delete duplicated entities
             $params['developer'] = array_unique($params['developer']);
-
-            // Check if developer's array contains integers as expected
-            // return array with successfull values
-            $filterDeveloperArray = filter_var_array($params['developer'], FILTER_VALIDATE_INT);
-
-            // Check if somes values are false or null
-            foreach ($filterDeveloperArray as $key => $value) {
-                if (empty($value) || $value == false) {
-
-                    $_SESSION['errorMessage'] = 'Valeur reçue pour développeur, non valide.';
-
-                    $view = new View();
-                    $view->redirect('edit-game');
-                }
-            }
-
-            // Allows to delete duplicated genres
             $params['genre'] = array_unique($params['genre']);
-
-            // Check if genre's array contains integers as expected
-            // return array with successfull values
-            $filterGenreArray = filter_var_array($params['genre'], FILTER_VALIDATE_INT);
-
-            // Check if somes values are false or null
-            foreach ($filterGenreArray as $key => $value) {
-                if (empty($value) || $value == false) {
-
-                    $_SESSION['errorMessage'] = 'Valeur reçue pour genre, non valide.';
-
-                    $view = new View();
-                    $view->redirect('edit-game');
-                }
-            }
-
-            // Allows to delete duplicates modes
             $params['mode'] = array_unique($params['mode']);
 
-            // Check if mode's array contains integers as expected
-            // return array with successfull values
-            $filterModeArray = filter_var_array($params['mode'], FILTER_VALIDATE_INT);
+            // Check if entity's array contains integers as expected
+            $checkData->checkIntegers($params['developer']);
+            $checkData->checkIntegers($params['genre']);
+            $checkData->checkIntegers($params['mode']);
 
-            // Check if somes values are false or null
-            foreach ($filterModeArray as $key => $value) {
-                if (empty($value) || $value == false) {
-
-                    $_SESSION['errorMessage'] = 'Valeur reçue pour mode, non valide.';
-
-                    $view = new View();
-                    $view->redirect('edit-game');
-                }
-            }
-
-
-            // Allows to use a function on each element of multidimensionnal array
-            array_walk_recursive($params['releaseDate'], function($item, $key) {
-
-                if ($key == 'platform' || $key == 'publisher' || $key == 'region') {
-
-                    if (!is_numeric($item)) {
-
-                        $_SESSION['errorMessage'] = 'Valeur reçue pour support, éditeur ou region, non valide.';
-
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-                }
-                if ($key == 'date') {
-              
-                    $itemArray = explode('-', $item);
-
-                    if (!checkdate($itemArray[1], $itemArray[2], $itemArray[0])) {
-
-                        $_SESSION['errorMessage'] = 'La date n\'est pas valide.';
-
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-                } 
-            });
+            // Check if releaseDates contain the expected values
+            $checkData->checkReleaseDatesValues($params['releaseDate']);
 
             try {
 
@@ -448,10 +327,10 @@ use App\Core\View;
 
                 // if it's a member
                 if ($_SESSION['currentMember']->getId_Type() == 3) {
-                    $game_id = $gameManager->addGame($params, $fileExtension, $toValidate = 1);
+                    $game_id = $gameManager->addGame($params, $file['fileExtension'], $toValidate = 1);
                 } else {
                     // Add game informations (name, content, cover)
-                    $game_id = $gameManager->addGame($params, $fileExtension);
+                    $game_id = $gameManager->addGame($params, $file['fileExtension']);
                 }
 
                 if (!$game_id) {
@@ -459,12 +338,12 @@ use App\Core\View;
                 } 
 
                 // Add game cover in folder
-                if ($validCover) {
+                if ($file['validCover']) {
 
                     // Validate file and store it in "covers" folder
                     move_uploaded_file(
                         $_FILES['cover']['tmp_name'],
-                        IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']
+                        IMAGE .'covers/cover_game_id_' . $game_id . '.' . $file['fileExtension']
                     );
                 } else {
                     throw new \Exception('Impossible d\'enregistrer l\'image du jeu');
@@ -543,6 +422,7 @@ use App\Core\View;
      * Allows to update a game
      * 
      * @param array $params
+     * @param bool $updateByMember, allows to know if the update is done by a member
      */
     public static function updateGame($params = [], $updateByMember = null)
     {
@@ -556,145 +436,26 @@ use App\Core\View;
 
             $game_id = $id;
 
-            // Allows to use a function on each element of multidimensionnal array
-            // Variable must be passed by reference to be modified by the function
-            array_walk_recursive($params, function(&$item, $key) {
+            // Check if data is not null
+            // return a modified array
+            $checkData = new CheckData();
+            $params = $checkData->checkDataNotNull($params, $game_id);
 
-                if ($key != 'content') {
+            // Check if file is valid
+            $file = $checkData->checkFile($game_id);
 
-                    $item = trim(strip_tags($item));
-
-                } elseif ($key == '0') {
-
-                    $item = trim(strip_tags($item));
-
-                }
-
-                if(empty($item)) {
-          
-                    $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
-
-                    $view = new View();
-                    $view->redirect('edit-game/id/' . $game_id);
-                }
-            });
-
-            // Check if file is present
-            if (isset($_FILES['cover']) && $_FILES['cover']['error']  == 0) {
-
-                // Check file size
-                if ($_FILES['cover']['size'] <= 3000000 ) {
-                    $fileInfos = pathinfo($_FILES['cover']['name']);
-                    $fileExtension = $fileInfos['extension'];
-                    $authorizedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-
-                    $validCover = false;
-
-                    if (in_array($fileExtension, $authorizedExtensions)) {
-
-                        $validCover = true;
-                        
-                    } else {
-                        $_SESSION['errorMessage'] = 'L\'image doit être aux formats jpg, jpeg, gif ou png.';
-
-                        $view = new View();
-                        $view->redirect('edit-game');
-                    }
-
-                } else {
-
-                    $_SESSION['errorMessage'] = 'L\'image ne doit pas dépasser les 3 Mo.';
-
-                    $view = new View();
-                    $view->redirect('edit-game/id/' . $game_id);
-
-                }
-
-            } else {
-                $fileExtension = false;
-            }
-
-            // Allows to delete duplicated developers
+            // Allows to delete duplicated entities
             $params['developer'] = array_unique($params['developer']);
-
-            // Check if developer's array contains integers as expected
-            // return array with successfull values
-            $filterDeveloperArray = filter_var_array($params['developer'], FILTER_VALIDATE_INT);
-
-            // Check if somes values are false or null
-            foreach ($filterDeveloperArray as $key => $value) {
-                if (empty($value) || $value == false) {
-
-                    $_SESSION['errorMessage'] = 'Valeur reçue pour développeur, non valide.';
-
-                    $view = new View();
-                    $view->redirect('edit-game/id/' . $game_id);
-                }
-            }
-
-            // Allows to delete duplicated genres
             $params['genre'] = array_unique($params['genre']);
-
-            // Check if genre's array contains integers as expected
-            // return array with successfull values
-            $filterGenreArray = filter_var_array($params['genre'], FILTER_VALIDATE_INT);
-
-            // Check if somes values are false or null
-            foreach ($filterGenreArray as $key => $value) {
-                if (empty($value) || $value == false) {
-
-                    $_SESSION['errorMessage'] = 'Valeur reçue pour genre, non valide.';
-
-                    $view = new View();
-                    $view->redirect('edit-game/id/' . $game_id);
-                }
-            }
-
-            // Allows to delete duplicates modes
             $params['mode'] = array_unique($params['mode']);
 
-            // Check if mode's array contains integers as expected
-            // return array with successfull values
-            $filterModeArray = filter_var_array($params['mode'], FILTER_VALIDATE_INT);
+            // Check if entity's array contains integers as expected
+            $checkData->checkIntegers($params['developer'], $game_id);
+            $checkData->checkIntegers($params['genre'], $game_id);
+            $checkData->checkIntegers($params['mode'], $game_id);
 
-            // Check if somes values are false or null
-            foreach ($filterModeArray as $key => $value) {
-                if (empty($value) || $value == false) {
-
-                    $_SESSION['errorMessage'] = 'Valeur reçue pour mode, non valide.';
-
-                    $view = new View();
-                    $view->redirect('edit-game/id/' . $game_id);
-                }
-            }
-
-
-            // Allows to use a function on each element of multidimensionnal array
-            array_walk_recursive($params['releaseDate'], function($item, $key) {
-
-                if ($key == 'platform' || $key == 'publisher' || $key == 'region') {
-
-                    if (!is_numeric($item)) {
-
-                        $_SESSION['errorMessage'] = 'Valeur reçue pour support, éditeur ou region, non valide.';
-
-                        $view = new View();
-                        $view->redirect('edit-game/id/' . $game_id);
-                    }
-                }
-                if ($key == 'date') {
-              
-                    $itemArray = explode('-', $item);
-
-                    if (!checkdate($itemArray[1], $itemArray[2], $itemArray[0])) {
-
-                        $_SESSION['errorMessage'] = 'La date n\'est pas valide.';
-
-                        $view = new View();
-                        $view->redirect('edit-game/id/' . $game_id);
-                    }
-                } 
-            });
+            // Check if releaseDates contain the expected values
+            $checkData->checkReleaseDatesValues($params['releaseDate'], $game_id);
 
 
             try {
@@ -709,7 +470,7 @@ use App\Core\View;
                 $game = $gameManager->getGame($game_id);
 
                 // Add game cover in folder
-                if (isset($validCover) && $validCover == true) {
+                if (isset($file['validCover']) && $file['validCover'] == true) {
 
                     // Delete current game cover
                     if (file_exists(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension())) {
@@ -719,12 +480,12 @@ use App\Core\View;
                     // Validate file and store it in "covers" folder
                     move_uploaded_file(
                         $_FILES['cover']['tmp_name'],
-                        IMAGE .'covers/cover_game_id_' . $game_id . '.' . $fileInfos['extension']
+                        IMAGE .'covers/cover_game_id_' . $game_id . '.' . $file['fileExtension']
                     );
                 }
 
                 // Update game informations (name, content, cover)
-                $gameManager->updateGame($params, $fileExtension, $game_id);
+                $gameManager->updateGame($params, $file['fileExtension'], $game_id);
 
                 // Delete game developers before adding new ones
                 $developerManager = new DeveloperManager();

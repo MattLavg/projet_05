@@ -58,10 +58,12 @@ use App\Model\GameManager;
             ));
 
         } else {
-            $_SESSION['errorMessage'] = 'La recherche n\'a donné aucun résultat.';
 
-            $view = new View();
-            $view->redirect('home');
+            $view = new View('search');
+            $view->render('front', array(
+                'searchedGame' => $params['game'],
+                'member' => $currentMember
+            ));
         }
     }
 

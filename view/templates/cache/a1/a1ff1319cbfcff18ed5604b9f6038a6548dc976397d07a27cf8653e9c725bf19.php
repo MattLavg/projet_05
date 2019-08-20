@@ -72,7 +72,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
             // line 15
             echo "
         <div class=\"listGames\">
-            
+        
             <a href=\"";
             // line 18
             echo twig_escape_filter($this->env, ($context["HOST"] ?? null), "html", null, true);
@@ -208,7 +208,7 @@ class __TwigTemplate_b451d0e9160a3b1e885bf1774ed1859e94a3b7cb43f94fc10a97a7bef07
         {% set elementsOnPage = true %}
 
         <div class=\"listGames\">
-            
+        
             <a href=\"{{ HOST }}game/id/{{ game.getId }}\" class=\"image-link\">
                 <div class=\"background_game_image_home container\" style=\"background-image: url('{{ HOST }}public/images/covers/cover_game_id_{{ game.getId }}.{{ game.getCover_extension }}')\"></div>
             </a>

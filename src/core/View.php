@@ -93,6 +93,9 @@ class View
 
         unset($_SESSION['errorMessage']);
         unset($_SESSION['actionDone']);
+        
+        // session used in CheckController
+        unset($_SESSION['game_id']);
   
     }
 

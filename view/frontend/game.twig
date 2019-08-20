@@ -40,6 +40,7 @@
         {% endfor %}
     </div>
 
+    <div><span class="bold">Description :</span><br>
     <div>{{ game.getContent|raw }}</div>
 
     {% if game.getTo_validate == 0 %}
@@ -70,6 +71,7 @@
         <p class="bold text-danger">Ce jeu a été ajouté récemment et est en attente de validation, il n'est pas possible de modifier la fiche.</p>
 
     {% endif %}
+
 
     {% if connected %}
 

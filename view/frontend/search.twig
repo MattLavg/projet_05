@@ -13,15 +13,22 @@
 <p>Résultats trouvés pour "{{ searchedGame }}"</p>
 
 <hr>
+ 
+{% if games %}
 
-{% for game in games %}
-    <div class="row">
-        <div class="col">
+    {% for game in games %}
+        <div>
             <a href="{{ HOST }}game/id/{{ game.getId }}" class="searchLink">{{ game.getName }}</a>
             <p>{{ game.getContent|striptags|slice(0, 300)|raw}}{{ dots }}</p>
         </div>
-    </div>
-    <hr>
-{% endfor %}
+    {% endfor %}
+
+{% else %}
+
+    <p>La recherche n'a donné aucun résultat.</p>
+
+{% endif %}
+
+<hr>
 
 {% endblock %}
