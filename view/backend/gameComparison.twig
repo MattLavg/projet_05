@@ -37,7 +37,9 @@
                 {% endfor %}
             </div>
 
-            <div>{{ game.getContent|raw }}</div>
+            <div><span class="bold">Description :</span><br>
+                <div>{{ game.getContent|raw }}</div>
+            </div>
         </div>
         <div class="col-lg-6">
 
@@ -101,8 +103,10 @@
                 {% endfor %}
             </div>
 
-            <div {% if  game.getContent != updatedGame.getContent %} class="redBackground" {% endif %}>
-                {{ updatedGame.getContent|raw }}
+            <div><span class="bold">Description :</span><br>
+                <div {% if  game.getContent != updatedGame.getContent %} class="redBackground" {% endif %}>
+                    {{ updatedGame.getContent|raw }}
+                </div>
             </div>
         </div>
     </div>

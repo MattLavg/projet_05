@@ -29,7 +29,24 @@
 
                     <tr>
                         <td><a href="{{ HOST }}game/id/{{ game.getId }}">{{ game.getName }}</a></td>
-                        <td><a href="{{ HOST }}edit-game/id/{{ game.getId }}" id="updateGame">Modifier</a></td>
+
+                        <td>
+
+                        {% if game.getTo_validate == 0 %}
+                            {% if game.getUpdated_by_member == 0 %}
+
+                                <a href="{{ HOST }}edit-game/id/{{ game.getId }}" id="updateGame">Modifier</a>
+
+                            {% else %}
+                                <p class="bold text-danger no-margin">En attente de validation (modification).</p>
+                            {% endif %}
+
+                        {% else %}
+                            <p class="bold text-danger no-margin">En attente de validation (ajout).</p>
+                        {% endif %}
+
+                        </td>
+
                         <td><a href="#" data-url-delete-game="{{ HOST }}delete-game/id/{{ game.getId }}" id="gameDeleteBtn" data-game-name="{{ game.getName }}" data-toggle="modal" data-target="#deleteModal">Supprimer</a></td>
                     </tr> 
 
