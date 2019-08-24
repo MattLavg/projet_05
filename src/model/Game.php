@@ -156,7 +156,7 @@ class Game
      * 
      * @param string $cover_extension
      */
-    public function setCover_extension(string $coverExtension)
+    public function setCover_extension(string $coverExtension = null)
     {
         $this->_cover_extension = $coverExtension;
     }

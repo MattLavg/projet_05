@@ -171,7 +171,6 @@ use App\Core\View;
             $updatedDevelopersArray [] =  $updatedDeveloper->getId();
         }
 
-
         $updateByMemberGenreManager = new UpdateByMemberGenreManager();
         $updatedGenres = $updateByMemberGenreManager->getGenresUpdatedByMember($game_id);
 
@@ -215,7 +214,13 @@ use App\Core\View;
             'releaseDate' => $updatedReleasesArray
         ];
 
-        
+        $updatedCoverFileExtension = null;
+
+        // Get the file extension of updated game
+        if (!empty($updatedGame->getCover_extension())) {
+            $updatedCoverFileExtension = $updatedGame->getCover_extension();
+        }
+
         $gameManager = new GameManager();
 
         // Change the status of the "updated_by_member" column
@@ -241,7 +246,7 @@ use App\Core\View;
         $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($game_id);
         $updateByMemberGameManager->deleteGameUpdatedByMember($game_id);
 
-        GameController::updateGame($updatedParams, $updateByMember = true);
+        GameController::updateGame($updatedParams, $updateByMember = true, $updatedCoverFileExtension);
 
         
 

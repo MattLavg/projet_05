@@ -424,7 +424,7 @@ use App\Core\View;
      * @param array $params
      * @param bool $updateByMember, allows to know if the update is done by a member
      */
-    public static function updateGame($params = [], $updateByMember = null)
+    public static function updateGame($params = [], $updateByMember = null, $updatedCoverFileExtension)
     {
         // echo "<pre>";
         // print_r($params);
@@ -484,8 +484,16 @@ use App\Core\View;
                     );
                 }
 
-                // Update game informations (name, content, cover)
-                $gameManager->updateGame($params, $file['fileExtension'], $game_id);
+                // When updated by Member
+                // And if updated cover exists
+                if (!empty($updatedCoverFileExtension)) {
+                    $gameManager->updateGame($params, $updatedCoverFileExtension, $game_id);
+                } else {
+                    // Update game informations (name, content, cover)
+                    $gameManager->updateGame($params, $file['fileExtension'], $game_id);
+                }
+
+                
 
                 // Delete game developers before adding new ones
                 $developerManager = new DeveloperManager();

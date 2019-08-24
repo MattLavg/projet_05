@@ -20,6 +20,7 @@ use App\Model\CommentManager;
 use App\Model\Pagination;
 // use App\Controller\ConnectionController;
 use App\Core\View;
+use App\Model\CheckData;
 
 /**
  *  UpdateGameByMemberController
@@ -92,7 +93,7 @@ use App\Core\View;
                 } 
 
                 // Add game cover in folder
-                if (isset($validCover) && $validCover == true) {
+                if (isset($file['validCover']) && $file['validCover'] == true) {
 
                     // Validate file and store it in "temp" folder
                     move_uploaded_file(
