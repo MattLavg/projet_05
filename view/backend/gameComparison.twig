@@ -57,49 +57,113 @@
                 {{ updatedGame.getName }}   
             </h1>
 
+            <!-- Create arrays with original games informations -->
+            <!-- Create an array with developers names -->
+            {% set developersNames = [] %}
+            {% for developer in developers %} 
+                {% set developersNames = developersNames|merge([developer.getName]) %}
+            {% endfor %}
+
+            <!-- Create an array with genres names -->
+            {% set genresNames = [] %}
+            {% for genre in genres %} 
+                {% set genresNames = genresNames|merge([genre.getName]) %}
+            {% endfor %}
+
+            <!-- Create an array with modes names -->
+            {% set modesNames = [] %}
+            {% for mode in modes %} 
+                {% set modesNames = modesNames|merge([mode.getName]) %}
+            {% endfor %}
+
+            <!-- Create an array with release dates platforms -->
+            {% set releasesPlatforms = [] %}
+            {% for release in releases %} 
+                {% set releasesPlatforms = releasesPlatforms|merge([release.getPlatform]) %}
+            {% endfor %}
+
+            <!-- Create an array with release dates publishers -->
+            {% set releasesPublishers = [] %}
+            {% for release in releases %} 
+                {% set releasesPublishers = releasesPublishers|merge([release.getPublisher]) %}
+            {% endfor %}
+
+            <!-- Create an array with release dates regions -->
+            {% set releasesRegions = [] %}
+            {% for release in releases %} 
+                {% set releasesRegions = releasesRegions|merge([release.getRegion]) %}
+            {% endfor %}
+
+            <!-- Create an array with release dates -->
+            {% set releasesDates = [] %}
+            {% for release in releases %} 
+                {% set releasesDates = releasesDates|merge([release.getReleaseDate]) %}
+            {% endfor %}
+
             <div><span class="bold">Développeur(s) :</span><br>
                 {% for updatedDeveloper in updatedDevelopers %} 
-                    {% for developer in developers %}
-                        <p {% if updatedDeveloper.getName != developer.getName %} class="redBackground" {% endif %}>
+
+                    {% if updatedDeveloper.getName in developersNames %}
+                        <p>
                             - {{ updatedDeveloper.getName }}
                         </p>
-                    {% endfor %}
+                    {% else %} 
+                        <p class="redBackground">
+                            - {{ updatedDeveloper.getName }}
+                        </p>
+                    {% endif %}
+
                 {% endfor %}
             </div>
 
             <div><span class="bold">Genre(s) :</span><br>
                 {% for updatedGenre in updatedGenres %} 
-                    {% for genre in genres %}
-                        <p {% if updatedGenre.getName != genre.getName %} class="redBackground" {% endif %}>
+
+                    {% if updatedGenre.getName in genresNames %}
+                        <p>
                             - {{ updatedGenre.getName }}
                         </p>
-                    {% endfor %}
+                    {% else %} 
+                        <p class="redBackground">
+                            - {{ updatedGenre.getName }}
+                        </p>
+                    {% endif %}
+
                 {% endfor %}
             </div>
 
             <div><span class="bold">Mode(s) de jeu :</span><br>
                 {% for updatedMode in updatedModes %} 
-                    {% for mode in modes %}
-                        <p {% if updatedMode.getName != mode.getName %} class="redBackground" {% endif %}>
+
+                    {% if updatedMode.getName in modesNames %}
+                        <p>
                             - {{ updatedMode.getName }}
                         </p>
-                    {% endfor %}
+                    {% else %} 
+                        <p class="redBackground">
+                            - {{ updatedMode.getName }}
+                        </p>
+                    {% endif %}
+
                 {% endfor %}
             </div>
 
             <div><span class="bold">Sortie(s) :</span><br>
                 {% for updatedRelease in updatedReleases %} 
-                    {% for release in releases %}
-                        <p {% if (updatedRelease.getPlatform != release.getPlatform)
-                              or (updatedRelease.getPublisher != release.getPublisher)
-                              or (updatedRelease.getRegion != release.getRegion)
-                              or (updatedRelease.getReleaseDate != release.getReleaseDate) 
-                            %} 
-                                class="redBackground" 
-                            {% endif %}>
+
+                    {% if updatedRelease.getPlatform in releasesPlatforms
+                       and updatedRelease.getPublisher in releasesPublishers
+                       and updatedRelease.getRegion in releasesRegions
+                       and updatedRelease.getReleaseDate in releasesDates %}
+                        <p>
                             - Sur {{ updatedRelease.getPlatform }}, édité par {{ updatedRelease.getPublisher }} - {{ updatedRelease.getRegion }} - {{  updatedRelease. getReleaseDate }}
                         </p>
-                    {% endfor %}
+                    {% else %} 
+                        <p class="redBackground">
+                            - Sur {{ updatedRelease.getPlatform }}, édité par {{ updatedRelease.getPublisher }} - {{ updatedRelease.getRegion }} - {{  updatedRelease. getReleaseDate }}
+                        </p>
+                    {% endif %}
+
                 {% endfor %}
             </div>
 
