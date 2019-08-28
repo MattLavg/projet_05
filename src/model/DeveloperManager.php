@@ -28,14 +28,20 @@ use App\Core\Manager;
      * @param int $game_id
      * @return array $developers
     */
-    public function getDevelopers($game_id)
+    public function getGameDevelopers($game_id, $updatedByMember = false)
     {
+        if (!$updatedByMember) {
+            $table = 'games_developers';
+        } else {
+            $table = 'update_by_member_games_developers';
+        }
+
         $req = $this->_db->prepare(
             'SELECT
             d.id,
             d.name
             FROM developers AS d
-            INNER JOIN games_developers AS gd
+            INNER JOIN '. $table .' AS gd
             ON gd.id_developer = d.id
             WHERE gd.id_game = ?');
 
@@ -74,9 +80,15 @@ use App\Core\Manager;
      * 
      * @param array $game_id, $developer_id
      */
-    public function addGameDeveloper($game_id, $developer_id)
+    public function addGameDeveloper($game_id, $developer_id, $updatedByMember = false)
     {
-        $req = $this->_db->prepare('INSERT INTO games_developers (id_game, id_developer) VALUES (?, ?)');
+        if (!$updatedByMember) {
+            $table = 'games_developers';
+        } else {
+            $table = 'update_by_member_games_developers';
+        }
+
+        $req = $this->_db->prepare('INSERT INTO '. $table .' (id_game, id_developer) VALUES (?, ?)');
         $req->execute(array($game_id, $developer_id));
 
         $count = $req->rowCount();
@@ -88,9 +100,15 @@ use App\Core\Manager;
      * 
      * @param int $game_id
      */
-    public function deleteGameDevelopers($game_id)
+    public function deleteGameDevelopers($game_id, $updatedByMember = false)
     {
-        $req = $this->_db->prepare('DELETE FROM games_developers WHERE id_game = ?');
+        if (!$updatedByMember) {
+            $table = 'games_developers';
+        } else {
+            $table = 'update_by_member_games_developers';
+        }
+
+        $req = $this->_db->prepare('DELETE FROM '. $table .' WHERE id_game = ?');
         $req->execute(array($game_id));
 
         $count = $req->rowCount();

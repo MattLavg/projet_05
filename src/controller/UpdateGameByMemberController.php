@@ -10,11 +10,6 @@ use App\Model\PlatformManager;
 use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
-use App\Model\UpdateByMemberGameManager;
-use App\Model\UpdateByMemberDeveloperManager;
-use App\Model\UpdateByMemberGenreManager;
-use App\Model\UpdateByMemberModeManager;
-use App\Model\UpdateByMemberReleaseDateManager;
 use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
@@ -82,11 +77,10 @@ use App\Model\CheckData;
                     throw new \Exception('Impossible de modifier le statut du jeu en indiquant la modification par un membre.');
                 } 
                 
-                $updateByMemberGameManager = new UpdateByMemberGameManager();
 
                 // Add game informations (name, content, cover) in "temporary" table
                 // waiting for validation to be updated on the original table
-                $updatedGame = $updateByMemberGameManager->addGameByMember($params, $file['fileExtension']);
+                $updatedGame = $gameManager->addGameByMember($params, $file['fileExtension']);
 
                 if (!$updatedGame) {
                     throw new \Exception('Impossible d\'enregistrer les informations du jeu');
@@ -103,10 +97,10 @@ use App\Model\CheckData;
                 }
 
                 // Add games developers
-                $updateByMemberDeveloperManager = new UpdateByMemberDeveloperManager();
+                $developerManager = new DeveloperManager();
                 foreach($params['developer'] as $developer_id) {
 
-                    $addedDeveloper = $updateByMemberDeveloperManager->addGameDeveloperByMember($game_id, $developer_id);
+                    $addedDeveloper = $developerManager->addGameDeveloper($game_id, $developer_id, true);
 
                     if (!$addedDeveloper) {
                         throw new \Exception('Impossible d\'enregistrer le ou les développeurs du jeu');
@@ -114,10 +108,10 @@ use App\Model\CheckData;
                 }
 
                 // Add games genres
-                $updateByMemberGenreManager = new UpdateByMemberGenreManager();
+                $genreManager = new GenreManager();
                 foreach($params['genre'] as $genre_id) {
 
-                    $addedGenre = $updateByMemberGenreManager->addGameGenreByMember($game_id, $genre_id);
+                    $addedGenre = $genreManager->addGameGenre($game_id, $genre_id, true);
 
                     if (!$addedGenre) {
                         throw new \Exception('Impossible d\'enregistrer le ou les genres du jeu');
@@ -125,10 +119,10 @@ use App\Model\CheckData;
                 }
 
                 // Add games modes
-                $updateByMemberModeManager = new UpdateByMemberModeManager();
+                $modeManager = new ModeManager();
                 foreach($params['mode'] as $mode_id) {
 
-                    $addedMode = $updateByMemberModeManager->addGameModeByMember($game_id, $mode_id);
+                    $addedMode = $modeManager->addGameMode($game_id, $mode_id, true);
 
                     if (!$addedMode) {
                         throw new \Exception('Impossible d\'enregistrer le ou les modes du jeu');
@@ -136,10 +130,10 @@ use App\Model\CheckData;
                 }
 
                 // Add games release
-                $updateByMemberReleaseDateManager = new UpdateByMemberReleaseDateManager();
+                $releaseDateManager = new ReleaseDateManager();
                 foreach($params['releaseDate'] as $releaseDate_array) {
 
-                    $addedRelease = $updateByMemberReleaseDateManager->addReleaseDateByMember($game_id, $releaseDate_array);
+                    $addedRelease = $releaseDateManager->addGameReleaseDate($game_id, $releaseDate_array, true);
 
                     if (!$addedRelease) {
                         throw new \Exception('Impossible d\'enregistrer les dates du jeu');

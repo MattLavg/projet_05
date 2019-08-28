@@ -73,23 +73,6 @@ abstract class Manager
             $sql = $sql . $order . $desc . $firstEntry .  $nbElementsByPage;
 
         } 
-        
-        // else if (!empty($order) && isset($desc) && empty($firstEntry) && empty($nbElementsByPage)) {
-
-        //     $sql = $sql . ' ORDER BY ' . $order . ' ' . $desc;
-
-        // } 
-
-        // // if pagination
-        // if (!empty($order)) {
-
-        //     $sql = $sql . ' ORDER BY ' . $order . ' ' . $desc;
-
-        // } 
-
-        
-// var_dump($order);
-//         var_dump($sql);die;
 
         $req = $this->_db->query($sql);
 
@@ -109,49 +92,6 @@ abstract class Manager
 
         return $array;
     }
-
-    // /**
-    //  * Get all the rows from a table
-    //  * 
-    //  * @return array $array
-    //  */
-    // public function getAll($order, $desc, $firstEntry = 0, $nbElementsByPage)
-    // {
-    //     $class = $this->_class;
-
-    //     // if no parameters, do a simple request
-    //     if ($order == null && $desc == null && $firstEntry == null && $nbElementsByPage == null) {
-    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' ORDER BY name');
-
-    //     // else, do a request with parameters
-    //     } else {
-
-    //         if ($desc == false) {
-    //             $desc = " ";
-    //         } else {
-    //             $desc = ' DESC';
-    //         }
-    
-    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
-
-    //     }
-
-    //     $array = [];
-
-    //     if ($req) {
-
-    //         while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
-
-    //             $object = new $class();
-    //             $object->hydrate($data);
-    
-    //             $array[] = $object;
-    
-    //         }
-    //     }
-
-    //     return $array;
-    // }
 
     /**
      * insert name in tables developers, genres, modes, platforms, publishers and regions

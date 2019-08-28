@@ -10,11 +10,11 @@ use App\Model\PlatformManager;
 use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
-use App\Model\UpdateByMemberGameManager;
-use App\Model\UpdateByMemberDeveloperManager;
-use App\Model\UpdateByMemberGenreManager;
-use App\Model\UpdateByMemberModeManager;
-use App\Model\UpdateByMemberReleaseDateManager;
+// use App\Model\UpdateByMemberGameManager;
+// use App\Model\UpdateByMemberDeveloperManager;
+// use App\Model\UpdateByMemberGenreManager;
+// use App\Model\UpdateByMemberModeManager;
+// use App\Model\UpdateByMemberReleaseDateManager;
 use App\Core\View;
 
 /**
@@ -42,41 +42,29 @@ use App\Core\View;
 
             $game_id = $id; // rename the variable for better identification
 
-            // Get the original game
             $gameManager = new GameManager();
-            $game = $gameManager->getGame($game_id);
-
             $developerManager = new DeveloperManager();
-            $developers = $developerManager->getDevelopers($game_id);
-
             $genreManager = new GenreManager();
-            $genres = $genreManager->getGenres($game_id);
-
             $modeManager = new ModeManager();
-            $modes = $modeManager->getModes($game_id);
-
-            // Get releases for a game with platforms, regions and publishers
             $releaseDateManager = new ReleaseDateManager();
-            $releaseDates = $releaseDateManager->getReleases($game_id);
+
+            // Get the original game
+            $game = $gameManager->getGame($game_id);
+            $developers = $developerManager->getGameDevelopers($game_id);
+            $genres = $genreManager->getGameGenres($game_id);
+            $modes = $modeManager->getGameModes($game_id);
+            $releaseDates = $releaseDateManager->getGameReleases($game_id);
 
             // Get the updated game
-            $updateByMemberGameManager = new UpdateByMemberGameManager();
-            $gameUpdatedByMember = $updateByMemberGameManager->getGameUpdatedByMember($game_id);
+            $gameUpdatedByMember = $gameManager->getGame($game_id, true);
 
             // Check if an updated cover is registered
             $gameUpdatedCover = $gameUpdatedByMember->getCover_extension();
 
-            $updateByMemberDeveloperManager = new UpdateByMemberDeveloperManager();
-            $developersUpdatedByMember = $updateByMemberDeveloperManager->getDevelopersUpdatedByMember($game_id);
-
-            $updateByMemberGenreManager = new UpdateByMemberGenreManager();
-            $genresUpdatedByMember = $updateByMemberGenreManager->getGenresUpdatedByMember($game_id);
-
-            $updateByMemberModeManager = new UpdateByMemberModeManager();
-            $modesUpdatedByMember = $updateByMemberModeManager->getModesUpdatedByMember($game_id);
-
-            $updateByMemberReleaseDateManager = new UpdateByMemberReleaseDateManager();
-            $releasesUpdatedByMember = $updateByMemberReleaseDateManager->getReleasesUpdatedByMember($game_id);
+            $developersUpdatedByMember = $developerManager->getGameDevelopers($game_id, true);
+            $genresUpdatedByMember = $genreManager->getGameGenres($game_id, true);
+            $modesUpdatedByMember = $modeManager->getGameModes($game_id, true);
+            $releasesUpdatedByMember = $releaseDateManager->getGameReleases($game_id, true);
 
             $view = new View('gameComparison');
             $view->render('comparison', array(

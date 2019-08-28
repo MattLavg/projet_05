@@ -3,11 +3,10 @@
 namespace App\Controller;
 
 use App\Model\GameManager;
-use App\Model\UpdateByMemberGameManager;
-use App\Model\UpdateByMemberDeveloperManager;
-use App\Model\UpdateByMemberGenreManager;
-use App\Model\UpdateByMemberModeManager;
-use App\Model\UpdateByMemberReleaseDateManager;
+use App\Model\DeveloperManager;
+use App\Model\GenreManager;
+use App\Model\ModeManager;
+use App\Model\ReleaseDateManager;
 use App\Model\Pagination;
 use App\Core\View;
 
@@ -160,33 +159,34 @@ use App\Core\View;
         extract($params); // Allows to extract the $id variable
         $game_id = $id; // rename the variable for better identification
 
-        // Get all the updated informations for a game
-        $updateByMemberGameManager = new UpdateByMemberGameManager();
-        $updatedGame = $updateByMemberGameManager->getGameUpdatedByMember($game_id);
+        $gameManager = new GameManager();
+        $developerManager = new DeveloperManager();
+        $genreManager = new GenreManager();
+        $modeManager = new ModeManager();
+        $releaseDateManager = new ReleaseDateManager();
 
-        $updateByMemberDeveloperManager = new UpdateByMemberDeveloperManager();
-        $updatedDevelopers = $updateByMemberDeveloperManager->getDevelopersUpdatedByMember($game_id);
+        // Get all the updated informations for a game
+        $updatedGame = $gameManager->getGame($game_id, true);
+
+        $updatedDevelopers = $developerManager->getGameDevelopers($game_id, true);
 
         foreach ($updatedDevelopers as $updatedDeveloper) {
             $updatedDevelopersArray [] =  $updatedDeveloper->getId();
         }
 
-        $updateByMemberGenreManager = new UpdateByMemberGenreManager();
-        $updatedGenres = $updateByMemberGenreManager->getGenresUpdatedByMember($game_id);
+        $updatedGenres = $genreManager->getGameGenres($game_id, true);
 
         foreach ($updatedGenres as $updatedGenre) {
             $updatedGenresArray [] = $updatedGenre->getId();
         }
 
-        $updateByMemberModeManager = new UpdateByMemberModeManager();
-        $updatedModes = $updateByMemberModeManager->getModesUpdatedByMember($game_id);
+        $updatedModes = $modeManager->getGameModes($game_id, true);
 
         foreach ($updatedModes as $updatedMode) {
             $updatedModesArray [] = $updatedMode->getId();
         }
 
-        $updateByMemberReleaseDateManager = new UpdateByMemberReleaseDateManager();
-        $updatedReleases = $updateByMemberReleaseDateManager->getReleasesUpdatedByMember($game_id);
+        $updatedReleases = $releaseDateManager->getGameReleases($game_id, true);
 
         foreach ($updatedReleases as $updatedRelease) {
 
@@ -221,9 +221,7 @@ use App\Core\View;
             $updatedCoverFileExtension = $updatedGame->getCover_extension();
         }
 
-        $gameManager = new GameManager();
-
-        // Change the status of the "updated_by_member" column
+        // Change the status of the "updated_by_member" column to "0"
         $gameManager->updatedByMember($game_id, false);
 
         // Get the game to access cover_extension
@@ -240,11 +238,11 @@ use App\Core\View;
         }
 
         // delete all updated elements linked to the game
-        $updateByMemberDeveloperManager->deleteGameDeveloperUpdatedByMember($game_id);
-        $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($game_id);
-        $updateByMemberModeManager->deleteGameModesUpdatedByMember($game_id);
-        $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($game_id);
-        $updateByMemberGameManager->deleteGameUpdatedByMember($game_id);
+        $developerManager->deleteGameDevelopers($game_id, true);
+        $genreManager->deleteGameGenres($game_id, true);
+        $modeManager->deleteGameModes($game_id, true);
+        $releaseDateManager->deleteGameReleaseDates($game_id, true);
+        $gameManager->deleteGameUpdatedByMember($game_id);
 
         GameController::updateGame($updatedParams, $updateByMember = true, $updatedCoverFileExtension);
 
@@ -268,21 +266,20 @@ use App\Core\View;
         extract($params); // Allows to extract the $id variable
         $game_id = $id; // rename the variable for better identification
 
+        $gameManager = new GameManager();
+        $developerManager = new DeveloperManager();
+        $genreManager = new GenreManager();
+        $modeManager = new ModeManager();
+        $releaseDateManager = new ReleaseDateManager();
+
         // delete all updated elements linked to the game
-        $updateByMemberDeveloperManager = new UpdateByMemberDeveloperManager();
-        $updateByMemberDeveloperManager->deleteGameDeveloperUpdatedByMember($game_id);
+        $developerManager->deleteGameDevelopers($game_id, true);
+        $genreManager->deleteGameGenres($game_id, true);
+        $modeManager->deleteGameModes($game_id, true);
+        $releaseDateManager->deleteGameReleaseDates($game_id, true);
 
-        $updateByMemberGenreManager = new UpdateByMemberGenreManager();
-        $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($game_id);
-
-        $updateByMemberModeManager = new UpdateByMemberModeManager();
-        $updateByMemberModeManager->deleteGameModesUpdatedByMember($game_id);
-
-        $updateByMemberReleaseDateManager = new UpdateByMemberReleaseDateManager();
-        $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($game_id);
-
-        $updateByMemberGameManager = new UpdateByMemberGameManager();
-        $updatedGame = $updateByMemberGameManager->getGameUpdatedByMember($game_id);
+        // Get the updated game to access cover extension
+        $updatedGame = $gameManager->getGame($game_id, true);
 
         // Delete game cover
         if (file_exists(IMAGE .'covers/temp/cover_game_id_' . $game_id . '.' . $updatedGame->getCover_extension())) {
@@ -291,8 +288,7 @@ use App\Core\View;
 
         $updateByMemberGameManager->deleteGameUpdatedByMember($game_id);
 
-        // set to 0 the "updated by member" column of the game
-        $gameManager = new GameManager();
+        // Change the status of the "updated_by_member" column to "0"
         $gameManager->updatedByMember($game_id, false);
 
         $_SESSION['actionDone'] = 'Vous avez supprimé les modifications apportées au jeu.';

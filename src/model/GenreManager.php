@@ -28,14 +28,20 @@ use App\Core\Manager;
      * @param int $game_id
      * @return array $genres
      */
-    public function getGenres($game_id)
+    public function getGameGenres($game_id, $updatedByMember = false)
     {
+        if (!$updatedByMember) {
+            $table = 'games_genres';
+        } else {
+            $table = 'update_by_member_games_genres';
+        }
+
         $req = $this->_db->prepare(
             'SELECT
             g.id,
             g.name 
             FROM genres AS g
-            INNER JOIN games_genres AS gg
+            INNER JOIN '. $table .' AS gg
             ON gg.id_genre = g.id
             WHERE gg.id_game = ?');
 
@@ -75,9 +81,15 @@ use App\Core\Manager;
      * 
      * @param array $game_id, $genre_id
      */
-    public function addGameGenre($game_id, $genre_id)
+    public function addGameGenre($game_id, $genre_id, $updatedByMember = false)
     {
-        $req = $this->_db->prepare('INSERT INTO games_genres (id_game, id_genre) VALUES (?, ?)');
+        if (!$updatedByMember) {
+            $table = 'games_genres';
+        } else {
+            $table = 'update_by_member_games_genres';
+        }
+
+        $req = $this->_db->prepare('INSERT INTO '. $table .' (id_game, id_genre) VALUES (?, ?)');
         $req->execute(array($game_id, $genre_id));
 
         $count = $req->rowCount();
@@ -89,9 +101,15 @@ use App\Core\Manager;
      * 
      * @param int $game_id
      */
-    public function deleteGameGenres($game_id)
+    public function deleteGameGenres($game_id, $updatedByMember = false)
     {
-        $req = $this->_db->prepare('DELETE FROM games_genres WHERE id_game = ?');
+        if (!$updatedByMember) {
+            $table = 'games_genres';
+        } else {
+            $table = 'update_by_member_games_genres';
+        }
+
+        $req = $this->_db->prepare('DELETE FROM '. $table .' WHERE id_game = ?');
         $req->execute(array($game_id));
 
         $count = $req->rowCount();

@@ -10,11 +10,6 @@ use App\Model\PlatformManager;
 use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
-use App\Model\UpdateByMemberGameManager;
-use App\Model\UpdateByMemberDeveloperManager;
-use App\Model\UpdateByMemberGenreManager;
-use App\Model\UpdateByMemberModeManager;
-use App\Model\UpdateByMemberReleaseDateManager;
 use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
@@ -48,20 +43,16 @@ use App\Core\View;
         $game_id = $id; // rename the variable for better identification
 
         $gameManager = new GameManager();
-        $game = $gameManager->getGame($game_id);
-
         $developerManager = new DeveloperManager();
-        $developers = $developerManager->getDevelopers($game_id);
-
         $genreManager = new GenreManager();
-        $genres = $genreManager->getGenres($game_id);
-
         $modeManager = new ModeManager();
-        $modes = $modeManager->getModes($game_id);
-
-        // Get releases for a game with platforms, regions and publishers
         $releaseDateManager = new ReleaseDateManager();
-        $releaseDates = $releaseDateManager->getReleases($game_id);
+
+        $game = $gameManager->getGame($game_id);
+        $developers = $developerManager->getGameDevelopers($game_id);
+        $genres = $genreManager->getGameGenres($game_id);
+        $modes = $modeManager->getGameModes($game_id);
+        $releaseDates = $releaseDateManager->getGameReleases($game_id);
 
         $pageNb = 1;
 
@@ -192,15 +183,15 @@ use App\Core\View;
 
                 // get the game developers and all developers for list
                 $developerManager = new DeveloperManager();
-                $developers = $developerManager->getDevelopers($game_id);
+                $developers = $developerManager->getGameDevelopers($game_id);
                 $allDevelopers = $developerManager->getAll(' ORDER BY name');
 
                 $genreManager = new GenreManager();
-                $genres = $genreManager->getGenres($game_id);
+                $genres = $genreManager->getGameGenres($game_id);
                 $allGenres = $genreManager->getAll(' ORDER BY name');
 
                 $modeManager = new ModeManager();
-                $modes = $modeManager->getModes($game_id);
+                $modes = $modeManager->getGameModes($game_id);
                 $allModes = $modeManager->getAll(' ORDER BY name');
 
                 $platformManager = new PlatformManager();
@@ -213,7 +204,7 @@ use App\Core\View;
                 $allRegions = $regionManager->getAll(' ORDER BY name');
 
                 $releaseDateManager = new ReleaseDateManager();
-                $releaseDates = $releaseDateManager->getReleases($game_id);
+                $releaseDates = $releaseDateManager->getGameReleases($game_id);
 
                 $view = new View('gameEdit');
                 $view->render('back', array(
@@ -325,7 +316,7 @@ use App\Core\View;
                 
                 $db->beginTransaction();
 
-                // if it's a member
+                // if it's a member, get the "to_validate" column to "1"
                 if ($_SESSION['currentMember']->getId_Type() == 3) {
                     $game_id = $gameManager->addGame($params, $file['fileExtension'], $toValidate = 1);
                 } else {
@@ -386,7 +377,7 @@ use App\Core\View;
                 $releaseDateManager = new ReleaseDateManager();
                 foreach($params['releaseDate'] as $releaseDate_array) {
 
-                    $addedRelease = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+                    $addedRelease = $releaseDateManager->addGameReleaseDate($game_id, $releaseDate_array);
 
                     if (!$addedRelease) {
                         throw new \Exception('Impossible d\'enregistrer les dates du jeu');
@@ -424,7 +415,7 @@ use App\Core\View;
      * @param array $params
      * @param bool $updateByMember, allows to know if the update is done by a member
      */
-    public static function updateGame($params = [], $updateByMember = null, $updatedCoverFileExtension)
+    public static function updateGame($params = [], $updateByMember = null, $updatedCoverFileExtension = null)
     {
         // echo "<pre>";
         // print_r($params);
@@ -540,7 +531,7 @@ use App\Core\View;
                 // Add games release
                 foreach($params['releaseDate'] as $releaseDate_array) {
                     
-                    $addedRelease = $releaseDateManager->addReleaseDate($game_id, $releaseDate_array);
+                    $addedRelease = $releaseDateManager->addGameReleaseDate($game_id, $releaseDate_array);
 
                     if (!$addedRelease) {
                         throw new \Exception('Impossible d\'enregistrer les dates du jeu');
@@ -592,49 +583,35 @@ use App\Core\View;
         // echo "</pre>";die;
         if (ConnectionController::isSessionValid()) {
 
+            $gameManager = new GameManager();
+            $developerManager = new DeveloperManager();
+            $genreManager = new GenreManager();
+            $modeManager = new ModeManager();
+            $releaseDateManager = new ReleaseDateManager();
+
             // if game is updated by member
             // delete all updated elements linked to the game
-            $updateByMemberDeveloperManager = new UpdateByMemberDeveloperManager();
-            $updateByMemberDeveloperManager->deleteGameDeveloperUpdatedByMember($params['id']);
+            $developerManager->deleteGameDevelopers($params['id'], true);
+            $genreManager->deleteGameGenres($params['id'], true);
+            $modeManager->deleteGameModes($params['id'], true);
+            $releaseDateManager->deleteGameReleaseDates($params['id'], true);
+            $gameManager->deleteGameUpdatedByMember($params['id']);
 
-            $updateByMemberGenreManager = new UpdateByMemberGenreManager();
-            $updateByMemberGenreManager->deleteGameGenresUpdatedByMember($params['id']);
-
-            $updateByMemberModeManager = new UpdateByMemberModeManager();
-            $updateByMemberModeManager->deleteGameModesUpdatedByMember($params['id']);
-
-            $updateByMemberReleaseDateManager = new UpdateByMemberReleaseDateManager();
-            $updateByMemberReleaseDateManager->deleteGameReleasesUpdatedByMember($params['id']);
-
-            $updateByMemberGameManager = new UpdateByMemberGameManager();
-            $updateByMemberGameManager->deleteGameUpdatedByMember($params['id']);
-
-            // Delete game developers
-            $developerManager = new DeveloperManager();
+            // Delete original game elements
             $developerManager->deleteGameDevelopers($params['id']);
-
-            // Delete games genres
-            $genreManager = new GenreManager();
             $genreManager->deleteGameGenres($params['id']);
-
-            // Delete games modes
-            $modeManager = new ModeManager();
             $modeManager->deleteGameModes($params['id']);
-
-            // Delete games release
-            $releaseDateManager = new ReleaseDateManager();
             $releaseDateManager->deleteGameReleaseDates($params['id']);
 
-            // Delete game informations and cover in folder
-            $gameManager = new GameManager();
-            
+            // Get the original game to access cover and remove it
             $game = $gameManager->getGame($params['id']);
 
             // Delete game cover
             if (file_exists(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension())) {
                 unlink(IMAGE .'covers/cover_game_id_' . $game->getId() . '.' . $game->getCover_extension());
             }
-            
+
+            // And delete games informations
             $gameManager->deleteGameAndComments($params['id']);
 
             $_SESSION['actionDone'] = 'Vous avez effacé un jeu.';

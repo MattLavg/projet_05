@@ -20,8 +20,14 @@ use App\model\ReleaseDate;
      * @param int $game_id
      * @return array $releases
     */
-    public function getReleases($game_id)
+    public function getGameReleases($game_id, $updatedByMember = false)
     {
+        if (!$updatedByMember) {
+            $table = 'release_dates';
+        } else {
+            $table = 'update_by_member_release_dates';
+        }
+
         $req = $this->_db->prepare(
             'SELECT 
             p.id AS platformId,
@@ -31,7 +37,7 @@ use App\model\ReleaseDate;
             r.name AS region, 
             pu.name AS publisher, 
             DATE_FORMAT(rd.release_date, \'%d/%m/%Y\') AS releaseDate
-            FROM release_dates AS rd
+            FROM '. $table .' AS rd
             INNER JOIN platforms AS p
             ON rd.id_platform = p.id
             INNER JOIN regions AS r
@@ -64,13 +70,19 @@ use App\model\ReleaseDate;
      * @param int $game_id
      * @param array $values
      */
-    public function addReleaseDate($game_id, $values)
+    public function addGameReleaseDate($game_id, $values, $updatedByMember = false)
     {
+        if (!$updatedByMember) {
+            $table = 'release_dates';
+        } else {
+            $table = 'update_by_member_release_dates';
+        }
+
         try {
 
             $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-            $req = $this->_db->prepare('INSERT INTO release_dates (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
+            $req = $this->_db->prepare('INSERT INTO '. $table .' (id_game, id_platform, id_region, id_publisher, release_date) VALUES (?, ?, ?, ?, ?)');
             $result = $req->execute(array($game_id, $values['platform'], $values['region'], $values['publisher'], $values['date']));
 
             $count = $req->rowCount();
@@ -101,9 +113,15 @@ use App\model\ReleaseDate;
      * 
      * @param int $game_id
      */
-    public function deleteGameReleaseDates($game_id)
+    public function deleteGameReleaseDates($game_id, $updatedByMember = false)
     {
-        $req = $this->_db->prepare('DELETE FROM release_dates WHERE id_game = ?');
+        if (!$updatedByMember) {
+            $table = 'release_dates';
+        } else {
+            $table = 'update_by_member_release_dates';
+        }
+
+        $req = $this->_db->prepare('DELETE FROM '. $table .' WHERE id_game = ?');
         $req->execute(array($game_id));
 
         $count = $req->rowCount();

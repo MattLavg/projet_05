@@ -30,10 +30,16 @@ use App\Model\Game;
      * @param int $id
      * @return object PDOStatement
      */
-    public function getGame($game_id, $table = 'games')
+    public function getGame($game_id, $updatedByMember = false)
     { 
+        if (!$updatedByMember) {
+            $table = 'games';
+        } else {
+            $table = 'update_by_member_games';
+        }
+
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM games WHERE id = ?');
+        $req = $db->prepare('SELECT * FROM '. $table .' WHERE id = ?');
         $req->execute(array($game_id));
 
         $data = $req->fetch(\PDO::FETCH_ASSOC);
@@ -164,6 +170,21 @@ use App\Model\Game;
     }
 
     /**
+     * Allows to add a game by a member
+     * 
+     * @param array $values
+     */
+    public function addGameByMember($values, $fileExtension)
+    { 
+        $req = $this->_db->prepare('INSERT INTO update_by_member_games (id, name, content, cover_extension) VALUES(?, ?, ?, ?)');
+        $req->execute(array($values['id'], $values['name'], $values['content'], $fileExtension));
+
+        $count = $req->rowCount();
+
+        return $count;
+    }
+
+    /**
      * Allows to update game informations
      * 
      * @param array $values
@@ -217,6 +238,19 @@ use App\Model\Game;
         ON C.id_game = G.id
         WHERE G.id = ?
         ');
+        $req->execute(array($game_id));
+
+        $count = $req->rowCount();
+    }
+
+    /**
+     * Allows to delete the version of game modified by a member and waiting for validation
+     * 
+     * @param int $game_id
+     */
+    public function deleteGameUpdatedByMember($game_id)
+    {
+        $req = $this->_db->prepare('DELETE FROM update_by_member_games WHERE id = ?');
         $req->execute(array($game_id));
 
         $count = $req->rowCount();
