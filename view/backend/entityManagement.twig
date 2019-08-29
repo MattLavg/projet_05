@@ -4,6 +4,12 @@
     <title>Gestion des {{ entityFr }}s | LISTaGAME</title>
 {% endblock %}
 
+{% block script %}
+    {% for jsFile in jsFiles %}
+        <script src="{{ jsFile }}"></script>
+    {% endfor %}
+{% endblock %}
+
 {% set elementsOnPage = false %}
 
 {% block content %}
@@ -55,6 +61,15 @@
         {{ pagination.render }}
     {% elseif not elementsOnPage %}
         <p>Il n'y a actuellement aucun jeu</p>
+    {% endif %}
+
+    {% if errorMessage %}
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
+            {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     {% endif %}
 
 {% endblock %}

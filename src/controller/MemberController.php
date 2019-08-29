@@ -38,10 +38,15 @@ use App\Model\Pagination;
             // update member's infos in session
             $_SESSION['currentMember'] = $member;
 
+            $jsFiles = [
+                ASSETS . 'js/modal.js'
+            ];
+
             $view = new View('memberInfos');
             $view->render('back', array(
                 'member' => $member,
-                'connected' => ConnectionController::isSessionValid()
+                'connected' => ConnectionController::isSessionValid(),
+                'jsFiles' => $jsFiles
             ));
 
 
@@ -70,10 +75,16 @@ use App\Model\Pagination;
             $memberManager = new MemberManager();
             $member = $memberManager->getMemberById($member_id);
 
+            $jsFiles = [
+                ASSETS . 'js/infosMemberDatepicker.js',
+                ASSETS . 'js/checkForm.js'
+            ];
+
             $view = new View('memberEdit');
             $view->render('back', array(
                 'member' => $member,
-                'connected' => ConnectionController::isSessionValid()
+                'connected' => ConnectionController::isSessionValid(),
+                'jsFiles' => $jsFiles
             ));
 
 
@@ -150,13 +161,18 @@ use App\Model\Pagination;
             $renderPagination = true;
         }
 
+        $jsFiles = [
+            ASSETS . 'js/modal.js'
+        ];
+
         $view = new View('memberManagement');
         $view->render('back', array(
             'members' => $members,
             'pagination' => $pagination,
             'renderPagination' => $renderPagination,
             'isSessionValid' => ConnectionController::isSessionValid(),
-            'member' => $currentMember
+            'member' => $currentMember,
+            'jsFiles' => $jsFiles
         ));
 
     }

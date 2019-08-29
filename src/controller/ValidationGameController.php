@@ -53,12 +53,17 @@ use App\Core\View;
                 $renderPagination = true;
             }
 
+            $jsFiles = [
+                ASSETS . 'js/modal.js'
+            ];
+
             $view = new View('gamesToValidate');
             $view->render('back', array(
                 'games' => $gamesToValidate, 
                 'pagination' => $pagination,
                 'renderPagination' => $renderPagination,
-                'member' => $currentMember
+                'member' => $currentMember,
+                'jsFiles' => $jsFiles
             ));
 
         } else {
@@ -286,7 +291,7 @@ use App\Core\View;
             unlink(IMAGE .'covers/temp/cover_game_id_' . $game_id . '.' . $updatedGame->getCover_extension());
         }
 
-        $updateByMemberGameManager->deleteGameUpdatedByMember($game_id);
+        $gameManager->deleteGameUpdatedByMember($game_id);
 
         // Change the status of the "updated_by_member" column to "0"
         $gameManager->updatedByMember($game_id, false);

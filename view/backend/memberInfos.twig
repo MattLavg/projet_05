@@ -4,6 +4,12 @@
     <title>Afficher les informations | LISTaGAME</title>
 {% endblock %}
 
+{% block script %}
+    {% for jsFile in jsFiles %}
+        <script src="{{ jsFile }}"></script>
+    {% endfor %}
+{% endblock %}
+
 {% block content %}
 
     <h3>Vos informations</h3>

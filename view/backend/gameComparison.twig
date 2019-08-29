@@ -4,6 +4,12 @@
     <title>Modifications à valider | LISTaGAME</title>
 {% endblock %}
 
+{% block script %}
+    {% for jsFile in jsFiles %}
+        <script src="{{ jsFile }}"></script>
+    {% endfor %}
+{% endblock %}
+
 {% block content %}
 
     <div class="row">

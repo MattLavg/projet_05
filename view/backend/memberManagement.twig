@@ -4,6 +4,12 @@
     <title>Gestion des membres | LISTaGAME</title>
 {% endblock %}
 
+{% block script %}
+    {% for jsFile in jsFiles %}
+        <script src="{{ jsFile }}"></script>
+    {% endfor %}
+{% endblock %}
+
 {% set elementsOnPage = false %}
 
 {% block content %}

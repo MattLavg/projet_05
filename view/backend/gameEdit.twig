@@ -4,6 +4,12 @@
     <title>Ajout et modification d'un jeu | LISTaGAME</title>
 {% endblock %}
 
+{% block script %}
+    {% for jsFile in jsFiles %}
+        <script src="{{ jsFile }}"></script>
+    {% endfor %}
+{% endblock %}
+
 {% block content %}
 
     {% if game_id %}

@@ -75,6 +75,10 @@ use App\Core\View;
             $renderPagination = true;
         }
 
+        $jsFiles = [
+            ASSETS . 'js/modal.js'
+        ];
+
         $view = new View('game');
         $view->render('front', array(
             'game' => $game,
@@ -86,7 +90,8 @@ use App\Core\View;
             'member' => $currentMember,
             'pagination' => $pagination,
             'renderPagination' => $renderPagination,
-            'comments' => $comments
+            'comments' => $comments,
+            'jsFiles' => $jsFiles
         ));
 
     }
@@ -134,13 +139,18 @@ use App\Core\View;
                 $renderPagination = true;
             }
 
+            $jsFiles = [
+                ASSETS . 'js/modal.js'
+            ];
+
             $view = new View('gameManagement');
             $view->render('back', array(
                 'games' => $games,
                 'pagination' => $pagination,
                 'renderPagination' => $renderPagination,
                 'isSessionValid' => ConnectionController::isSessionValid(),
-                'member' => $currentMember
+                'member' => $currentMember,
+                'jsFiles' => $jsFiles
             ));
 
         } else {
@@ -206,6 +216,11 @@ use App\Core\View;
                 $releaseDateManager = new ReleaseDateManager();
                 $releaseDates = $releaseDateManager->getGameReleases($game_id);
 
+                $jsFiles = [
+                    ASSETS . 'js/editFormElements.js',
+                    ASSETS . 'js/checkForm.js'
+                ];
+
                 $view = new View('gameEdit');
                 $view->render('back', array(
                     'game_id' => $game_id,
@@ -220,7 +235,8 @@ use App\Core\View;
                     'allPlatforms' => $allPlatforms,
                     'allPublishers' => $allPublishers,
                     'allRegions' => $allRegions,
-                    'member' => $currentMember
+                    'member' => $currentMember,
+                    'jsFiles' => $jsFiles
                 ));
 
             } else {
@@ -239,6 +255,11 @@ use App\Core\View;
                 $publishers = $publisherManager->getAll(' ORDER BY name');
                 $regions = $regionManager->getAll(' ORDER BY name');
 
+                $jsFiles = [
+                    ASSETS . 'js/editFormElements.js',
+                    ASSETS . 'js/checkForm.js'
+                ];
+
                 $view = new View('gameEdit');
                 $view->render('back', array(
                     'developers' => $developers,
@@ -247,7 +268,8 @@ use App\Core\View;
                     'platforms' => $platforms,
                     'publishers' => $publishers,
                     'regions' => $regions,
-                    'member' => $currentMember
+                    'member' => $currentMember,
+                    'jsFiles' => $jsFiles
                 ));
 
             }

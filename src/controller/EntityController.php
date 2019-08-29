@@ -91,6 +91,10 @@ use App\Core\View;
             $urlUpdateEntity = HOST . 'update-entity/entity/' . $entity;
             $urlDeleteEntity = HOST . 'delete-entity/entity/' . $entity;
 
+            $jsFiles = [
+                ASSETS . 'js/editEntitiesAjax.js'
+            ];
+
             $view = new View('entityManagement');
             $view->render('back', array(
                 'entities' => $entities,
@@ -101,7 +105,8 @@ use App\Core\View;
                 'urlUpdateEntity' => $urlUpdateEntity,
                 'urlDeleteEntity' => $urlDeleteEntity,
                 'isSessionValid' => ConnectionController::isSessionValid(),
-                'member' => $currentMember
+                'member' => $currentMember,
+                'jsFiles' => $jsFiles
             ));
 
         } else {

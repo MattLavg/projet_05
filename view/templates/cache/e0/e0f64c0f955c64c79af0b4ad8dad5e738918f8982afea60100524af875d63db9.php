@@ -29,6 +29,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
             'title' => [$this, 'block_title'],
             'cover' => [$this, 'block_cover'],
             'content' => [$this, 'block_content'],
+            'script' => [$this, 'block_script'],
         ];
     }
 
@@ -310,11 +311,12 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js\" integrity=\"sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp\" crossorigin=\"anonymous\"></script>
 
     <!-- SCRIPTS JS -->
-    <script src=\"";
-        // line 155
-        echo twig_escape_filter($this->env, ($context["ASSETS"] ?? null), "html", null, true);
-        echo "js/script.js\"></script>
-
+    ";
+        // line 156
+        echo "    ";
+        $this->displayBlock('script', $context, $blocks);
+        // line 157
+        echo "
 </html>
 
 
@@ -336,6 +338,11 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     {
     }
 
+    // line 156
+    public function block_script($context, array $blocks = [])
+    {
+    }
+
     public function getTemplateName()
     {
         return "front.twig";
@@ -348,7 +355,7 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
 
     public function getDebugInfo()
     {
-        return array (  335 => 111,  330 => 107,  325 => 7,  315 => 155,  305 => 148,  267 => 112,  265 => 111,  256 => 109,  253 => 108,  251 => 107,  248 => 106,  241 => 102,  235 => 101,  231 => 100,  224 => 95,  222 => 94,  216 => 90,  210 => 88,  208 => 87,  200 => 82,  197 => 81,  190 => 77,  186 => 76,  181 => 75,  176 => 73,  171 => 72,  169 => 71,  165 => 70,  161 => 69,  157 => 68,  153 => 67,  149 => 66,  145 => 65,  141 => 64,  137 => 63,  132 => 60,  130 => 59,  125 => 57,  122 => 56,  120 => 55,  115 => 53,  104 => 45,  98 => 44,  71 => 20,  65 => 17,  59 => 14,  55 => 13,  48 => 8,  46 => 7,  38 => 1,);
+        return array (  342 => 156,  337 => 111,  332 => 107,  327 => 7,  319 => 157,  316 => 156,  306 => 148,  268 => 112,  266 => 111,  257 => 109,  254 => 108,  252 => 107,  249 => 106,  242 => 102,  236 => 101,  232 => 100,  225 => 95,  223 => 94,  217 => 90,  211 => 88,  209 => 87,  201 => 82,  198 => 81,  191 => 77,  187 => 76,  182 => 75,  177 => 73,  172 => 72,  170 => 71,  166 => 70,  162 => 69,  158 => 68,  154 => 67,  150 => 66,  146 => 65,  142 => 64,  138 => 63,  133 => 60,  131 => 59,  126 => 57,  123 => 56,  121 => 55,  116 => 53,  105 => 45,  99 => 44,  72 => 20,  66 => 17,  60 => 14,  56 => 13,  49 => 8,  47 => 7,  39 => 1,);
     }
 
     public function getSourceContext()
@@ -507,7 +514,8 @@ class __TwigTemplate_ff3bc88fb1563342fbcfbd72ef4059a68ee69e019acef32491551cd67df
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js\" integrity=\"sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp\" crossorigin=\"anonymous\"></script>
 
     <!-- SCRIPTS JS -->
-    <script src=\"{{ ASSETS }}js/script.js\"></script>
+    {# <script src=\"{{ ASSETS }}js/script.js\"></script> #}
+    {% block script %}{% endblock %}
 
 </html>
 

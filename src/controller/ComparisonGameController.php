@@ -10,11 +10,6 @@ use App\Model\PlatformManager;
 use App\Model\PublisherManager;
 use App\Model\RegionManager;
 use App\Model\ReleaseDateManager;
-// use App\Model\UpdateByMemberGameManager;
-// use App\Model\UpdateByMemberDeveloperManager;
-// use App\Model\UpdateByMemberGenreManager;
-// use App\Model\UpdateByMemberModeManager;
-// use App\Model\UpdateByMemberReleaseDateManager;
 use App\Core\View;
 
 /**
@@ -66,6 +61,10 @@ use App\Core\View;
             $modesUpdatedByMember = $modeManager->getGameModes($game_id, true);
             $releasesUpdatedByMember = $releaseDateManager->getGameReleases($game_id, true);
 
+            $jsFiles = [
+                ASSETS . 'js/modal.js'
+            ];
+
             $view = new View('gameComparison');
             $view->render('comparison', array(
                 'game' => $game, 
@@ -79,7 +78,8 @@ use App\Core\View;
                 'updatedModes' => $modesUpdatedByMember,
                 'updatedReleases' => $releasesUpdatedByMember,
                 'updatedCover' => $gameUpdatedCover,
-                'member' => $currentMember
+                'member' => $currentMember,
+                'jsFiles' => $jsFiles
             ));
 
         } else {
