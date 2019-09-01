@@ -63,13 +63,20 @@
         <p>Il n'y a actuellement aucun jeu</p>
     {% endif %}
 
-    {% if errorMessage %}
-        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom" role="alert">
-            {{ errorMessage }}
+
+        <div class="alert alert-success alert-dismissible fade show actionErrorMessage fixed-bottom entityMessageSuccess" role="alert">
+            <span class="entityMessageText"></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    {% endif %}
+  
+        <div class="alert alert-danger alert-dismissible fade show actionErrorMessage fixed-bottom entityMessageError" role="alert">
+            <span class="entityMessageText"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
 
 {% endblock %}

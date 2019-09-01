@@ -159,18 +159,18 @@ use App\Core\View;
 
             $lastInsertedId = $manager->insertEntity($params);
 
-            $_SESSION['actionDone'] = 'Un nouvel élément a été ajouté.';
+            if ($lastInsertedId) {
+                $urlUpdateEntity = HOST . 'update-entity/entity/' . $entity . '/id/' . $lastInsertedId;
+                $urlDeleteEntity = HOST . 'delete-entity/entity/' . $entity . '/id/' . $lastInsertedId;
 
-            $urlUpdateEntity = HOST . 'update-entity/entity/' . $entity . '/id/' . $lastInsertedId;
-            $urlDeleteEntity = HOST . 'delete-entity/entity/' . $entity . '/id/' . $lastInsertedId;
-
-            echo json_encode(['success' => 1, 'name' => $params['name'], 'urlUpdateEntity' => $urlUpdateEntity, 'urlDeleteEntity' => $urlDeleteEntity]);
+                echo json_encode(['success' => 1, 'name' => $params['name'], 'urlUpdateEntity' => $urlUpdateEntity, 'urlDeleteEntity' => $urlDeleteEntity]);
+            } else {
+                echo json_encode(['success' => 0]);
+            }
 
         } else {
 
-            $_SESSION['errorMessage'] = 'Le champs doit être renseigné.';
-
-            echo json_encode(['success' => 0]);
+            echo json_encode(['success' => 0, 'emptyInput' => true]);
 
         }
     }
@@ -213,17 +213,17 @@ use App\Core\View;
                     break;
             }
 
-            $manager->updateEntity($params);
+            $count = $manager->updateEntity($params);
 
-            $_SESSION['actionDone'] = 'L\'élément a été mis à jour.';
-
-            echo json_encode(['success' => 1, 'name' => $params['name']]);
+            if ($count) {
+                echo json_encode(['success' => 1, 'name' => $params['name']]);
+            } else {
+                echo json_encode(['success' => 0]);
+            }
 
         } else {
 
-            $_SESSION['errorMessage'] = 'Vous ne pouvez enregistrer un champ vide.';
-
-            echo json_encode(['success' => 0]);
+            echo json_encode(['success' => 0, 'emptyInput' => true]);
 
         }
     }
@@ -267,13 +267,9 @@ use App\Core\View;
 
         if(!empty($count)) {
 
-            $_SESSION['actionDone'] = 'Un élément a été effacé.';
-
              echo json_encode(['success' => 1]);
 
         } else {
-
-            $_SESSION['errorMessage'] = 'L\'élément n\'a pu être effacé.';
 
              echo json_encode(['success' => 0]);
 

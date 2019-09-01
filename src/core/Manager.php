@@ -124,7 +124,8 @@ abstract class Manager
 
         $req->execute(array($values['name'], $values['id']));
 
-        // $count = $req->rowCount();
+        $count = $req->rowCount();
+        return $count;
 
     }
 
@@ -141,7 +142,6 @@ abstract class Manager
 
         $count = $req->rowCount();
         return $count;
-
     }
 
 }

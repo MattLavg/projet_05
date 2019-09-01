@@ -257,6 +257,16 @@ h1 {
     margin-top: 20px;
 }
 
+/* ENTITIES PAGES */
+
+.entityMessageSuccess {
+    display: none;
+}
+
+.entityMessageError {
+    display: none;
+}
+
 /* SEARCH VUE */
 
 .searchLink {

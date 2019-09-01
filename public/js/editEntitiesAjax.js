@@ -4,7 +4,15 @@ $(document).ready(function () {
     $('#addEntity').click(function(e) {
         e.preventDefault();
         // get url to add entity 
-        url = $(this).attr('data-url');        
+        url = $(this).attr('data-url');   
+        
+        // Hide success message
+        $('.entityMessageSuccess').css('display', 'none');
+        $('.entityMessageSuccess .entityMessageText').html();
+
+        // Hide error message
+        $('.entityMessageError').css('display', 'none');
+        $('.entityMessageError .entityMessageText').html();
         
         $.post(
             url,
@@ -34,11 +42,23 @@ $(document).ready(function () {
 
                     // remove the value in the input
                     $('#addEntityInput').val('');
-               }
-               else{
-                    // Failed
-                    $("#resultat").html("<p>Impossible d'ajouter un élément.</p>");
-               }
+
+                    // show success message
+                    $('.entityMessageSuccess').css('display', 'block');
+                    $('.entityMessageSuccess .entityMessageText').html('Vous avez ajouté un élément.');
+                }
+                else{
+
+                    if (data.emptyInput) {
+                        // show error message
+                        $('.entityMessageError').css('display', 'block');
+                        $('.entityMessageError .entityMessageText').html('Le champs doit être renseigné.');
+                    } else {
+                        // show error message
+                        $('.entityMessageError').css('display', 'block');
+                        $('.entityMessageError .entityMessageText').html('L\'élément n\'a pu être ajouté.');
+                    }
+                }
             },
             'json'
         );
@@ -76,6 +96,14 @@ $(document).ready(function () {
 
             // get the update entity url
             url = $(this).attr('data-url'); 
+
+            // Hide success message
+            $('.entityMessageSuccess').css('display', 'none');
+            $('.entityMessageSuccess .entityMessageText').html();
+
+            // Hide error message
+            $('.entityMessageError').css('display', 'none');
+            $('.entityMessageError .entityMessageText').html();
             
             $.post(
                 url,
@@ -92,11 +120,23 @@ $(document).ready(function () {
         
                         // remove the add form
                         $(updateBtn).parent().remove();
-                   }
-                   else{
-                        // Failed
-                        $("#resultat").html("<p>Impossible de modifier l'élément.</p>");
-                   }
+
+                        // show success message
+                        $('.entityMessageSuccess').css('display', 'block');
+                        $('.entityMessageSuccess .entityMessageText').html('Vous avez modifié un élément.');
+                    }
+                    else{
+
+                        if (data.emptyInput) {
+                            // show error message
+                            $('.entityMessageError').css('display', 'block');
+                            $('.entityMessageError .entityMessageText').html('Le champs doit être renseigné.');
+                        } else {
+                            // show error message
+                            $('.entityMessageError').css('display', 'block');
+                            $('.entityMessageError .entityMessageText').html('Impossible de modifier l\'élément');
+                        }
+                    }
                 },
                 'json'
             );
@@ -106,6 +146,9 @@ $(document).ready(function () {
 
             // get the value of row'input
             var defaultValue = $(this).data('default-value');
+
+            // hide the error message if it's on page
+            $(this).closest('main').find('.entityMessageError').css('display', 'none');
 
             // put the original value in tr
             $(this).parent().parent().html(defaultValue);
@@ -122,7 +165,15 @@ $(document).ready(function () {
     var deleteAction = function(e) {
         e.preventDefault();
         // get the delete entity url
-        url = $(this).attr('href'); 
+        url = $(this).attr('href');
+        
+        // Hide success message
+        $('.entityMessageSuccess').css('display', 'none');
+        $('.entityMessageSuccess .entityMessageText').html();
+
+        // Hide error message
+        $('.entityMessageError').css('display', 'none');
+        $('.entityMessageError .entityMessageText').html();
 
         var deleteBtn = $(this);
         
@@ -134,16 +185,25 @@ $(document).ready(function () {
                     // $("#resultat").html("<p>Vous avez supprimé l'élément.</p>");
 
                     $(deleteBtn).parent().parent().remove();
-               }
-               else{
-                    // Failed
-                    $("#resultat").html("<p>Impossible de supprimer l'élément.</p>");
-               }
+
+                    // show success message
+                    $('.entityMessageSuccess').css('display', 'block');
+                    $('.entityMessageSuccess .entityMessageText').html('Vous avez supprimé un élément.');
+                }
+                else{
+                    // show error message
+                    $('.entityMessageError').css('display', 'block');
+                    $('.entityMessageError .entityMessageText').html('Impossible de supprimer l\'élément');
+                }
             },
             'json'
-            );
+        );
     };
 
     // DELETE ENTITY AJAX
     $('.deleteEntity').click(deleteAction);
+
+    // $('.deleteEntity').click(function(e) {
+
+    // });
 });
