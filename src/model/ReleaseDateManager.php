@@ -65,6 +65,28 @@ use App\model\ReleaseDate;
     }
 
     /**
+     * Allows to count releases
+     * 
+     * @return int $totalNbRows
+     */
+    public function count($game_id, $updatedByMember = false)
+    {
+        if (!$updatedByMember) {
+            $table = 'release_dates';
+        } else {
+            $table = 'update_by_member_release_dates';
+        }
+
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(*) AS nbRows FROM '. $table .' WHERE id_game = ?');
+        $req->execute(array($game_id));
+        
+        $result = $req->fetch();
+  
+        return $totalNbRows = $result['nbRows'];
+    }
+
+    /**
      * Allows to add a releade date
      * 
      * @param int $game_id

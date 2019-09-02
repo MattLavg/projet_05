@@ -154,7 +154,7 @@
                 {% endfor %}
             </div>
 
-            <div><span class="bold">Sortie(s) :</span><br>
+            <div><span class="bold">Sortie(s) :{% if not releasesCount %}<span class="redBackground"> Dates modifiées </span>{% endif %}</span><br>
                 {% for updatedRelease in updatedReleases %} 
 
                     {% if updatedRelease.getPlatform in releasesPlatforms

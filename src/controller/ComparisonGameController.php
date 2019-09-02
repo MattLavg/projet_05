@@ -61,6 +61,16 @@ use App\Core\View;
             $modesUpdatedByMember = $modeManager->getGameModes($game_id, true);
             $releasesUpdatedByMember = $releaseDateManager->getGameReleases($game_id, true);
 
+            // get numbers of releases and updated releases
+            $nbReleases = $releaseDateManager->count($game_id);
+            $nbUpdatedReleases = $releaseDateManager->count($game_id, true);
+
+            if ($nbReleases != $nbUpdatedReleases) {
+                $releasesCount = false;
+            } else {
+                $releasesCount = true;
+            }
+
             $jsFiles = [
                 ASSETS . 'js/modal.js'
             ];
@@ -79,7 +89,8 @@ use App\Core\View;
                 'updatedReleases' => $releasesUpdatedByMember,
                 'updatedCover' => $gameUpdatedCover,
                 'member' => $currentMember,
-                'jsFiles' => $jsFiles
+                'jsFiles' => $jsFiles,
+                'releasesCount' => $releasesCount
             ));
 
         } else {
