@@ -145,7 +145,7 @@
                                     {% endfor %}
                                 </select>
                                 <input type="text" class="form-control date" value="{{ releaseDate.getReleaseDate }}" readonly>
-                                <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
+                                <input type="hidden" class="form-control altDate" name="releaseDate[0][date]" readonly>
                                 <span class="redText"></span>
                             </div>
                         {% endfor %}
@@ -273,7 +273,7 @@
                             </select>
 
                             <input type="text" class="form-control date" placeholder="Choisissez une date" readonly>
-                            <input type="text" class="form-control altDate" name="releaseDate[0][date]" readonly>
+                            <input type="hidden" class="form-control altDate" name="releaseDate[0][date]" readonly>
                             <span class="redText"></span>
                         </div>
                     </div>

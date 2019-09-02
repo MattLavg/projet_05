@@ -38,7 +38,11 @@ try
 {
 
     try {
-        $db = new \PDO('mysql:host=localhost;dbname=projet05;charset=utf8', 'root', 'root');
+        $db = new \PDO( 'mysql:host='. DB_HOST .';
+                        dbname='. DB_NAME .';
+                        charset=utf8', 
+                        DB_USER_NAME, 
+                        DB_PASSWORD);
     } catch (\Exception $e) {
         throw new MyException('Impossible de se connecter à la base de donnée.');
     }

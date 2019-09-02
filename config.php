@@ -8,6 +8,13 @@ if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
     define('HOST', 'http://' . $_SERVER['HTTP_HOST'] . '/projet_05/');
 }
 
+// Define constants for DB connection
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'projet05');
+define('DB_USER_NAME', 'root');
+define('DB_PASSWORD', 'root');
+
+
 define('ROOT', __DIR__ . DIRECTORY_SEPARATOR); // DIR is the folder where we can find the file calling the constant
 
 define('CORE', ROOT . 'src' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR);
