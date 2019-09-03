@@ -250,15 +250,6 @@ use App\Core\View;
         $gameManager->deleteGameUpdatedByMember($game_id);
 
         GameController::updateGame($updatedParams, $updateByMember = true, $updatedCoverFileExtension);
-
-        
-
-        // var_dump($updatedDevelopers);
-
-        // echo "<pre>";
-        // print_r($updatedParams);
-        // echo "</pre>";die;
-        
     }
 
     /**

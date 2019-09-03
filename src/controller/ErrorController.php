@@ -3,7 +3,6 @@
 namespace App\controller;
 
 use App\Core\View;
-// use App\Controller\ConnectionController;
 
 /**
  *  ErrorController

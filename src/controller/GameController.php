@@ -14,7 +14,6 @@ use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
 use App\model\CheckData;
-// use App\Controller\ConnectionController;
 use App\Core\View;
 
 /**
@@ -169,10 +168,6 @@ use App\Core\View;
      */
     public function showEditGame($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         if (ConnectionController::isSessionValid()) {
 
             $currentMember = null;
@@ -290,9 +285,6 @@ use App\Core\View;
      */
     public function addGame($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
 
         if (ConnectionController::isSessionValid()) {
 
@@ -439,10 +431,6 @@ use App\Core\View;
      */
     public static function updateGame($params = [], $updateByMember = null, $updatedCoverFileExtension = null)
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         if (ConnectionController::isSessionValid()) {
 
             extract($params); // Allows to extract the $id variable
@@ -469,7 +457,6 @@ use App\Core\View;
 
             // Check if releaseDates contain the expected values
             $checkData->checkReleaseDatesValues($params['releaseDate'], $game_id);
-
 
             try {
 
@@ -505,8 +492,6 @@ use App\Core\View;
                     // Update game informations (name, content, cover)
                     $gameManager->updateGame($params, $file['fileExtension'], $game_id);
                 }
-
-                
 
                 // Delete game developers before adding new ones
                 $developerManager = new DeveloperManager();
@@ -600,9 +585,6 @@ use App\Core\View;
      */
     public function deleteGameAndComments($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
         if (ConnectionController::isSessionValid()) {
 
             $gameManager = new GameManager();

@@ -20,10 +20,6 @@ use App\Model\GameManager;
      */
     public function searchGame($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         $currentMember = null;
 
         if (isset($_SESSION['currentMember'])) {

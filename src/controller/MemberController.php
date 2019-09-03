@@ -22,10 +22,6 @@ use App\Model\Pagination;
      */
     public function showInformationsMember($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";
-
         if (ConnectionController::isSessionValid()) {
 
             extract($params); // Allows to extract the $id variable
@@ -104,10 +100,6 @@ use App\Model\Pagination;
      */
     public function showMemberManagement($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";
-
         $currentMember = null;
 
         if (isset($_SESSION['currentMember'])) {
@@ -184,10 +176,6 @@ use App\Model\Pagination;
      */
     public function addMember($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";
-
         // Default SESSION['valid'] to false
         $_SESSION['valid'] = false;
 
@@ -251,8 +239,6 @@ use App\Model\Pagination;
             $view->redirect('connection');
         }
 
-        // echo debug_print_backtrace();die;
-
         $_SESSION['valid'] = true;
         
         $member = $memberManager->getMemberByMail($params['mail']);
@@ -272,10 +258,6 @@ use App\Model\Pagination;
      */
     public function updateInfosMember($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         foreach ($params as $key => &$value) {
 
             $value = trim(strip_tags($value));
@@ -336,9 +318,6 @@ use App\Model\Pagination;
      */
     public function updatePasswordMember($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
 
         foreach ($params as $key => &$value) {
 
@@ -480,10 +459,6 @@ use App\Model\Pagination;
      */
     public function askBecomingModerator($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         extract($params); // Allows to extract the $id variable
 
         $member_id = $id;

@@ -36,19 +36,9 @@ namespace App\Model;
     protected $_mail;
 
     /**
-     * @var string $_ipAddress, the IP address of a member
-     */
-    // protected $_ipAddress;
-
-    /**
      * @var string $_birthday, the birthday of a member
      */
     protected $_birthday;
-
-    /**
-     * @var string $_icon, the icon of a member
-     */
-    // protected $_icon;
 
     /**
      * @var string $_inscriptionDate, the inscription date of a member
@@ -82,10 +72,6 @@ namespace App\Model;
      */
     public function hydrate($data)
     {   
-
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";die;
         foreach ($data as $key => $value) {
 
             $method = 'set' . ucfirst($key);
@@ -149,16 +135,6 @@ namespace App\Model;
     }
 
     /**
-     * Allows to get the IP address of a member
-     * 
-     * @return string $_ipAddress
-     */
-    // public function getIpAddress()
-    // {
-    //     return $this->_ipAddress;
-    // }
-
-    /**
      * Allows to get the birthday of a member
      * 
      * @return string $_birthday
@@ -167,16 +143,6 @@ namespace App\Model;
     {
         return $this->_birthday;
     }
-
-    /**
-     * Allows to get the icon of a member
-     * 
-     * @return string $_icon
-     */
-    // public function getIcon()
-    // {
-    //     return $this->_icon;
-    // }
 
     /**
      * Allows to get the inscription date of a member
@@ -281,16 +247,6 @@ namespace App\Model;
     }
 
     /**
-     * Allows to set the IP address of a member
-     * 
-     * @param string $_ipAddress
-     */
-    // public function setIpAddress(string $ipAdress)
-    // {
-    //     $this->_ipAddress = $ipAdress;
-    // }
-
-    /**
      * Allows to set the birthday of a member
      * 
      * @param string $_birthday
@@ -299,16 +255,6 @@ namespace App\Model;
     {
         $this->_birthday = $birthday;
     }
-
-    /**
-     * Allows to set the icon of a member
-     * 
-     * @param string $_icon
-     */
-    // public function setIcon(string $icon)
-    // {
-    //     $this->_icon = $icon;
-    // }
 
     /**
      * Allows to set the inscription date of a member

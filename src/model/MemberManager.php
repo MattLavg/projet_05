@@ -61,40 +61,6 @@ use App\Model\Member;
 
     }
 
-    // /**
-    //  * Get all the members from a table
-    //  * 
-    //  * @return array $array
-    //  */
-    // public function getAllMembers($order, $desc, $firstEntry = 0, $nbElementsByPage, $displayedMembers)
-    // {
-    //     $class = $this->_class;
-
-    //     if ($displayedMembers == 'members') {
-    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
-    //     } else if ($displayedMembers == 'moderators') {
-    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
-    //     } else {
-    //         $req = $this->_db->query('SELECT * FROM ' . $this->_table . ' WHERE id_type = 3 OR id_type = 2 ORDER BY ' . $order . $desc . ' LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
-    //     }
-
-    //     $array = [];
-
-    //     if ($req) {
-
-    //         while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
-
-    //             $object = new $class();
-    //             $object->hydrate($data);
-    
-    //             $array[] = $object;
-    
-    //         }
-    //     }
-
-    //     return $array;
-    // }
-
     /**
      * Allows to count member without the Admin
      * 
@@ -149,30 +115,6 @@ use App\Model\Member;
      * 
      * @param array $values
      */
-//     public function addMember($values, $cryptedPassword)
-//     {
-//         $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, password, id_type) VALUES(?, ?, NOW(), ?, ?)');
-//         $req->execute(array(
-//             $values['nickName'],
-//             $values['mail'],
-//             $cryptedPassword,
-//             3
-//         ));
-
-//         $count = $req->rowCount();
-
-// var_dump($this->_db->lastInsertId());die;
-//         if (!empty($count)) {
-//             $id = $this->_db->lastInsertId();
-//             return $id;
-//         }
-//     }
-
-    /**
-     * Allows to add a member
-     * 
-     * @param array $values
-     */
     public function addMember($values, $cryptedPassword)
     {
         $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, last_connection_date, password, id_type) VALUES(?, ?, NOW(), NOW(), ?, ?)');
@@ -189,31 +131,6 @@ use App\Model\Member;
             $id = $this->_db->lastInsertId();
             return $id;
         }
-
-        // try {
-
-        //     $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
-        //     $req = $this->_db->prepare('INSERT INTO ' . $this->_table . ' (nick_name, mail, inscription_date, last_connection_date, password, id_type) VALUES(?, ?, NOW(), NOW(), ?, ?)');
-        //     $req->execute(array(
-        //         $values['nickName'],
-        //         $values['mail'],
-        //         $cryptedPassword,
-        //         3
-        //     ));
-
-        //     $count = $req->rowCount();
-
-        //     if (!empty($count)) {
-        //         $id = $this->_db->lastInsertId();
-        //         return $id;
-        //     }
-
-        // } catch (\PDOException $e) {
-
-        //     throw new \Exception($e->getMessage());
-        // }
-
     }
 
     /**

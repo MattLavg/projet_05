@@ -2,8 +2,6 @@
 
 namespace App\Core;
 
-
-
 /**
  *  View
  * 
@@ -40,13 +38,6 @@ class View
      */
     public function render($template, $params = [])
     {
-        // foreach ($params as $name => $value) {
-        //     ${name} = $value;
-
-        // extract($params); 
-        // Allows to extract variables from array's keys
-        // Ex : from HomeController, allows to extract variables $games, $pagination, $isSessionValid, $actionDone
-
         $this->_template = $template;
 
         $view = $this->_view;
@@ -84,10 +75,6 @@ class View
         $params['IMAGE'] = IMAGE;
         $params['errorMessage'] = $errorMessage;
         $params['actionDone'] = $actionDone;
-
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
     
         echo $twig->render($view . '.twig', $params);
 

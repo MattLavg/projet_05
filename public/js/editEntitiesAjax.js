@@ -21,8 +21,6 @@ $(document).ready(function () {
             },
             function(data){
                 if(data.success){
-                    // Success
-                    // $("#resultat").html("<p>Un élément a été ajouté.</p>");
 
                     // create a row
                     var ligne = '<tr>' +
@@ -112,8 +110,6 @@ $(document).ready(function () {
                 },
                 function(data){
                     if(data.success){
-                        // Success
-                        // $("#resultat").html("<p>Vous avez modifié l'élément.</p>");
     
                         // add the modified name in the td
                         $(updateBtn).parent().parent().prepend(data.name);
@@ -164,46 +160,46 @@ $(document).ready(function () {
     // put the delete action in variable
     var deleteAction = function(e) {
         e.preventDefault();
-        // get the delete entity url
-        url = $(this).attr('href');
-        
-        // Hide success message
-        $('.entityMessageSuccess').css('display', 'none');
-        $('.entityMessageSuccess .entityMessageText').html();
 
-        // Hide error message
-        $('.entityMessageError').css('display', 'none');
-        $('.entityMessageError .entityMessageText').html();
+        var res = confirm("Souhaitez-vous effacer la ligne ?")
 
-        var deleteBtn = $(this);
-        
-        $.post(
-            url,
-            function(data){
-                if(data.success){
-                    // Success
-                    // $("#resultat").html("<p>Vous avez supprimé l'élément.</p>");
+        if (res) {
+            // get the delete entity url
+            url = $(this).attr('href');
+            
+            // Hide success message
+            $('.entityMessageSuccess').css('display', 'none');
+            $('.entityMessageSuccess .entityMessageText').html();
 
-                    $(deleteBtn).parent().parent().remove();
+            // Hide error message
+            $('.entityMessageError').css('display', 'none');
+            $('.entityMessageError .entityMessageText').html();
 
-                    // show success message
-                    $('.entityMessageSuccess').css('display', 'block');
-                    $('.entityMessageSuccess .entityMessageText').html('Vous avez supprimé un élément.');
-                }
-                else{
-                    // show error message
-                    $('.entityMessageError').css('display', 'block');
-                    $('.entityMessageError .entityMessageText').html('Impossible de supprimer l\'élément');
-                }
-            },
-            'json'
-        );
+            var deleteBtn = $(this);
+            
+            $.post(
+                url,
+                function(data){
+                    if(data.success){
+
+                        $(deleteBtn).parent().parent().remove();
+
+                        // show success message
+                        $('.entityMessageSuccess').css('display', 'block');
+                        $('.entityMessageSuccess .entityMessageText').html('Vous avez supprimé un élément.');
+                    }
+                    else{
+                        // show error message
+                        $('.entityMessageError').css('display', 'block');
+                        $('.entityMessageError .entityMessageText').html('Impossible de supprimer l\'élément');
+                    }
+                },
+                'json'
+            );
+        }
     };
 
     // DELETE ENTITY AJAX
     $('.deleteEntity').click(deleteAction);
 
-    // $('.deleteEntity').click(function(e) {
-
-    // });
 });

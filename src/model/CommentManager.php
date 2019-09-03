@@ -110,7 +110,6 @@ class CommentManager extends Manager
     public function listReportedComments($firstEntry = 0, $nbElementsByPage)
     {
         $db = $this->dbConnect();
-        // $req = $db->query('SELECT id, post_id, author, content, reported, DATE_FORMAT(creationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS creationDate FROM comments WHERE reported = 1 ORDER BY comments.creationDate DESC LIMIT ' . $firstEntry . ',' . $nbElementsByPage);
 
         $req = $db->query(
             'SELECT
@@ -158,10 +157,6 @@ class CommentManager extends Manager
      */
     public function addComment($values)
     {
-        // echo "<pre>";
-        // print_r($values);
-        // echo "</pre>";die;
-
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO comments (id_member, id_game, content, creation_date) VALUES(?, ?, ?, NOW())');
 

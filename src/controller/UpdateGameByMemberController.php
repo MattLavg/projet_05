@@ -13,7 +13,6 @@ use App\Model\ReleaseDateManager;
 use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
-// use App\Controller\ConnectionController;
 use App\Core\View;
 use App\Model\CheckData;
 
@@ -32,10 +31,6 @@ use App\Model\CheckData;
      */
     public function updateGameByMember($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         if (ConnectionController::isSessionValid()) {
 
             extract($params); // Allows to extract the $id variable
@@ -63,7 +58,6 @@ use App\Model\CheckData;
             // Check if releaseDates contain the expected values
             $checkData->checkReleaseDatesValues($params['releaseDate'], $game_id);
             
-
             try {
 
                 $db = Registry::getDb();
@@ -77,7 +71,6 @@ use App\Model\CheckData;
                     throw new \Exception('Impossible de modifier le statut du jeu en indiquant la modification par un membre.');
                 } 
                 
-
                 // Add game informations (name, content, cover) in "temporary" table
                 // waiting for validation to be updated on the original table
                 $updatedGame = $gameManager->addGameByMember($params, $file['fileExtension']);

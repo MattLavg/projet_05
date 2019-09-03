@@ -54,34 +54,6 @@ use App\Model\Game;
         return $game;
     }
 
-    // /**
-    //  * Allows to get games to validate
-    //  * 
-    //  * @param int $id
-    //  * @return object PDOStatement
-    //  */
-    // public function getGamesToValidate()
-    // { 
-    //     $db = $this->dbConnect();
-    //     $req = $db->query('SELECT * FROM games WHERE to_validate = 1');
-
-    //     $array = [];
-
-    //     if ($req) {
-
-    //         while ($data = $req->fetch(\PDO::FETCH_ASSOC)) {
-
-    //             $object = new $this->_class();
-    //             $object->hydrate($data);
-    
-    //             $array[] = $object;
-    
-    //         }
-    //     }
-
-    //     return $array;
-    // }
-
     /**
      * Get searched game
      * 

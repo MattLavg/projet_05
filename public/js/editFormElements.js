@@ -36,7 +36,7 @@ $(document).ready(function () {
 
         // if cross with cross-cancel-game-update class exists
         if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update')) {
-            // console.log('pliiiiip');
+ 
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update').css('display', 'block');
             // apply the delete function to the new cross icon on form game update
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel-game-update').click(deleteEntityList);
@@ -45,7 +45,7 @@ $(document).ready(function () {
         
         // if cross with cross-cancel class exists
         if ($(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel')) {
-// console.log('plop');
+
             // display cross
             $(this).parent().find('.bloc-entity-game-edit:last').find('.cross-cancel').css('display', 'block');
             // apply the delete function to the new cross icon
@@ -113,7 +113,6 @@ $(document).ready(function () {
 
     $('#addReleaseDateForm').click(function(e) {
         nbList++;
-        // nbDatepicker++;
 
         // get the bloc where list of entities are duplicated
         var blocEntityList = $(this).parent().find('.entity-group-game-edit');
@@ -152,7 +151,6 @@ $(document).ready(function () {
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeAttr('id');
         $(this).parent().find('.bloc-entity-game-edit:last').find('.date').removeClass('hasDatepicker');
 
-        // $(this).parent().find('.bloc-entity-game-edit:last').find('.date').attr('id', 'datepicker' + nbList);
         $(this).parent().find('.bloc-entity-game-edit:last').find('.altDate').attr('name', 'releaseDate[' + nbList + '][date]');
         
 

@@ -23,11 +23,6 @@ abstract class Manager
     */
     protected $_class;
 
-    // /**
-    //  * @var string $_column
-    // */
-    // protected $_column = '*';
-
     /**
      * @var string $_db
     */
