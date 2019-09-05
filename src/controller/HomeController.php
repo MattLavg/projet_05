@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Model\GameManager;
 use App\Model\Pagination;
 use App\Core\View;
-use App\Controller\ConnectionController;
+
 
 /**
  * HomeController

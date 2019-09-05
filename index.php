@@ -1,7 +1,7 @@
 <?php
 
 use App\Core\Routeur;
-use App\core\Registry;
+use App\Core\Registry;
 use App\Core\MyException;
 
 require_once 'vendor/autoload.php';

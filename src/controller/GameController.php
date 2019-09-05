@@ -13,7 +13,7 @@ use App\Model\ReleaseDateManager;
 use App\Core\Registry;
 use App\Model\CommentManager;
 use App\Model\Pagination;
-use App\model\CheckData;
+use App\Model\CheckData;
 use App\Core\View;
 
 /**
@@ -265,8 +265,7 @@ use App\Core\View;
                     'regions' => $regions,
                     'member' => $currentMember,
                     'jsFiles' => $jsFiles
-                ));
-
+                ));    
             }
 
         } else {

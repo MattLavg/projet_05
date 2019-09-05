@@ -1,10 +1,10 @@
 <?php
 
-namespace App\model;
+namespace App\Model;
 
 use App\Core\Manager;
 use App\Core\View;
-use App\model\ReleaseDate;
+use App\Model\ReleaseDate;
 
 /**
  *  ReleaseDateManager
