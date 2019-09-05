@@ -19,12 +19,20 @@ class ErrorController
 
         $view = new View('error');
 
-        if (!ConnectionController::isSessionValid()) {
-            $view->render('front');
+        if (ConnectionController::isSessionValid()) {
+
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
+
+            $view->render('front', array(
+                'connected' => ConnectionController::isSessionValid(),
+                'member' => $currentMember
+            ));
         } else {
-            $view->render('back');
+            $view->render('front');
         }
-
     }
-
 }

@@ -625,8 +625,13 @@ use App\Core\View;
                 $view->redirect('added-game-member');
             }
 
+            if (isset($params['page']) && $params['page'] == 'game-management') {
+                $view = new View();
+                $view->redirect('game-management');
+            }
+
             $view = new View();
-            $view->redirect('game-management');
+            $view->redirect('home');
 
         } else {
 

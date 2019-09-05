@@ -21,10 +21,6 @@ class CommentController
      */
     public function addComment($params = [])
     {
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         $params['content'] = trim(strip_tags($params['content']));
 
         if (!empty($params['game-id']) && !empty($params['member-id']) && !empty($params['content'])) {
@@ -55,10 +51,6 @@ class CommentController
      */
     public function deleteComment($params)
     { 
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";die;
-
         $commentManager = new CommentManager();
         $commentManager->deleteComment($params['id']);
 
@@ -158,12 +150,17 @@ class CommentController
                 $renderPagination = true;
             }
 
+            $jsFiles = [
+                ASSETS . 'js/modal.js'
+            ];
+
             $view = new View('reportedComments');
             $view->render('back', array(
                 'comments' => $reportedComments, 
                 'pagination' => $pagination,
                 'renderPagination' => $renderPagination,
-                'member' => $currentMember
+                'member' => $currentMember,
+                'jsFiles' => $jsFiles
             ));
 
         } else {

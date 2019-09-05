@@ -66,10 +66,14 @@ use App\Model\Member;
      * 
      * @return int $totalNbRows
      */
-    public function count()
+    public function count($where)
     {
+        if (empty($where)) {
+            $where = ' WHERE NOT id_type = 1';
+        }
+
         $db = $this->dbConnect();
-        $req = $db->query('SELECT COUNT(*) AS nbRows FROM members WHERE NOT id_type = 1');
+        $req = $db->query('SELECT COUNT(*) AS nbRows FROM members' . $where);
         $result = $req->fetch();
 
         return $totalNbRows = $result['nbRows'];

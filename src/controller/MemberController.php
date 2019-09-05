@@ -100,73 +100,90 @@ use App\Model\Pagination;
      */
     public function showMemberManagement($params = [])
     {
-        $currentMember = null;
+        if (ConnectionController::isSessionValid()) {
 
-        if (isset($_SESSION['currentMember'])) {
-            $currentMember = $_SESSION['currentMember'];
-        }
+            $currentMember = null;
 
-        // Members can not access the member management page
-        if ($currentMember->getId_type() != 1) {
-            $_SESSION['errorMessage'] = 'Vous n\'avez pas les droits pour accéder à cette page.';
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
+
+            // Members can't access the member management page
+            if ($currentMember->getId_type() != 1) {
+                $_SESSION['errorMessage'] = 'Vous n\'avez pas les droits pour accéder à cette page.';
+
+                $view = new View();
+                $view->redirect('home');
+            }
+
+            $pageNb = 1;
+
+            if (isset($params['pageNb'])) {
+                $pageNb = $params['pageNb'];
+            }
+
+            $memberManager = new MemberManager();
+
+            // type of member displayed, all by default
+            $displayedMembers = ' WHERE id_type = 3 OR id_type = 2';
+
+            // if no members selected, count to null by default
+            $displayedMembersForCount = null;
+
+            if (isset($params['displayedMembers'])) {
+                if ($params['displayedMembers'] == 'members') {
+                    $displayedMembers = ' WHERE id_type = 3';
+                    $displayedMembersForCount = ' WHERE NOT id_type = 1 AND NOT id_type = 2';
+                } else if ($params['displayedMembers'] == 'moderators') {
+                    $displayedMembers = ' WHERE id_type = 2';
+                    $displayedMembersForCount = ' WHERE NOT id_type = 1 AND NOT id_type = 3';
+                }
+
+                $_SESSION['displayedMembers'] = $displayedMembers;
+            }
+
+            $totalNbRows = $memberManager->count($displayedMembersForCount);
+            $url = HOST . 'member-management';
+
+            $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
+
+            // if descendant order wanted, set 'DESC' 
+            // if not set ''
+            $desc = '';
+
+            // set the name of element you want the list ordered by 
+            $orderBy = 'nick_name';
+
+            $members = $memberManager->getAll(' ORDER BY nick_name', ' ', 'LIMIT ' . $pagination->getFirstEntry() . ',', $pagination->getElementNbByPage(), $displayedMembers);
+
+            $renderPagination = false;
+
+            if ($pagination->getEnoughEntries()) {
+                $renderPagination = true;
+            }
+
+            $jsFiles = [
+                ASSETS . 'js/modal.js'
+            ];
+
+            $view = new View('memberManagement');
+            $view->render('back', array(
+                'members' => $members,
+                'pagination' => $pagination,
+                'renderPagination' => $renderPagination,
+                'isSessionValid' => ConnectionController::isSessionValid(),
+                'member' => $currentMember,
+                'jsFiles' => $jsFiles
+            ));
+
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
 
             $view = new View();
-            $view->redirect('home');
+            $view->redirect('connection');
         }
-
-        $pageNb = 1;
-
-        if (isset($params['pageNb'])) {
-            $pageNb = $params['pageNb'];
-        }
-
-        $memberManager = new MemberManager();
-
-        $totalNbRows = $memberManager->count();
-        $url = HOST . 'member-management';
-
-        $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
-
-        // if descendant order wanted, set 'DESC' 
-        // if not set ''
-        $desc = '';
-
-        // set the name of element you want the list ordered by 
-        $orderBy = 'nick_name';
-
-        // type of member displayed, all by default
-        $displayedMembers = ' WHERE id_type = 3 OR id_type = 2';
-
-        if (isset($params['displayedMembers'])) {
-            if ($params['displayedMembers'] == 'members') {
-                $displayedMembers = ' WHERE id_type = 3';
-            } else if ($params['displayedMembers'] == 'moderators') {
-                $displayedMembers = ' WHERE id_type = 2';
-            }
-        }
-
-        $members = $memberManager->getAll(' ORDER BY nick_name', ' ', 'LIMIT ' . $pagination->getFirstEntry() . ',', $pagination->getElementNbByPage(), $displayedMembers);
-
-        $renderPagination = false;
-
-        if ($pagination->getEnoughEntries()) {
-            $renderPagination = true;
-        }
-
-        $jsFiles = [
-            ASSETS . 'js/modal.js'
-        ];
-
-        $view = new View('memberManagement');
-        $view->render('back', array(
-            'members' => $members,
-            'pagination' => $pagination,
-            'renderPagination' => $renderPagination,
-            'isSessionValid' => ConnectionController::isSessionValid(),
-            'member' => $currentMember,
-            'jsFiles' => $jsFiles
-        ));
-
     }
 
     /**
