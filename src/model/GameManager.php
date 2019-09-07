@@ -82,6 +82,20 @@ use App\Model\Game;
     }
 
     /**
+     * Allows to get all games id
+     * 
+     * @return array $result
+     */
+    public function getGamesId()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT id FROM games');
+        $result = $req->fetchAll(\PDO::FETCH_COLUMN);
+
+        return $result;
+    }
+
+    /**
      * Allows to count games
      * 
      * @return int $totalNbRows

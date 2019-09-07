@@ -15,6 +15,7 @@ use App\Model\CommentManager;
 use App\Model\Pagination;
 use App\Model\CheckData;
 use App\Core\View;
+use App\Core\MyException;
 
 /**
  *  GameController
@@ -46,6 +47,13 @@ use App\Core\View;
         $genreManager = new GenreManager();
         $modeManager = new ModeManager();
         $releaseDateManager = new ReleaseDateManager();
+
+        // Get all games id
+        $allGamesId = $gameManager->getGamesId();
+        // Check if the game id exists
+        if (!in_array($game_id, $allGamesId)) {
+            throw new MyException('La page du jeu demandé n\'existe pas.');
+        }
 
         $game = $gameManager->getGame($game_id);
         $developers = $developerManager->getGameDevelopers($game_id);
@@ -177,13 +185,21 @@ use App\Core\View;
             }
 
             if (isset($params['id'])) {
-
+                
                 extract($params); // Allows to extract the $id variable
 
                 $game_id = $id;
 
-                // get the game
                 $gameManager = new GameManager();
+
+                // Get all games id
+                $allGamesId = $gameManager->getGamesId();
+                // Check if the game id exists
+                if (!in_array($game_id, $allGamesId)) {
+                    throw new MyException('La page du jeu demandé n\'existe pas.');
+                }
+               
+                // get the game
                 $game = $gameManager->getGame($game_id);
 
                 // get the game developers and all developers for list
