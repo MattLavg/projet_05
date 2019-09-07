@@ -430,6 +430,9 @@ use App\Model\Pagination;
         if (isset($params['page']) && $params['page'] == 'requestsModerators') {
             $view = new View();
             $view->redirect('requests-moderators');
+        } elseif (isset($params['page']) && $params['page'] == 'memberInfos') {
+            $view = new View();
+            $view->redirect('infos-member/id/' . $member_id);
         } else {
             $view = new View();
             $view->redirect('member-management');
@@ -471,7 +474,7 @@ use App\Model\Pagination;
     }
 
     /**
-     * Allows to set the 'becoming moderator' column on true in a member
+     * Allows to set the 'becoming moderator' column on true for a member
      */
     public function askBecomingModerator($params = [])
     {
@@ -479,6 +482,7 @@ use App\Model\Pagination;
 
         $member_id = $id;
 
+        // check if member cancels his request
         if (isset($params['moderatorAsk']) && $params['moderatorAsk'] == 'cancel') {
 
             $cancelModeratorAsk = true;
@@ -487,20 +491,20 @@ use App\Model\Pagination;
             $askedBecomingModerator = $memberManager->updateBecomingModerator($member_id, $cancelModeratorAsk);
 
             if (!$askedBecomingModerator) {
-                throw new \Exception('Impossible d\'annuler la demande.');
+                $_SESSION['errorMessage'] = 'Impossible d\'annuler la demande.';
+            } else {
+                $_SESSION['actionDone'] = 'La demande d\'annulation a bien été prise en compte.';
             }
-
-            $_SESSION['actionDone'] = 'La demande d\'annulation a bien été prise en compte.';
 
         } else {
             $memberManager = new MemberManager();
             $askedBecomingModerator = $memberManager->updateBecomingModerator($member_id);
 
             if (!$askedBecomingModerator) {
-                throw new \Exception('Impossible de faire la demande.');
+                $_SESSION['errorMessage'] = 'Impossible de faire la demande.';
+            } else {
+                $_SESSION['actionDone'] = 'La demande a bien été prise en compte.';
             }
-    
-            $_SESSION['actionDone'] = 'La demande a bien été prise en compte.';
         }
 
         $view = new View();
@@ -567,10 +571,10 @@ use App\Model\Pagination;
         $result = $memberManager->updateBecomingModerator($member_id, $cancelModeratorAsk);
 
         if (!$result) {
-            throw new \Exception('Impossible d\'annuler la demande.');
+            $_SESSION['errorMessage'] = 'Impossible d\'annuler la demande.';
+        } else {
+            $_SESSION['actionDone'] = 'La demande de refus a bien été prise en compte.';
         }
-
-        $_SESSION['actionDone'] = 'La demande de refus a bien été prise en compte.';
 
         $view = new View();
         $view->redirect('requests-moderators');

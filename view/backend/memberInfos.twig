@@ -70,6 +70,17 @@
             <a href="{{ HOST }}ask-becoming-moderator/id/{{ member.getId }}"><button type="button" class="btn btn-secondary">Je souhaite devenir modérateur</button></a>
         {% endif %}
         <hr>
+    
+    {% elseif member.getId_type == 2 %}
+
+    <h4>Annuler votre statut de modérateur</h4>
+
+        <hr>
+        <p>Si vous ne souhaitez plus être modérateur, vous pouvez nous l'indiquer en cliquant sur le bouton ci-dessous.</p>
+
+        <a href="{{ HOST }}update-status-member/id/{{ member.getId }}/page/memberInfos" id="updateStatusMember"><button type="button" class="btn btn-danger">Ne plus être modérateur</button></a>
+
+        <hr>
 
     {% endif %}
 
