@@ -186,6 +186,61 @@ use App\Model\Pagination;
     }
 
     /**
+     * Allows to show members request to be moderator
+     */
+    public function showRequestsToBeModerator($params = [])
+    {
+        if (ConnectionController::isConnected()) {
+
+            $currentMember = null;
+
+            if (isset($_SESSION['currentMember'])) {
+                $currentMember = $_SESSION['currentMember'];
+            }
+
+            $pageNb = 1;
+
+            if (isset($params['pageNb'])) {
+                $pageNb = $params['pageNb'];
+            }
+
+            $memberManager = new MemberManager();
+
+            $totalNbRows = $memberManager->countMembersRequestingToBeModerator();
+            $url = HOST . 'requests-moderators';
+
+            $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
+
+            $membersRequests = $memberManager->getMembersRequestingToBeModerator($pagination->getFirstEntry(), $pagination->getElementNbByPage());
+
+            if (!$membersRequests) {
+                throw new \Exception('Impossible de récupérer les membres souhaitant être modérateurs.');
+            }
+
+            $renderPagination = false;
+
+            if ($pagination->getEnoughEntries()) {
+                $renderPagination = true;
+            }
+
+            $view = new View('requestsModerators');
+            $view->render('back', array(
+                'membersRequests' => $membersRequests,
+                'pagination' => $pagination,
+                'renderPagination' => $renderPagination,
+                'member' => $currentMember
+            ));
+
+        } else {
+
+            $_SESSION['errorMessage'] = 'Vous ne pouvez accéder à cette page, veuillez vous connecter.';
+
+            $view = new View();
+            $view->redirect('connection');
+        }
+    }
+
+    /**
      * Allows to add a member
      * 
      * @param array $params
@@ -511,50 +566,7 @@ use App\Model\Pagination;
         $view->redirect('infos-member/id/' . $member_id);
     }
 
-    /**
-     * Allows to show members request to be moderator
-     */
-    public function showRequestsToBeModerator($params = [])
-    {
-        $currentMember = null;
-
-        if (isset($_SESSION['currentMember'])) {
-            $currentMember = $_SESSION['currentMember'];
-        }
-
-        $pageNb = 1;
-
-        if (isset($params['pageNb'])) {
-            $pageNb = $params['pageNb'];
-        }
-
-        $memberManager = new MemberManager();
-
-        $totalNbRows = $memberManager->countMembersRequestingToBeModerator();
-        $url = HOST . 'requests-moderators';
-
-        $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
-
-        $membersRequests = $memberManager->getMembersRequestingToBeModerator($pagination->getFirstEntry(), $pagination->getElementNbByPage());
-
-        if (!$membersRequests) {
-            throw new \Exception('Impossible de récupérer les membres souhaitant être modérateurs.');
-        }
-
-        $renderPagination = false;
-
-        if ($pagination->getEnoughEntries()) {
-            $renderPagination = true;
-        }
-
-        $view = new View('requestsModerators');
-        $view->render('back', array(
-            'membersRequests' => $membersRequests,
-            'pagination' => $pagination,
-            'renderPagination' => $renderPagination,
-            'member' => $currentMember
-        ));
-    }
+    
 
     /**
      * Allows to cancel becoming moderator's ask
