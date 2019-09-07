@@ -22,7 +22,7 @@ use App\Model\Pagination;
      */
     public function showInformationsMember($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             extract($params); // Allows to extract the $id variable
 
@@ -41,7 +41,7 @@ use App\Model\Pagination;
             $view = new View('memberInfos');
             $view->render('back', array(
                 'member' => $member,
-                'connected' => ConnectionController::isSessionValid(),
+                'connected' => ConnectionController::isConnected(),
                 'jsFiles' => $jsFiles
             ));
 
@@ -62,7 +62,7 @@ use App\Model\Pagination;
      */
     public function showEditMember($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             extract($params); // Allows to extract the $id variable
 
@@ -79,7 +79,7 @@ use App\Model\Pagination;
             $view = new View('memberEdit');
             $view->render('back', array(
                 'member' => $member,
-                'connected' => ConnectionController::isSessionValid(),
+                'connected' => ConnectionController::isConnected(),
                 'jsFiles' => $jsFiles
             ));
 
@@ -100,7 +100,7 @@ use App\Model\Pagination;
      */
     public function showMemberManagement($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $currentMember = null;
 
@@ -171,7 +171,6 @@ use App\Model\Pagination;
                 'members' => $members,
                 'pagination' => $pagination,
                 'renderPagination' => $renderPagination,
-                'isSessionValid' => ConnectionController::isSessionValid(),
                 'member' => $currentMember,
                 'jsFiles' => $jsFiles
             ));
@@ -194,7 +193,7 @@ use App\Model\Pagination;
     public function addMember($params = [])
     {
         // Default SESSION['valid'] to false
-        $_SESSION['valid'] = false;
+        $_SESSION['connected'] = false;
 
         array_walk($params, function(&$item, $key) {
 
@@ -230,7 +229,7 @@ use App\Model\Pagination;
         
         if ($mailResult) {
             
-            $_SESSION['errorMessage'] = 'Le mail existe déjà.';
+            $_SESSION['errorMessage'] = 'L\'adresse mail existe déjà.';
 
             $view = new View();
             $view->redirect('connection');
@@ -256,7 +255,7 @@ use App\Model\Pagination;
             $view->redirect('connection');
         }
 
-        $_SESSION['valid'] = true;
+        $_SESSION['connected'] = true;
         
         $member = $memberManager->getMemberByMail($params['mail']);
 
@@ -464,7 +463,7 @@ use App\Model\Pagination;
 
         $_SESSION['actionDone'] = 'Votre compte a bien été supprimé.';
 
-        unset($_SESSION['valid']);
+        unset($_SESSION['connected']);
         unset($_SESSION['currentMember']);
 
         $view = new View();
@@ -549,7 +548,6 @@ use App\Model\Pagination;
             'membersRequests' => $membersRequests,
             'pagination' => $pagination,
             'renderPagination' => $renderPagination,
-            'isSessionValid' => ConnectionController::isSessionValid(),
             'member' => $currentMember
         ));
     }

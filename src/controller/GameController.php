@@ -93,7 +93,7 @@ use App\Core\MyException;
             'genres' => $genres,
             'modes' => $modes,
             'releases' => $releaseDates,
-            'connected' => ConnectionController::isSessionValid(),
+            'connected' => ConnectionController::isConnected(),
             'member' => $currentMember,
             'pagination' => $pagination,
             'renderPagination' => $renderPagination,
@@ -110,7 +110,7 @@ use App\Core\MyException;
      */
     public function showGamesManagement($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $pageNb = 1;
 
@@ -155,7 +155,6 @@ use App\Core\MyException;
                 'games' => $games,
                 'pagination' => $pagination,
                 'renderPagination' => $renderPagination,
-                'isSessionValid' => ConnectionController::isSessionValid(),
                 'member' => $currentMember,
                 'jsFiles' => $jsFiles
             ));
@@ -176,7 +175,7 @@ use App\Core\MyException;
      */
     public function showEditGame($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $currentMember = null;
 
@@ -301,7 +300,7 @@ use App\Core\MyException;
     public function addGame($params = [])
     {
 
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             // Check if data is not null
             // return a modified array
@@ -446,7 +445,7 @@ use App\Core\MyException;
      */
     public static function updateGame($params = [], $updateByMember = null, $updatedCoverFileExtension = null)
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             extract($params); // Allows to extract the $id variable
 
@@ -600,7 +599,7 @@ use App\Core\MyException;
      */
     public function deleteGameAndComments($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $gameManager = new GameManager();
             $developerManager = new DeveloperManager();

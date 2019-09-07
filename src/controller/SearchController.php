@@ -50,6 +50,7 @@ use App\Model\GameManager;
             $view->render('front', array(
                 'games' => $foundGames,
                 'searchedGame' => $params['game'],
+                'connected' => ConnectionController::isConnected(),
                 'member' => $currentMember
             ));
 
@@ -58,6 +59,7 @@ use App\Model\GameManager;
             $view = new View('search');
             $view->render('front', array(
                 'searchedGame' => $params['game'],
+                'connected' => ConnectionController::isConnected(),
                 'member' => $currentMember
             ));
         }

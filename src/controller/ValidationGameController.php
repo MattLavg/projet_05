@@ -24,7 +24,7 @@ use App\Core\View;
      */
     public function showAddedGamesValidation($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $currentMember = null;
 
@@ -81,7 +81,7 @@ use App\Core\View;
      */
     public function showUpdatedGamesValidation($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $currentMember = null;
 

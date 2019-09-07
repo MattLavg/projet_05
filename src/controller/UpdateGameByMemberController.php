@@ -31,7 +31,7 @@ use App\Model\CheckData;
      */
     public function updateGameByMember($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             extract($params); // Allows to extract the $id variable
 

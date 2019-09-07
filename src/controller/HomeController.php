@@ -61,7 +61,7 @@ class HomeController
             'games' => $games,
             'pagination' => $pagination,
             'renderPagination' => $renderPagination,
-            'connected' => ConnectionController::isSessionValid(),
+            'connected' => ConnectionController::isConnected(),
             'member' => $currentMember));
 
     }

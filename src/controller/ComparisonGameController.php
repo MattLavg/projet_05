@@ -25,7 +25,7 @@ use App\Core\View;
      */
     public function showOriginalAndUpdatedGame($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $currentMember = null;
 

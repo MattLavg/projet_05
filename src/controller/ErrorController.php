@@ -19,7 +19,7 @@ class ErrorController
 
         $view = new View('error');
 
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $currentMember = null;
 
@@ -28,7 +28,7 @@ class ErrorController
             }
 
             $view->render('front', array(
-                'connected' => ConnectionController::isSessionValid(),
+                'connected' => ConnectionController::isConnected(),
                 'member' => $currentMember
             ));
         } else {

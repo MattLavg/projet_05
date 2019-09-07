@@ -19,15 +19,21 @@ class ConnectionController
      */
     public function showConnection()
     {
-        if ($this->isSessionValid()) {
+        if ($this->isConnected()) {
 
             $view = new View();
             $view->redirect('home');
 
         } else {
 
+            $jsFiles = [
+                ASSETS . 'js/checkForm.js'
+            ];
+
             $view = new View('connection');
-            $view->render('front');
+            $view->render('front', array(
+                'jsFiles' => $jsFiles
+            ));
         }
     }
 
@@ -39,7 +45,7 @@ class ConnectionController
     public function loginCheck($params)
     {
         // Default SESSION['valid'] to false
-        $_SESSION['valid'] = false;
+        $_SESSION['connected'] = false;
 
         if (isset($params['mail']) && isset($params['password']) && !empty($params['mail']) && !empty($params['password'])) {
 
@@ -48,7 +54,7 @@ class ConnectionController
   
             if ($params['mail'] == $authentication['mail'] && password_verify($params['password'], $authentication['password'])) {
             
-                $_SESSION['valid'] = true;
+                $_SESSION['connected'] = true;
 
                 $memberManager = new MemberManager();
                 $member = $memberManager->getMemberByMail($params['mail']);
@@ -87,7 +93,7 @@ class ConnectionController
     {
         $_SESSION['actionDone'] = 'Vous avez été déconnecté.';
 
-        unset($_SESSION['valid']);
+        unset($_SESSION['connected']);
         unset($_SESSION['currentMember']);
 
         $view = new View();
@@ -99,9 +105,9 @@ class ConnectionController
      * 
      * @return true|null
      */
-    public static function isSessionValid()
+    public static function isConnected()
     {
-        if (isset($_SESSION['valid']) && $_SESSION['valid'] == true) {
+        if (isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
             return true;
         }
 

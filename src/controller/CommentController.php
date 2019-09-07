@@ -121,7 +121,7 @@ class CommentController
      */
     public function showReportedComments($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             $pageNb = 1;
 

@@ -27,7 +27,7 @@ use App\Core\View;
      */
     public function showEntitiesManagement($params = [])
     {
-        if (ConnectionController::isSessionValid()) {
+        if (ConnectionController::isConnected()) {
 
             switch ($params['entity']) {
                 case 'developer':
@@ -104,7 +104,6 @@ use App\Core\View;
                 'urlAddEntity' => $urlAddEntity,
                 'urlUpdateEntity' => $urlUpdateEntity,
                 'urlDeleteEntity' => $urlDeleteEntity,
-                'isSessionValid' => ConnectionController::isSessionValid(),
                 'member' => $currentMember,
                 'jsFiles' => $jsFiles
             ));
