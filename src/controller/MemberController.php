@@ -333,23 +333,28 @@ use App\Model\Pagination;
 
             $value = trim(strip_tags($value));
 
-            if (empty($value)) {
+            if ($key == 'nickname' || $key == 'mail') {
+                if (empty($value)) {
 
-                $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+                    $_SESSION['errorMessage'] = 'Vous devez renseigner tous les champs.';
+        
+                    $view = new View();
+                    $view->redirect('edit-infos-member/id/' . $params['member_id']);
+                }
+            }
+        }
+
+        if (!empty($params['birthday'])) {
+
+            $birthday = explode('-', $params['birthday']);
+
+            if (!checkdate($birthday[1], $birthday[2], $birthday[0])) {
+
+                $_SESSION['errorMessage'] = 'La date n\'est pas valide.';
     
                 $view = new View();
                 $view->redirect('edit-infos-member/id/' . $params['member_id']);
             }
-        }
-
-        $birthday = explode('-', $params['birthday']);
-
-        if (!checkdate($birthday[1], $birthday[2], $birthday[0])) {
-
-            $_SESSION['errorMessage'] = 'La date n\'est pas valide.';
-
-            $view = new View();
-            $view->redirect('edit-infos-member/id/' . $params['member_id']);
         }
 
         try {

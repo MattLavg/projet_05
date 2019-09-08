@@ -129,7 +129,7 @@ use App\Core\MyException;
             $totalNbRows = $gameManager->count();
             $url = HOST . 'game-management';
 
-            $pagination = new Pagination($pageNb, $totalNbRows, $url, 3);
+            $pagination = new Pagination($pageNb, $totalNbRows, $url, 15);
 
             // if descendant order wanted, set 'DESC' 
             // if not set ''
