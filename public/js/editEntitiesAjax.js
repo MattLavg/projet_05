@@ -177,7 +177,7 @@ $(document).ready(function () {
 
             var deleteBtn = $(this);
             
-            $.post(
+            $.get(
                 url,
                 function(data){
                     if(data.success){
