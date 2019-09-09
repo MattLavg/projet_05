@@ -134,9 +134,11 @@
                 <p class="col-12 textComment">{% if comment.getReported == true %}Commentaire signalé par la communauté.{% else %}{{ comment.getContent }}{% endif %}</p>
                 <div class="col-12 commentButtonBloc d-flex justify-content-end">
         
-                <a href="{{ HOST }}report-comment/id/{{ comment.getId }}/game-id/{{ game.getId }}">
-                    <button type="button" class="btn btn-warning btn-sm">Signaler</button>
-                </a>
+                {% if connected %}
+                    <a href="{{ HOST }}report-comment/id/{{ comment.getId }}/game-id/{{ game.getId }}">
+                        <button type="button" class="btn btn-warning btn-sm">Signaler</button>
+                    </a>
+                {% endif %}
         
                 <!-- If admin or moderator, comments can be published or deleted -->
                 {% if member.getId_type == 1 or member.getId_type == 2 %}

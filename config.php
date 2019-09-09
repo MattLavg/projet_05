@@ -14,11 +14,6 @@ define('DB_NAME', 'projet05');
 define('DB_USER_NAME', 'root');
 define('DB_PASSWORD', 'root');
 
-// define('DB_HOST', 'boudin.o2switch.net');
-// define('DB_NAME', 'mathiasla_projet05');
-// define('DB_USER_NAME', 'mathiasla_p5');
-// define('DB_PASSWORD', 'W4bMNafJVY7G');
-
 
 define('ROOT', __DIR__ . DIRECTORY_SEPARATOR); // DIR is the folder where we can find the file calling the constant
 

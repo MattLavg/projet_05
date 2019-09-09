@@ -9,30 +9,6 @@ require_once 'config.php';
 require_once 'errorHandler.php';
 require_once CORE . 'MyException.php';
 
-// Load Twig
-// $loader = new \Twig\Loader\FilesystemLoader(['view/frontend', 'view/backend']);
-// $twig = new \Twig\Environment($loader, [
-//     'cache' => 'view/templates/cache', 'debug' => true, 'auto-reload' => true
-// ]);var_dump($twig);die;
-
-
-// $db = new \PDO('mysql:host=localhost;dbname=projet04;charset=utf8', 'root', 'root');
-
-// function getPost($id, $db)
-//     { 
-
-//         $req = $db->prepare('SELECT id, title, content, author, DATE_FORMAT(creationDate, \'%d/%m/%Y à %Hh%imin%ss\') AS creationDate, DATE_FORMAT(updateDate, \'%d/%m/%Y à %Hh%imin%ss\') AS updateDate FROM posts WHERE id = ?');
-//         $req->execute(array($id));
-
-//         $data = $req->fetch(\PDO::FETCH_ASSOC);
-
-//         return $data;
-//     }
-
-// $result = getPost(53, $db);
-
-// $template = $twig->load('vue.html');
-// echo $template->render(['result' => $result]);
 
 try
 {
